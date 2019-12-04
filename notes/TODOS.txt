@@ -1,0 +1,7 @@
+1.Dynamic search bar 
+2.add backend
+3.more navigation and filters
+4.add more cool cart features 
+5.ratings and reviews
+6.suggesting items features 
+7.user Dashboard 

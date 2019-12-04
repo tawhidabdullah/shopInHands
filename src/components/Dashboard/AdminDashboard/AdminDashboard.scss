@@ -1,0 +1,103 @@
+@media (max-width: 700px) {
+  .add-product-heading h4 {
+    font-size: 45px;
+  }
+}
+
+@media (max-width: 500px) {
+  .add-product-heading h4 {
+    font-size: 35px;
+  }
+}
+
+@media (max-width: 380px) {
+  .add-product-heading h4 {
+    font-size: 27px;
+  }
+}
+
+.profile-avatar {
+  // background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1609106/headshot.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.side-nav .search {
+  text-align: center;
+  padding: 15px 30px;
+  // margin: 15px 0;
+  position: relative;
+}
+.side-nav .search > input {
+  width: 100%;
+  font-size: 14px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #2a2e35;
+  padding: 7px 0 7px;
+  color: #ddd;
+}
+.side-nav .search > input ~ i {
+  position: absolute;
+  top: 26px;
+  right: 40px;
+  display: block;
+  color: #2b2f3a;
+  font-size: 16px;
+}
+.side-nav .search > input:focus {
+  outline: none;
+}
+
+.sidenav {
+  &__profile {
+    display: flex;
+    align-items: center;
+    min-height: 90px;
+    background-color: rgba(110, 106, 106, 0.1);
+
+    &-avatar {
+      height: 64px;
+      width: 64px;
+      margin: 0 15px;
+    }
+
+    &-title {
+      font-size: 17px;
+      letter-spacing: 1px;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .sidenav {
+    &__profile {
+      display: flex;
+      align-items: center;
+      min-height: 90px;
+      background-color: rgba(110, 106, 106, 0.1);
+
+      &-avatar {
+        height: 50px;
+        width: 50px;
+        margin: 0 6px;
+      }
+
+      &-title {
+        font-size: 17px;
+        letter-spacing: 1px;
+        visibility: hidden;
+      }
+    }
+  }
+
+  .side-nav .search {
+    visibility: hidden;
+    text-align: center;
+    padding: 0;
+
+    position: relative;
+  }
+}

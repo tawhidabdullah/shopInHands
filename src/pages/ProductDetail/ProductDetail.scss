@@ -1,0 +1,96 @@
+.row.no-pad {
+  margin-right: 0;
+  margin-left: 0;
+}
+.row.no-pad > [class*="col-sm-9"] {
+  padding-right: 7px;
+  padding-left: 0;
+}
+
+.row.no-pad > [class*="col-sm-3"] {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.breadcrumb {
+  position: relative;
+  padding: 20px 10px;
+}
+
+.rate-product {
+  width: auto;
+  float: right;
+  position: absolute;
+  top: 12px;
+  right: 20px;
+}
+
+.rate-product button {
+  background: #2874f0;
+  color: white;
+  width: 140px;
+  height: 40px;
+  border: 0;
+  font-size: 15px;
+  border-radius: 3px;
+  box-shadow: 1px 2px 3px rgba($color: #000000, $alpha: 0.5);
+  font-weight: 450;
+  transition: 0.6s;
+  overflow: hidden;
+}
+.rate-product button:focus {
+  outline: 0;
+}
+.rate-product button:before {
+  content: "";
+  display: block;
+  position: absolute;
+  background: rgba(255, 255, 255, 0.5);
+  width: 60px;
+  height: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0.5;
+  -webkit-filter: blur(30px);
+  filter: blur(30px);
+  -webkit-transform: translateX(-100px) skewX(-15deg);
+  transform: translateX(-100px) skewX(-15deg);
+}
+.rate-product button:after {
+  content: "";
+  display: block;
+  position: absolute;
+  background: rgba(255, 255, 255, 0.2);
+  width: 30px;
+  height: 100%;
+  left: 30px;
+  top: 0;
+  opacity: 0;
+  -webkit-filter: blur(5px);
+  filter: blur(5px);
+  -webkit-transform: translateX(-100px) skewX(-15deg);
+  transform: translateX(-100px) skewX(-15deg);
+}
+.rate-product button:hover {
+  background: #092f6b;
+  cursor: pointer;
+}
+.rate-product button:hover:before {
+  -webkit-transform: translateX(300px) skewX(-15deg);
+  transform: translateX(300px) skewX(-15deg);
+  opacity: 0.6;
+  transition: 0.7s;
+}
+.rate-product button:hover:after {
+  -webkit-transform: translateX(300px) skewX(-15deg);
+  transform: translateX(300px) skewX(-15deg);
+  opacity: 1;
+  transition: 0.7s;
+}
+
+@media screen and (max-width: 755px) {
+  .fill {
+    min-height: 100%;
+    height: 100%;
+  }
+}
