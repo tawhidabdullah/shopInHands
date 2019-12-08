@@ -60,7 +60,7 @@ const shopReducer = (state = initialState, action) => {
     case ADD_PRODUCT_TO_CART:
       updatedCart = [...state.cart];
       updatedItemIndex = updatedCart.findIndex(
-        item => item._id === action.payload._id
+        item => item.id === action.payload.id
       );
 
       if (updatedItemIndex < 0) {

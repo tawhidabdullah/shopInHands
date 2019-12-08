@@ -4,169 +4,33 @@ import { NavLink, Link } from 'react-router-dom';
 import { logoutUser } from '../../actions/authAction';
 import './Header.scss';
 import '../styles_components/searchBar.scss';
+import {addProductToCart, decrementCartQuantity, incrementCartQuantity, removeProductToCart} from "../../actions";
+
+
 
 class Header extends Component {
+
   state = {
-    dropdownToggle: false,
-    fosttrapToggle: false,
-    searchInput: ''
-  };
+    isShowCartBar: false
+  }
 
-  toggleDrodown = () => {
-    const dt = this.state.dropdownToggle;
+  handleToggleCartBar = () => {
     this.setState({
-      dropdownToggle: !dt
-    });
-  };
+      isShowCartBar: !this.state.isShowCartBar
+    })
+  }
 
-  onLogoutClick = e => {
-    e.preventDefault();
-    this.props.logoutUser(); // firing the action here
-  };
+  handleRemoveCartItem = (id) => {
+    this.props.removeProductToCart(id)
+  }
 
-  onnavFostrapclick = () => {
-    const fosttrapToggle = this.state.fosttrapToggle;
-    this.setState({
-      fosttrapToggle: !fosttrapToggle
-    });
-  };
-
-  onSearchInputChange = () => {};
   render() {
     const { isAuthenticate, user } = this.props.auth;
-    const cats = this.props.category.categories;
-    let categoryNavContents;
-    let categories;
+    const {cartItems} = this.props;
+    const {isShowCartBar} = this.state; 
 
-    if (cats) {
-      categories = cats.map(category => {
-        return category.title;
-      });
-    }
 
-    if (categories) {
-      categoryNavContents = categories.map(category => {
-        return (
-          <li>
-            <a>{category}</a>
-          </li>
-        );
-      });
-    }
-
-    const logedInUserLinks = (
-      <React.Fragment>
-        <li>
-          <Link to="/dashboard">
-            {' '}
-            <i className="fa fa-dashboard"> </i> Dashboard
-          </Link>
-        </li>
-
-        <li className="header__avatar" onClick={this.toggleDrodown}>
-          <div className="user-account">
-            <img
-              className="header__avatar-img"
-              src={user.avatar}
-              title="you must have a Gravatar connect to your email for displaying image"
-            />
-            <div
-              className={`dropdownx ${
-                this.state.dropdownToggle ? 'dropdown--active' : 'deactive'
-              }`}
-            >
-              <div className="dropdown__list">
-                <a className="dropdown__list-item">
-                  <span className="dropdown__icon">
-                    <i className="fa fa-user" />
-                  </span>
-                  <span className="dropdown__title">my profile</span>
-                </a>
-                <a className="dropdown__list-item">
-                  <span className="dropdown__icon">
-                    <i className="fa fa-clipboard" />
-                  </span>
-                  <span className="dropdown__title">my account</span>
-                </a>
-                <a className="dropdown__list-item" onClick={this.onLogoutClick}>
-                  <span className="dropdown__icon">
-                    <i className="fa fa-sign-out" />
-                  </span>
-                  <span className="dropdown__title">log out</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </li>
-      </React.Fragment>
-    );
-    const newUserLinks = (
-      <React.Fragment>
-        <li>
-          <Link to="/register">Sign Up</Link>
-        </li>
-        <li>
-          <Link to="/login">Login</Link>
-        </li>
-      </React.Fragment>
-    );
     return (
-      // <nav className="fixed-top navbarheader">
-      //   <div
-      //     className={
-      //       this.state.fosttrapToggle ? "nav-fostrap visible" : "nav-fostrap"
-      //     }
-      //   >
-      //     <ul>
-      //       <li>
-      //         <NavLink to="/">
-      //           <span className="lead">SharpStore</span>
-      //         </NavLink>
-      //       </li>
-
-      //       <li>
-      //         <a href="javascript:void(0)">
-      //           Category
-      //           <span className="arrow-down" />
-      //         </a>
-      //         <ul className="dropdown">{categoryNavContents}</ul>
-      //       </li>
-      //       <li>
-      //         <a href="javascript:void(0)">
-      //           Blogger
-      //           <span className="arrow-down" />
-      //         </a>
-      //         <ul className="dropdown">
-      //           <li>
-      //             <a>Widget</a>
-      //           </li>
-      //           <li>
-      //             <a>Tips</a>
-      //           </li>
-      //         </ul>
-      //       </li>
-      //       <li>
-      //         <a>Business</a>
-      //       </li>
-      //       <li>
-      //         <NavLink to={"/cart"}>
-      //           <i className="fa fa-shopping-cart mr-2" aria-hidden="true" />
-      //           <span class="mb-2 badge badge-primary">
-      //             {this.props.cartLength ? ` ${this.props.cartLength}` : ""}
-      //           </span>
-      //         </NavLink>
-      //       </li>
-      //       {isAuthenticate ? logedInUserLinks : newUserLinks}{" "}
-      //     </ul>
-      //   </div>
-      //   <div className="nav-bg-fostrap">
-      //     <div className="navbar-fostrap" onClick={this.onnavFostrapclick}>
-      //       {" "}
-      //       <span /> <span /> <span />{" "}
-      //     </div>
-      //     <a className="title-mobile">SharpStore</a>
-      //   </div>
-      // </nav>
       <>
         <div className="top-head-1">
           <div className="langandcurrency">
@@ -187,6 +51,82 @@ class Header extends Component {
             </p>
           </div>
         </div>
+
+        <div className='navbar'>
+          <div className='navbar-center'>
+          
+            <span className='nav-icon'>
+              <i className='fa fa-bars'></i>
+            </span>
+            <img style={{
+              height: '40px',
+              width: '100px',
+              objectFit: 'contain'
+            }} src={require('../../assets/productImages/logo-e.png')}  alt='logo'/>
+            <div className='cartt-btn' onClick={this.handleToggleCartBar}>
+              <span className='nav-icon'>
+                  <i className='fa fa-shopping-cart'></i>
+              </span>
+              <div className='cartt-items'>
+                {this.props.cartLength ? ` ${this.props.cartLength}` : 0}
+              </div>
+            </div>
+           
+          </div>
+        </div>
+
+        <div className={isShowCartBar ? 'cart-overlay show-cart-bar': 'cart-overlay'}>
+          <div className={isShowCartBar ? 'cart showCart': 'cart'}>
+            <span className='close-cart' onClick={this.handleToggleCartBar}>
+              <i className='fa fa-window-close' ></i>
+            </span>
+            <h2>Your Cart</h2>
+
+            <div className='cart-content'>
+            
+            {this.props.cartItems.length && this.props.cartItems.map(cartItem => {
+              return (
+                <div className='cart-item'>
+                <img src={require('../../assets/productImages/img7.jpg')} alt='productImg'/>
+                  <div className=''>
+                    <h4 >{cartItem.name}</h4>
+                    <h5>${cartItem.price}</h5>
+                    <span className='remove-item' onClick={()=>this.handleRemoveCartItem(cartItem.id)}>
+                      remove
+                    </span>
+                  </div>
+                  <div>
+                    <i className='fa fa-chevron-up'></i>
+                    <p className='item-amount'>
+                      1
+                    </p>
+                    <i className='fa fa-chevron-down'></i>
+                  </div>
+              </div>
+              )
+            }) || (
+              <div className='cart-footer'>
+                <button className='clear-cart banner-btn'>
+                  Add Products
+                </button>
+            </div>
+            )}
+
+            </div>
+           {cartItems && cartItems.length > 0 && (
+              <div className='cart-footer'>
+              <h3>Your total : $ <span className='cart-total'>
+                  0
+                </span>
+                </h3>
+
+                <button className='clear-cart banner-btn'>
+                  Clear Cart
+                </button>
+            </div>
+           )}
+          </div>
+        </div>
       </>
     );
   }
@@ -195,29 +135,11 @@ class Header extends Component {
 const mapStateToProps = state => {
   return {
     cartLength: state.shop.cart.length,
+    cartItems: state.shop.cart,
     auth: state.auth,
     category: state.category
   };
 };
 
-export default connect(mapStateToProps, { logoutUser })(Header);
+export default connect(mapStateToProps, { logoutUser,removeProductToCart })(Header);
 
-/*
-
-  <nav className="navbar navbar-expand-lg navbar-dark bg-danger fixed-top">
-        <div className="container">
-          <NavLink className="navbar-brand" to="/">
-            <span className="lead">SharpStore</span>
-          </NavLink>
-          <div>
-            <ul className="navbar-nav ml-auto">
-            
-             
-              {isAuthenticate ? logedInUserLinks : newUserLinks}{" "}
-            </ul>
-          </div>
-        </div>
-      </nav>
-
-
-*/
