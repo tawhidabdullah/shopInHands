@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { NavLink, Link } from "react-router-dom";
-import { logoutUser } from "../../actions/authAction";
-import "./Header.scss";
-import "../styles_components/searchBar.scss";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { NavLink, Link } from 'react-router-dom';
+import { logoutUser } from '../../actions/authAction';
+import './Header.scss';
+import '../styles_components/searchBar.scss';
 
 class Header extends Component {
   state = {
     dropdownToggle: false,
     fosttrapToggle: false,
-    searchInput: ""
+    searchInput: ''
   };
 
   toggleDrodown = () => {
@@ -58,7 +58,7 @@ class Header extends Component {
       <React.Fragment>
         <li>
           <Link to="/dashboard">
-            {" "}
+            {' '}
             <i className="fa fa-dashboard"> </i> Dashboard
           </Link>
         </li>
@@ -72,7 +72,7 @@ class Header extends Component {
             />
             <div
               className={`dropdownx ${
-                this.state.dropdownToggle ? "dropdown--active" : "deactive"
+                this.state.dropdownToggle ? 'dropdown--active' : 'deactive'
               }`}
             >
               <div className="dropdown__list">
@@ -123,7 +123,7 @@ class Header extends Component {
       //           <span className="lead">SharpStore</span>
       //         </NavLink>
       //       </li>
-           
+
       //       <li>
       //         <a href="javascript:void(0)">
       //           Category
@@ -167,48 +167,27 @@ class Header extends Component {
       //     <a className="title-mobile">SharpStore</a>
       //   </div>
       // </nav>
-    <>
-      <div className="top-head-1">
-      <div className="langandcurrency">
-        <p>
-          ENGLISH <i className="fa fa-angle-down"></i>
-        </p>
-        <p>
-          USD <i className="fa fa-angle-down"></i>
-        </p>
-      </div>
-      <div className="trackorderandauthlinks">
-        <p className="trackorderbutton">
-          <i className="fa fa-car"></i>Track You Order{' '}
-        </p>
-        <p>
-          <i className="fa fa-user"></i>
-          <span>Login</span> or <span>Register</span>
-        </p>
-      </div>
-    </div>
-
-    <div className="top-tags">
-      <h5 className="top-tags-desc">Top Tags:</h5>
-
-      <div className="tags">
-        <h5>Electronic Cigarettes</h5>
-        <h5>Eye Makeup</h5>
-        <h5>iPad Mini Cases</h5>
-        <h5>iPhone 5 Cases</h5>
-        <h5>RC Helicopters</h5>
-        <h5>Tablets</h5>
-        <h5>Laptops</h5>
-        <h5>Mornitors</h5>
-        <h5>Mornitors</h5>
-        <h5>Cameras</h5>
-
-        <h5>Iwatchs</h5>
-        <h5>Fashions</h5>
-        <h5>Shops</h5>
-      </div>
-    </div>
-    </>
+      <>
+        <div className="top-head-1">
+          <div className="langandcurrency">
+            <p>
+              ENGLISH <i className="fa fa-angle-down"></i>
+            </p>
+            <p>
+              USD <i className="fa fa-angle-down"></i>
+            </p>
+          </div>
+          <div className="trackorderandauthlinks">
+            <p className="trackorderbutton">
+              <i className="fa fa-car"></i>Track You Order{' '}
+            </p>
+            <p>
+              <i className="fa fa-user"></i>
+              <span>Login</span> or <span>Register</span>
+            </p>
+          </div>
+        </div>
+      </>
     );
   }
 }
@@ -221,10 +200,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { logoutUser }
-)(Header);
+export default connect(mapStateToProps, { logoutUser })(Header);
 
 /*
 

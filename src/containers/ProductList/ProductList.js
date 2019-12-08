@@ -1,23 +1,23 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import Product from "../../components/Product/Product";
-import "./ProductList.scss";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Product from '../../components/Product/Product';
+import './ProductList.scss';
 
-import { brandFilter } from "../../pipes/brandFilter";
-import { orderByFilter } from "../../pipes/orderByFilter";
-import LayoutMode from "../../components/LayoutMode/LayoutMode";
-import { paginationPipe } from "../../pipes/paginationFilter";
-import Pagination from "../../components/Pagination/Pagination";
-import Spinner from "../../components/commonFeilds/Spinner";
+import { brandFilter } from '../../pipes/brandFilter';
+import { orderByFilter } from '../../pipes/orderByFilter';
+import LayoutMode from '../../components/LayoutMode/LayoutMode';
+import { paginationPipe } from '../../pipes/paginationFilter';
+import Pagination from '../../components/Pagination/Pagination';
+import Spinner from '../../components/commonFeilds/Spinner';
 
 class ProductList extends Component {
   state = {
-    colValue: "col-lg-4",
+    colValue: 'col-lg-4',
     perPage: 12,
     currentPage: 1,
     pagesToShow: 3,
     gridValue: 3,
-    searchInput: ""
+    searchInput: ''
   };
 
   changeLayout = n => {
@@ -103,8 +103,8 @@ class ProductList extends Component {
             <div
               className="card"
               style={{
-                backgroundColor: "#fb5555",
-                color: "whitesmoke"
+                backgroundColor: '#fb5555',
+                color: 'whitesmoke'
               }}
             >
               <div className="card-header d-flex justify-content-end">
@@ -169,7 +169,4 @@ const mapStateToProps = state => {
   return { products: filterByOrderArr };
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(ProductList);
+export default connect(mapStateToProps, null)(ProductList);
