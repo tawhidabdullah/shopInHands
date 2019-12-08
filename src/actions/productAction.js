@@ -1,5 +1,5 @@
-import axios from "axios";
-
+import axios from 'axios';
+import { getApi } from '../utilities/wooApi';
 import {
   ADD_PRODUCT,
   GET_ERRORS,
@@ -10,12 +10,12 @@ import {
   DELETE_PRODUCT,
   PRODUCT_SUCCESSFULL,
   GET_REVIEWS
-} from "./types";
+} from './types';
 
 // Add Post
 export const addProductAction = PrductData => dispatch => {
   axios
-    .post("/api/admin/product/addProduct", PrductData)
+    .post('/api/admin/product/addProduct', PrductData)
     .then(res => {
       dispatch(clearErrors());
       dispatch({
@@ -39,7 +39,7 @@ export const addProductAction = PrductData => dispatch => {
 // Get products
 export const getProductAction = () => dispatch => {
   axios
-    .get("/api/products/getProduct")
+    .get('/api/products/getProduct')
     .then(res => {
       let products;
       if (res.data) {
@@ -60,18 +60,31 @@ export const getProductAction = () => dispatch => {
 
 // Get products
 export const getAProductAction = id => dispatch => {
-  axios
-    .get(`/api/products/getAProduct/${id}`)
-    .then(res => {
+  // axios
+  //   .get(`/api/products/getAProduct/${id}`)
+  //   .then(res => {
+  //     dispatch({
+  //       type: GET_PRODUCT,
+  //       payload: res.data
+  //     });
+  //   })
+  //   .catch(err =>
+  //     dispatch({
+  //       type: GET_ERRORS,
+  //       payload: err.response.data
+  //     })
+  //   );
+  getApi(`/wp-json/wc/v3/products/${id}`)
+    .then(product => {
       dispatch({
         type: GET_PRODUCT,
-        payload: res.data
+        payload: product
       });
     })
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err
       })
     );
 };

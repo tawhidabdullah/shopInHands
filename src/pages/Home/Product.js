@@ -10,7 +10,7 @@ import {
 } from '../../actions/userAction';
 
 const Product = ({ product, addProductToCart }) => {
-  const { name, price, images } = product;
+  const { name, price, images, id } = product;
   return (
     <div class="col-md-3">
       <div className="product-card">
@@ -19,7 +19,7 @@ const Product = ({ product, addProductToCart }) => {
           <div className="product-top-overlay"></div>
 
           <div class="overlay-right">
-            <Link to={`/products/${90}`} className="product__link">
+            <Link to={`/products/${id}`} className="product__link">
               <button
                 type="button"
                 class="btn btn-secondary"

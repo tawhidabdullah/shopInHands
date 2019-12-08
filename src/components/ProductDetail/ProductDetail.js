@@ -1,10 +1,10 @@
-import React from "react";
-import { connect } from "react-redux";
-import { formatMoney } from "../../pipes/priceFormatter";
-import { addProductToCart } from "../../actions";
-import "./ProductDetail.scss";
+import React from 'react';
+import { connect } from 'react-redux';
+import { formatMoney } from '../../pipes/priceFormatter';
+import { addProductToCart } from '../../actions';
+import './ProductDetail.scss';
 const ProductDetail = props => {
-  const { title, category, price, desc, reviews } = props.product;
+  const { name, price, desc } = props.product;
 
   const onCart = () => {
     props.dispatch(addProductToCart(props.product));
@@ -13,7 +13,7 @@ const ProductDetail = props => {
   return (
     <aside className="col-sm-7">
       <article className="card-body p-5">
-        <h3 className="title mb-3">{title}</h3>
+        <h3 className="title mb-3">{name}</h3>
 
         <p className="price-detail-wrap">
           <span className="price h3 text-primary">
@@ -30,7 +30,7 @@ const ProductDetail = props => {
             <li class="fa fa-fw fa-lg fa-star-half" />
           </ul>
           <span class="product-reviews">
-            <a href="#">{reviews.length} Reviews</a>
+            {/* <a href="#">{reviews.length} Reviews</a> */}
           </span>
         </div>
         <dl className="item-property">
@@ -41,7 +41,7 @@ const ProductDetail = props => {
         </dl>
         <dl className="param param-feature">
           <dt>Category</dt>
-          <dd className="text-capitalize">{category}</dd>
+          {/* <dd className="text-capitalize">{category}</dd> */}
         </dl>
 
         <hr />
