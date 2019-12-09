@@ -1,0 +1,27 @@
+.block-title {
+    border-bottom: 2px solid#eee;
+    
+    text-transform: uppercase;
+    
+    color:#222;
+    
+    font-size: 18px;
+    
+    font-weight: 600;
+    
+    margin-bottom: 30px;
+    line-height: 50px;
+    position: relative;
+}
+
+.block-title span::before{
+    background: #ff5c00;
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 2px;
+    width: 100px;
+}

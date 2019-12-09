@@ -23,35 +23,17 @@ const Products = ({ categoryId, categoryName }) => {
     <section className="product-slider-section">
       <div
         className="row"
-        style={{
-          borderBottom: '1px solid #ddd'
-        }}
+       
       >
-        <div className="col-md-6">
-          <h2 className="products-section-title">{categoryName}</h2>
+        <div className="col-md-12">
+  
+          <div class="block-title">
+              <span>
+              {categoryName}
+              </span>
+          </div>
         </div>
-        <div className="col-md-6">
-          {/* <div className="filter-taq-text">
-            <h3> 
-              Category
-            </h3>
-            <h3> 
-              Category
-            </h3>
-            <h3> 
-              Category
-            </h3>
-            <h3> 
-              Category
-            </h3>
-            <h3> 
-              Category
-            </h3>
-            <h3> 
-              Category
-            </h3>
-          </div> */}
-        </div>
+      
       </div>
       <div className="row" style={{ paddingTop: '20px' }}>
         {products &&

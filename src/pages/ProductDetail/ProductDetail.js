@@ -79,7 +79,7 @@ class ProductDetail extends Component {
                                             </h3>
                                             <h3 class="reviews-actions">
                                                 <span class="review-count">1</span>
-                                                <span>Review</span>
+                                                <span> Review</span>
                                             </h3>
                                             
                                             <h3 class="reviews-actions">
