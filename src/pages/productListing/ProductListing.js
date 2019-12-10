@@ -12,35 +12,80 @@ const ProductListing = (props) => {
     const [products, setProducts] = React.useState([]);
     const [categories, setCategories] = React.useState([]);
     const [isLoading,setIsLoading] = React.useState(false); 
+    const [searchValue,setSearchValue] = React.useState(''); 
     // const [manupulatedCategories,setManupulatedCategories] = React.useState([]); 
 
     React.useEffect(() => {
 
-      const getProducts = async () => {
+      if(id === 967021){
 
-        setIsLoading(true); 
+        const getProducts = async () => {
+          setIsLoading(true); 
         try {
           const products = await getApi(
-            `/wp-json/wc/v3/products?category=${id}`
+            `/wp-json/wc/v3/products`
           );
           setProducts(products);
-          setIsLoading(false);
+          setIsLoading(false); 
         } catch (err) {
-          setIsLoading(false);
           console.log(err);
+          setIsLoading(false); 
         }
       };
-      id && getProducts();
+     getProducts();
+      }
+
+      else {
+        const getProducts = async () => {
+
+          setIsLoading(true); 
+          try {
+            const products = await getApi(
+              `/wp-json/wc/v3/products?category=${id}`
+            );
+            setProducts(products);
+            setIsLoading(false);
+          } catch (err) {
+            setIsLoading(false);
+            console.log(err);
+          }
+        };
+        id && getProducts();
+      }
+
+
     }, [id]);
 
 
     React.useEffect(() => {
 
+
+
+
+
       const getCategories = async () => {
 
         try {
-          const categories = await getApi('/wp-json/wc/v3/products/categories');
-          setCategories(categories); 
+          const awaitedCategories = await getApi('/wp-json/wc/v3/products/categories');
+          const categories = [
+            {
+              name: 'All Categories',
+              id: 967021,
+              [`isAll Categories}`]: id ? false : true
+            }
+          ]
+          const tempCategories = awaitedCategories.map(
+            (cat, index) => {
+              return {
+                name: cat.name,
+                id: cat.id,
+                [`is${cat.name}`]: false
+              };
+            }); 
+
+          
+            setCategories([...categories,...tempCategories])
+
           
         } catch (err) {
           console.log(err);
@@ -50,17 +95,41 @@ const ProductListing = (props) => {
     }, []);
 
 
+    const handleSearch = () => {
+  
 
-  const handleSelectCategory = e => {
-    const name = e.target.name;
-    const value = e.target.checked;
-
-    if (e.target.checked) {
-
-    } else {
-      
+      // searchValue ? props.history.push(`/productsListing/${}/homes`) : history.push('/rentals');
     }
+
+    const handleSearchInput = (e) => {
+      setSearchValue(e.target.value); 
+    }
+
+
+    const handleKeyPress = (e) =>{
+      if(e.key === 'Enter'){
+         handleSearch(); 
+      }
+  }
+
+
+
+  const handleSelectCategory = (id, name) => {
+    props.history.push(`/productsListing/${id}`); 
+
+    const temCategories = [...categories];
+    temCategories &&
+      temCategories.forEach(cat => {
+        if (cat.name === name) {
+          cat[`is${cat.name}`] = true;
+        } else cat[`is${cat.name}`] = false;
+      });
+    console.log('temCategories', temCategories);
+      
+    setCategories(temCategories)
   };
+
+
 
     return (
         <div class="Bcak-bg">
@@ -71,25 +140,40 @@ const ProductListing = (props) => {
               <div class="category-block">
                 <span class="category-title">Search here</span>
                 <div class="form-group search-product">
-                  <input type="text" name="Search" placeholder="Search here...." />
-                  <i class="fa fa-search" aria-hidden="true"></i>
+                  <input
+                   type="text" 
+                  name="Search" 
+                  placeholder="Search here...." 
+                  onChange={handleSearchInput}
+                  onKeyPress={handleKeyPress}
+
+                  />
+                  <i 
+                  onClick={handleSearch}
+                  class="fa fa-search"
+                   aria-hidden="true"></i>
                 </div>
        
               </div>
       
               <div class="category-block">
                 <div class="product-detail">
-                  <h2 class="category-title active">Categories</h2>
+                  <h2 class="category-title">Categories</h2>
                   <ul>
-                   <li className='category-header-all'>
-                      All Categories
-                   </li>
+            
+                  
                    {categories && categories.map((cat,i) => {
                      return (
                       <li key={i} >
                           <span 
-                          className='category-text' 
-                          onClick={()=>props.history.push(`/productsListing/${cat.id}`)}>
+                          className={cat.name !== 'All Categories' ?
+                           `${cat[`is${cat.name}`] ? 'category-text active': 'category-text'}` :  
+                           `${cat[`is${cat.name}`] ? 'category-header-all active': 'category-header-all'}`
+                          }
+                         
+                          onClick={()=> {
+                            handleSelectCategory(cat.id,cat.name)
+                          }}>
                             {cat.name}
                           </span>
                       </li>

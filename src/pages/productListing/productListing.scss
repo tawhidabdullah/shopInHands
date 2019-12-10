@@ -77,6 +77,8 @@
   font-size: 16px;
   margin-left: 5px;
   cursor: pointer;
+  color: #555;
+
 }
 
 .category-header-all.active {
@@ -99,7 +101,10 @@
 }
 
 
+.category-text.active {
+  color: #222;
 
+}
 
 
 
