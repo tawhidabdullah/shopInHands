@@ -12,8 +12,8 @@ import {
 const Product = ({ product, addProductToCart,history }) => {
   const { name, price, images, id } = product;
   return (
-    <div class="col-md-3">
-      <div className="product-card">
+
+        <div className="product-card">
         <div class="product-top" >
           <img src={images[0].src} />
           <div className="product-top-overlay" onClick={()=> history.push(`/products/${id}`)}></div>
@@ -62,7 +62,6 @@ const Product = ({ product, addProductToCart,history }) => {
           <h5 className="product-bottom-price">${price}</h5>
         </div>
       </div>
-    </div>
   );
 };
 

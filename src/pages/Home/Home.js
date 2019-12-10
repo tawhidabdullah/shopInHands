@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { getApi } from '../../utilities/wooApi';
 import Products from './products';
 import './Home.scss';
+import { withRouter } from "react-router-dom";
 import Spinner from '../../components/commonFeilds/Spinner';
 
 
@@ -50,7 +51,7 @@ class Home extends Component {
           <div className="tags">
             {categories && categories.length > 0
               ? categories.map(cat => {
-                  return <h5>{cat.name}</h5>;
+                  return <h5 onClick={()=>this.props.history.push(`/productsListing/${cat.id}`)}>{cat.name}</h5>;
                 })
               : ''}
           </div>
@@ -105,4 +106,4 @@ const mapStateToProp = state => {
     products: state.product
   };
 };
-export default connect(mapStateToProp, { getProductAction })(Home);
+export default connect(mapStateToProp, { getProductAction })(withRouter(Home));

@@ -38,11 +38,19 @@ const Products = ({ categoryId, categoryName }) => {
       
       </div>
       <div className="row" style={{ paddingTop: '20px' }}>
-        {products &&
+      
+      {products &&
           products.length > 0 &&
           products.map(product => {
-            return <Product product={product} />;
+            return (
+
+              <div class="col-md-3">
+                <Product product={product} />
+                 </div>
+            );
           }) || <Spinner />}
+     
+      
       </div>
     </section>
   );
