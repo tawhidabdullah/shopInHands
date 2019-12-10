@@ -57,7 +57,7 @@ class Header extends Component {
         <div className='navbar'>
           <div className='navbar-center'>
           
-            <span className='nav-icon' style={{
+            <span className='nav-icon nav-menu' style={{
               display: 'block',
               fontSize: '18px',
               padding: '10px 25px',
