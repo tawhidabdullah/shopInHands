@@ -273,34 +273,7 @@ class ProductDetail extends Component {
                                             </h2>
                                         </div>
                                     </div>
-                                    <div class="small-product-item">
-                                            <div class="small-product-item-box-img">
-                                                <img s
-                                                rc="http://magento2.flytheme.net/themes/sm_shopping/default/lightweight-on-ear-headphones-black.html"
-                                               class="product photo product-item-photo" alt="" />
-                                            </div>
-                                            <div class="small-product-info">
-                                            <div class="small-product-reviews-summary">
-                                                    <h3 class="small-rating-summary">
-                                                    
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i> 
-                                                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-            
-                                                    </h3>
-                                                    
-                                                </div>
-            
-                                                <h2 class="small-product-title">
-                                                    Lightweight Great Product
-                                                </h2>
-                                                <h2 class="small-product-price">
-                                                    $2.20
-                                                </h2>
-                                            </div>
-                                        </div>
+                           
                         </div>
                     </div>
                 </div>
