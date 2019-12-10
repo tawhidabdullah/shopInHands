@@ -197,6 +197,7 @@
 .productDetails__container {
     padding: 25px;
     display: flex;
+    width: 100%;
 }
 
 .productDetails__tablist {
@@ -234,10 +235,8 @@
 .productDetails__content {
     padding: 20px;
     border: 1px solid#ddd;
-    /* border-bottom-color: rgb(221, 221, 221);
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    border-bottom: none; */
+    line-height: 1.7;   
+    flex-grow: 1;
 
 }
 

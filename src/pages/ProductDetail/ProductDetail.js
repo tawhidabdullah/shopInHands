@@ -5,6 +5,10 @@ import ProductDetailComponent from '../../components/ProductDetail/ProductDetail
 import ProductSlider from '../../components/ProductSlider/ProductSlider';
 import Breadcrumb from '../../components/styles_components/Breadcrumb';
 import Product from '../../components/Product/Product';
+
+
+
+
 import {
   getAProductAction,
   addProductReview,
@@ -18,8 +22,37 @@ import './ProductDetail.scss';
 
 class ProductDetail extends Component {
   state = {
-    clickedAddReview: false
+    clickedAddReview: false,
+    productDetailTabs: {
+      isReviews: false,
+      isDetails: true,
+      isMoreInformation: false,
+  }
+
   };
+
+
+
+
+ toggleTabs = (tabName) => {
+    const tempTabs = { ...this.state.productDetailTabs };
+    console.log('temsptabs',tempTabs); 
+    const tbsMap = Object.keys(tempTabs);
+    tbsMap.forEach(tb => {
+        if (tb === tabName) {
+            tempTabs[tb] = true;
+        }
+        else tempTabs[tb] = false;
+    })
+    this.setState({
+        ...this.state,
+        productDetailTabs: {
+            ...this.state.productDetailTabs, ...tempTabs
+        }
+    })
+};
+
+
 
   componentDidMount() {
     const productId = this.props.match.params.id;
@@ -40,17 +73,59 @@ class ProductDetail extends Component {
   };
 
   render() {
+
+
     const productId = this.props.match.params.id;
     const { product } = this.props.product;
 
     let ProductDetailContent = <Spinner />;
-    if (product) {
+    if (Object.keys(product).length > 0) {
       const { images } = product;
       ProductDetailContent = (
-        <div className="row">
-          {/* <ProductSlider imgData={product.productImage} /> */}
+        < >
+         
           <ProductDetailComponent product={product} />
-        </div>
+          <div class="row">
+                     <div class="productDetails__container">
+                         <ul class="productDetails__tablist">
+                             <li class="productDetails__tablist-item"  
+                             onClick={() => this.toggleTabs('isDetails')}>
+                                 <a  
+                                    
+                                class="productDetails__tablist-link">
+                                     Details
+                                 </a>
+                             </li>
+                             <li 
+                              onClick={() => this.toggleTabs('isMoreInformation')}
+                             class="productDetails__tablist-item">
+                                    <a 
+                                     
+                                     class="productDetails__tablist-link">
+                                    More Information
+                                    </a>
+                                </li>
+                            <li 
+                              onClick={() => this.toggleTabs('isReviews')}
+                            class="productDetails__tablist-item">
+                                    <a 
+                                    
+                                     class="productDetails__tablist-link">
+                                    Reviews
+                                    </a>
+                            </li>
+                            
+                         </ul>
+                         <div class="productDetails__content">
+                             {this.state.productDetailTabs.isDetails ? ('isDetails'): ""}
+                             {this.state.productDetailTabs.isReviews ? ('isReviews'): ""}
+                             {this.state.productDetailTabs.isMoreInformation ? ('isMoreInformation'): ""}
+                         </div>
+                     </div>
+                 </div>
+
+        </>
+        
       );
     }
 
@@ -59,112 +134,9 @@ class ProductDetail extends Component {
         <div class="container-fluid singleProduct__container">
             <div class="row">
                 <div class="col-md-9">
-                 <div class="row">
-                        <div class="col-md-6">
-                                olo
-                            </div>
-                            <div class="col-md-6">
-                                <div class="productInfo__container">
-                                    <h2 class="productInfo__title">Touch Wireless Bluetooth Portable Speaker</h2>
-                                    <div class="productInfo__price">
-                                        <div class="product-reviews-summary">
-                                            <h3 class="rating-summary">
-                                           
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i> 
-                                                <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                {ProductDetailContent}
 
-                                            </h3>
-                                            <h3 class="reviews-actions">
-                                                <span class="review-count">1</span>
-                                                <span> Review</span>
-                                            </h3>
-                                            
-                                            <h3 class="reviews-actions">
-                                                Add New Reviews
-                                            </h3>
-                                        </div>
-            
-                                        <div class="product-price-box">
-                                            <h2 class="special-price">
-                                                    $60.00
-                                            </h2>
-                                            <h2 class="old-price">
-                                                    $65.00
-                                            </h2>
-                                        </div>
-                                    </div>
-                                    <div class="product-options-bottom">
-                                        <div class="box-tocart">
-                                            <div class="actions">
-                                               <a  class="btn-add withbackground">Add To Cart</a> 
-                                               <a  class="btn-add withborder"><i class="fa fa-heart"></i></a> 
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="product-description">
-                                        <p>
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                            Dicta quod consequatur soluta porro voluptate accusamus 
-                                            pariatur sapiente illo 
-                                            corporis aliquam quaerat dolorum fugit consectetur nemo 
-                                            sunt recusandae, quisquam excepturi maiores.
-                                            
-                                        </p>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                 </div>
-
-
-                 <div class="row">
-                     <div class="productDetails__container">
-                         <ul class="productDetails__tablist">
-                             <li class="productDetails__tablist-item">
-                                 <a href="#" class="productDetails__tablist-link">
-                                     Details
-                                 </a>
-                             </li>
-                             <li class="productDetails__tablist-item">
-                                    <a href="#" class="productDetails__tablist-link">
-                                        Details
-                                    </a>
-                                </li>
-                            <li class="productDetails__tablist-item">
-                                    <a href="#" class="productDetails__tablist-link">
-                                        Details
-                                    </a>
-                            </li>
-                            <li class="productDetails__tablist-item">
-                                    <a href="#" class="productDetails__tablist-link">
-                                        Details
-                                    </a>
-                            </li>
-                         </ul>
-                         <div class="productDetails__content">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                Dicta quod consequatur soluta porro voluptate accusamus 
-                                pariatur sapiente illo 
-                                corporis aliquam quaerat dolorum fugit consectetur nemo 
-                                sunt recusandae, quisquam excepturi maiores.
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                Dicta quod consequatur soluta porro voluptate accusamus 
-                                pariatur sapiente illo 
-                                corporis aliquam quaerat dolorum fugit consectetur nemo 
-                                sunt recusandae, quisquam excepturi maiores.
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                Dicta quod consequatur soluta porro voluptate accusamus 
-                                pariatur sapiente illo 
-                                corporis aliquam quaerat dolorum fugit consectetur nemo 
-                                sunt recusandae, quisquam excepturi maiores.
-                         </div>
-                     </div>
-                 </div>
-
+     
 
 
                 </div>
