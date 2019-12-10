@@ -57,16 +57,22 @@ class Home extends Component {
         </div>
         <section className="image-slider-section">
           <div className="row">
-            <div className="col-md-9 col-sm-12">
+            <div className="col-md-9 col-sm-12 image-slider-section-carousel">
               <Carousel />
             </div>
             <div className="col-md-3">
               <div className="row">
                 <div className="col-md-12 ">
-                  <img src={require('./banner-3.jpg')} alt="Banner Img" />
+                  <img style={{
+                    width: '100%',
+                    
+                  }} src={require('./banner-3.jpg')} alt="Banner Img" />
                 </div>
                 <div className="col-md-12 " style={{ marginTop: '15px' }}>
-                  <img src={require('./banner-4.jpg')} alt="Banner Img" />
+                  <img  style={{
+                    width: '100%',
+                    
+                  }}  src={require('./banner-4.jpg')} alt="Banner Img" />
                 </div>
               </div>
             </div>

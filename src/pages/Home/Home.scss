@@ -201,9 +201,20 @@ table {
   padding: 15px 25px;
 }
 
+@media screen and (max-width: 765px) {
+  .image-slider-section-carousel {
+    margin-bottom: 20px;
+  }
+  
+}
+
+
+
 .product-slider-section {
   margin: 15px 25px;
 }
+
+
 
 .filter-taq-text {
   display: flex;
