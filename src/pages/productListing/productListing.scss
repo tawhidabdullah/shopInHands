@@ -8,6 +8,7 @@
     position: relative;
     cursor: pointer;
     padding: 0;
+    text-transform: capitalize;
   }
   .custom-checkbox + label:before {
     content: "";
@@ -69,7 +70,40 @@
   .category-title{
     display:block;
     padding-bottom:10px;
+    font-size: 18px;
   }
+
+.category-header-all {
+  font-size: 16px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.category-header-all.active {
+  color: #222;
+  font-size: 700;
+
+}
+
+.category-block ul li {
+  margin-bottom: 10px;
+}
+
+.category-text {
+  font-size: 16px;
+  font-size: 700;
+  color: #555;
+  margin-left: 10px;
+  text-transform:capitalize;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
   .search-product{
     position:relative;
   }

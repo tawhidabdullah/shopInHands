@@ -1,4 +1,5 @@
 import React from 'react'; 
+import { withRouter } from "react-router-dom";
 import  "./productListing.scss";
 import Product from "../Home/Product";
 import { getApi } from '../../utilities/wooApi';
@@ -9,23 +10,57 @@ const ProductListing = (props) => {
     const id = props.match.params.id;
 
     const [products, setProducts] = React.useState([]);
+    const [categories, setCategories] = React.useState([]);
+    const [isLoading,setIsLoading] = React.useState(false); 
+    // const [manupulatedCategories,setManupulatedCategories] = React.useState([]); 
 
     React.useEffect(() => {
 
       const getProducts = async () => {
 
+        setIsLoading(true); 
         try {
           const products = await getApi(
             `/wp-json/wc/v3/products?category=${id}`
           );
           setProducts(products);
+          setIsLoading(false);
         } catch (err) {
+          setIsLoading(false);
           console.log(err);
         }
       };
       id && getProducts();
     }, [id]);
 
+
+    React.useEffect(() => {
+
+      const getCategories = async () => {
+
+        try {
+          const categories = await getApi('/wp-json/wc/v3/products/categories');
+          setCategories(categories); 
+          
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      getCategories();
+    }, []);
+
+
+
+  const handleSelectCategory = e => {
+    const name = e.target.name;
+    const value = e.target.checked;
+
+    if (e.target.checked) {
+
+    } else {
+      
+    }
+  };
 
     return (
         <div class="Bcak-bg">
@@ -44,24 +79,57 @@ const ProductListing = (props) => {
       
               <div class="category-block">
                 <div class="product-detail">
-                  <h2 class="category-title">Categories</h2>
+                  <h2 class="category-title active">Categories</h2>
                   <ul>
-                    <li>
-                      <input class="custom-checkbox" id="styled-checkbox-4" type="checkbox" value="value1" />
-                      <label for="styled-checkbox-4">Toys</label>
+                   <li className='category-header-all'>
+                      All Categories
+                   </li>
+                   {categories && categories.map((cat,i) => {
+                     return (
+                      <li key={i} >
+                          <span 
+                          className='category-text' 
+                          onClick={()=>props.history.push(`/productsListing/${cat.id}`)}>
+                            {cat.name}
+                          </span>
+                      </li>
+                     )
+                   })}
+                   
+                  </ul>
+                </div>
+                
+              </div>
+
+              <div class="category-block">
+                <div class="product-detail">
+                  <h2 class="category-title">Tags</h2>
+                  <ul>
+                   
+                   {/* {categories && categories.map((cat,i) => {
+                     return (
+                      <li key={i}>
+                      <input 
+                      class="custom-checkbox"
+                        type="checkbox"
+                        checked={true}
+                        onChange={handleSelectCategory}
+                        name={cat.name} />
+                      <label >{cat.name}</label>
                     </li>
-                    <li>
-                      <input class="custom-checkbox" id="styled-checkbox-5" type="checkbox" value="value1" />
-                      <label for="styled-checkbox-5">Fashion</label>
+                     )
+                   })} */}
+
+                   <li >
+                      <input 
+                      class="custom-checkbox"
+                        type="checkbox"
+                        checked={true}
+                        onChange={handleSelectCategory}
+                       />
+                      <label>Products</label>
                     </li>
-                    <li>
-                      <input class="custom-checkbox" id="styled-checkbox-6" type="checkbox" value="value1"  />
-                      <label for="styled-checkbox-6">Cars</label>
-                    </li>
-                    <li>
-                      <input class="custom-checkbox" id="styled-checkbox-7" type="checkbox" value="value1" />
-                      <label for="styled-checkbox-7">Latest</label>
-                    </li>
+                   
                   </ul>
                 </div>
                 
@@ -73,7 +141,7 @@ const ProductListing = (props) => {
               <div class="row">
 
               {products &&
-          products.length > 0 &&
+          products.length > 0 && !isLoading &&
           products.map(product => {
             return (
 
@@ -85,13 +153,16 @@ const ProductListing = (props) => {
           
         
               </div>
-              <div class="pagination">
+             
+             {!isLoading ? (
+                <div class="pagination">
                 <a href="#"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
                 <a href="#">1</a>
                 <a href="#" class="active">2</a>
                 <a href="#">3</a>
                 <a href="#"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
               </div>
+             ): ""}
             </div>
           </div>
         </div>
@@ -100,4 +171,4 @@ const ProductListing = (props) => {
 }
 
 
-export default ProductListing; 
+export default withRouter(ProductListing); 

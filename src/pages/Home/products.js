@@ -1,10 +1,11 @@
 import React from 'react';
 import Product from './Product';
 import { getApi } from '../../utilities/wooApi';
+import { withRouter } from "react-router-dom";
 
 import Spinner from '../../components/commonFeilds/Spinner';
 
-const Products = ({ categoryId, categoryName }) => {
+const Products = ({ categoryId, categoryName ,history}) => {
   const [products, setProducts] = React.useState([]);
 
   React.useEffect(() => {
@@ -33,7 +34,17 @@ const Products = ({ categoryId, categoryName }) => {
               <span>
               {categoryName}
               </span>
+              <div className='seeMore-title-box'  onClick={()=>history.push(`/productsListing/${categoryId}`)}>
+              <h5 className='seeMore-title'>
+                {`See All ${categoryName} Products`}
+              </h5>
+              <i className='fa fa-chevron-right'></i>
+             </div>
+   
           </div>
+
+         
+
         </div>
       
       </div>
@@ -56,4 +67,4 @@ const Products = ({ categoryId, categoryName }) => {
   );
 };
 
-export default Products;
+export default withRouter(Products);

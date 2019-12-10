@@ -158,6 +158,8 @@ body {
     margin-bottom: 30px;
     line-height: 50px;
     position: relative;
+    display: flex;
+    justify-content: space-between;
 }
 
 .block-title span::before{
@@ -170,4 +172,34 @@ body {
     bottom: -2px;
     height: 2px;
     width: 100px;
+}
+
+.seeMore-title-box {
+  display: flex;
+  align-items: center;
+  transition: all .4s;
+  cursor: pointer;
+}
+
+
+.seeMore-title {
+  font-weight: normal;
+  font-size: 15px;
+  top: 5px;
+  color: #666;
+  text-transform: none;
+  font-size: 14px !important;
+}
+
+.seeMore-title:hover {
+  color: #FF5C00;
+
+}
+
+.seeMore-title-box .fa-chevron-right {
+  font-size: 12px;
+  color: #666;
+  top: 5px;
+  margin-left: 3px;
+
 }
