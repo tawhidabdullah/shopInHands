@@ -131,12 +131,15 @@ table {
   border-bottom: 1px solid #eee;
   align-items: center;
   padding: 13px;
+  flex-wrap: wrap;
+  padding-bottom: 0;
 }
 
 .top-head-1 .langandcurrency,
 .top-head-1 .trackorderandauthlinks {
   display: flex;
   align-items: center;
+  margin-bottom: 13px;
 }
 
 .top-head-1 .langandcurrency p,

@@ -9,14 +9,14 @@ import {
   deleteWishListAction
 } from '../../actions/userAction';
 
-const Product = ({ product, addProductToCart }) => {
+const Product = ({ product, addProductToCart,history }) => {
   const { name, price, images, id } = product;
   return (
     <div class="col-md-3">
       <div className="product-card">
-        <div class="product-top">
+        <div class="product-top" >
           <img src={images[0].src} />
-          <div className="product-top-overlay"></div>
+          <div className="product-top-overlay" onClick={()=> history.push(`/products/${id}`)}></div>
 
           <div class="overlay-right">
             <Link to={`/products/${id}`} className="product__link">

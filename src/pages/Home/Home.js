@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { getApi } from '../../utilities/wooApi';
 import Products from './products';
 import './Home.scss';
+import Spinner from '../../components/commonFeilds/Spinner';
+
 
 class Home extends Component {
   state = {
@@ -12,28 +14,13 @@ class Home extends Component {
     isProductLoading: false,
     categories: []
   };
-  async componentWillMount() {
-    // this.props.getProductAction();
+
+  async componentDidMount() {
 
     try {
       const categories = await getApi('/wp-json/wc/v3/products/categories');
-
       this.setState({
         categories: categories
-      });
-      console.log('categoriescategories', categories);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  async componentDidMount() {
-    try {
-      const products = await getApi(`/wp-json/wc/v3/products`);
-
-      console.log('products', products);
-      this.setState({
-        products: products
       });
     } catch (err) {
       console.log(err);
@@ -91,14 +78,17 @@ class Home extends Component {
             <ProductList />
           </div> */}
 
-        {categories && categories.length > 0
-          ? categories.map(cat => {
-              if (cat.name === 'Uncategorized') {
-              } else {
-                return <Products categoryId={cat.id} categoryName={cat.name} />;
-              }
-            })
-          : ''}
+          
+          {
+            this.state.categories.length > 0 ? (
+              categories.map(cat => {
+                if (cat.name === 'Uncategorized') {
+                } else {
+                  return <Products categoryId={cat.id} categoryName={cat.name} />;
+                }
+              })
+            ): <Spinner />
+          }
       </React.Fragment>
     );
   }

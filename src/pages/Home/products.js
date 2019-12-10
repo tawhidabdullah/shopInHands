@@ -2,6 +2,8 @@ import React from 'react';
 import Product from './Product';
 import { getApi } from '../../utilities/wooApi';
 
+import Spinner from '../../components/commonFeilds/Spinner';
+
 const Products = ({ categoryId, categoryName }) => {
   const [products, setProducts] = React.useState([]);
 
@@ -40,7 +42,7 @@ const Products = ({ categoryId, categoryName }) => {
           products.length > 0 &&
           products.map(product => {
             return <Product product={product} />;
-          })}
+          }) || <Spinner />}
       </div>
     </section>
   );

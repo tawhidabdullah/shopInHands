@@ -55,14 +55,31 @@ class Header extends Component {
         <div className='navbar'>
           <div className='navbar-center'>
           
-            <span className='nav-icon'>
-              <i className='fa fa-bars'></i>
+            <span className='nav-icon' style={{
+              display: 'block',
+              fontSize: '18px',
+              padding: '10px 25px',
+              borderRadius: '5px',
+              border: '1px solid #ddd',
+              background: '#FAFAFA'
+            }}>
+              <i className='fa fa-bars' style={{
+                fontSize:'15px',
+                color: '#FF5C00'
+              }}></i>
+              <span style={{
+                marginLeft: '7px',
+                fontSize: '16px',
+                textTransform: 'uppercase',
+                color: '#333',
+                fontWeight: '500'
+              }}>
+              All Departments
+              </span>
             </span>
-            <img style={{
-              height: '40px',
-              width: '100px',
-              objectFit: 'contain'
-            }} src={require('../../assets/productImages/logo-e.png')}  alt='logo'/>
+            <Link to='/products' style={{fontWeight: '700', textDecoration: 'none', color: '#444',textTransform: 'uppercase',fontSize:'20px' }}>
+              ShopInHands
+            </Link>
             <div className='cartt-btn' onClick={this.handleToggleCartBar}>
               <span className='nav-icon'>
                   <i className='fa fa-shopping-cart'></i>
