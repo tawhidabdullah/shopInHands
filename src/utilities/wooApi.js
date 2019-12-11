@@ -21,4 +21,27 @@ const getApi = async path => {
   }
 };
 
-export { getApi };
+
+
+const postApi = async (path,data) => {
+  const auth = new Buffer(
+    apiConfig.consumerKey + ':' + apiConfig.consumerSecret
+  ).toString('base64');
+
+  try {
+    const response = await fetch(`https://shopinhands.com/wp${path}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Basic ${auth}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+
+    return response.json();
+  } catch (err) {
+    return err;
+  }
+};
+
+export { getApi,postApi };

@@ -1,6 +1,8 @@
 import React from 'react'; 
 import { Form,Button } from "react-bootstrap";
-
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { postApi } from "../../utilities/wooApi";
 import "./checkout.scss";
 
 const Checkout = (props) => {
@@ -38,9 +40,56 @@ const Checkout = (props) => {
     }
 
 
-    const onOrderSubmit = (e) => {
+    const onOrderSubmit = async (e) => {
         e.preventDefault(); 
-        console.log('feids',fields); 
+
+        const line_items = props.cartItems.map(cartItem => {
+            return {
+                product_id: cartItem.id,
+                quantity: cartItem.quantity,
+            }
+        })
+
+        const orderData = {
+            billing: {
+              first_name: fields.first_name,
+              last_name: fields.last_name,
+              address_1: fields.address_1,
+              address_2: fields.address_2,
+              city: fields.city,
+              state: fields.state,
+              postcode: fields.postcode,
+              country: fields.country,
+              email: fields.email,
+              phone: fields.phone
+            },
+            shipping: {
+                first_name: fields.first_name,
+                last_name: fields.last_name,
+                address_1: fields.address_1,
+                address_2: fields.address_2,
+                city: fields.city,
+                state: fields.state,
+                postcode: fields.postcode,
+                country: fields.country,
+            },
+            line_items
+          };
+
+          try {
+            const successOrderResponse = await postApi(
+              ` /wp-json/wc/v3/orders`
+            ,orderData);
+
+            console.log('successOrderrestponse',successOrderResponse); 
+
+
+          } catch (err) {
+            console.log(err);
+          }
+          
+
+
     }
 
 
@@ -74,7 +123,7 @@ const Checkout = (props) => {
                         }}>Phone Number</Form.Label>
                         <Form.Control 
                         name='number'
-                        type="number"
+                        type="text"
                         onChange={handleFieldsChange}
 
                          placeholder="Enter Phone Number" />
@@ -236,7 +285,13 @@ const Checkout = (props) => {
                 </div>
                 <div className='col-md-4'>
                         <div className='order-summary'>
-
+                            <h2>
+                                Order Summary
+                            </h2>
+                            <div className='order-summary-price'>
+                            <h3>{props.cartItems.length} items in Cart</h3>
+                            <span>${props.totalPrice}</span>
+                            </div>
                         </div>
                 </div>  
             </div>
@@ -244,4 +299,22 @@ const Checkout = (props) => {
     )
 }; 
 
-export default Checkout; 
+const mapStateToProps = state => {
+    console.log(state, "state has changed");
+  
+    return {
+      cartItems: state.shop.cart,
+      cartItemCount: state.shop.cart.reduce((count, curItem) => {
+        return count + curItem.quantity;
+      }, 0),
+      totalPrice: state.shop.cart.reduce((count, curItem) => {
+        return count + curItem.price * curItem.quantity;
+      }, 0)
+    };
+  };
+  
+  export default connect(
+    mapStateToProps,
+    null
+  )(withRouter(Checkout));
+  

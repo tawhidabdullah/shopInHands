@@ -10,3 +10,45 @@
     line-height: 60px;
     text-align: left;
 }
+
+.order-summary {
+    background: #eee;
+    padding:20px;
+    margin-top: 20px;
+    border-radius: 3px;
+}
+
+.order-summary-price {
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10px; 
+
+
+}
+
+.order-summary h2 {
+    text-transform: uppercase;
+    font-size: 18px;
+    color: #333;
+    text-align: left;
+
+}
+
+.order-summary h3 {
+    text-transform: capitalize;
+    font-size: 16px;
+    color: #666;
+    text-align: left;
+  
+}
+
+.order-summary span {
+    text-transform: capitalize;
+    font-size: 16px;
+    color: #FF5C00; 
+    text-align: left;
+  
+}
