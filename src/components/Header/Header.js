@@ -60,7 +60,10 @@ class Header extends Component {
           }}
         >
           <div className="navbar-center">
-            <div className="navbar-center-logoBox">
+            <div
+              className="navbar-center-logoBox"
+              onClick={() => this.props.history.push('/products')}
+            >
               <img
                 style={{
                   width: '100%',
@@ -188,8 +191,14 @@ class Header extends Component {
             </div> */}
 
             <div className="navbar-center-navItems">
-              <span>Home</span>
-              <span>Features</span>
+              <span onClick={() => this.props.history.push('/products')}>
+                Home
+              </span>
+              <span
+                onClick={() => this.props.history.push('/productsListing/22')}
+              >
+                Products
+              </span>
               <span>Under $100</span>
               <span>Deals</span>
               <span>About Us</span>

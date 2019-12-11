@@ -707,6 +707,10 @@
 select {
   height: 50px;
   width: 100%;
+  border: none;
+  outline: none;
+  border-bottom-left-radius: 16px;
+  border-top-left-radius: 5px;
 }
 
 /*=====  End of Choices  ======*/
@@ -984,6 +988,9 @@ fieldset {
   padding: 0.35em 0.75em 0.625em;
 }
 
+.navbar-center-logoBox {
+  cursor: pointer;
+}
 @media screen and (max-width: 970px) {
   .navbar-center-logoBox {
     margin-bottom: 15px;
