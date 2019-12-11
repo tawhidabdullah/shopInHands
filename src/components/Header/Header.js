@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, Link, withRouter } from 'react-router-dom';
+import { getApi } from '../../utilities/wooApi';
 import { logoutUser } from '../../actions/authAction';
 import './Header.scss';
 import '../styles_components/searchBar.scss';
@@ -13,7 +14,8 @@ import {
 
 class Header extends Component {
   state = {
-    isShowCartBar: false
+    isShowCartBar: false,
+    searchBarValue: ''
   };
 
   handleToggleCartBar = () => {
@@ -24,6 +26,22 @@ class Header extends Component {
 
   handleRemoveCartItem = id => {
     this.props.removeProductToCart(id);
+  };
+
+  handleSearchBar = e => {
+    e.preventDefault();
+    this.setState({
+      ...this.state,
+      searchBarValue: e.target.value
+    });
+  };
+
+  handleSearch = e => {
+    e.preventDefault();
+    this.props.history.push({
+      pathname: '/productSearch',
+      search: `?search=${this.state.searchBarValue}`
+    });
   };
 
   render() {
@@ -79,7 +97,7 @@ class Header extends Component {
             <div className="navbar-center-categoryAndSearch">
               <div className="categoryAndSearchFeilds">
                 <div class="s003">
-                  <form>
+                  <form onSubmit={this.handleSearch}>
                     <div class="inner-form">
                       <div class="input-field first-wrap">
                         <div class="input-select">
@@ -103,6 +121,9 @@ class Header extends Component {
                           id="search"
                           type="text"
                           placeholder="Enter Keywords?"
+                          name="searchbar"
+                          value={this.state.searchBarValue}
+                          onChange={this.handleSearchBar}
                         />
                       </div>
                       <div class="input-field third-wrap">

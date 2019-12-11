@@ -1,31 +1,31 @@
-import React, { Component } from "react";
-import { Provider } from "react-redux";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import jwt_decode from "jwt-decode";
-import setAuthorizationToken from "./utilities/setAuthorizationToken";
+import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
+import setAuthorizationToken from './utilities/setAuthorizationToken';
 
-import "./App.scss";
-import Home from "./pages/Home/Home";
-import ProductListing from "./pages/productListing";
-import Checkout from "./pages/Checkout";
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
-import ProductDetail from "./pages/ProductDetail/ProductDetail";
-import ShoppingCart from "./pages/ShopingCart/ShoppingCart";
-import Dashboard from "./components/Dashboard/Dashboard";
-import AddProducts from "./components/Dashboard/AddProducts";
+import './App.scss';
+import Home from './pages/Home/Home';
+import ProductListing from './pages/productListing';
+import Checkout from './pages/Checkout';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import ProductDetail from './pages/ProductDetail/ProductDetail';
+import ShoppingCart from './pages/ShopingCart/ShoppingCart';
+import Dashboard from './components/Dashboard/Dashboard';
+import AddProducts from './components/Dashboard/AddProducts';
+import ProductSearch from './pages/productSearch';
 
 // AUTH COMPONENTS
-import Register from "./components/auth/Register";
-import Login from "./components/auth/Login";
+import Register from './components/auth/Register';
+import Login from './components/auth/Login';
 
 // import private route
-import PrivateRoute from "./components/commonFeilds/privateRoute";
+import PrivateRoute from './components/commonFeilds/privateRoute';
 
 // IMPORT REDUX STORE
-import store from "./store";
-import { setCurrentUser } from "./actions/authAction";
-
+import store from './store';
+import { setCurrentUser } from './actions/authAction';
 
 // CHECK FOR TOKEN
 if (localStorage.jwttoken) {
@@ -39,9 +39,6 @@ if (localStorage.jwttoken) {
   /////////// MAKE LOGOUT THE USER BASED on expired  tIme
 }
 
-
-
-
 class App extends Component {
   render() {
     return (
@@ -52,26 +49,38 @@ class App extends Component {
             <Switch>
               <Route
                 exact
-                path={"/"}
+                path={'/'}
                 render={() => {
-                  return <Redirect to={"/products"} />;
+                  return <Redirect to={'/products'} />;
+                }}
+              />
+
+              <Route
+                exact
+                path={'/'}
+                render={() => {
+                  return <Redirect to={'/products'} />;
                 }}
               />
 
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
-              <Route exact path={"/products"} component={Home} />
-              <Route exact path={"/products/:id"} component={ProductDetail  } />
-              <Route exact path={"/productsListing/:id"} component={ProductListing} />
-              <Route exact path={"/checkout"} component={Checkout} />
-              
-              
-              <Route exact path={"/cart"} component={ShoppingCart} />
+              <Route exact path={'/products'} component={Home} />
+              <Route exact path={'/products/:id'} component={ProductDetail} />
+              <Route exact path={'/productSearch'} component={ProductSearch} />
+              <Route
+                exact
+                path={'/productsListing/:id'}
+                component={ProductListing}
+              />
+              <Route exact path={'/checkout'} component={Checkout} />
+
+              <Route exact path={'/cart'} component={ShoppingCart} />
             </Switch>
             <Switch>
               <PrivateRoute
                 exact
-                path={"/addProducts"}
+                path={'/addProducts'}
                 component={AddProducts}
               />
             </Switch>

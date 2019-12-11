@@ -20,7 +20,7 @@ const ProductListing = props => {
       const getProducts = async () => {
         setIsLoading(true);
         try {
-          const products = await getApi(`/wp-json/wc/v3/products`);
+          const products = await getApi(`/wp-json/wc/v3/products`, {});
           console.log('products', products);
           setProducts(products);
           setIsLoading(false);
@@ -80,7 +80,21 @@ const ProductListing = props => {
   }, []);
 
   const handleSearch = () => {
-    // searchValue ? props.history.push(`/productsListing/${}/homes`) : history.push('/rentals');
+    const getProducts = async () => {
+      setIsLoading(true);
+      try {
+        const products = await getApi(
+          `/wp-json/wc/v3/products?search=${searchValue}`
+        );
+        console.log('products', products);
+        setProducts(products);
+        setIsLoading(false);
+      } catch (err) {
+        console.log(err);
+        setIsLoading(false);
+      }
+    };
+    getProducts();
   };
 
   const handleSearchInput = e => {
