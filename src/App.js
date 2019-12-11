@@ -7,6 +7,7 @@ import setAuthorizationToken from "./utilities/setAuthorizationToken";
 import "./App.scss";
 import Home from "./pages/Home/Home";
 import ProductListing from "./pages/productListing";
+import Checkout from "./pages/Checkout";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
@@ -62,6 +63,8 @@ class App extends Component {
               <Route exact path={"/products"} component={Home} />
               <Route exact path={"/products/:id"} component={ProductDetail  } />
               <Route exact path={"/productsListing/:id"} component={ProductListing} />
+              <Route exact path={"/checkout"} component={Checkout} />
+              
               
               <Route exact path={"/cart"} component={ShoppingCart} />
             </Switch>

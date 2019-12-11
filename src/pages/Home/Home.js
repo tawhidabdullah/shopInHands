@@ -46,7 +46,7 @@ class Home extends Component {
     return (
       <React.Fragment>
         <div className="top-tags">
-          <h5 className="top-tags-desc">Top Tags:</h5>
+          <h5 className="top-tags-desc" onClick={()=>this.props.history.push('/cart')}>Top Tags:</h5>
 
           <div className="tags">
             {categories && categories.length > 0

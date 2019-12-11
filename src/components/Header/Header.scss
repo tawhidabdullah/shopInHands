@@ -83,7 +83,7 @@
   margin-bottom: 3rem;
 }
 .banner-btn {
-  padding: 1rem 3rem;
+  padding: 1rem 2rem;
   text-transform: uppercase;
   letter-spacing: var(--mainSpacing);
   font-size: 1rem;
@@ -272,11 +272,38 @@
 .cart-footer {
   margin-top: 2rem;
   letter-spacing: var(--mainSpacing);
-  text-align: center;
-}
-.cart-footer h3 {
-  text-transform: capitalize;
-  margin-bottom: 1rem;
+  // text-align: center;
+  
 }
 
+
+.cart-footer h3 {
+  text-transform: capitalize;
+  // margin-bottom: 1rem;
+}
+
+.cart-total {
+  padding: 15px 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-top: 2px solid #eee;
+  border-bottom: 2px solid #eee;
+  margin-bottom: 20px;
+}
+
+.cart-total h3 {
+  text-transform: uppercase;
+  font-weight: 800;
+  color: #333;
+
+}
+
+.cart-total span {
+  text-transform: uppercase;
+  font-weight: 800;
+  color: #FF5C32;
+
+}
 /* --------------- End of Cart ---------------- */

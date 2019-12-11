@@ -26,7 +26,7 @@ class Header extends Component {
 
   render() {
     const { isAuthenticate, user } = this.props.auth;
-    const {cartItems} = this.props;
+    const {cartItems,totalPrice} = this.props;
     const {isShowCartBar} = this.state; 
 
   
@@ -148,14 +148,25 @@ class Header extends Component {
             </div>
            {cartItems && cartItems.length > 0 && (
               <div className='cart-footer'>
-              {/* <h3>Your total : $ <span className='cart-total'>
-                  0
+                <div className='cart-total'> 
+                <h3>Your total : 
+                </h3>
+               <span >
+               ${totalPrice}
                 </span>
-                </h3> */}
-
-                <button className='clear-cart banner-btn'>
-                  Proceed
+                </div>
+              <button className='clear-cart banner-btn' onClick={()=>{
+                this.handleToggleCartBar(); 
+                this.props.history.push('/cart')
+              }}>
+                  View Cart
                 </button>
+                <button className='clear-cart banner-btn' style={{
+                  marginLeft: '20px'
+                }}>
+                  Checkout
+                </button>
+               
             </div>
            )}
           </div>
@@ -170,7 +181,10 @@ const mapStateToProps = state => {
     cartLength: state.shop.cart.length,
     cartItems: state.shop.cart,
     auth: state.auth,
-    category: state.category
+    category: state.category,
+    totalPrice: state.shop.cart.reduce((count, curItem) => {
+      return count + curItem.price * curItem.quantity;
+    }, 0)
   };
 };
 
