@@ -199,16 +199,23 @@ const ProductListing = props => {
             </div>
           </div>
           <div class="col-sm-9">
-            <div class="row">
+            <div
+              class="row"
+              style={{
+                paddingTop: '20px',
+                width: '100%',
+                // background: 'red',
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'space-around',
+                alignItems: 'center'
+              }}
+            >
               {(products &&
                 products.length > 0 &&
                 !isLoading &&
                 products.map(product => {
-                  return (
-                    <div class="col-sm-6 col-md-4 product_item_outer">
-                      <Product product={product} />
-                    </div>
-                  );
+                  return <Product product={product} productListing={true} />;
                 })) ||
                 (isLoading && <Spinner />)}
             </div>
