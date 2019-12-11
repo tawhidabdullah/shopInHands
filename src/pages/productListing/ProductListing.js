@@ -221,7 +221,12 @@ const ProductListing = props => {
             </div>
 
             {!isLoading && products && products.length > 0 ? (
-              <div class="pagination">
+              <div
+                class="pagination"
+                style={{
+                  marginTop: '50px'
+                }}
+              >
                 <a href="#">
                   <i class="fa fa-chevron-left" aria-hidden="true"></i>
                 </a>
