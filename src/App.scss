@@ -126,62 +126,55 @@ table {
   border-spacing: 0;
 }
 
-
-
-
 *,
 *::after,
 *::before {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    // font-family: 'Roboto', sans-serif !important; 
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  // font-family: 'Roboto', sans-serif !important;
 }
 
 body {
-    font-family: 'Roboto', sans-serif !important; 
-
+  font-family: 'Roboto', sans-serif !important;
 }
-
-
 
 .block-title {
-    border-bottom: 2px solid#eee;
-    
-    text-transform: uppercase;
-    
-    color:#222;
-    
-    font-size: 18px;
-    
-    font-weight: 600;
-    
-    margin-bottom: 30px;
-    line-height: 50px;
-    position: relative;
-    display: flex;
-    justify-content: space-between;
+  border-bottom: 2px solid#eee;
+
+  text-transform: uppercase;
+
+  color: #222;
+
+  font-size: 18px;
+
+  font-weight: 600;
+
+  margin-bottom: 0px;
+  line-height: 50px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
 }
 
-.block-title span::before{
-    background: #ff5c00;
-    content: '';
-    display: block;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -2px;
-    height: 2px;
-    width: 100px;
+.block-title span::before {
+  background: #ff5c00;
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  width: 100px;
 }
 
 .seeMore-title-box {
   display: flex;
   align-items: center;
-  transition: all .4s;
+  transition: all 0.4s;
   cursor: pointer;
 }
-
 
 .seeMore-title {
   font-weight: normal;
@@ -193,8 +186,7 @@ body {
 }
 
 .seeMore-title:hover {
-  color: #FF5C00;
-
+  color: #ff5c00;
 }
 
 .seeMore-title-box .fa-chevron-right {
@@ -202,5 +194,4 @@ body {
   color: #666;
   top: 5px;
   margin-left: 3px;
-
 }

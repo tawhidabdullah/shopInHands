@@ -21,9 +21,7 @@ const getApi = async path => {
   }
 };
 
-
-
-const postApi = async (path,data) => {
+const postApi = async (path, data) => {
   const auth = new Buffer(
     apiConfig.consumerKey + ':' + apiConfig.consumerSecret
   ).toString('base64');
@@ -44,4 +42,4 @@ const postApi = async (path,data) => {
   }
 };
 
-export { getApi,postApi };
+export { getApi, postApi };

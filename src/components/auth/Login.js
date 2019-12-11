@@ -1,19 +1,19 @@
-import React, { Component } from "react";
-import TextFeildGroup from "../commonFeilds/TextFeildGroup";
-import "../styles_components/submit.scss"; 
-import { connect } from "react-redux";
-import { loginUser } from "../../actions/authAction";
+import React, { Component } from 'react';
+import TextFeildGroup from '../commonFeilds/TextFeildGroup';
+import '../styles_components/submit.scss';
+import { connect } from 'react-redux';
+import { loginUser } from '../../actions/authAction';
 
 class Login extends Component {
   state = {
-    email: "",
-    password: "",
+    email: '',
+    password: '',
     errors: {}
   };
 
   componentDidMount() {
     if (this.props.auth.isAuthenticate) {
-      this.props.history.push("/dashboard");
+      this.props.history.push('/dashboard');
       // do this when the this file means login components just mounted ,
       // then check with the help of redux that is authenticated is true
       // of not if true then =>> give redirect to dashboard
@@ -29,7 +29,7 @@ class Login extends Component {
   componentWillReceiveProps(nextProps) {
     // it's runs when our components recive new props
     if (nextProps.auth.isAuthenticate) {
-      this.props.history.push("/dashboard");
+      this.props.history.push('/dashboard');
     }
     if (nextProps.errors) {
       this.setState({
@@ -61,7 +61,7 @@ class Login extends Component {
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Log In</h1>
               <p className="lead text-center">
-                Sign in to your StudentNetwork account
+                Sign in to your ShopInHands Account
               </p>
               <form onSubmit={this.onSubmit}>
                 <TextFeildGroup
@@ -82,11 +82,7 @@ class Login extends Component {
                   errors={errors.password}
                 />
                 <div className="form">
-                  <input
-                    type="submit"
-                    value="Create Product"
-                    id="input-submit"
-                  />{" "}
+                  <input type="submit" value="Signin" id="input-submit" />{' '}
                 </div>
               </form>
             </div>
@@ -104,7 +100,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { loginUser }
-)(Login);
+export default connect(mapStateToProps, { loginUser })(Login);

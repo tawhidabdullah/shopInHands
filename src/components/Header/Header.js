@@ -66,7 +66,13 @@ class Header extends Component {
             </p>
             <p>
               <i className="fa fa-user"></i>
-              <span>Login</span> or <span>Register</span>
+              <span onClick={() => this.props.history.push('/login')}>
+                Login
+              </span>{' '}
+              or{' '}
+              <span onClick={() => this.props.history.push('/register')}>
+                Register
+              </span>
             </p>
           </div>
         </div>
@@ -85,12 +91,11 @@ class Header extends Component {
               <img
                 style={{
                   width: '100%',
-                  height: '80%',
+                  height: '100%',
                   objectFit: 'contain'
                 }}
-                src={
-                  'http://magento2.flytheme.net/themes/sm_shopping/pub/static/frontend/Sm/shopping/en_US/images/logo.svg'
-                }
+                // className="img-fluid"
+                src={require('../../assets/logo.png')}
                 alt="get a life"
               />
             </div>
@@ -254,7 +259,7 @@ class Header extends Component {
                           this.handleToggleCartBar();
                           this.props.history.push(`/products/${cartItem.id}`);
                         }}
-                        src={require('../../assets/productImages/img7.jpg')}
+                        src={cartItem.images[0].src}
                         alt="productImg"
                       />
                       <div className="">

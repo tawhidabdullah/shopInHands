@@ -1,25 +1,25 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import "../styles_components/submit.scss";
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import '../styles_components/submit.scss';
 // import formFeild
-import TextFeildGroup from "../commonFeilds/TextFeildGroup";
+import TextFeildGroup from '../commonFeilds/TextFeildGroup';
 
 // connect redux
-import { connect } from "react-redux";
-import { registeruser } from "../../actions/authAction";
+import { connect } from 'react-redux';
+import { registeruser } from '../../actions/authAction';
 
 class Register extends Component {
   state = {
-    name: "",
-    email: "",
-    password: "",
-    password2: "",
+    name: '',
+    email: '',
+    password: '',
+    password2: '',
     errors: {}
   };
 
   componentDidMount() {
     if (this.props.auth.isAuthenticate) {
-      this.props.history.push("/dashboard");
+      this.props.history.push('/dashboard');
     }
   }
 
@@ -60,7 +60,7 @@ class Register extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Sign Up</h1>
-              <p className="lead text-center">Create your Student account</p>
+              <p className="lead text-center">Create your account</p>
               <form noValidate onSubmit={this.onSubmit}>
                 <TextFeildGroup
                   name="name"
@@ -103,9 +103,9 @@ class Register extends Component {
                 <div className="form">
                   <input
                     type="submit"
-                    value="Create Product"
+                    value="Create Account"
                     id="input-submit"
-                  />{" "}
+                  />{' '}
                 </div>
               </form>
             </div>
@@ -125,7 +125,4 @@ const mapStateToProp = state => {
 
 // checking the proptypes
 
-export default connect(
-  mapStateToProp,
-  { registeruser }
-)(withRouter(Register));
+export default connect(mapStateToProp, { registeruser })(withRouter(Register));

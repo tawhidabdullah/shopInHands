@@ -15,7 +15,7 @@ const Products = ({ categoryId, categoryName, history }) => {
           `/wp-json/wc/v3/products?category=${categoryId}`
         );
 
-        setProducts(products.splice(0, 5));
+        setProducts([...products.splice(0, 5)]);
       } catch (err) {
         console.log(err);
       }
@@ -24,7 +24,12 @@ const Products = ({ categoryId, categoryName, history }) => {
   }, [categoryId]);
 
   return (
-    <section className="product-slider-section">
+    <section
+      className="product-slider-section"
+      style={{
+        marginTop: '40px'
+      }}
+    >
       <div className="row">
         <div className="col-md-12">
           <div class="block-title">
@@ -60,7 +65,10 @@ const Products = ({ categoryId, categoryName, history }) => {
               // <div class="col-md-2 col-sm-4 ml-3 mr-3">
               //   <Product product={product} />
               // </div>
-              <Product product={product} productListing={true} />
+              <>
+                <Product product={product} productListing={true} />
+                <Product product={product} productListing={true} />
+              </>
             );
           })) || <Spinner />}
       </div>
