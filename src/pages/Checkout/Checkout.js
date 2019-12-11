@@ -3,7 +3,10 @@ import { Form,Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { postApi } from "../../utilities/wooApi";
+import { useAlert } from 'react-alert'
 import "./checkout.scss";
+
+
 
 const Checkout = (props) => {
     const [fields, setfields] = React.useState({
@@ -30,6 +33,8 @@ const Checkout = (props) => {
         email: "",
         phone: ""
     }); 
+
+    const alert = useAlert(); 
 
 
     const handleFieldsChange = (e) => {
@@ -82,6 +87,7 @@ const Checkout = (props) => {
             ,orderData);
 
             console.log('successOrderrestponse',successOrderResponse); 
+            alert.show('Something Went Wrong When Ordering')
 
 
           } catch (err) {

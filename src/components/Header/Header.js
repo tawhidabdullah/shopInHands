@@ -161,7 +161,12 @@ class Header extends Component {
               }}>
                   View Cart
                 </button>
-                <button className='clear-cart banner-btn' style={{
+                <button className='clear-cart banner-btn' 
+              onClick={()=>{
+                this.handleToggleCartBar(); 
+                this.props.history.push('/checkout')
+              }}
+                style={{
                   marginLeft: '20px'
                 }}>
                   Checkout
