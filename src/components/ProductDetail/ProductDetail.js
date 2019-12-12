@@ -7,7 +7,6 @@ import { Carousel } from 'react-responsive-carousel';
 
 const ProductDetail = props => {
   const { name, price, description, sale_price, images } = props.product;
-  console.log('imagesimages', images);
 
   const onCart = e => {
     e.preventDefault();
@@ -18,13 +17,14 @@ const ProductDetail = props => {
     <div class="row">
       <div class="col-md-6">
         <Carousel>
-          {images.map(image => {
+          {/* {images.map(image => {
             return (
-              <div>
-                <img src={image.src} />
-              </div>
+              
             );
-          })}
+          })} */}
+          <div>
+            <img src={images[0].src} />
+          </div>
         </Carousel>
       </div>
       <div class="col-md-6">

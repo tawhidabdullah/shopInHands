@@ -67,7 +67,6 @@ const Products = ({ categoryId, categoryName, history }) => {
               // </div>
               <>
                 <Product product={product} productListing={true} />
-                <Product product={product} productListing={true} />
               </>
             );
           })) || <Spinner />}
