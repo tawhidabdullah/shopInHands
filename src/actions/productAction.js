@@ -147,20 +147,33 @@ export const deleteReview = (product_id, reviewId) => dispatch => {
 
 // Delete Review
 export const getProductReviews = product_id => dispatch => {
-  axios
-    .get(`/api/products/getReviews/${product_id}`)
-    .then(res =>
+  getApi(`/wp-json/wc/v2/products/${product_id}/reviews`)
+    .then(reviews =>
       dispatch({
         type: GET_REVIEWS,
-        payload: res.data
+        payload: reviews
       })
     )
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err
       })
     );
+  // axios
+  //   .get(`/api/products/getReviews/${product_id}`)
+  //   .then(res =>
+  //     dispatch({
+  //       type: GET_REVIEWS,
+  //       payload: res.data
+  //     })
+  //   )
+  // .catch(err =>
+  //   dispatch({
+  //     type: GET_ERRORS,
+  //     payload: err.response.data
+  //   })
+  // );
 };
 
 // Clear errors

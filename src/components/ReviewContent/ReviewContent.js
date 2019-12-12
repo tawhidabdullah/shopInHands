@@ -1,19 +1,19 @@
-import React, { Component } from "react";
-import "./ReviewContent.scss";
-import { connect } from "react-redux";
-import { getProductReviews, deleteReview } from "../../actions/productAction";
-import ReviewItem from "./ReviewItem";
-import Spinner from "../commonFeilds/Spinner";
+import React, { Component } from 'react';
+import './ReviewContent.scss';
+import { connect } from 'react-redux';
+import { getProductReviews, deleteReview } from '../../actions/productAction';
+import ReviewItem from './ReviewItem';
+import Spinner from '../commonFeilds/Spinner';
 
 class ReviewContent extends Component {
-  componentWillMount() {
+  componentDidMount() {
     const productId = this.props.productId;
     this.props.getProductReviews(productId);
   }
 
   componentDidUpdate() {
-    const productId = this.props.productId;
-    this.props.getProductReviews(productId);
+    // const productId = this.props.productId;
+    // this.props.getProductReviews(productId);
   }
   onClickDeleteReview = reviewId => {
     const productId = this.props.productId;
@@ -22,13 +22,14 @@ class ReviewContent extends Component {
 
   render() {
     const { reviews } = this.props.reviews;
+    console.log('reviews', reviews);
     const { isAdmin } = this.props.user;
 
     let reviewItemContent = <Spinner />;
 
-    if (reviews.reviews) {
-      if (reviews.reviews.length > 0) {
-        reviewItemContent = reviews.reviews.map(review => {
+    if (reviews) {
+      if (reviews.length > 0) {
+        reviewItemContent = reviews.map(review => {
           return (
             <ReviewItem
               review={review}
@@ -37,7 +38,7 @@ class ReviewContent extends Component {
             />
           );
         });
-      } else if (reviews.reviews.length === 0) {
+      } else if (reviews.length === 0) {
         reviewItemContent = (
           <h2 className="display-5 text-center">No Reviews</h2>
         );
@@ -54,7 +55,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { getProductReviews, deleteReview }
-)(ReviewContent);
+export default connect(mapStateToProps, { getProductReviews, deleteReview })(
+  ReviewContent
+);

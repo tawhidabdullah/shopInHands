@@ -1,12 +1,22 @@
-import React, { Component } from "react";
-import "./ReviewItem.scss";
-import Moment from "react-moment";
+import React, { Component } from 'react';
+import './ReviewItem.scss';
+import Moment from 'react-moment';
+import StarRatings from 'react-star-ratings';
+
 export default class ReviewItem extends Component {
   render() {
-    const { avatar, name, date, text, _id } = this.props.review;
+    const {
+      avatar,
+      name,
+      date,
+      rating,
+      review,
+      _id,
+      date_created
+    } = this.props.review;
     const { isAdmin } = this.props;
 
-    let isAdminContent = "";
+    let isAdminContent = '';
 
     if (isAdmin) {
       isAdminContent = (
@@ -23,57 +33,47 @@ export default class ReviewItem extends Component {
       <div class="content-wrap">
         <div class="comment-item">
           <div class="comment-item--inner">
-            <div class="is-left">
+            {/* <div class="is-left">
               <figure class="avatar">
                 <img src={avatar} alt={name} />
               </figure>
-            </div>
+            </div> */}
             <div class="is-right">
-              {isAdminContent}
               <div class="is-right--inner">
                 <a href="" class="name">
                   {name}
                 </a>
                 <small>
-                  {" "}
-                  <Moment format="YYYY/MM/DD">{date}</Moment>
+                  {' '}
+                  <Moment format="YYYY/MM/DD">{date_created}</Moment>
                 </small>
                 <div class="the--comment">
-                  <p>{text}</p>
+                  <p>{review}</p>
                 </div>
                 <div class="ratings">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="shareCount plus feather feather-chevron-up"
+                  {/* <Rating
+                    initialRating={rating}
+                    // fullSymbol="fa fa-star fa-2x"
+                  /> */}
+
+                  <StarRatings
+                    rating={rating}
+                    numberOfStars={5}
+                    starRatedColor="#FF0000"
+                    starDimension="20px"
+                    starSpacing="4"
+                  />
+
+                  <span
+                    style={{
+                      color: '#FF0000',
+                      marginLeft: '7px',
+                      fontSize: '16px',
+                      marginTop: '4px'
+                    }}
                   >
-                    <polyline points="18 15 12 9 6 15" />
-                  </svg>
-                  <span class="share share-count share-plus">1</span>{" "}
-                  <span class="bar">|</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="shareCount minus feather feather-chevron-down"
-                  >
-                    <polyline points="6 9 12 15 18 9" />
-                  </svg>{" "}
-                  <span class="share share-count share-minus" />
-                  <span class="share sharing-init">Share</span>
+                    {rating}
+                  </span>
                 </div>
               </div>
             </div>

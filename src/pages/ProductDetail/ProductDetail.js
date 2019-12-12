@@ -6,6 +6,8 @@ import ProductSlider from '../../components/ProductSlider/ProductSlider';
 import Breadcrumb from '../../components/styles_components/Breadcrumb';
 import Product from '../../components/Product/Product';
 import { getApi } from '../../utilities/wooApi';
+import apiConfig from '../../config/apiConfig';
+import axios from 'axios';
 
 import {
   getAProductAction,
@@ -25,7 +27,8 @@ class ProductDetail extends Component {
       isReviews: false,
       isDetails: true,
       isMoreInformation: false,
-      product: {}
+      product: {},
+      relatedProducts: []
     }
   };
 
@@ -55,12 +58,39 @@ class ProductDetail extends Component {
         this.setState({
           product
         });
+
+        const productRelatedIds = product && product.related_ids;
+        const auth = new Buffer(
+          apiConfig.consumerKey + ':' + apiConfig.consumerSecret
+        ).toString('base64');
+
+        axios
+          .all(
+            productRelatedIds.map(id =>
+              axios({
+                url: `https://shopinhands.com/wp/wp-json/wc/v3/products/${id}`,
+                method: 'GET',
+                headers: {
+                  Authorization: `Basic ${auth}`,
+                  'Content-Type': 'application/json'
+                }
+              })
+            )
+          )
+          .then(responseArr => {
+            //this will be executed only when all requests are complete
+            const relatedProducts = responseArr.map(responseItem => {
+              return responseItem.data;
+            });
+            console.log('responseArr', responseArr);
+            this.setState({
+              relatedProducts
+            });
+          });
       })
       .catch(err => {
         console.log('something went wrong when retreving the product');
       });
-
-    // this.props.getProductAction();
   }
 
   onAddRateButtonClick = () => {
@@ -80,7 +110,7 @@ class ProductDetail extends Component {
 
     let ProductDetailContent = <Spinner />;
     if (product && Object.keys(product).length > 0) {
-      const { images } = product;
+      const { images, id } = product;
       ProductDetailContent = (
         <>
           <ProductDetailComponent {...this.props} product={product} />
@@ -108,7 +138,11 @@ class ProductDetail extends Component {
               </ul>
               <div class="productDetails__content">
                 {this.state.productDetailTabs.isDetails ? 'isDetails' : ''}
-                {this.state.productDetailTabs.isReviews ? 'isReviews' : ''}
+                {this.state.productDetailTabs.isReviews ? (
+                  <ReviewContent productId={id} />
+                ) : (
+                  ''
+                )}
                 {this.state.productDetailTabs.isMoreInformation
                   ? 'isMoreInformation'
                   : ''}
@@ -168,81 +202,37 @@ class ProductDetail extends Component {
                   <span>Best Sellers</span>
                 </div>
                 <div class="small-products-items">
-                  <div class="small-product-item">
-                    <div class="small-product-item-box-img">
-                      <img
-                        src="http://magento2.flytheme.net/themes/sm_shopping/default/lightweight-on-ear-headphones-black.html"
-                        class="product photo product-item-photo"
-                        alt=""
-                      />
-                    </div>
-                    <div class="small-product-info">
-                      <div class="small-product-reviews-summary">
-                        <h3 class="small-rating-summary">
-                          <i class="fa fa-star" aria-hidden="true"></i>
-                          <i class="fa fa-star" aria-hidden="true"></i>
-                          <i class="fa fa-star" aria-hidden="true"></i>
-                          <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                          <i class="fa fa-star-o" aria-hidden="true"></i>
-                        </h3>
-                      </div>
+                  {(this.state.relatedProducts &&
+                    this.state.relatedProducts.map(item => {
+                      return (
+                        <div class="small-product-item">
+                          <div class="small-product-item-box-img">
+                            <img
+                              src={item.images[0].src}
+                              class="product photo product-item-photo"
+                              alt=""
+                            />
+                          </div>
+                          <div class="small-product-info">
+                            <div class="small-product-reviews-summary">
+                              <h3 class="small-rating-summary">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i
+                                  class="fa fa-star-half-o"
+                                  aria-hidden="true"
+                                ></i>
+                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                              </h3>
+                            </div>
 
-                      <h2 class="small-product-title">
-                        Lightweight Great Product
-                      </h2>
-                      <h2 class="small-product-price">$2.20</h2>
-                    </div>
-                  </div>
-                  <div class="small-product-item">
-                    <div class="small-product-item-box-img">
-                      <img
-                        src="http://magento2.flytheme.net/themes/sm_shopping/default/lightweight-on-ear-headphones-black.html"
-                        class="product photo product-item-photo"
-                        alt=""
-                      />
-                    </div>
-                    <div class="small-product-info">
-                      <div class="small-product-reviews-summary">
-                        <h3 class="small-rating-summary">
-                          <i class="fa fa-star" aria-hidden="true"></i>
-                          <i class="fa fa-star" aria-hidden="true"></i>
-                          <i class="fa fa-star" aria-hidden="true"></i>
-                          <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                          <i class="fa fa-star-o" aria-hidden="true"></i>
-                        </h3>
-                      </div>
-
-                      <h2 class="small-product-title">
-                        Lightweight Great Product
-                      </h2>
-                      <h2 class="small-product-price">$2.20</h2>
-                    </div>
-                  </div>
-                  <div class="small-product-item">
-                    <div class="small-product-item-box-img">
-                      <img
-                        src="http://magento2.flytheme.net/themes/sm_shopping/default/lightweight-on-ear-headphones-black.html"
-                        class="product photo product-item-photo"
-                        alt=""
-                      />
-                    </div>
-                    <div class="small-product-info">
-                      <div class="small-product-reviews-summary">
-                        <h3 class="small-rating-summary">
-                          <i class="fa fa-star" aria-hidden="true"></i>
-                          <i class="fa fa-star" aria-hidden="true"></i>
-                          <i class="fa fa-star" aria-hidden="true"></i>
-                          <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                          <i class="fa fa-star-o" aria-hidden="true"></i>
-                        </h3>
-                      </div>
-
-                      <h2 class="small-product-title">
-                        Lightweight Great Product
-                      </h2>
-                      <h2 class="small-product-price">$2.20</h2>
-                    </div>
-                  </div>
+                            <h2 class="small-product-title">{item.name}</h2>
+                            <h2 class="small-product-price">${item.price}</h2>
+                          </div>
+                        </div>
+                      );
+                    })) || <Spinner />}
                 </div>
               </div>
             </div>

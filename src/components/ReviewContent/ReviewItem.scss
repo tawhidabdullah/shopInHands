@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 
 .icon-wrapper-review {
   float: right;
@@ -7,7 +7,7 @@
 
 body {
   background: #e7e9ee;
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -33,7 +33,7 @@ p {
     padding: 2em 1em;
     position: relative;
     &:after {
-      content: "";
+      content: '';
       position: relative;
       display: block;
       clear: both;
@@ -52,7 +52,7 @@ p {
 }
 
 .is-right--inner {
-  margin-left: 5.6em;
+  // margin-left: 5.6em;
 
   small {
     padding-left: 0.7em;
@@ -75,6 +75,8 @@ p {
   padding: 0em 0.5em;
 }
 .ratings {
+  display: flex;
+  align-items: center;
   svg {
     cursor: pointer;
     stroke: #999;
