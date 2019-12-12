@@ -1,8 +1,10 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import InputRange from 'react-input-range';
 import './productListing.scss';
 import Product from '../Home/Product';
 import { getApi } from '../../utilities/wooApi';
+import 'react-input-range/lib/css/index.css';
 
 import Spinner from '../../components/commonFeilds/Spinner';
 
@@ -13,6 +15,7 @@ const ProductListing = props => {
   const [categories, setCategories] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [searchValue, setSearchValue] = React.useState('');
+  const [value, setValue] = React.useState({ min: 2, max: 99999 });
   // const [manupulatedCategories,setManupulatedCategories] = React.useState([]);
 
   React.useEffect(() => {
@@ -146,6 +149,10 @@ const ProductListing = props => {
               </div>
             </div>
 
+            <div className="category-block">
+              <div className="product-title">Category</div>
+              <InputRange value={value} onChange={value => setValue(value)} />
+            </div>
             <div class="category-block">
               <div class="product-detail">
                 <h2 class="category-title">Categories</h2>
