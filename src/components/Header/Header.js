@@ -5,12 +5,14 @@ import { getApi } from '../../utilities/wooApi';
 import { logoutUser } from '../../actions/authAction';
 import './Header.scss';
 import '../styles_components/searchBar.scss';
+
 import {
   addProductToCart,
   decrementCartQuantity,
   incrementCartQuantity,
   removeProductToCart
 } from '../../actions';
+import CartOverLayCartItem from './CartOverLayCartItem';
 
 class Header extends Component {
   state = {
@@ -43,6 +45,21 @@ class Header extends Component {
       search: `?search=${this.state.searchBarValue}`
     });
   };
+
+  // const incrementOrDecrement = (e, type) => {
+  //   const value = itemQuantity;
+  //   console.log(type, value);
+
+  //   if (type === 'inc' && value < 10) {
+  //     setItemQuantity(itemQuantity + 1);
+  //     dispatch(incrementCartQuantity(id));
+  //   }
+
+  //   if (type === 'desc' && value > 1) {
+  //     setItemQuantity(itemQuantity - 1);
+  //     dispatch(decrementCartQuantity(id));
+  //   }
+  // };
 
   render() {
     const { isAuthenticate, user } = this.props.auth;
@@ -253,45 +270,11 @@ class Header extends Component {
               {(this.props.cartItems.length &&
                 this.props.cartItems.map(cartItem => {
                   return (
-                    <div className="cart-item">
-                      <img
-                        onClick={() => {
-                          this.handleToggleCartBar();
-                          this.props.history.push(`/products/${cartItem.id}`);
-                        }}
-                        src={cartItem.images[0].src}
-                        alt="productImg"
-                      />
-                      <div className="">
-                        <h4
-                          onClick={() => {
-                            this.handleToggleCartBar();
-                            this.props.history.push(`/products/${cartItem.id}`);
-                          }}
-                        >
-                          {cartItem.name}
-                        </h4>
-                        <h5>${cartItem.price}</h5>
-                        <span
-                          className="remove-item"
-                          onClick={() => this.handleRemoveCartItem(cartItem.id)}
-                        >
-                          <i
-                            className="fa fa-trash"
-                            style={{
-                              marginRight: '5px',
-                              color: '#FF5C00'
-                            }}
-                          ></i>
-                          remove
-                        </span>
-                      </div>
-                      <div>
-                        <i className="fa fa-chevron-up"></i>
-                        <p className="item-amount">1</p>
-                        <i className="fa fa-chevron-down"></i>
-                      </div>
-                    </div>
+                    <CartOverLayCartItem
+                      cartItem={cartItem}
+                      handleRemoveCartItem={this.handleRemoveCartItem}
+                      handleToggleCartBar={this.handleToggleCartBar}
+                    />
                   );
                 })) || (
                 <div className="cart-footer">
