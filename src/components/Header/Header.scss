@@ -1004,7 +1004,15 @@ fieldset {
     // width: 100%;
   }
 
+  @media screen and (max-width: 600px) {
+    .navbar-center-logoBox {
+      width: 170px;
+      height: 100px;
+    }
+  }
+
   .navbar-center-categoryAndSearch {
+    width: 100%;
     order: 5;
   }
 
@@ -1016,6 +1024,7 @@ fieldset {
     order: 5;
     margin-left: -15px;
     padding-bottom: 10px;
+    margin-top: 20px;
   }
   .nav-icon.nav-menu {
     margin-bottom: 20px;
@@ -1025,5 +1034,16 @@ fieldset {
 @media screen and (max-width: 705px) {
   .navbar-center-navItems span {
     margin-bottom: 15px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .navbar-center-logoBox {
+    width: 140px;
+    height: 100px;
+  }
+
+  .navbar-center-navItems {
+    // justify-content: space-between;
   }
 }
