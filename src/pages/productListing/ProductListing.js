@@ -15,7 +15,7 @@ const ProductListing = props => {
   const [categories, setCategories] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [searchValue, setSearchValue] = React.useState('');
-  const [value, setValue] = React.useState({ min: 2, max: 99999 });
+  const [value, setValue] = React.useState({ min: 2, max: 5000 });
   // const [manupulatedCategories,setManupulatedCategories] = React.useState([]);
 
   React.useEffect(() => {
@@ -125,6 +125,26 @@ const ProductListing = props => {
     setCategories(temCategories);
   };
 
+  const handleInputRangePriceChange = value => {
+    setValue(value);
+    const newValue = value;
+    const getProducts = async () => {
+      setIsLoading(true);
+      try {
+        const products = await getApi(
+          `/wp-json/wc/v3/products?min_price=${newValue.min}&max_price=${newValue.max}`
+        );
+        console.log('products', products);
+        setProducts(products);
+        setIsLoading(false);
+      } catch (err) {
+        console.log(err);
+        setIsLoading(false);
+      }
+    };
+    getProducts();
+  };
+
   return (
     <div class="Bcak-bg">
       <div class="container">
@@ -150,8 +170,19 @@ const ProductListing = props => {
             </div>
 
             <div className="category-block">
-              <div className="product-title">Category</div>
-              <InputRange value={value} onChange={value => setValue(value)} />
+              <div className="product-title">Price</div>
+              <div
+                style={{
+                  padding: '50px 0 30px 0'
+                }}
+              >
+                <InputRange
+                  value={value}
+                  maxValue={20000}
+                  minValue={0}
+                  onChange={value => handleInputRangePriceChange(value)}
+                />
+              </div>
             </div>
             <div class="category-block">
               <div class="product-detail">
@@ -191,6 +222,37 @@ const ProductListing = props => {
             <div class="category-block">
               <div class="product-detail">
                 <h2 class="category-title">Tags</h2>
+                <ul>
+                  {/* {categories && categories.map((cat,i) => {
+                     return (
+                      <li key={i}>
+                      <input 
+                      class="custom-checkbox"
+                        type="checkbox"
+                        checked={true}
+                        onChange={handleSelectCategory}
+                        name={cat.name} />
+                      <label >{cat.name}</label>
+                    </li>
+                     )
+                   })} */}
+
+                  <li>
+                    <input
+                      class="custom-checkbox"
+                      type="checkbox"
+                      checked={true}
+                      onChange={handleSelectCategory}
+                    />
+                    <label>Products</label>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="category-block">
+              <div class="product-detail">
+                <h2 class="category-title">Ratings</h2>
                 <ul>
                   {/* {categories && categories.map((cat,i) => {
                      return (

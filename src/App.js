@@ -24,7 +24,7 @@ import Login from './components/auth/Login';
 import PrivateRoute from './components/commonFeilds/privateRoute';
 
 // IMPORT REDUX STORE
-import store from './store';
+import { store } from './store';
 import { setCurrentUser } from './actions/authAction';
 
 // CHECK FOR TOKEN

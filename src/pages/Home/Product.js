@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { addProductToCart } from '../../actions';
+import { addProductToCart, removeProductToCart } from '../../actions';
 import {
   addWishListAction,
   getWishListsAction,
@@ -13,9 +13,33 @@ const Product = ({
   product,
   addProductToCart,
   history,
-  productListing = false
+  productListing = false,
+  cartItems,
+  removeProductToCart
 }) => {
   const { name, price, images, id } = product;
+
+  const AddCartContent = () => {
+    if (cartItems && cartItems.length > 0) {
+      const isItemExistInCart = cartItems.find(item => item.id === id);
+      if (isItemExistInCart) {
+        return 'Added';
+      } else return 'Add To Cart';
+    } else {
+      return 'Add To Cart';
+    }
+  };
+
+  const handleCartAction = () => {
+    if (cartItems && cartItems.length > 0) {
+      const isItemExistInCart = cartItems.find(item => item.id === id);
+      if (isItemExistInCart) {
+        removeProductToCart(id);
+      } else addProductToCart({ ...product });
+    } else {
+      return addProductToCart({ ...product });
+    }
+  };
   return (
     <div
       className="product-card"
@@ -51,11 +75,8 @@ const Product = ({
       </div>
 
       <div class="product-bottom text-center">
-        <div
-          className="cart-btn"
-          onClick={() => addProductToCart({ ...product })}
-        >
-          <button className="primary-btn">Add to Cart</button>
+        <div className="cart-btn" onClick={handleCartAction}>
+          <button className="primary-btn">{AddCartContent()}</button>
         </div>
 
         <div className="ratingsandtitle">
@@ -76,7 +97,8 @@ const Product = ({
 const mapStateToProp = state => {
   return {
     user: state.auth,
-    wishList: state.wishList
+    wishList: state.wishList,
+    cartItems: state.shop.cart
   };
 };
 
@@ -84,5 +106,6 @@ export default connect(mapStateToProp, {
   addWishListAction,
   getWishListsAction,
   deleteWishListAction,
-  addProductToCart
+  addProductToCart,
+  removeProductToCart
 })(withRouter(Product));
