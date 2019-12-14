@@ -149,7 +149,7 @@ class Header extends Component {
                         />
                       </div>
                       <div class="input-field third-wrap">
-                        <button class="btn-search" type="button">
+                        <button class="btn-search">
                           <svg
                             class="svg-inline--fa fa-search fa-w-16"
                             aria-hidden="true"

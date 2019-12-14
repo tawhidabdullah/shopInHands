@@ -1,19 +1,19 @@
 // actions is tough to understand
 //Actions must have a type
-import axios from "axios";
-import jwt_decode from "jwt-decode";
+import axios from 'axios';
+import jwt_decode from 'jwt-decode';
+import { postApi } from '../utilities/wooApi';
 
 // import setAuthorizationToken
-import setAuthorizationToken from "../utilities/setAuthorizationToken";
+import setAuthorizationToken from '../utilities/setAuthorizationToken';
 
 // import TYPES
-import { GET_ERRORS, SET_CURRENT_USER } from "./types";
+import { GET_ERRORS, SET_CURRENT_USER } from './types';
 
 // Register user
-export const registeruser = (userdata, history) => dispatch => {
-  axios
-    .post("/api/users/register", userdata)
-    .then(res => history.push("/login"))
+export const registeruser = (userData, history) => dispatch => {
+  postApi('/wp-json/wp/v2/users/register', userData, 'auth')
+    .then(res => history.push('/login'))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -24,12 +24,11 @@ export const registeruser = (userdata, history) => dispatch => {
 // when registeruser action get's called uporer function ta fired kore
 
 // Login - Get user token //////////////////////////////////////
-export const loginUser = userdata => dispatch => {
-  axios
-    .post("/api/users/login", userdata)
+export const loginUser = userData => dispatch => {
+  postApi('/wp-json/jwt-auth/v1/token', userData, 'auth')
     .then(res => {
-      const { token } = res.data; // get token from res.data
-      localStorage.setItem("jwttoken", token); //save to localstorage
+      const { token } = res; // get token from res.data
+      localStorage.setItem('jwttoken', token); //save to localstorage
       setAuthorizationToken(token); // set Authorization token  to header
       const decoded = jwt_decode(token); // decode token to get user data
       dispatch(setCurrentUser(decoded)); // set current user
@@ -45,8 +44,8 @@ export const loginUser = userdata => dispatch => {
 // Log out User
 
 export const logoutUser = () => dispatch => {
-  localStorage.removeItem("jwttoken"); // remove the token from localStorage
-  setAuthorizationToken(false); // remove Authorization header 
+  localStorage.removeItem('jwttoken'); // remove the token from localStorage
+  setAuthorizationToken(false); // remove Authorization header
   //set currentUser to empty object=>which will set isAuthenticate to false
   dispatch(setCurrentUser({}));
 };

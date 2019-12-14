@@ -10,10 +10,9 @@ import { registeruser } from '../../actions/authAction';
 
 class Register extends Component {
   state = {
-    name: '',
+    username: '',
     email: '',
     password: '',
-    password2: '',
     errors: {}
   };
 
@@ -41,10 +40,9 @@ class Register extends Component {
   onSubmit = e => {
     e.preventDefault();
     const newUser = {
-      name: this.state.name,
+      username: this.state.username,
       email: this.state.email,
       password: this.state.password,
-      password2: this.state.password2,
       errors: {}
     };
 
@@ -63,12 +61,12 @@ class Register extends Component {
               <p className="lead text-center">Create your account</p>
               <form noValidate onSubmit={this.onSubmit}>
                 <TextFeildGroup
-                  name="name"
-                  placeholder="name"
+                  name="username"
+                  placeholder="username"
                   type="text"
-                  value={this.state.name}
+                  value={this.state.username}
                   onChange={this.onChange}
-                  errors={errors.name}
+                  errors={errors.username}
                 />
 
                 <TextFeildGroup
@@ -78,8 +76,6 @@ class Register extends Component {
                   value={this.state.email}
                   onChange={this.onChange}
                   errors={errors.email}
-                  info="This site uses Gravatar 
-            so if you want a profile image, use a Gravatar email"
                 />
 
                 <TextFeildGroup
@@ -89,15 +85,6 @@ class Register extends Component {
                   value={this.state.password}
                   onChange={this.onChange}
                   errors={errors.password}
-                />
-
-                <TextFeildGroup
-                  name="password2"
-                  placeholder="Confirm Password"
-                  type="password"
-                  value={this.state.password2}
-                  onChange={this.onChange}
-                  errors={errors.password2}
                 />
 
                 <div className="form">

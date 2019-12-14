@@ -1,6 +1,6 @@
-import React from "react";
-import classnames from "classnames";
-import "../../components/styles_components/TextFeildGroup.scss";
+import React from 'react';
+import classnames from 'classnames';
+import '../../components/styles_components/TextFeildGroup.scss';
 
 const TextFeildGroup = ({
   // props descructuring
@@ -17,17 +17,27 @@ const TextFeildGroup = ({
     <div className="form">
       <input
         type={type}
-        className={classnames("form-control form-control-lg", {
-          "is-invalid": errors
+        className={classnames('form-control form-control-lg', {
+          'is-invalid': errors
         })}
         placeholder={placeholder}
         name={name}
         value={value}
         onChange={onChange}
         disabled={disabled}
-        id='inputFeild'
+        id="inputFeild"
       />
-      {info && <small className="form-text text-muted"> {info} </small>}
+      {info && (
+        <small
+          className="form-text text-muted"
+          style={{
+            marginTop: '10px'
+          }}
+        >
+          {' '}
+          {info}{' '}
+        </small>
+      )}
       {errors && <div className="invalid-feedback"> {errors} </div>}
     </div>
   );
