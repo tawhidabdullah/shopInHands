@@ -7,6 +7,7 @@ import Breadcrumb from '../../components/styles_components/Breadcrumb';
 import Product from '../../components/Product/Product';
 import { getApi } from '../../utilities/wooApi';
 import apiConfig from '../../config/apiConfig';
+import Footer from '../../components/Footer/Footer';
 import axios from 'axios';
 
 import {
@@ -154,91 +155,110 @@ class ProductDetail extends Component {
     }
 
     return (
-      <div class="singleProduct">
-        <div class="container-fluid singleProduct__container">
-          <div class="row">
-            <div class="col-md-9">{ProductDetailContent}</div>
-            <div class="col-md-3">
-              <div class="services-sidebar">
-                <ul>
-                  <li>
-                    <div class="service-content">
-                      <div class="service-icon">
-                        <i class="fa fa-truck"></i>
-                      </div>
-                      <div class="service-info">
-                        <h4>Free Delivery</h4>
-                        <p>From $59.89</p>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="service-content">
-                      <div class="service-icon">
-                        <i class="fa fa-truck"></i>
-                      </div>
-                      <div class="service-info">
-                        <h4>Free Delivery</h4>
-                        <p>From $59.89</p>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="service-content">
-                      <div class="service-icon">
-                        <i class="fa fa-truck"></i>
-                      </div>
-                      <div class="service-info">
-                        <h4>Free Delivery</h4>
-                        <p>From $59.89</p>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-
-              <div class="small__filterProducts">
-                <div class="block-title">
-                  <span>Best Sellers</span>
-                </div>
-                <div class="small-products-items">
-                  {(this.state.relatedProducts &&
-                    this.state.relatedProducts.map(item => {
-                      return (
-                        <div class="small-product-item">
-                          <div class="small-product-item-box-img">
-                            <img
-                              src={item.images[0].src}
-                              class="product photo product-item-photo"
-                              alt=""
-                            />
+      (product && Object.keys(product).length > 0 && (
+        <>
+          <div class="singleProduct">
+            <div class="container-fluid singleProduct__container">
+              <div class="row">
+                <div class="col-md-9">{ProductDetailContent}</div>
+                <div class="col-md-3">
+                  <div class="services-sidebar">
+                    <ul>
+                      <li>
+                        <div class="service-content">
+                          <div class="service-icon">
+                            <i class="fa fa-truck"></i>
                           </div>
-                          <div class="small-product-info">
-                            <div class="small-product-reviews-summary">
-                              <h3 class="small-rating-summary">
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i
-                                  class="fa fa-star-half-o"
-                                  aria-hidden="true"
-                                ></i>
-                                <i class="fa fa-star-o" aria-hidden="true"></i>
-                              </h3>
-                            </div>
-
-                            <h2 class="small-product-title">{item.name}</h2>
-                            <h2 class="small-product-price">${item.price}</h2>
+                          <div class="service-info">
+                            <h4>Free Delivery</h4>
+                            <p>From $59.89</p>
                           </div>
                         </div>
-                      );
-                    })) || <Spinner />}
+                      </li>
+                      <li>
+                        <div class="service-content">
+                          <div class="service-icon">
+                            <i class="fa fa-truck"></i>
+                          </div>
+                          <div class="service-info">
+                            <h4>Free Delivery</h4>
+                            <p>From $59.89</p>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="service-content">
+                          <div class="service-icon">
+                            <i class="fa fa-truck"></i>
+                          </div>
+                          <div class="service-info">
+                            <h4>Free Delivery</h4>
+                            <p>From $59.89</p>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="small__filterProducts">
+                    <div class="block-title">
+                      <span>Best Sellers</span>
+                    </div>
+                    <div class="small-products-items">
+                      {(this.state.relatedProducts &&
+                        this.state.relatedProducts.map(item => {
+                          return (
+                            <div class="small-product-item">
+                              <div class="small-product-item-box-img">
+                                <img
+                                  src={item.images[0].src}
+                                  class="product photo product-item-photo"
+                                  alt=""
+                                />
+                              </div>
+                              <div class="small-product-info">
+                                <div class="small-product-reviews-summary">
+                                  <h3 class="small-rating-summary">
+                                    <i
+                                      class="fa fa-star"
+                                      aria-hidden="true"
+                                    ></i>
+                                    <i
+                                      class="fa fa-star"
+                                      aria-hidden="true"
+                                    ></i>
+                                    <i
+                                      class="fa fa-star"
+                                      aria-hidden="true"
+                                    ></i>
+                                    <i
+                                      class="fa fa-star-half-o"
+                                      aria-hidden="true"
+                                    ></i>
+                                    <i
+                                      class="fa fa-star-o"
+                                      aria-hidden="true"
+                                    ></i>
+                                  </h3>
+                                </div>
+
+                                <h2 class="small-product-title">{item.name}</h2>
+                                <h2 class="small-product-price">
+                                  ${item.price}
+                                </h2>
+                              </div>
+                            </div>
+                          );
+                        })) || <Spinner />}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+          <Footer />
+        </>
+      )) || <Spinner />
     );
   }
 }

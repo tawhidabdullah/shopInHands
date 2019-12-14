@@ -88,7 +88,7 @@ class App extends Component {
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </Switch>
 
-            <Footer />
+            {/* <Footer /> */}
           </React.Fragment>
         </BrowserRouter>
       </Provider>

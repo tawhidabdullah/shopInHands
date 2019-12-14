@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import { getApi } from '../../utilities/wooApi';
 import Products from './products';
 import './Home.scss';
-import { withRouter } from "react-router-dom";
+import { withRouter } from 'react-router-dom';
 import Spinner from '../../components/commonFeilds/Spinner';
-
+import Footer from '../../components/Footer/Footer';
 
 class Home extends Component {
   state = {
@@ -17,7 +17,6 @@ class Home extends Component {
   };
 
   async componentDidMount() {
-
     try {
       const categories = await getApi('/wp-json/wc/v3/products/categories');
       this.setState({
@@ -46,12 +45,25 @@ class Home extends Component {
     return (
       <React.Fragment>
         <div className="top-tags">
-          <h5 className="top-tags-desc" onClick={()=>this.props.history.push('/cart')}>Top Tags:</h5>
+          <h5
+            className="top-tags-desc"
+            onClick={() => this.props.history.push('/cart')}
+          >
+            Top Tags:
+          </h5>
 
           <div className="tags">
             {categories && categories.length > 0
               ? categories.map(cat => {
-                  return <h5 onClick={()=>this.props.history.push(`/productsListing/${cat.id}`)}>{cat.name}</h5>;
+                  return (
+                    <h5
+                      onClick={() =>
+                        this.props.history.push(`/productsListing/${cat.id}`)
+                      }
+                    >
+                      {cat.name}
+                    </h5>
+                  );
                 })
               : ''}
           </div>
@@ -64,16 +76,22 @@ class Home extends Component {
             <div className="col-md-3">
               <div className="row">
                 <div className="col-md-12 ">
-                  <img style={{
-                    width: '100%',
-                    
-                  }} src={require('./banner-3.jpg')} alt="Banner Img" />
+                  <img
+                    style={{
+                      width: '100%'
+                    }}
+                    src={require('./banner-3.jpg')}
+                    alt="Banner Img"
+                  />
                 </div>
                 <div className="col-md-12 " style={{ marginTop: '15px' }}>
-                  <img  style={{
-                    width: '100%',
-                    
-                  }}  src={require('./banner-4.jpg')} alt="Banner Img" />
+                  <img
+                    style={{
+                      width: '100%'
+                    }}
+                    src={require('./banner-4.jpg')}
+                    alt="Banner Img"
+                  />
                 </div>
               </div>
             </div>
@@ -85,17 +103,19 @@ class Home extends Component {
             <ProductList />
           </div> */}
 
-          
-          {
-            this.state.categories.length > 0 ? (
-              categories.map(cat => {
-                if (cat.name === 'Uncategorized') {
-                } else {
-                  return <Products categoryId={cat.id} categoryName={cat.name} />;
-                }
-              })
-            ): <Spinner />
-          }
+        {this.state.categories.length > 0 ? (
+          <>
+            {categories.map(cat => {
+              if (cat.name === 'Uncategorized') {
+              } else {
+                return <Products categoryId={cat.id} categoryName={cat.name} />;
+              }
+            })}
+            <Footer />
+          </>
+        ) : (
+          <Spinner />
+        )}
       </React.Fragment>
     );
   }
