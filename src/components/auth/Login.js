@@ -3,11 +3,13 @@ import TextFeildGroup from '../commonFeilds/TextFeildGroup';
 import '../styles_components/submit.scss';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/authAction';
+import { withAlert } from 'react-alert';
 
 class Login extends Component {
   state = {
     email: '',
     password: '',
+    username: '',
     errors: {}
   };
 
@@ -42,6 +44,7 @@ class Login extends Component {
   onSubmit = e => {
     e.preventDefault();
     const userData = {
+      username: this.state.username,
       email: this.state.email,
       password: this.state.password,
       errors: {}
@@ -54,6 +57,9 @@ class Login extends Component {
 
   render() {
     const { errors } = this.state;
+    const { alert } = this.props;
+    typeof errors === 'string' &&
+      alert.error(typeof errors === 'string' && errors);
     return (
       <div className="login">
         <div className="container mt-5">
@@ -64,6 +70,15 @@ class Login extends Component {
                 Sign in to your ShopInHands Account
               </p>
               <form onSubmit={this.onSubmit}>
+                <TextFeildGroup
+                  name="username"
+                  placeholder="Username"
+                  type="username"
+                  value={this.state.username}
+                  onChange={this.onChange}
+                  errors={errors.username}
+                />
+
                 <TextFeildGroup
                   name="email"
                   placeholder="Email"
@@ -81,6 +96,7 @@ class Login extends Component {
                   onChange={this.onChange}
                   errors={errors.password}
                 />
+
                 <div className="form">
                   <input type="submit" value="Signin" id="input-submit" />{' '}
                 </div>
@@ -100,4 +116,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { loginUser })(Login);
+export default connect(mapStateToProps, { loginUser })(withAlert()(Login));

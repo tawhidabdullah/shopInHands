@@ -40,13 +40,13 @@ const postApi = async (path, data, type = 'notAuth') => {
     const response = await axios({
       method: 'post',
       headers:
-        type === 'notAuth' ? headersWithOutBasicAuth : headersWithOutBasicAuth,
+        type === 'notAuth' ? headersWithBasicAuth : headersWithOutBasicAuth,
       data,
       url: `https://shopinhands.com/wp${path}`
     });
     return response;
   } catch (err) {
-    return err;
+    return err.response.data;
   }
 };
 

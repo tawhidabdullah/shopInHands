@@ -13,11 +13,17 @@ import { GET_ERRORS, SET_CURRENT_USER } from './types';
 // Register user
 export const registeruser = (userData, history) => dispatch => {
   postApi('/wp-json/wp/v2/users/register', userData, 'auth')
-    .then(res => history.push('/login'))
+    .then(res => {
+      if (res.data.status === 400 || 403) {
+        throw new Error(res.message);
+      } else {
+        history.push('/login');
+      }
+    })
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.message
       })
     );
 };
@@ -27,16 +33,32 @@ export const registeruser = (userData, history) => dispatch => {
 export const loginUser = userData => dispatch => {
   postApi('/wp-json/jwt-auth/v1/token', userData, 'auth')
     .then(res => {
-      const { token } = res; // get token from res.data
-      localStorage.setItem('jwttoken', token); //save to localstorage
-      setAuthorizationToken(token); // set Authorization token  to header
-      const decoded = jwt_decode(token); // decode token to get user data
-      dispatch(setCurrentUser(decoded)); // set current user
+      if (res.data.status === 403 || 403) {
+        function strip_html_tags(str) {
+          if (str === null || str === '') return false;
+          else str = str.toString();
+          return str.replace(/<[^>]*>/g, '');
+        }
+        throw new Error(strip_html_tags(res.message));
+      } else {
+        const { token, user_display_name, user_email, user_nicename } = res; // get token from res.data
+
+        localStorage.setItem('jwtToken', token); //save to localStorage
+        setAuthorizationToken(token); // set Authorization token  to header
+        // const decoded = jwt_decode(token); // decode token to get user data
+        dispatch(
+          setCurrentUser({
+            user_display_name,
+            user_email,
+            user_nicename
+          })
+        ); // set current user
+      }
     })
-    .catch(errors => {
+    .catch(err => {
       dispatch({
         type: GET_ERRORS,
-        payload: errors.response.data
+        payload: err.message
       });
     });
 };

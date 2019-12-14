@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { withAlert } from 'react-alert';
 import '../styles_components/submit.scss';
 // import formFeild
 import TextFeildGroup from '../commonFeilds/TextFeildGroup';
@@ -37,6 +38,11 @@ class Register extends Component {
     });
   };
 
+  showError = errors => {
+    typeof errors === 'string' &&
+      alert.error(typeof errors === 'string' && errors);
+  };
+
   onSubmit = e => {
     e.preventDefault();
     const newUser = {
@@ -48,10 +54,14 @@ class Register extends Component {
 
     // this is when action get's fired
     this.props.registeruser(newUser, this.props.history); // passing user object to action
+
+    this.showError();
   };
 
   render() {
     const { errors } = this.state;
+    const { alert } = this.props;
+    this.showError(errors);
     return (
       <div className="register">
         <div className="container mt-5">
@@ -112,4 +122,6 @@ const mapStateToProp = state => {
 
 // checking the proptypes
 
-export default connect(mapStateToProp, { registeruser })(withRouter(Register));
+export default connect(mapStateToProp, { registeruser })(
+  withRouter(withAlert()(Register))
+);
