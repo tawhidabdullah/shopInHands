@@ -13,6 +13,12 @@ const ProductDetail = props => {
     props.dispatch(addProductToCart(props.product));
   };
 
+  const strip_html_tags = str => {
+    if (str === null || str === '') return false;
+    else str = str.toString();
+    return str.replace(/<[^>]*>/g, '');
+  };
+
   return (
     <div class="row">
       <div class="col-md-6">
@@ -63,7 +69,7 @@ const ProductDetail = props => {
           </div>
 
           <div class="product-description">
-            <p>{description}</p>
+            <p>{strip_html_tags(description)}</p>
           </div>
         </div>
       </div>

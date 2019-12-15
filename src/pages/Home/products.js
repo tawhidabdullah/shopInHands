@@ -1,12 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Product from './Product';
 import { getApi } from '../../utilities/wooApi';
 import { withRouter } from 'react-router-dom';
-
+import 'react-multi-carousel/lib/styles.css';
+import Carousel from 'react-multi-carousel';
 import Spinner from '../../components/commonFeilds/Spinner';
 
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 6
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 5
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1
+  }
+};
+
 const Products = ({ categoryId, categoryName, history }) => {
-  const [products, setProducts] = React.useState([]);
+  const [products, setProducts] = useState([]);
+  const [activeItemIndex, setActiveItemIndex] = useState(0);
+  const chevronWidth = 40;
 
   React.useEffect(() => {
     const getProducts = async () => {
@@ -15,7 +38,7 @@ const Products = ({ categoryId, categoryName, history }) => {
           `/wp-json/wc/v3/products?category=${categoryId}`
         );
 
-        setProducts([...products.splice(0, 5)]);
+        setProducts([...products.splice(0, 6)]);
       } catch (err) {
         console.log(err);
       }
@@ -46,30 +69,33 @@ const Products = ({ categoryId, categoryName, history }) => {
           </div>
         </div>
       </div>
+
       <div
-        className="row"
         style={{
-          paddingTop: '20px',
           width: '100%',
-          // background: 'red',
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'space-around',
+          justifyContent: 'center',
           alignItems: 'center'
         }}
       >
-        {(products &&
-          products.length > 0 &&
-          products.map(product => {
-            return (
-              // <div class="col-md-2 col-sm-4 ml-3 mr-3">
-              //   <Product product={product} />
-              // </div>
-              <>
-                <Product product={product} productListing={true} />
-              </>
-            );
-          })) || <Spinner />}
+        {products && !products.length > 0 && <Spinner />}
+      </div>
+      <div
+        style={{
+          width: '100%',
+          justifyContent: 'center'
+        }}
+      >
+        <Carousel responsive={responsive}>
+          {products &&
+            products.length > 0 &&
+            products.map(product => {
+              return (
+                <>
+                  <Product product={product} productListing={true} />
+                </>
+              );
+            })}
+        </Carousel>
       </div>
     </section>
   );

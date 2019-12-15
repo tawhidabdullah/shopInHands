@@ -148,6 +148,7 @@ class Header extends Component {
                           >
                             <option placeholder="">Categories</option>
                             {categories &&
+                              categories.length > 0 &&
                               categories.map(item => {
                                 return (
                                   <option value={item.id}>{item.name}</option>
