@@ -7,6 +7,8 @@ import Spinner from '../../components/commonFeilds/Spinner';
 
 const ProductSearch = props => {
   const queryValueOfSearch = queryString.parse(props.location.search).search;
+  const categoryValueOfSearch = queryString.parse(props.location.search)
+    .category;
   console.log('searchBValue', queryValueOfSearch);
   const [products, setProducts] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -16,7 +18,7 @@ const ProductSearch = props => {
       try {
         setIsLoading(true);
         const products = await getApi(
-          `/wp-json/wc/v3/products?search${queryValueOfSearch}`
+          `/wp-json/wc/v3/products?category=${categoryValueOfSearch}&search=${queryValueOfSearch}`
         );
 
         setProducts(products);

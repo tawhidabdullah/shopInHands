@@ -61,16 +61,16 @@ class Header extends Component {
 
   handleSearch = e => {
     e.preventDefault();
+
     this.props.history.push({
       pathname: '/productSearch',
-      search: `?search=${this.state.searchBarValue}`
+      search: `?category=${this.state.categorySelectValue}&search=${this.state.searchBarValue}`
     });
   };
 
   handleCategorySelectChange = event => {
     const value = event.target.value;
     this.setState({ categorySelectValue: value });
-    this.props.history.push(`/productsListing/${value}`);
   };
 
   render() {
@@ -128,7 +128,6 @@ class Header extends Component {
                   height: '100%',
                   objectFit: 'contain'
                 }}
-                // className="img-fluid"
                 src={require('../../assets/logo.png')}
                 alt="get a life"
               />
