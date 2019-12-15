@@ -35,7 +35,6 @@ class ProductDetail extends Component {
 
   toggleTabs = tabName => {
     const tempTabs = { ...this.state.productDetailTabs };
-    console.log('temsptabs', tempTabs);
     const tbsMap = Object.keys(tempTabs);
     tbsMap.forEach(tb => {
       if (tb === tabName) {
@@ -51,10 +50,8 @@ class ProductDetail extends Component {
     });
   };
 
-  componentDidMount() {
-    const productId = this.props.match.params.id;
-    // this.props.getAProductAction(productId);
-    getApi(`/wp-json/wc/v3/products/${productId}`)
+  getProductsAndRelatedProducts = id => {
+    getApi(`/wp-json/wc/v3/products/${id}`)
       .then(product => {
         this.setState({
           product
@@ -92,6 +89,13 @@ class ProductDetail extends Component {
       .catch(err => {
         console.log('something went wrong when retreving the product');
       });
+  };
+
+  componentDidMount() {
+    const productId = this.props.match.params.id;
+    // this.props.getAProductAction(productId);
+    this.getProductsAndRelatedProducts(productId);
+    console.log('get a life');
   }
 
   onAddRateButtonClick = () => {
@@ -105,6 +109,18 @@ class ProductDetail extends Component {
       });
     }
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    const newId = this.props.match.params.id;
+    const prevProductId = prevProps.match.params.id;
+    if (prevProductId !== newId) {
+      this.setState({
+        ...this.state,
+        product: {}
+      });
+      this.getProductsAndRelatedProducts(newId);
+    }
+  }
 
   render() {
     const { product } = this.state;
@@ -209,7 +225,14 @@ class ProductDetail extends Component {
                         this.state.relatedProducts.map(item => {
                           return (
                             <div class="small-product-item">
-                              <div class="small-product-item-box-img">
+                              <div
+                                class="small-product-item-box-img"
+                                onClick={() => {
+                                  this.props.history.push(
+                                    `/products/${item.id}`
+                                  );
+                                }}
+                              >
                                 <img
                                   src={item.images[0].src}
                                   class="product photo product-item-photo"
@@ -242,9 +265,11 @@ class ProductDetail extends Component {
                                   </h3>
                                 </div>
 
-                                <h2 class="small-product-title">{item.name}</h2>
+                                <h2 class="small-product-title">
+                                  {item.price}
+                                </h2>
                                 <h2 class="small-product-price">
-                                  ${item.price}
+                                  ${item.regular_price}
                                 </h2>
                               </div>
                             </div>

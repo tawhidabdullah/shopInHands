@@ -84,7 +84,7 @@ class Home extends Component {
                     alt="Banner Img"
                   />
                 </div>
-                <div className="col-md-12 " style={{ marginTop: '15px' }}>
+                <div className="col-md-12 " style={{ marginTop: '25px' }}>
                   <img
                     style={{
                       width: '100%'
