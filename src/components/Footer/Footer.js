@@ -35,27 +35,33 @@ const Footer = () => {
             </div>
             <span className="footer_section-item">
               <i className="fa fa-circle"></i>
-              <h3>Track your Order</h3>
+              <a href="https://shopinhands.com/wp/track-your-order">
+                Track your Order
+              </a>
             </span>
             <span className="footer_section-item">
               <i className="fa fa-circle"></i>
-              <h3>Wishlist</h3>
+              <a href="https://shopinhands.com/wp/wishlist">Wishlist</a>
             </span>
             <span className="footer_section-item">
               <i className="fa fa-circle"></i>
-              <h3>Customer Service</h3>
+              <a href="https://shopinhands.com/wp/customer-service">
+                Customer Service
+              </a>
             </span>
             <span className="footer_section-item">
               <i className="fa fa-circle"></i>
-              <h3>Returns / Exchange</h3>
+              <a href="https://shopinhands.com/wp/returns-exchange">
+                Returns / Exchange
+              </a>
             </span>
             <span className="footer_section-item">
               <i className="fa fa-circle"></i>
-              <h3>Faq?</h3>
+              <a href="https://shopinhands.com/wp/faq">Faq?</a>
             </span>
             <span className="footer_section-item">
               <i className="fa fa-circle"></i>
-              <h3>Support</h3>
+              <a href="https://shopinhands.com/wp/support">Support</a>
             </span>
           </div>
         </div>
