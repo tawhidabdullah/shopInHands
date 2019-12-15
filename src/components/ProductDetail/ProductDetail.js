@@ -43,7 +43,6 @@ const ProductDetail = props => {
                 <span class="review-count">1</span>
                 <span> Review</span>
               </h3>
-
               <h3 class="reviews-actions">Add New Reviews</h3>
             </div>
 
@@ -64,12 +63,7 @@ const ProductDetail = props => {
           </div>
 
           <div class="product-description">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta
-              quod consequatur soluta porro voluptate accusamus pariatur
-              sapiente illo corporis aliquam quaerat dolorum fugit consectetur
-              nemo sunt recusandae, quisquam excepturi maiores.
-            </p>
+            <p>{description}</p>
           </div>
         </div>
       </div>

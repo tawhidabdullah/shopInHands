@@ -72,7 +72,7 @@ const ProductSearch = props => {
               className="btn btn-outline-secondary"
               onClick={e => {
                 e.preventDefault();
-                props.history.push('/products');
+                props.history.push('/');
               }}
             >
               Go Back To Home Page

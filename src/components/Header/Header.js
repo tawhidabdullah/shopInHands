@@ -17,7 +17,10 @@ import CartOverLayCartItem from './CartOverLayCartItem';
 class Header extends Component {
   state = {
     isShowCartBar: false,
-    searchBarValue: ''
+    searchBarValue: '',
+    categories: [],
+    isLoading: false,
+    categorySelectValue: 'Categories'
   };
 
   handleToggleCartBar = () => {
@@ -29,6 +32,24 @@ class Header extends Component {
   handleRemoveCartItem = id => {
     this.props.removeProductToCart(id);
   };
+
+  async componentDidMount() {
+    try {
+      this.setState({
+        isLoading: true
+      });
+      const categories = await getApi('/wp-json/wc/v3/products/categories');
+      this.setState({
+        categories: categories,
+        isLoading: false
+      });
+    } catch (err) {
+      console.log(err);
+      this.setState({
+        isLoading: false
+      });
+    }
+  }
 
   handleSearchBar = e => {
     e.preventDefault();
@@ -46,25 +67,21 @@ class Header extends Component {
     });
   };
 
-  // const incrementOrDecrement = (e, type) => {
-  //   const value = itemQuantity;
-  //   console.log(type, value);
-
-  //   if (type === 'inc' && value < 10) {
-  //     setItemQuantity(itemQuantity + 1);
-  //     dispatch(incrementCartQuantity(id));
-  //   }
-
-  //   if (type === 'desc' && value > 1) {
-  //     setItemQuantity(itemQuantity - 1);
-  //     dispatch(decrementCartQuantity(id));
-  //   }
-  // };
+  handleCategorySelectChange = event => {
+    const value = event.target.value;
+    this.setState({ categorySelectValue: value });
+    this.props.history.push(`/productsListing/${value}`);
+  };
 
   render() {
     const { isAuthenticate, user } = this.props.auth;
     const { cartItems, totalPrice } = this.props;
-    const { isShowCartBar } = this.state;
+    const {
+      isShowCartBar,
+      categories,
+      isLoading,
+      categorySelectValue
+    } = this.state;
 
     return (
       <>
@@ -103,7 +120,7 @@ class Header extends Component {
           <div className="navbar-center">
             <div
               className="navbar-center-logoBox"
-              onClick={() => this.props.history.push('/products')}
+              onClick={() => this.props.history.push('/')}
             >
               <img
                 style={{
@@ -126,15 +143,16 @@ class Header extends Component {
                           <select
                             data-trigger="choices"
                             name="choices-single-default"
+                            value={categorySelectValue}
+                            onChange={e => this.handleCategorySelectChange(e)}
                           >
-                            <option placeholder="">Category</option>
-                            <option>New Arrivals</option>
-                            <option>Sale</option>
-                            <option>Ladies</option>
-                            <option>Men</option>
-                            <option>Clothing</option>
-                            <option>Footwear</option>
-                            <option>Accessories</option>
+                            <option placeholder="">Categories</option>
+                            {categories &&
+                              categories.map(item => {
+                                return (
+                                  <option value={item.id}>{item.name}</option>
+                                );
+                              })}
                           </select>
                         </div>
                       </div>
@@ -240,10 +258,11 @@ class Header extends Component {
               >
                 Products
               </span>
-              <span>Under $100</span>
-              <span>Deals</span>
-              <span>About Us</span>
-              <span>Contact Us</span>
+
+              <a href="https://shopinhands.com/wp/on-sale/">OnSale</a>
+              <a href="https://shopinhands.com/wp/deals">Deals</a>
+              <a href="https://shopinhands.com/wp/about-us">About Us</a>
+              <a href="https://shopinhands.com/wp/">Contact Us</a>
             </div>
             <div className="navbar-center-phoneNumberbox">
               <i className="fa fa-phone"></i>
