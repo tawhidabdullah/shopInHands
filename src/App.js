@@ -47,25 +47,10 @@ class App extends Component {
           <React.Fragment>
             <Header />
             <Switch>
-              <Route
-                exact
-                path={'/'}
-                render={() => {
-                  return <Redirect to={'/products'} />;
-                }}
-              />
-
-              <Route
-                exact
-                path={'/'}
-                render={() => {
-                  return <Redirect to={'/products'} />;
-                }}
-              />
+              <Route exact path={'/'} component={Home} />
 
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
-              <Route exact path={'/products'} component={Home} />
               <Route exact path={'/products/:id'} component={ProductDetail} />
               <Route exact path={'/productSearch'} component={ProductSearch} />
               <Route

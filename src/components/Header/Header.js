@@ -234,9 +234,7 @@ class Header extends Component {
             </div> */}
 
             <div className="navbar-center-navItems">
-              <span onClick={() => this.props.history.push('/products')}>
-                Home
-              </span>
+              <span onClick={() => this.props.history.push('/')}>Home</span>
               <span
                 onClick={() => this.props.history.push('/productsListing/22')}
               >

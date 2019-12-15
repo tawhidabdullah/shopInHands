@@ -68,7 +68,12 @@ const Product = ({
           >
             <i class="fa fa-heart-o"></i>
           </button>
-          <button type="button" class="btn btn-secondary" title="Add To Cart">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            title="Add To Cart"
+            onClick={() => addProductToCart({ ...product })}
+          >
             <i class="fa fa-shopping-cart"></i>
           </button>
         </div>
