@@ -4,10 +4,11 @@ import {
   ADD_PRODUCT_TO_CART,
   DECREMENT_CART_ITEM_QUANTITY,
   INCREMENT_CART_ITEM_QUANTITY,
-  REMOVE_PRODUCT_FROM_CART
-} from "../actions";
+  REMOVE_PRODUCT_FROM_CART,
+  CLEAR_CART_ACTION
+} from '../actions';
 
-import { GET_PRODUCTS } from "../actions/types";
+import { GET_PRODUCTS } from '../actions/types';
 
 const initialState = {
   products: [],
@@ -84,6 +85,9 @@ const shopReducer = (state = initialState, action) => {
       updatedCart.splice(updatedItemIndex, 1);
 
       return { ...state, cart: updatedCart };
+
+    case CLEAR_CART_ACTION:
+      return { ...state, cart: action.payload };
     default:
       return state;
   }

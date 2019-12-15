@@ -17,8 +17,8 @@ const responsive = {
     items: 5
   },
   tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2
+    breakpoint: { max: 1024, min: 700 },
+    items: 3
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
@@ -28,8 +28,6 @@ const responsive = {
 
 const Products = ({ categoryId, categoryName, history }) => {
   const [products, setProducts] = useState([]);
-  const [activeItemIndex, setActiveItemIndex] = useState(0);
-  const chevronWidth = 40;
 
   React.useEffect(() => {
     const getProducts = async () => {
@@ -82,7 +80,8 @@ const Products = ({ categoryId, categoryName, history }) => {
       <div
         style={{
           width: '100%',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          alignItems: 'center'
         }}
       >
         <Carousel responsive={responsive}>

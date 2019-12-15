@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { formatMoney } from '../../pipes/priceFormatter';
 import CartItem from '../../components/CartItem/CartItem';
+import { clearCart } from '../../actions/index';
 import './ShoppingCart.scss';
 
 const ShoppingCart = props => {
@@ -66,6 +67,7 @@ const ShoppingCart = props => {
                     color: '#fff',
                     margin: '10px 10px'
                   }}
+                  onClick={() => props.clearCart()}
                 >
                   Clear Shopping Cart
                 </a>
@@ -136,4 +138,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, null)(withRouter(ShoppingCart));
+export default connect(mapStateToProps, { clearCart })(
+  withRouter(ShoppingCart)
+);
