@@ -114,7 +114,7 @@ const ShoppingCart = props => {
               }}
             >
               <div className="pull-right" style={{ margin: '5px' }}>
-                Total price: <b>{formatMoney(props.totalPrice)}$</b>
+                Total price: <b>{formatMoney(props.totalPrice)}৳</b>
               </div>
             </div>
           </div>

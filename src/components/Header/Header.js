@@ -308,7 +308,7 @@ class Header extends Component {
               <div className="cart-footer">
                 <div className="cart-total">
                   <h3>Your total :</h3>
-                  <span>${totalPrice}</span>
+                  <span>৳{totalPrice}</span>
                 </div>
                 <button
                   className="clear-cart banner-btn"

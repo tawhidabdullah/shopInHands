@@ -53,8 +53,8 @@ const ProductDetail = props => {
             </div>
 
             <div class="product-price-box">
-              <h2 class="special-price">${sale_price}</h2>
-              <h2 class="old-price">${price}</h2>
+              <h2 class="special-price">৳{sale_price}</h2>
+              <h2 class="old-price">{price}৳</h2>
             </div>
           </div>
           <div class="product-options-bottom">

@@ -78,7 +78,7 @@ const CartItem = ({
         >
           <h6>
             <strong>
-              {price}$ <span className="text-muted">x</span>
+              {price}৳ <span className="text-muted">x</span>
             </strong>
           </h6>
         </div>

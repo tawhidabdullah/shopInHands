@@ -198,7 +198,7 @@ class ProductDetail extends Component {
                           </div>
                           <div class="service-info">
                             <h4>Free Delivery</h4>
-                            <p>From $59.89</p>
+                            <p>From ৳59.89</p>
                           </div>
                         </div>
                       </li>
@@ -209,7 +209,7 @@ class ProductDetail extends Component {
                           </div>
                           <div class="service-info">
                             <h4>Free Delivery</h4>
-                            <p>From $59.89</p>
+                            <p>From ৳59.89</p>
                           </div>
                         </div>
                       </li>
@@ -266,10 +266,10 @@ class ProductDetail extends Component {
                                 </div>
 
                                 <h2 class="small-product-title">
-                                  {item.price}
+                                  ৳{item.price}
                                 </h2>
                                 <h2 class="small-product-price">
-                                  ${item.regular_price}
+                                  ৳{item.regular_price}
                                 </h2>
                               </div>
                             </div>

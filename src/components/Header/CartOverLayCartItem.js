@@ -48,7 +48,7 @@ const CartOverLayCartItem = ({
         >
           {name}
         </h4>
-        <h5>${price}</h5>
+        <h5>৳{price}</h5>
         <span className="remove-item" onClick={() => handleRemoveCartItem(id)}>
           <i
             className="fa fa-trash"

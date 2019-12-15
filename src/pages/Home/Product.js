@@ -93,7 +93,7 @@ const Product = ({
 
           <h3 className="product-bottom-title">{name}</h3>
         </div>
-        <h5 className="product-bottom-price">${price}</h5>
+        <h5 className="product-bottom-price">৳{price}</h5>
       </div>
     </div>
   );
