@@ -275,7 +275,7 @@ const ProductListing = props => {
                       checked={true}
                       onChange={handleSelectCategory}
                     />
-                    <label>Products</label>
+                    <label>All</label>
                   </li>
                 </ul>
               </div>

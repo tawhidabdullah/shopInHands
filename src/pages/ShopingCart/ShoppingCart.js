@@ -32,7 +32,15 @@ const ShoppingCart = props => {
             )}
           </div>
 
-          <div className="card-footer">
+          <div
+            className="card-footer"
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-start',
+              alignItems: 'center',
+              flexWrap: 'wrap'
+            }}
+          >
             {props.cartItemCount ? (
               <>
                 <a
@@ -45,7 +53,7 @@ const ShoppingCart = props => {
                     background: '#ff5c00',
                     borderColor: '#ff5c00',
                     color: '#fff',
-                    margin: '0 5px'
+                    margin: '10px 10px'
                   }}
                 >
                   Continue Shopping
@@ -56,21 +64,10 @@ const ShoppingCart = props => {
                     background: '#ff5c00',
                     borderColor: '#ff5c00',
                     color: '#fff',
-                    margin: '0 5px'
+                    margin: '10px 10px'
                   }}
                 >
                   Clear Shopping Cart
-                </a>
-                <a
-                  className="btn btn-primary"
-                  style={{
-                    background: '#ff5c00',
-                    borderColor: '#ff5c00',
-                    color: '#fff',
-                    margin: '0 5px'
-                  }}
-                >
-                  Update Shopping Cart
                 </a>
 
                 <a
@@ -83,7 +80,7 @@ const ShoppingCart = props => {
                     background: '#ff5c00',
                     borderColor: '#ff5c00',
                     color: '#fff',
-                    margin: '0 5px'
+                    margin: '10px 10px'
                   }}
                 >
                   Proceed To Checkout
@@ -100,14 +97,20 @@ const ShoppingCart = props => {
                   background: '#ff5c00',
                   borderColor: '#ff5c00',
                   color: '#fff',
-                  margin: '0 5px'
+                  margin: '10px 10px'
                 }}
               >
                 Go Back and Shopping
               </a>
             )}
 
-            <div className="pull-right" style={{ margin: '10px' }}>
+            <div
+              className="pull-right"
+              style={{ margin: '10px' }}
+              style={{
+                flexGrow: 1
+              }}
+            >
               <div className="pull-right" style={{ margin: '5px' }}>
                 Total price: <b>{formatMoney(props.totalPrice)}$</b>
               </div>
