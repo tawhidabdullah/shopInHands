@@ -7,6 +7,12 @@ import { useAlert } from 'react-alert';
 import './checkout.scss';
 
 const Checkout = props => {
+  const [selectedPaymentGateway, setSelectedPaymentGateway] = React.useState(
+    'cod'
+  );
+  const [senderBkashNumbr, setSenderBkashNumbr] = React.useState('');
+  const [senderTransactionId, setSenderTransactionId] = React.useState('');
+
   const [fields, setfields] = React.useState({
     first_name: '',
     last_name: '',
@@ -97,6 +103,22 @@ const Checkout = props => {
 
       console.log(err);
     }
+  };
+
+  const handlePaymentGatewayChange = e => {
+    setSelectedPaymentGateway(e.target.value);
+  };
+
+  const handleSenderNumberChange = e => {
+    setSenderBkashNumbr(e.target.value);
+  };
+
+  const handleSenderTranncIdChange = e => {
+    setSenderTransactionId(e.target.value);
+  };
+
+  const onPaymentGateWaySubmit = e => {
+    e.preventDefault();
   };
 
   return (
@@ -307,21 +329,114 @@ const Checkout = props => {
                   variant="primary"
                   type="submit"
                   style={{
-                    background: '#666',
-                    borderColor: '#666'
+                    background: '#0000FE',
+                    borderColor: '#fff'
                   }}
                 >
-                  Create
+                  Save
                 </Button>
               </Form>
             </div>
           </div>
           <div className="col-md-5">
-            <div className="order-summary">
-              <h2>Order Summary</h2>
-              <div className="order-summary-price">
-                <h3>{props.cartItems.length} items in Cart</h3>
-                <span>${props.totalPrice}</span>
+            <div className="row">
+              <div className="col-md-12">
+                <div className="order-summary">
+                  <h2>Order Summary</h2>
+                  <div className="order-summary-price">
+                    <h3>{props.cartItems.length} items in Cart</h3>
+                    <span>${props.totalPrice}</span>
+                  </div>
+                </div>
+                <div className="order-summary">
+                  <h2>Place Order</h2>
+                  <div className="mt-3 mb-3">
+                    <form>
+                      <input
+                        checked={selectedPaymentGateway === 'cod'}
+                        type="radio"
+                        name="paymentGateway"
+                        value="cod"
+                        checked={true}
+                        onChange={handlePaymentGatewayChange}
+                      />{' '}
+                      Cash On Delivery
+                      <br />
+                      <input
+                        checked={selectedPaymentGateway === 'bkash'}
+                        type="radio"
+                        name="paymentGateway"
+                        value="bkash"
+                        onChange={handlePaymentGatewayChange}
+                        style={{
+                          marginTop: '10px'
+                        }}
+                      />{' '}
+                      Bkash
+                      <br />
+                    </form>
+
+                    <div
+                      style={{
+                        marginTop: '20px'
+                      }}
+                    >
+                      <h2>01XXXXXXXXX</h2>
+
+                      <Form>
+                        <Form.Group controlId="formBasicEmail">
+                          <Form.Label
+                            style={{
+                              marginBottom: '10px'
+                            }}
+                          >
+                            Email address
+                          </Form.Label>
+                          <Form.Control
+                            name="usernumber"
+                            type="text"
+                            placeholder="Sender Number"
+                            onChange={handleSenderNumberChange}
+                          />
+                          <Form.Text className="text-muted text-danger">
+                            {errors.senderNumber && errors.senderNumber}
+                          </Form.Text>
+                        </Form.Group>
+
+                        <Form.Group controlId="formBasicPhone">
+                          <Form.Label
+                            style={{
+                              marginBottom: '10px'
+                            }}
+                          >
+                            Transaction ID
+                          </Form.Label>
+                          <Form.Control
+                            name="transid"
+                            type="text"
+                            onChange={handleSenderTranncIdChange}
+                            placeholder="Enter Transaction ID"
+                          />
+
+                          <Form.Text className="text-muted text-danger">
+                            {errors.transId && errors.transId}
+                          </Form.Text>
+                        </Form.Group>
+                      </Form>
+                    </div>
+                  </div>
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    style={{
+                      background: '#777',
+                      borderColor: '#777'
+                    }}
+                    onClick={onPaymentGateWaySubmit}
+                  >
+                    Place Order
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
