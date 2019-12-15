@@ -140,8 +140,9 @@ const Checkout = props => {
                     onChange={handleFieldsChange}
                     placeholder="Enter Phone Number"
                   />
-                  <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
+
+                  <Form.Text className="text-muted text-danger">
+                    {errors.number && errors.number}
                   </Form.Text>
                 </Form.Group>
 
@@ -159,8 +160,9 @@ const Checkout = props => {
                     onChange={handleFieldsChange}
                     placeholder="Enter First Name"
                   />
-                  <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
+
+                  <Form.Text className="text-muted text-danger">
+                    {errors.first_name && errors.first_name}
                   </Form.Text>
                 </Form.Group>
 
@@ -178,8 +180,8 @@ const Checkout = props => {
                     placeholder="Enter Last Name"
                     name="last_name"
                   />
-                  <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
+                  <Form.Text className="text-muted text-danger">
+                    {errors.last_name && errors.last_name}
                   </Form.Text>
                 </Form.Group>
 
@@ -197,8 +199,9 @@ const Checkout = props => {
                     placeholder="Enter Address1"
                     name="address_1"
                   />
-                  <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
+
+                  <Form.Text className="text-muted text-danger">
+                    {errors.address_1 && errors.address_1}
                   </Form.Text>
                 </Form.Group>
 
@@ -216,8 +219,9 @@ const Checkout = props => {
                     placeholder="Enter Address2"
                     name="address_2"
                   />
-                  <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
+
+                  <Form.Text className="text-muted text-danger">
+                    {errors.address_2 && errors.address_2}
                   </Form.Text>
                 </Form.Group>
 
@@ -235,8 +239,9 @@ const Checkout = props => {
                     onChange={handleFieldsChange}
                     placeholder="Enter City"
                   />
-                  <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
+
+                  <Form.Text className="text-muted text-danger">
+                    {errors.city && errors.city}
                   </Form.Text>
                 </Form.Group>
 
@@ -254,8 +259,9 @@ const Checkout = props => {
                     onChange={handleFieldsChange}
                     placeholder="Enter State"
                   />
-                  <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
+
+                  <Form.Text className="text-muted text-danger">
+                    {errors.state && errors.state}
                   </Form.Text>
                 </Form.Group>
 
@@ -273,8 +279,8 @@ const Checkout = props => {
                     onChange={handleFieldsChange}
                     placeholder="Enter Postcode"
                   />
-                  <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
+                  <Form.Text className="text-muted text-danger">
+                    {errors.postcode && errors.postcode}
                   </Form.Text>
                 </Form.Group>
 
@@ -292,8 +298,8 @@ const Checkout = props => {
                     onChange={handleFieldsChange}
                     placeholder="Enter Country"
                   />
-                  <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
+                  <Form.Text className="text-muted text-danger">
+                    {errors.country && errors.country}
                   </Form.Text>
                 </Form.Group>
 

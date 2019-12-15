@@ -310,7 +310,7 @@ const ProductListing = props => {
                   marginTop: '50px'
                 }}
               >
-                <a href="#">
+                {/* <a href="#">
                   <i class="fa fa-chevron-left" aria-hidden="true"></i>
                 </a>
                 <a href="#">1</a>
@@ -320,7 +320,7 @@ const ProductListing = props => {
                 <a href="#">3</a>
                 <a href="#">
                   <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                </a>
+                </a> */}
               </div>
             ) : (
               !isLoading &&
