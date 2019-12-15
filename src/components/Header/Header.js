@@ -215,28 +215,28 @@ class Header extends Component {
                 display: 'block',
                 fontSize: '18px',
                 padding: '10px 25px',
-                borderRadius: '5px',
-                border: '1px solid #ddd',
-                background: '#FAFAFA'
+                borderRadius: '5px'
+                // border: '1px solid #ddd',
+                // background: '#FAFAFA'
               }}
             >
-              <i
+              {/* <i
                 className="fa fa-bars"
                 style={{
                   fontSize: '15px',
                   color: '#FF5C00'
                 }}
-              ></i>
+              ></i> */}
               <span
                 style={{
                   marginLeft: '7px',
                   fontSize: '16px',
                   textTransform: 'uppercase',
-                  color: '#333',
+                  // color: '#333',
                   fontWeight: '500'
                 }}
               >
-                All Departments
+                {/* All Departments */}
               </span>
             </span>
             {/* <Link to='/products' style={{fontWeight: '700', textDecoration: 'none', color: '#444',textTransform: 'uppercase',fontSize:'20px' }}>

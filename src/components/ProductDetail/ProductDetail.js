@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { formatMoney } from '../../pipes/priceFormatter';
 import { addProductToCart } from '../../actions';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
@@ -23,11 +22,6 @@ const ProductDetail = props => {
     <div class="row">
       <div class="col-md-6">
         <Carousel>
-          {/* {images.map(image => {
-            return (
-              
-            );
-          })} */}
           <div>
             <img src={images[0].src} />
           </div>

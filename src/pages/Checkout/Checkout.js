@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { postApi } from '../../utilities/wooApi';
+import { postApi, getApi } from '../../utilities/wooApi';
 import { useAlert } from 'react-alert';
 import './checkout.scss';
 
@@ -12,6 +12,7 @@ const Checkout = props => {
   );
   const [senderBkashNumbr, setSenderBkashNumbr] = React.useState('');
   const [senderTransactionId, setSenderTransactionId] = React.useState('');
+  const [ourWpNumber, setOurWpNumber] = React.useState('');
 
   const [fields, setfields] = React.useState({
     first_name: '',
@@ -25,6 +26,9 @@ const Checkout = props => {
     email: '',
     phone: ''
   });
+
+  const [isShowBkashFeilds, setIsShowBkashFeilds] = React.useState(false);
+
   const [errors, seterrors] = React.useState({
     first_name: '',
     last_name: '',
@@ -97,13 +101,24 @@ const Checkout = props => {
       );
 
       console.log('successOrderrestponse', successOrderResponse);
-      alert.show('Your Order Has Been Created SuccessFully');
+      // alert.show('Your Order Has Been Created SuccessFully');
     } catch (err) {
       alert.show('Something Went Wrong Went Creating The Order');
-
-      console.log(err);
     }
   };
+
+  React.useEffect(() => {
+    const getPaymentGatewaysProps = async () => {
+      try {
+        const gatewaysProps = await getApi('/wp-json/wc/v3/payment_gateways');
+        setOurWpNumber(gatewaysProps[4].settings.bkash_number.value);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getPaymentGatewaysProps();
+  }, []);
 
   const handlePaymentGatewayChange = e => {
     setSelectedPaymentGateway(e.target.value);
@@ -119,6 +134,10 @@ const Checkout = props => {
 
   const onPaymentGateWaySubmit = e => {
     e.preventDefault();
+  };
+
+  const toggleIsShowBkashFeilds = () => {
+    setIsShowBkashFeilds(isShow => !isShow);
   };
 
   return (
@@ -357,7 +376,6 @@ const Checkout = props => {
                         type="radio"
                         name="paymentGateway"
                         value="cod"
-                        checked={true}
                         onChange={handlePaymentGatewayChange}
                       />{' '}
                       Cash On Delivery
@@ -376,54 +394,58 @@ const Checkout = props => {
                       <br />
                     </form>
 
-                    <div
-                      style={{
-                        marginTop: '20px'
-                      }}
-                    >
-                      <h2>01XXXXXXXXX</h2>
+                    {selectedPaymentGateway === 'bkash' ? (
+                      <div
+                        style={{
+                          marginTop: '20px'
+                        }}
+                      >
+                        <h2>Num: {ourWpNumber}</h2>
 
-                      <Form>
-                        <Form.Group controlId="formBasicEmail">
-                          <Form.Label
-                            style={{
-                              marginBottom: '10px'
-                            }}
-                          >
-                            Email address
-                          </Form.Label>
-                          <Form.Control
-                            name="usernumber"
-                            type="text"
-                            placeholder="Sender Number"
-                            onChange={handleSenderNumberChange}
-                          />
-                          <Form.Text className="text-muted text-danger">
-                            {errors.senderNumber && errors.senderNumber}
-                          </Form.Text>
-                        </Form.Group>
+                        <Form>
+                          <Form.Group controlId="formBasicEmail">
+                            <Form.Label
+                              style={{
+                                marginBottom: '10px'
+                              }}
+                            >
+                              Sender Number
+                            </Form.Label>
+                            <Form.Control
+                              name="usernumber"
+                              type="text"
+                              placeholder="Sender Number"
+                              onChange={handleSenderNumberChange}
+                            />
+                            <Form.Text className="text-muted text-danger">
+                              {errors.senderNumber && errors.senderNumber}
+                            </Form.Text>
+                          </Form.Group>
 
-                        <Form.Group controlId="formBasicPhone">
-                          <Form.Label
-                            style={{
-                              marginBottom: '10px'
-                            }}
-                          >
-                            Transaction ID
-                          </Form.Label>
-                          <Form.Control
-                            name="transid"
-                            type="text"
-                            onChange={handleSenderTranncIdChange}
-                            placeholder="Enter Transaction ID"
-                          />
+                          <Form.Group controlId="formBasicPhone">
+                            <Form.Label
+                              style={{
+                                marginBottom: '10px'
+                              }}
+                            >
+                              Transaction ID
+                            </Form.Label>
+                            <Form.Control
+                              name="transid"
+                              type="text"
+                              onChange={handleSenderTranncIdChange}
+                              placeholder="Enter Transaction ID"
+                            />
 
-                          <Form.Text className="text-muted text-danger">
-                            {errors.transId && errors.transId}
-                          </Form.Text>
-                        </Form.Group>
-                      </Form>
-                    </div>
+                            <Form.Text className="text-muted text-danger">
+                              {errors.transId && errors.transId}
+                            </Form.Text>
+                          </Form.Group>
+                        </Form>
+                      </div>
+                    ) : (
+                      ''
+                    )}
                   </div>
                   <Button
                     variant="primary"
