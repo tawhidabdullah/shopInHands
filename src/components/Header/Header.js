@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Spinner from "../commonFeilds/Spinner";
 import { connect } from 'react-redux';
 import { NavLink, Link, withRouter } from 'react-router-dom';
 import { getApi } from '../../utilities/wooApi';
@@ -242,56 +243,26 @@ class Header extends Component {
             </span>
             <div className='all-department-sideMenu'> 
                 <ul> 
-                  <li> On sale <i className='fa fa-angle-right' />
+                {categories &&
+                categories.length > 0 &&
+                categories.map(item => {
+                  return (
+                    <li> {item.name} <i className='fa fa-angle-right' />
                     <ul> 
-                      <li> On Sale Number</li>
-                      <li> On Sale Number</li>
-                      <li> On Sale Number</li>
-                      <li> On Sale Number</li>
-                      <li> On Sale Number</li>
+                      <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
+                      <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
+                      <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
+                      <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
+                      <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
+                      <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
+                      <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
+                      <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
+                    
                     </ul>
                   </li>
-                  <li> Deals <i className='fa fa-angle-right' />
-                    <ul> 
-                      <li> Deals Number</li>
-                      <li> Deals Number</li>
-                      <li> Deals Number</li>
-                      <li> Deals Number</li>
-                      <li> Deals Number</li>
-                    </ul>
-                  </li>
-                  <li> Departments <i className='fa fa-angle-right' />
-                    <ul> 
-                      <li>Departments Number</li>
-                      <li>Departments Number</li>
-                      <li>Departments Number</li>
-                      <li>Departments Number</li>
-                      <li>Departments Number</li>
-                    </ul>
-                  </li>
-                  <li> Mobiles <i className='fa fa-angle-right' />
-                  <ul> 
-                      <li> Sub Menu 2</li>
-                      <li> Sub Menu 2</li>
-                      <li> Sub Menu 2</li>
-                      <li> Sub Menu 2</li>
-                      <li> Sub Menu 2</li>
-                    </ul>
-                  </li>
-                  <li> Computers <i className='fa fa-angle-right' />
-                  <ul> 
-                      <li> Sub Menu 2</li>
-                      <li> Sub Menu 2</li>
-                      <li> Sub Menu 2</li>
-                      <li> Sub Menu 2</li>
-                      <li> Sub Menu 2</li>
-                    </ul>
-                  </li>
-
-                 
-                 
-                
-                
+                  );
+                }) || isLoading && <Spinner />}
+              
                  
                 </ul>
             </div>

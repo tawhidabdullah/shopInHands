@@ -1044,6 +1044,7 @@ fieldset {
   width: 100%;
   background-color: #fff;
   position: relative;
+  min-height: 500px;
 }
 
 .all-department-sideMenu ul li {
@@ -1054,6 +1055,8 @@ fieldset {
   cursor: pointer;
   padding: 10px 5px;
   color: #666;
+  text-transform: capitalize;
+
   
 }
 
@@ -1121,6 +1124,10 @@ fieldset {
     margin-top: -20px;
   }
 
+
+  .all-department-sideMenu ul {
+    min-height: 300px;
+  }
 
 }
 
