@@ -151,7 +151,7 @@ class Header extends Component {
                               categories.length > 0 &&
                               categories.map(item => {
                                 return (
-                                  <option value={item.id}>{item.name}</option>
+                                  <option value={item.id} >{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</option>
                                 );
                               })}
                           </select>

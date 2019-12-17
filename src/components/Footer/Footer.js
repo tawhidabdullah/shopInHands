@@ -1,7 +1,25 @@
-import React from 'react';
+import React,{useState} from 'react';
+import { getApi} from "../../utilities/wooApi";
 import './Footer.scss';
 
 const Footer = () => {
+  React.useEffect(() => {
+    const getFooterContent = async () => {
+      try {
+        const footerContents = await getApi(
+          `/wp-json/wp-rest-api-sidebars/v1/sidebars`
+        );
+
+       console.log('footerContents',footerContents); 
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getFooterContent();
+  }, []);
+
+
+
   return (
     <footer className="footer">
       <div className="row">
