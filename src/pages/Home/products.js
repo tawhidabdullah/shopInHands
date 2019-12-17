@@ -41,7 +41,6 @@ const Products = ({ categoryId, categoryName, history }) => {
         setProducts([...products.splice(0, 6)]);
         setIsLoading(false);
       } catch (err) {
-        console.log(err);
         setIsLoading(false);
       }
     };

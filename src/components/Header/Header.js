@@ -21,7 +21,9 @@ class Header extends Component {
     searchBarValue: '',
     categories: [],
     isLoading: false,
-    categorySelectValue: 'Categories'
+    categorySelectValue: 'Categories',
+    mainMenu: [],
+    catMenu: []
   };
 
   handleToggleCartBar = () => {
@@ -43,6 +45,38 @@ class Header extends Component {
       this.setState({
         categories: categories,
         isLoading: false
+      });
+    } catch (err) {
+      console.log(err);
+      this.setState({
+        isLoading: false
+      });
+    }
+
+    try {
+      this.setState({
+        isLoading: true
+      });
+      const catMenu = await getApi('/wp-json/wp/v2/menu_cat');
+      this.setState({
+        catMenu: catMenu,
+        isLoading: false
+      });
+    } catch (err) {
+      console.log(err);
+      this.setState({
+        isLoading: false
+      });
+    }
+
+    try {
+      this.setState({
+        isLoading: true
+      });
+      const mainMenu = await getApi('/wp-json/wp/v2/menu_main');
+      this.setState({
+        mainLMenu: mainMenu,
+        isoading: false
       });
     } catch (err) {
       console.log(err);
@@ -77,6 +111,7 @@ class Header extends Component {
   render() {
     const { isAuthenticate, user } = this.props.auth;
     const { cartItems, totalPrice } = this.props;
+    const { catMenu, mainMenu } = this.state;
     const {
       isShowCartBar,
       categories,
@@ -88,12 +123,12 @@ class Header extends Component {
       <>
         <div className="top-head-1">
           <div className="langandcurrency">
-            <p>
+            {/* <p>
               ENGLISH <i className="fa fa-angle-down"></i>
             </p>
             <p>
               USD <i className="fa fa-angle-down"></i>
-            </p>
+            </p> */}
           </div>
           <div className="trackorderandauthlinks">
             <p className="trackorderbutton">
@@ -246,31 +281,34 @@ class Header extends Component {
               </span>
               <div className="all-department-sideMenu">
                 <ul>
-                  {(categories &&
-                    categories.length > 0 &&
-                    categories.map(item => {
-                      return (
-                        <li
-                          onClick={() =>
-                            this.props.history.push(
-                              `/productsListing/${item.id}`
-                            )
-                          }
-                        >
-                          {' '}
-                          {item.name}
-                          {/* <ul> */}
-                          {/* <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
-                      <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
-                      <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
-                      <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
-                      <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
-                      <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
-                      <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
-                      <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li> */}
-                          {/* </ul> */}
-                        </li>
-                      );
+                  {(catMenu &&
+                    catMenu.length > 0 &&
+                    catMenu.map(item => {
+                      if (item.menu_item_parent !== '0') {
+                      } else {
+                        return (
+                          <li
+                            onClick={() =>
+                              this.props.history.push(
+                                `/productsListing/${item.id}`
+                              )
+                            }
+                          >
+                            {' '}
+                            {item.title}
+                            {/* <ul> */}
+                            {/* <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
+                        <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
+                        <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
+                        <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
+                        <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
+                        <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
+                        <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
+                        <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li> */}
+                            {/* </ul> */}
+                          </li>
+                        );
+                      }
                     })) ||
                     (isLoading && <Spinner />)}
                 </ul>
@@ -290,7 +328,13 @@ class Header extends Component {
             </div> */}
 
             <div className="navbar-center-navItems">
-              <span onClick={() => this.props.history.push('/')}>Home</span>
+              {!isLoading &&
+                mainMenu &&
+                mainMenu.length > 0 &&
+                mainMenu.map(item => {
+                  return <span>{item.title}</span>;
+                })}
+              {/* <span onClick={() => this.props.history.push('/')}>Home</span>
               <span
                 onClick={() => this.props.history.push('/productsListing/22')}
               >
@@ -300,7 +344,7 @@ class Header extends Component {
               <a href="https://shopinhands.com/wp/on-sale/">OnSale</a>
               <a href="https://shopinhands.com/wp/deals">Deals</a>
               <a href="https://shopinhands.com/wp/about-us">About Us</a>
-              <a href="https://shopinhands.com/wp/contact-us">Contact Us</a>
+              <a href="https://shopinhands.com/wp/contact-us">Contact Us</a> */}
             </div>
             <div className="navbar-center-phoneNumberbox">
               <i className="fa fa-phone"></i>
