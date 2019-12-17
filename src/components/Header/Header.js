@@ -249,14 +249,14 @@ class Header extends Component {
                   return (
                     <li> {item.name} <i className='fa fa-angle-right' />
                     <ul> 
+                      {/* <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
                       <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
                       <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
                       <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
                       <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
                       <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
                       <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
-                      <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
-                      <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
+                      <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li> */}
                     
                     </ul>
                   </li>
