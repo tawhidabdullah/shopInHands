@@ -1010,6 +1010,98 @@ fieldset {
   height: 100px;
 }
 
+/* All departments Sidemenu */
+
+
+.all-department {
+  // background-color: red; 
+}
+
+
+
+
+.all-department-sideMenu {
+  height: 79%;
+  width: 100%;
+  font-size: 14px;
+  float: left;
+  z-index: 2;
+  background-color: #fff;
+}
+
+
+
+.all-department-sideMenu ul {
+  border:  1px solid #eee;
+  width: 100%;
+}
+
+.all-department-sideMenu ul li {
+  list-style:none;
+  list-style-type: none; 
+  font-weight: bold;
+  margin-top: 10px;
+  cursor: pointer;
+  padding: 7px 5px;
+}
+
+.all-department-sideMenu ul li:hover {
+  color: orange;
+}
+
+
+.all-department-sideMenu ul li ul {
+  display: none;
+  z-index: 10;
+  top: 50px;
+}
+
+
+.all-department-sideMenu ul li:hover ul {
+
+  display: block;
+  height: 400px;
+  margin-left: 15%;
+  padding: 0 100px 10px 10px; 
+  position: fixed;
+  background: #fff;
+  border-left: 1px solid #eee;
+
+}
+
+
+
+.fa.fa-angle-right {
+  margin-top: 4px;
+  margin-right: 8px;
+  float: right;
+
+}
+
+
+@media screen and (max-width: 980px){
+  .all-department-sideMenu {
+    width: 34%;
+    z-index: 20px;
+    position: fixed;
+    font-size: 12px;
+    background-color: #f1f3f4;
+    display: none;
+
+  }
+
+  .all-department-sideMenu ul li ul {
+    top: 133px;
+  }
+
+  .all-department-sideMenu ul li:hover ul {
+     margin-left: 31%;
+  }
+
+
+}
+
+
 @media screen and (max-width: 970px) {
   .navbar-center-logoBox {
     margin-bottom: 15px;
@@ -1059,3 +1151,7 @@ fieldset {
     // justify-content: space-between;
   }
 }
+
+
+
+

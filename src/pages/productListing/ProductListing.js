@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import InputRange from 'react-input-range';
+import Footer from "../../components/Footer/Footer";
 import './productListing.scss';
 import Product from '../Home/Product';
 import { getApi } from '../../utilities/wooApi';
@@ -146,6 +147,7 @@ const ProductListing = props => {
   };
 
   return (
+    <>
     <div class="Bcak-bg">
       <div class="container">
         {/* <h2>Category</h2> */}
@@ -351,6 +353,8 @@ const ProductListing = props => {
         </div>
       </div>
     </div>
+    <Footer />
+</>
   );
 };
 

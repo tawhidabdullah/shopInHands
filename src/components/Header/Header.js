@@ -209,6 +209,7 @@ class Header extends Component {
 
         <div className="navbar">
           <div className="navbar-center">
+            <div className='all-department'> 
             <span
               className="nav-icon nav-menu"
               style={{
@@ -239,6 +240,93 @@ class Header extends Component {
                 All Departments
               </span>
             </span>
+            <div className='all-department-sideMenu'> 
+                <ul> 
+                  <li> On sale <i className='fa fa-angle-right' />
+                    <ul> 
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                    </ul>
+                  </li>
+                  <li> On sale <i className='fa fa-angle-right' />
+                    <ul> 
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                    </ul>
+                  </li>
+                  <li> On sale <i className='fa fa-angle-right' />
+                    <ul> 
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                    </ul>
+                  </li>
+                  <li> On sale <i className='fa fa-angle-right' />
+                    <ul> 
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                    </ul>
+                  </li>
+                  <li> On sale <i className='fa fa-angle-right' />
+                    <ul> 
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                    </ul>
+                  </li>
+                  <li> On sale <i className='fa fa-angle-right' />
+                    <ul> 
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                    </ul>
+                  </li>
+                  <li> On sale <i className='fa fa-angle-right' />
+                    <ul> 
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                      <li> Sub Menu 1</li>
+                    </ul>
+                  </li>
+                  <li> Mobiles <i className='fa fa-angle-right' />
+                  <ul> 
+                      <li> Sub Menu 2</li>
+                      <li> Sub Menu 2</li>
+                      <li> Sub Menu 2</li>
+                      <li> Sub Menu 2</li>
+                      <li> Sub Menu 2</li>
+                    </ul>
+                  </li>
+                  <li> Computers <i className='fa fa-angle-right' />
+                  <ul> 
+                      <li> Sub Menu 2</li>
+                      <li> Sub Menu 2</li>
+                      <li> Sub Menu 2</li>
+                      <li> Sub Menu 2</li>
+                      <li> Sub Menu 2</li>
+                    </ul>
+                  </li>
+                </ul>
+            </div>
+            </div>
+       
             {/* <Link to='/products' style={{fontWeight: '700', textDecoration: 'none', color: '#444',textTransform: 'uppercase',fontSize:'20px' }}>
               ShopInHands
             </Link> */}
@@ -250,6 +338,9 @@ class Header extends Component {
                 {this.props.cartLength ? ` ${this.props.cartLength}` : 0}
               </div>
             </div> */}
+
+
+      
 
             <div className="navbar-center-navItems">
               <span onClick={() => this.props.history.push('/')}>Home</span>

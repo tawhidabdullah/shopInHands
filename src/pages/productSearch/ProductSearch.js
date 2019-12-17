@@ -4,6 +4,7 @@ import queryString from 'query-string';
 import { getApi } from '../../utilities/wooApi';
 import Product from '../Home/Product';
 import Spinner from '../../components/commonFeilds/Spinner';
+import Footer from "../../components/Footer/Footer";
 
 const ProductSearch = props => {
   const queryValueOfSearch = queryString.parse(props.location.search).search;
@@ -32,6 +33,7 @@ const ProductSearch = props => {
   }, [queryValueOfSearch]);
 
   return (
+    <>
     <div className="container">
       <div
         className="row"
@@ -85,6 +87,8 @@ const ProductSearch = props => {
         )}
       </div>
     </div>
+    <Footer />
+    </>
   );
 };
 
