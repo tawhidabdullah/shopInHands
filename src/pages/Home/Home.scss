@@ -43,6 +43,10 @@
   margin-left: 10px;
 }
 
+.tags {
+  text-transform: capitalize;
+}
+
 @media screen and (max-width: 420px) {
   .top-tags-desc {
     margin-bottom: 10px;

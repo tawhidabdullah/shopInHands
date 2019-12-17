@@ -147,21 +147,21 @@ class ProductDetail extends Component {
                   <a class="productDetails__tablist-link">More Information</a>
                 </li>
                 <li
-                  onClick={() => this.toggleTabs('isReviews')}
+                  onClick={() => this.toggleTabs('Reviews')}
                   class="productDetails__tablist-item"
                 >
                   <a class="productDetails__tablist-link">Reviews</a>
                 </li>
               </ul>
               <div class="productDetails__content">
-                {this.state.productDetailTabs.isDetails ? 'isDetails' : ''}
+                {this.state.productDetailTabs.isDetails ? 'Details' : ''}
                 {this.state.productDetailTabs.isReviews ? (
                   <ReviewContent productId={id} />
                 ) : (
                   ''
                 )}
                 {this.state.productDetailTabs.isMoreInformation
-                  ? 'isMoreInformation'
+                  ? 'MoreInformation'
                   : ''}
               </div>
             </div>

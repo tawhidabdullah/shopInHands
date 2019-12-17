@@ -294,7 +294,7 @@ class Header extends Component {
               <a href="https://shopinhands.com/wp/on-sale/">OnSale</a>
               <a href="https://shopinhands.com/wp/deals">Deals</a>
               <a href="https://shopinhands.com/wp/about-us">About Us</a>
-              <a href="https://shopinhands.com/wp/">Contact Us</a>
+              <a href="https://shopinhands.com/wp/contact-us">Contact Us</a>
             </div>
             <div className="navbar-center-phoneNumberbox">
               <i className="fa fa-phone"></i>
