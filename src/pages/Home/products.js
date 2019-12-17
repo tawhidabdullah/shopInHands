@@ -28,17 +28,21 @@ const responsive = {
 
 const Products = ({ categoryId, categoryName, history }) => {
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   React.useEffect(() => {
     const getProducts = async () => {
+      setIsLoading(true);
       try {
         const products = await getApi(
           `/wp-json/wc/v3/products?category=${categoryId}`
         );
 
         setProducts([...products.splice(0, 6)]);
+        setIsLoading(false);
       } catch (err) {
         console.log(err);
+        setIsLoading(false);
       }
     };
     categoryId && getProducts();
@@ -75,7 +79,16 @@ const Products = ({ categoryId, categoryName, history }) => {
           alignItems: 'center'
         }}
       >
-        {products && !products.length > 0 && <Spinner />}
+        {isLoading && products && !products.length > 0 && <Spinner />}
+        {!isLoading && products && !products.length > 0 && (
+          <h2
+            style={{
+              lineHeight: '200px'
+            }}
+          >
+            No Product Has Found On This Category
+          </h2>
+        )}
       </div>
       <div
         style={{

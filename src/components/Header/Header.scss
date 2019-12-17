@@ -1012,13 +1012,12 @@ fieldset {
 
 /* All departments Sidemenu */
 
-
 .all-department {
-  // background-color: red; 
+  // background-color: red;
   position: relative;
 }
 
-.all-department:hover .all-department-sideMenu  {
+.all-department:hover .all-department-sideMenu {
   display: block;
 }
 
@@ -1037,10 +1036,8 @@ fieldset {
   display: none;
 }
 
-
-
 .all-department-sideMenu ul {
-  border:  1px solid #eee;
+  border: 1px solid #eee;
   width: 100%;
   background-color: #fff;
   position: relative;
@@ -1048,22 +1045,19 @@ fieldset {
 }
 
 .all-department-sideMenu ul li {
-  list-style:none;
-  list-style-type: none; 
+  list-style: none;
+  list-style-type: none;
   font-weight: bold;
   // margin-top: 10px;
   cursor: pointer;
-  padding: 10px 5px;
+  padding: 13px 12px;
   color: #666;
   text-transform: capitalize;
-
-  
 }
 
 .all-department-sideMenu ul li:hover {
   color: #333;
 }
-
 
 .all-department-sideMenu ul li ul {
   display: none;
@@ -1075,33 +1069,25 @@ fieldset {
   top: 0;
 }
 
-
 .all-department-sideMenu ul li:hover ul {
-
   display: block;
   margin-left: 98%;
-  padding: 0 100px 10px 10px; 
+  padding: 0 100px 10px 10px;
   position: fixed;
   background: #fff;
   border-left: 1px solid #eee;
   position: absolute;
   top: 0;
-
-
 }
-
-
 
 .fa.fa-angle-right {
   margin-top: 4px;
   margin-right: 8px;
   float: right;
   color: #666;
-
 }
 
-
-@media screen and (max-width: 980px){
+@media screen and (max-width: 980px) {
   // .all-department-sideMenu {
   //   width: 34%;
   //   z-index: 20px;
@@ -1124,13 +1110,10 @@ fieldset {
     margin-top: -20px;
   }
 
-
   .all-department-sideMenu ul {
     min-height: 300px;
   }
-
 }
-
 
 @media screen and (max-width: 970px) {
   .navbar-center-logoBox {
@@ -1181,7 +1164,3 @@ fieldset {
     // justify-content: space-between;
   }
 }
-
-
-
-

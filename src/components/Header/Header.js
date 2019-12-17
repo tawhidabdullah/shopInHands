@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Spinner from "../commonFeilds/Spinner";
+import Spinner from '../commonFeilds/Spinner';
 import { connect } from 'react-redux';
 import { NavLink, Link, withRouter } from 'react-router-dom';
 import { getApi } from '../../utilities/wooApi';
@@ -151,7 +151,10 @@ class Header extends Component {
                               categories.length > 0 &&
                               categories.map(item => {
                                 return (
-                                  <option value={item.id} >{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</option>
+                                  <option value={item.id}>
+                                    {item.name.charAt(0).toUpperCase() +
+                                      item.name.slice(1)}
+                                  </option>
                                 );
                               })}
                           </select>
@@ -210,46 +213,54 @@ class Header extends Component {
 
         <div className="navbar">
           <div className="navbar-center">
-            <div className='all-department'> 
-            <span
-              className="nav-icon nav-menu"
-              style={{
-                display: 'block',
-                fontSize: '18px',
-                padding: '10px 25px',
-                borderRadius: '5px',
-                border: '1px solid #ddd',
-                background: '#FAFAFA'
-              }}
-            >
-              <i
-                className="fa fa-bars"
-                style={{
-                  fontSize: '15px',
-                  color: '#FF5C00'
-                }}
-              ></i>
+            <div className="all-department">
               <span
+                className="nav-icon nav-menu"
                 style={{
-                  marginLeft: '7px',
-                  fontSize: '16px',
-                  textTransform: 'uppercase',
-                  color: '#333',
-                  fontWeight: '500'
+                  display: 'block',
+                  fontSize: '18px',
+                  padding: '10px 25px',
+                  borderRadius: '5px',
+                  border: '1px solid #ddd',
+                  background: '#FAFAFA'
                 }}
               >
-                All Departments
+                <i
+                  className="fa fa-bars"
+                  style={{
+                    fontSize: '15px',
+                    color: '#FF5C00'
+                  }}
+                ></i>
+                <span
+                  style={{
+                    marginLeft: '7px',
+                    fontSize: '16px',
+                    textTransform: 'uppercase',
+                    color: '#333',
+                    fontWeight: '500'
+                  }}
+                >
+                  All Departments
+                </span>
               </span>
-            </span>
-            <div className='all-department-sideMenu'> 
-                <ul> 
-                {categories &&
-                categories.length > 0 &&
-                categories.map(item => {
-                  return (
-                    <li> {item.name} <i className='fa fa-angle-right' />
-                    <ul> 
-                      {/* <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
+              <div className="all-department-sideMenu">
+                <ul>
+                  {(categories &&
+                    categories.length > 0 &&
+                    categories.map(item => {
+                      return (
+                        <li
+                          onClick={() =>
+                            this.props.history.push(
+                              `/productsListing/${item.id}`
+                            )
+                          }
+                        >
+                          {' '}
+                          {item.name}
+                          {/* <ul> */}
+                          {/* <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
                       <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
                       <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
                       <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
@@ -257,17 +268,15 @@ class Header extends Component {
                       <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
                       <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
                       <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li> */}
-                    
-                    </ul>
-                  </li>
-                  );
-                }) || isLoading && <Spinner />}
-              
-                 
+                          {/* </ul> */}
+                        </li>
+                      );
+                    })) ||
+                    (isLoading && <Spinner />)}
                 </ul>
+              </div>
             </div>
-            </div>
-       
+
             {/* <Link to='/products' style={{fontWeight: '700', textDecoration: 'none', color: '#444',textTransform: 'uppercase',fontSize:'20px' }}>
               ShopInHands
             </Link> */}
@@ -279,9 +288,6 @@ class Header extends Component {
                 {this.props.cartLength ? ` ${this.props.cartLength}` : 0}
               </div>
             </div> */}
-
-
-      
 
             <div className="navbar-center-navItems">
               <span onClick={() => this.props.history.push('/')}>Home</span>
