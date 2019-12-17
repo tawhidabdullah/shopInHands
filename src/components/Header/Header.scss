@@ -1015,18 +1015,26 @@ fieldset {
 
 .all-department {
   // background-color: red; 
+  position: relative;
 }
 
+.all-department:hover .all-department-sideMenu  {
+  display: block;
+}
 
-
+.nav-icon.nav-menu {
+  cursor: pointer;
+}
 
 .all-department-sideMenu {
+  position: absolute;
   height: 79%;
   width: 100%;
   font-size: 14px;
   float: left;
   z-index: 2;
   background-color: #fff;
+  display: none;
 }
 
 
@@ -1034,19 +1042,23 @@ fieldset {
 .all-department-sideMenu ul {
   border:  1px solid #eee;
   width: 100%;
+  background-color: #fff;
+  position: relative;
 }
 
 .all-department-sideMenu ul li {
   list-style:none;
   list-style-type: none; 
   font-weight: bold;
-  margin-top: 10px;
+  // margin-top: 10px;
   cursor: pointer;
-  padding: 7px 5px;
+  padding: 10px 5px;
+  color: #666;
+  
 }
 
 .all-department-sideMenu ul li:hover {
-  color: orange;
+  color: #333;
 }
 
 
@@ -1054,18 +1066,24 @@ fieldset {
   display: none;
   z-index: 10;
   top: 50px;
+  width: 300px;
+  background-color: red;
+  position: absolute;
+  top: 0;
 }
 
 
 .all-department-sideMenu ul li:hover ul {
 
   display: block;
-  height: 400px;
-  margin-left: 15%;
+  margin-left: 98%;
   padding: 0 100px 10px 10px; 
   position: fixed;
   background: #fff;
   border-left: 1px solid #eee;
+  position: absolute;
+  top: 0;
+
 
 }
 
@@ -1075,27 +1093,32 @@ fieldset {
   margin-top: 4px;
   margin-right: 8px;
   float: right;
+  color: #666;
 
 }
 
 
 @media screen and (max-width: 980px){
+  // .all-department-sideMenu {
+  //   width: 34%;
+  //   z-index: 20px;
+  //   position: fixed;
+  //   font-size: 12px;
+  //   background-color: #f1f3f4;
+  //   display: none;
+
+  // }
+
+  // .all-department-sideMenu ul li ul {
+  //   top: 133px;
+  // }
+
+  // .all-department-sideMenu ul li:hover ul {
+  //    margin-left: 31%;
+  // }
+
   .all-department-sideMenu {
-    width: 34%;
-    z-index: 20px;
-    position: fixed;
-    font-size: 12px;
-    background-color: #f1f3f4;
-    display: none;
-
-  }
-
-  .all-department-sideMenu ul li ul {
-    top: 133px;
-  }
-
-  .all-department-sideMenu ul li:hover ul {
-     margin-left: 31%;
+    margin-top: -20px;
   }
 
 

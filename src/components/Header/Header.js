@@ -244,65 +244,29 @@ class Header extends Component {
                 <ul> 
                   <li> On sale <i className='fa fa-angle-right' />
                     <ul> 
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
+                      <li> On Sale Number</li>
+                      <li> On Sale Number</li>
+                      <li> On Sale Number</li>
+                      <li> On Sale Number</li>
+                      <li> On Sale Number</li>
                     </ul>
                   </li>
-                  <li> On sale <i className='fa fa-angle-right' />
+                  <li> Deals <i className='fa fa-angle-right' />
                     <ul> 
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
+                      <li> Deals Number</li>
+                      <li> Deals Number</li>
+                      <li> Deals Number</li>
+                      <li> Deals Number</li>
+                      <li> Deals Number</li>
                     </ul>
                   </li>
-                  <li> On sale <i className='fa fa-angle-right' />
+                  <li> Departments <i className='fa fa-angle-right' />
                     <ul> 
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
-                    </ul>
-                  </li>
-                  <li> On sale <i className='fa fa-angle-right' />
-                    <ul> 
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
-                    </ul>
-                  </li>
-                  <li> On sale <i className='fa fa-angle-right' />
-                    <ul> 
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
-                    </ul>
-                  </li>
-                  <li> On sale <i className='fa fa-angle-right' />
-                    <ul> 
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
-                    </ul>
-                  </li>
-                  <li> On sale <i className='fa fa-angle-right' />
-                    <ul> 
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
-                      <li> Sub Menu 1</li>
+                      <li>Departments Number</li>
+                      <li>Departments Number</li>
+                      <li>Departments Number</li>
+                      <li>Departments Number</li>
+                      <li>Departments Number</li>
                     </ul>
                   </li>
                   <li> Mobiles <i className='fa fa-angle-right' />
@@ -323,6 +287,12 @@ class Header extends Component {
                       <li> Sub Menu 2</li>
                     </ul>
                   </li>
+
+                 
+                 
+                
+                
+                 
                 </ul>
             </div>
             </div>
