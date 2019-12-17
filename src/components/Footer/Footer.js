@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import ReactHtmlParser, {
-  processNodes,
-  convertNodeToElement,
-  htmlparser2
-} from 'react-html-parser';
+import Spinner from '../commonFeilds/Spinner';
+import ReactHtmlParser from 'react-html-parser';
 import { getApi } from '../../utilities/wooApi';
 import './Footer.scss';
 
@@ -12,9 +9,11 @@ const Footer = () => {
   const [footerTwo, setFooterTwo] = useState({});
   const [footerThree, setFooterThree] = useState({});
   const [footerFour, setFooterFour] = useState({});
+  const [isLoading, setIsLoading] = useState({});
   React.useEffect(() => {
     const getFooterContent = async () => {
       try {
+        setIsLoading(true);
         const footerContentOne = await getApi(
           `/wp-json/wp-rest-api-sidebars/v1/sidebars/footer-1`
         );
@@ -32,8 +31,11 @@ const Footer = () => {
         setFooterTwo(footerContentTwo);
         setFooterThree(footerContentThree);
         setFooterFour(footerContentFour);
+
+        setIsLoading(false);
       } catch (err) {
         console.log(err);
+        setIsLoading(false);
       }
     };
     getFooterContent();
@@ -44,26 +46,6 @@ const Footer = () => {
       <div className="row">
         <div className="col-md-3">
           <div className="shopping__info">
-            {/* <div className="shopping__info-item">
-              <i className="fa fa-address-card" />
-              <h3>
-                San Luis Potosis Centro Historico, 78000 San Luis Potosis, SLP,
-                Mexico
-              </h3>
-            </div>
-            <div className="shopping__info-item">
-              <i className="fa fa-phone" />
-              <h3>(+0214)0 315 215 - (+0214)0 315 215</h3>
-            </div>
-            <div className="shopping__info-item">
-              <i className="fa fa-envelope" />
-              <h3>Support_emarket@domain.com</h3>
-            </div>
-            <div className="shopping__info-item">
-              <i className="fa fa-plane" />
-              <h3>Open time: 8:00AM - 16:PM</h3>
-            </div> */}
-
             <div
               style={{
                 padding: '20px  30px'
@@ -73,43 +55,38 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="col-md-2">
-          <div className="our__services">
-            <div className="footer_section-title">
-              <span>{footerTwo && ReactHtmlParser(footerTwo.name)}</span>
-            </div>
-            {footerTwo && ReactHtmlParser(footerTwo.rendered)}
-          </div>
-        </div>
 
-        <div className="col-md-2">
-          <div className="our__categories">
-            <div className="footer_section-title">
-              <span>{footerTwo && ReactHtmlParser(footerTwo.name)}</span>
+        {Object.keys(footerTwo).length > 0 && (
+          <div className="col-md-3">
+            <div className="our__categories">
+              <div className="footer_section-title">
+                <span>{ReactHtmlParser(footerTwo.name)}</span>
+              </div>
+              {ReactHtmlParser(footerTwo.rendered)}
             </div>
-            {footerTwo && ReactHtmlParser(footerTwo.rendered)}
           </div>
-        </div>
+        )}
 
-        <div className="col-md-2">
-          <div className="our__categories">
-            <div className="footer_section-title">
-              <span>Our Categories</span>
+        {Object.keys(footerThree).length > 0 && (
+          <div className="col-md-3">
+            <div className="our__categories">
+              <div className="footer_section-title">
+                <span>{ReactHtmlParser(footerThree.name)}</span>
+              </div>
+              {ReactHtmlParser(footerThree.rendered)}
             </div>
-            <div className="footer_section-title">
-              <span>{footerTwo && ReactHtmlParser(footerThree.name)}</span>
-            </div>
-            {footerTwo && ReactHtmlParser(footerThree.rendered)}
           </div>
-        </div>
-        <div className="col-md-3">
-          <div className="our__categories">
-            <div className="footer_section-title">
-              <span>{footerTwo && ReactHtmlParser(footerFour.name)}</span>
+        )}
+        {Object.keys(footerFour).length > 0 && (
+          <div className="col-md-3">
+            <div className="our__categories">
+              <div className="footer_section-title">
+                <span>{footerFour && ReactHtmlParser(footerFour.name)}</span>
+              </div>
+              {footerFour && ReactHtmlParser(footerFour.rendered)}
             </div>
-            {footerTwo && ReactHtmlParser(footerFour.rendered)}
           </div>
-        </div>
+        )}
       </div>
     </footer>
   );
