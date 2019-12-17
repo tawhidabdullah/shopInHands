@@ -75,8 +75,8 @@ class Header extends Component {
       });
       const mainMenu = await getApi('/wp-json/wp/v2/menu_main');
       this.setState({
-        mainLMenu: mainMenu,
-        isoading: false
+        mainMenu: mainMenu,
+        isLoading: false
       });
     } catch (err) {
       console.log(err);
@@ -111,13 +111,8 @@ class Header extends Component {
   render() {
     const { isAuthenticate, user } = this.props.auth;
     const { cartItems, totalPrice } = this.props;
-    const { catMenu, mainMenu } = this.state;
-    const {
-      isShowCartBar,
-      categories,
-      isLoading,
-      categorySelectValue
-    } = this.state;
+    const { catMenu, mainMenu, isLoading } = this.state;
+    const { isShowCartBar, categories, categorySelectValue } = this.state;
 
     return (
       <>
@@ -131,9 +126,6 @@ class Header extends Component {
             </p> */}
           </div>
           <div className="trackorderandauthlinks">
-            <p className="trackorderbutton">
-              <i className="fa fa-car"></i>Track You Order{' '}
-            </p>
             <p>
               <i className="fa fa-user"></i>
               <span onClick={() => this.props.history.push('/login')}>
@@ -281,34 +273,31 @@ class Header extends Component {
               </span>
               <div className="all-department-sideMenu">
                 <ul>
-                  {(catMenu &&
-                    catMenu.length > 0 &&
-                    catMenu.map(item => {
-                      if (item.menu_item_parent !== '0') {
-                      } else {
-                        return (
-                          <li
-                            onClick={() =>
-                              this.props.history.push(
-                                `/productsListing/${item.id}`
-                              )
-                            }
-                          >
-                            {' '}
-                            {item.title}
-                            {/* <ul> */}
-                            {/* <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
-                        <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
-                        <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
-                        <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
-                        <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
-                        <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
-                        <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
-                        <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li> */}
-                            {/* </ul> */}
-                          </li>
-                        );
-                      }
+                  {(categories &&
+                    categories.length > 0 &&
+                    categories.map(item => {
+                      return (
+                        <li
+                          onClick={() =>
+                            this.props.history.push(
+                              `/productsListing/${item.id}`
+                            )
+                          }
+                        >
+                          {' '}
+                          {item.name}
+                          {/* <ul> */}
+                          {/* <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
+                      <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
+                      <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
+                      <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
+                      <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
+                      <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
+                      <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li>
+                      <li onClick={()=> this.props.history.push(`/productsListing/${item.id}`)}> {item.name}s</li> */}
+                          {/* </ul> */}
+                        </li>
+                      );
                     })) ||
                     (isLoading && <Spinner />)}
                 </ul>
@@ -328,12 +317,24 @@ class Header extends Component {
             </div> */}
 
             <div className="navbar-center-navItems">
-              {!isLoading &&
-                mainMenu &&
+              {!isLoading && mainMenu && mainMenu.length > 0 && (
+                <>
+                  <span onClick={() => this.props.history.push('/')}>Home</span>
+                  <span
+                    onClick={() =>
+                      this.props.history.push('/productsListing/all')
+                    }
+                  >
+                    Products
+                  </span>
+                </>
+              )}
+              {mainMenu &&
                 mainMenu.length > 0 &&
                 mainMenu.map(item => {
                   return <span>{item.title}</span>;
                 })}
+
               {/* <span onClick={() => this.props.history.push('/')}>Home</span>
               <span
                 onClick={() => this.props.history.push('/productsListing/22')}

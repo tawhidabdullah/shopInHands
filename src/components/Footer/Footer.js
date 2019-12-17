@@ -1,16 +1,37 @@
-import React,{useState} from 'react';
-import { getApi} from "../../utilities/wooApi";
+import React, { useState } from 'react';
+import ReactHtmlParser, {
+  processNodes,
+  convertNodeToElement,
+  htmlparser2
+} from 'react-html-parser';
+import { getApi } from '../../utilities/wooApi';
 import './Footer.scss';
 
 const Footer = () => {
+  const [footerOne, setFooterOne] = useState({});
+  const [footerTwo, setFooterTwo] = useState({});
+  const [footerThree, setFooterThree] = useState({});
+  const [footerFour, setFooterFour] = useState({});
   React.useEffect(() => {
     const getFooterContent = async () => {
       try {
-        const footerContents = await getApi(
-          `/wp-json/wp-rest-api-sidebars/v1/sidebars`
+        const footerContentOne = await getApi(
+          `/wp-json/wp-rest-api-sidebars/v1/sidebars/footer-1`
+        );
+        const footerContentTwo = await getApi(
+          `/wp-json/wp-rest-api-sidebars/v1/sidebars/footer-2`
+        );
+        const footerContentThree = await getApi(
+          `/wp-json/wp-rest-api-sidebars/v1/sidebars/footer-3`
+        );
+        const footerContentFour = await getApi(
+          `/wp-json/wp-rest-api-sidebars/v1/sidebars/footer-4`
         );
 
-       console.log('footerContents',footerContents); 
+        setFooterOne(footerContentOne);
+        setFooterTwo(footerContentTwo);
+        setFooterThree(footerContentThree);
+        setFooterFour(footerContentFour);
       } catch (err) {
         console.log(err);
       }
@@ -18,14 +39,12 @@ const Footer = () => {
     getFooterContent();
   }, []);
 
-
-
   return (
     <footer className="footer">
       <div className="row">
         <div className="col-md-3">
           <div className="shopping__info">
-            <div className="shopping__info-item">
+            {/* <div className="shopping__info-item">
               <i className="fa fa-address-card" />
               <h3>
                 San Luis Potosis Centro Historico, 78000 San Luis Potosis, SLP,
@@ -43,44 +62,32 @@ const Footer = () => {
             <div className="shopping__info-item">
               <i className="fa fa-plane" />
               <h3>Open time: 8:00AM - 16:PM</h3>
+            </div> */}
+
+            <div
+              style={{
+                padding: '20px  30px'
+              }}
+            >
+              {footerOne && ReactHtmlParser(footerOne.rendered)}
             </div>
           </div>
         </div>
         <div className="col-md-2">
           <div className="our__services">
             <div className="footer_section-title">
-              <span>Our Services</span>
+              <span>{footerTwo && ReactHtmlParser(footerTwo.name)}</span>
             </div>
-            <span className="footer_section-item">
-              <i className="fa fa-circle"></i>
-              <a href="https://shopinhands.com/wp/track-your-order">
-                Track your Order
-              </a>
-            </span>
-            <span className="footer_section-item">
-              <i className="fa fa-circle"></i>
-              <a href="https://shopinhands.com/wp/wishlist">Wishlist</a>
-            </span>
-            <span className="footer_section-item">
-              <i className="fa fa-circle"></i>
-              <a href="https://shopinhands.com/wp/customer-service">
-                Customer Service
-              </a>
-            </span>
-            <span className="footer_section-item">
-              <i className="fa fa-circle"></i>
-              <a href="https://shopinhands.com/wp/returns-exchange">
-                Returns / Exchange
-              </a>
-            </span>
-            <span className="footer_section-item">
-              <i className="fa fa-circle"></i>
-              <a href="https://shopinhands.com/wp/faq">Faq?</a>
-            </span>
-            <span className="footer_section-item">
-              <i className="fa fa-circle"></i>
-              <a href="https://shopinhands.com/wp/support">Support</a>
-            </span>
+            {footerTwo && ReactHtmlParser(footerTwo.rendered)}
+          </div>
+        </div>
+
+        <div className="col-md-2">
+          <div className="our__categories">
+            <div className="footer_section-title">
+              <span>{footerTwo && ReactHtmlParser(footerTwo.name)}</span>
+            </div>
+            {footerTwo && ReactHtmlParser(footerTwo.rendered)}
           </div>
         </div>
 
@@ -89,93 +96,18 @@ const Footer = () => {
             <div className="footer_section-title">
               <span>Our Categories</span>
             </div>
-            <span className="footer_section-item">
-              <i className="fa fa-circle"></i>
-              <h3> Industrial Parts & Tools</h3>
-            </span>
-            <span className="footer_section-item">
-              <i className="fa fa-circle"></i>
-              <h3> Health & Beauty</h3>
-            </span>
-            <span className="footer_section-item">
-              <i className="fa fa-circle"></i>
-              <h3> Gifts, Sports & Toys</h3>
-            </span>
-            <span className="footer_section-item">
-              <i className="fa fa-circle"></i>
-              <h3> Packaging & Office</h3>
-            </span>
-            <span className="footer_section-item">
-              <i className="fa fa-circle"></i>
-              <h3> Metallurgy, Chemicals</h3>
-            </span>
-            <span className="footer_section-item">
-              <i className="fa fa-circle"></i>
-              <h3> Arts, Crafts & Sewing</h3>
-            </span>
-          </div>
-        </div>
-
-        <div className="col-md-2">
-          <div className="our__categories">
             <div className="footer_section-title">
-              <span>Our Categories</span>
+              <span>{footerTwo && ReactHtmlParser(footerThree.name)}</span>
             </div>
-            <span className="footer_section-item">
-              <i className="fa fa-circle"></i>
-              <h3> Industrial Parts & Tools</h3>
-            </span>
-            <span className="footer_section-item">
-              <i className="fa fa-circle"></i>
-              <h3> Health & Beauty</h3>
-            </span>
-            <span className="footer_section-item">
-              <i className="fa fa-circle"></i>
-              <h3> Gifts, Sports & Toys</h3>
-            </span>
-            <span className="footer_section-item">
-              <i className="fa fa-circle"></i>
-              <h3> Packaging & Office</h3>
-            </span>
-            <span className="footer_section-item">
-              <i className="fa fa-circle"></i>
-              <h3> Metallurgy, Chemicals</h3>
-            </span>
-            <span className="footer_section-item">
-              <i className="fa fa-circle"></i>
-              <h3> Arts, Crafts & Sewing</h3>
-            </span>
+            {footerTwo && ReactHtmlParser(footerThree.rendered)}
           </div>
         </div>
         <div className="col-md-3">
           <div className="our__categories">
             <div className="footer_section-title">
-              <span>Our Categories</span>
+              <span>{footerTwo && ReactHtmlParser(footerFour.name)}</span>
             </div>
-            <span className="footer_section-item">
-              <i className="fa fa-circle"></i>
-              <h3> Industrial Parts & Tools</h3>
-            </span>
-            <span className="footer_section-item">
-              <i className="fa fa-circle"></i>
-              <h3> Health & Beauty</h3>
-            </span>
-            <span className="footer_section-item">
-              <i className="fa fa-circle"></i>
-              <h3> Gifts, Sports & Toys</h3>
-            </span>
-            <span className="footer_section-item">
-              <i className="fa fa-circle"></i>
-              <h3> Packaging & Office</h3>
-            </span>
-            <span className="footer_section-item">
-              <i className="fa fa-circle"></i>
-              <h3> Metallurgy, Chemicals</h3>
-            </span>
-            <span className="footer_section-item">
-              <i className="fa fa-circle"></i>
-              <h3> Arts, Crafts & Sewing</h3>
-            </span>
+            {footerTwo && ReactHtmlParser(footerFour.rendered)}
           </div>
         </div>
       </div>

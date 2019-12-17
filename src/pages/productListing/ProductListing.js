@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import InputRange from 'react-input-range';
-import Footer from "../../components/Footer/Footer";
+import Footer from '../../components/Footer/Footer';
 import './productListing.scss';
 import Product from '../Home/Product';
 import { getApi } from '../../utilities/wooApi';
@@ -20,11 +20,11 @@ const ProductListing = props => {
   // const [manupulatedCategories,setManupulatedCategories] = React.useState([]);
 
   React.useEffect(() => {
-    if (id === '967021') {
+    if (id === 'all') {
       const getProducts = async () => {
         setIsLoading(true);
         try {
-          const products = await getApi(`/wp-json/wc/v3/products`, {});
+          const products = await getApi(`/wp-json/wc/v3/products`);
           console.log('products', products);
           setProducts(products);
           setIsLoading(false);
@@ -148,84 +148,84 @@ const ProductListing = props => {
 
   return (
     <>
-    <div class="Bcak-bg">
-      <div class="container">
-        {/* <h2>Category</h2> */}
-        <div class="row">
-          <div class="col-sm-3 filterbar">
-            <div class="category-block">
-              <span class="category-title">Search here</span>
-              <div class="form-group search-product">
-                <input
-                  type="text"
-                  name="Search"
-                  placeholder="Search here...."
-                  onChange={handleSearchInput}
-                  onKeyPress={handleKeyPress}
-                />
-                <i
-                  onClick={handleSearch}
-                  class="fa fa-search"
-                  aria-hidden="true"
-                ></i>
+      <div class="Bcak-bg">
+        <div class="container">
+          {/* <h2>Category</h2> */}
+          <div class="row">
+            <div class="col-sm-3 filterbar">
+              <div class="category-block">
+                <span class="category-title">Search here</span>
+                <div class="form-group search-product">
+                  <input
+                    type="text"
+                    name="Search"
+                    placeholder="Search here...."
+                    onChange={handleSearchInput}
+                    onKeyPress={handleKeyPress}
+                  />
+                  <i
+                    onClick={handleSearch}
+                    class="fa fa-search"
+                    aria-hidden="true"
+                  ></i>
+                </div>
               </div>
-            </div>
 
-            <div className="category-block">
-              <div className="product-title">Price</div>
-              <div
-                style={{
-                  padding: '50px 0 30px 0'
-                }}
-              >
-                <InputRange
-                  value={value}
-                  maxValue={20000}
-                  minValue={0}
-                  onChange={value => handleInputRangePriceChange(value)}
-                />
+              <div className="category-block">
+                <div className="product-title">Price</div>
+                <div
+                  style={{
+                    padding: '50px 0 30px 0'
+                  }}
+                >
+                  <InputRange
+                    value={value}
+                    maxValue={20000}
+                    minValue={0}
+                    onChange={value => handleInputRangePriceChange(value)}
+                  />
+                </div>
               </div>
-            </div>
-            <div class="category-block">
-              <div class="product-detail">
-                <h2 class="category-title">Categories</h2>
-                <ul>
-                  {categories &&
-                    categories.map((cat, i) => {
-                      return (
-                        <li key={i}>
-                          <span
-                            className={
-                              cat.name !== 'All Categories'
-                                ? `${
-                                    cat[`is${cat.name}`]
-                                      ? 'category-text active'
-                                      : 'category-text'
-                                  }`
-                                : `${
-                                    cat[`is${cat.name}`]
-                                      ? 'category-header-all active'
-                                      : 'category-header-all'
-                                  }`
-                            }
-                            onClick={() => {
-                              handleSelectCategory(cat.id, cat.name);
-                            }}
-                          >
-                            {cat.name}
-                          </span>
-                        </li>
-                      );
-                    })}
-                </ul>
+              <div class="category-block">
+                <div class="product-detail">
+                  <h2 class="category-title">Categories</h2>
+                  <ul>
+                    {categories &&
+                      categories.map((cat, i) => {
+                        return (
+                          <li key={i}>
+                            <span
+                              className={
+                                cat.name !== 'All Categories'
+                                  ? `${
+                                      cat[`is${cat.name}`]
+                                        ? 'category-text active'
+                                        : 'category-text'
+                                    }`
+                                  : `${
+                                      cat[`is${cat.name}`]
+                                        ? 'category-header-all active'
+                                        : 'category-header-all'
+                                    }`
+                              }
+                              onClick={() => {
+                                handleSelectCategory(cat.id, cat.name);
+                              }}
+                            >
+                              {cat.name}
+                            </span>
+                          </li>
+                        );
+                      })}
+                  </ul>
+                </div>
               </div>
-            </div>
 
-            <div class="category-block">
-              <div class="product-detail">
-                <h2 class="category-title">Tags</h2>
-                <ul>
-                  {/* {categories && categories.map((cat,i) => {
+              <div class="category-block">
+                <div class="product-detail">
+                  <h2 class="category-title">Tags</h2>
+                  <ul>
+                    {/* {categories && categories.map((cat,i) => {
                      return (
                       <li key={i}>
                       <input 
@@ -239,24 +239,24 @@ const ProductListing = props => {
                      )
                    })} */}
 
-                  <li>
-                    <input
-                      class="custom-checkbox"
-                      type="checkbox"
-                      checked={true}
-                      onChange={handleSelectCategory}
-                    />
-                    <label>Products</label>
-                  </li>
-                </ul>
+                    <li>
+                      <input
+                        class="custom-checkbox"
+                        type="checkbox"
+                        checked={true}
+                        onChange={handleSelectCategory}
+                      />
+                      <label>Products</label>
+                    </li>
+                  </ul>
+                </div>
               </div>
-            </div>
 
-            <div class="category-block">
-              <div class="product-detail">
-                <h2 class="category-title">Ratings</h2>
-                <ul>
-                  {/* {categories && categories.map((cat,i) => {
+              <div class="category-block">
+                <div class="product-detail">
+                  <h2 class="category-title">Ratings</h2>
+                  <ul>
+                    {/* {categories && categories.map((cat,i) => {
                      return (
                       <li key={i}>
                       <input 
@@ -270,49 +270,49 @@ const ProductListing = props => {
                      )
                    })} */}
 
-                  <li>
-                    <input
-                      class="custom-checkbox"
-                      type="checkbox"
-                      checked={true}
-                      onChange={handleSelectCategory}
-                    />
-                    <label>All</label>
-                  </li>
-                </ul>
+                    <li>
+                      <input
+                        class="custom-checkbox"
+                        type="checkbox"
+                        checked={true}
+                        onChange={handleSelectCategory}
+                      />
+                      <label>All</label>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-sm-9">
-            <div
-              class="row"
-              style={{
-                paddingTop: '20px',
-                width: '100%',
-                // background: 'red',
-                display: 'flex',
-                flexWrap: 'wrap',
-                justifyContent: 'space-around',
-                alignItems: 'center'
-              }}
-            >
-              {(products &&
-                products.length > 0 &&
-                !isLoading &&
-                products.map(product => {
-                  return <Product product={product} productListing={true} />;
-                })) ||
-                (isLoading && <Spinner />)}
-            </div>
-
-            {!isLoading && products && products.length > 0 ? (
+            <div class="col-sm-9">
               <div
-                class="pagination"
+                class="row"
                 style={{
-                  marginTop: '50px'
+                  paddingTop: '20px',
+                  width: '100%',
+                  // background: 'red',
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  justifyContent: 'space-around',
+                  alignItems: 'center'
                 }}
               >
-                {/* <a href="#">
+                {(products &&
+                  products.length > 0 &&
+                  !isLoading &&
+                  products.map(product => {
+                    return <Product product={product} productListing={true} />;
+                  })) ||
+                  (isLoading && <Spinner />)}
+              </div>
+
+              {!isLoading && products && products.length > 0 ? (
+                <div
+                  class="pagination"
+                  style={{
+                    marginTop: '50px'
+                  }}
+                >
+                  {/* <a href="#">
                   <i class="fa fa-chevron-left" aria-hidden="true"></i>
                 </a>
                 <a href="#">1</a>
@@ -323,38 +323,38 @@ const ProductListing = props => {
                 <a href="#">
                   <i class="fa fa-chevron-right" aria-hidden="true"></i>
                 </a> */}
-              </div>
-            ) : (
-              !isLoading &&
-              products &&
-              !products.length > 0 && (
-                <div
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                  }}
-                >
-                  <h3
+                </div>
+              ) : (
+                !isLoading &&
+                products &&
+                !products.length > 0 && (
+                  <div
                     style={{
-                      color: '#333',
-                      fontSize: '22px',
-                      textTransform: 'uppercase'
+                      width: '100%',
+                      height: '100%',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center'
                     }}
                   >
-                    No Product Has Been Found For This Category
-                  </h3>
-                </div>
-              )
-            )}
+                    <h3
+                      style={{
+                        color: '#333',
+                        fontSize: '22px',
+                        textTransform: 'uppercase'
+                      }}
+                    >
+                      No Product Has Been Found For This Category
+                    </h3>
+                  </div>
+                )
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <Footer />
-</>
+      <Footer />
+    </>
   );
 };
 
