@@ -116,7 +116,7 @@ class Home extends Component {
                         style={{
                           marginTop: `${
                             index + 1 === sliderRight.widgets.length
-                              ? '23px'
+                              ? '25px'
                               : ''
                           }`
                         }}
@@ -135,7 +135,7 @@ class Home extends Component {
             <ProductList />
           </div> */}
 
-        {this.state.categories.length > 0 ? (
+        {categories.length > 0 ? (
           <>
             {categories.map(cat => {
               if (cat.name === 'Uncategorized') {

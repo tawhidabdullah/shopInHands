@@ -179,7 +179,68 @@ class ProductDetail extends Component {
                 <div class="col-md-9">{ProductDetailContent}</div>
                 <div class="col-md-3">
                   <div class="services-sidebar">
-                    <ul>
+                    <div class="small__filterProducts">
+                      <div class="block-title">
+                        <span>Best Sellers</span>
+                      </div>
+                      <div class="small-products-items">
+                        {(this.state.relatedProducts &&
+                          this.state.relatedProducts.map(item => {
+                            return (
+                              <div class="small-product-item">
+                                <div
+                                  class="small-product-item-box-img"
+                                  onClick={() => {
+                                    this.props.history.push(
+                                      `/products/${item.id}`
+                                    );
+                                  }}
+                                >
+                                  <img
+                                    src={item.images[0].src}
+                                    class="product photo product-item-photo"
+                                    alt=""
+                                  />
+                                </div>
+                                <div class="small-product-info">
+                                  <div class="small-product-reviews-summary">
+                                    <h3 class="small-rating-summary">
+                                      <i
+                                        class="fa fa-star"
+                                        aria-hidden="true"
+                                      ></i>
+                                      <i
+                                        class="fa fa-star"
+                                        aria-hidden="true"
+                                      ></i>
+                                      <i
+                                        class="fa fa-star"
+                                        aria-hidden="true"
+                                      ></i>
+                                      <i
+                                        class="fa fa-star-half-o"
+                                        aria-hidden="true"
+                                      ></i>
+                                      <i
+                                        class="fa fa-star-o"
+                                        aria-hidden="true"
+                                      ></i>
+                                    </h3>
+                                  </div>
+
+                                  <h2 class="small-product-title">
+                                    ৳{item.price}
+                                  </h2>
+                                  <h2 class="small-product-price">
+                                    ৳{item.regular_price}
+                                  </h2>
+                                </div>
+                              </div>
+                            );
+                          })) || <Spinner />}
+                      </div>
+                    </div>
+                    {/* <ul>
                       <li>
                         <div class="service-content">
                           <div class="service-icon">
@@ -213,10 +274,10 @@ class ProductDetail extends Component {
                           </div>
                         </div>
                       </li>
-                    </ul>
+                    </ul> */}
                   </div>
 
-                  <div class="small__filterProducts">
+                  {/* <div class="small__filterProducts">
                     <div class="block-title">
                       <span>Best Sellers</span>
                     </div>
@@ -276,7 +337,7 @@ class ProductDetail extends Component {
                           );
                         })) || <Spinner />}
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

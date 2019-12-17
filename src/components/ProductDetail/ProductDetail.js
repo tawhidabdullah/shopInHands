@@ -5,7 +5,14 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
 
 const ProductDetail = props => {
-  const { name, price, description, sale_price, images,regular_price } = props.product;
+  const {
+    name,
+    price,
+    description,
+    sale_price,
+    images,
+    regular_price
+  } = props.product;
 
   const onCart = e => {
     e.preventDefault();
@@ -32,7 +39,7 @@ const ProductDetail = props => {
           <h2 class="productInfo__title">{name}</h2>
           <div class="productInfo__price">
             <div class="product-reviews-summary">
-              <h3 class="rating-summary">
+              {/* <h3 class="rating-summary">
                 <i class="fa fa-star" aria-hidden="true"></i>
                 <i class="fa fa-star" aria-hidden="true"></i>
                 <i class="fa fa-star" aria-hidden="true"></i>
@@ -43,7 +50,7 @@ const ProductDetail = props => {
                 <span class="review-count">1</span>
                 <span> Review</span>
               </h3>
-              <h3 class="reviews-actions">Add New Reviews</h3>
+              <h3 class="reviews-actions">Add New Reviews</h3> */}
             </div>
 
             <div class="product-price-box">

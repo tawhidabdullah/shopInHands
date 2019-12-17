@@ -396,3 +396,13 @@
   transition: 450ms;
   font-weight: bold;
 }
+
+.marginTop25 {
+  margin-top: 10px;
+}
+
+@media screen and (min-width: 770px) {
+  .marginTop25 {
+    margin-top: 25px;
+  }
+}
