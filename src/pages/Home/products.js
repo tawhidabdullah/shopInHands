@@ -85,7 +85,7 @@ const Products = ({ categoryId, categoryName, history }) => {
               lineHeight: '200px'
             }}
           >
-            No Product Has Found On This Category
+            No Product Has Been Found On This Category
           </h2>
         )}
       </div>

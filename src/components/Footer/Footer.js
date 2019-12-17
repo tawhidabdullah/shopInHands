@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Spinner from '../commonFeilds/Spinner';
 import ReactHtmlParser from 'react-html-parser';
+
 import { getApi } from '../../utilities/wooApi';
 import './Footer.scss';
 

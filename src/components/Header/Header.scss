@@ -1010,6 +1010,13 @@ fieldset {
   height: 100px;
 }
 
+.navbar-center-logoBox img {
+  cursor: pointer !important;
+  width: 250px !important;
+  height: 100px !important;
+  object-fit: contain !important;
+}
+
 /* All departments Sidemenu */
 
 .all-department {

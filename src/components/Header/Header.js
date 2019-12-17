@@ -6,6 +6,7 @@ import { getApi } from '../../utilities/wooApi';
 import { logoutUser } from '../../actions/authAction';
 import './Header.scss';
 import '../styles_components/searchBar.scss';
+import ReactHtmlParser from 'react-html-parser';
 
 import {
   addProductToCart,
@@ -23,7 +24,9 @@ class Header extends Component {
     isLoading: false,
     categorySelectValue: 'Categories',
     mainMenu: [],
-    catMenu: []
+    catMenu: [],
+    logoContent: {},
+    topLeftContent: {}
   };
 
   handleToggleCartBar = () => {
@@ -37,6 +40,30 @@ class Header extends Component {
   };
 
   async componentDidMount() {
+    try {
+      this.setState({
+        isLoading: true
+      });
+      const logoContent = await getApi(
+        '/wp-json/wp-rest-api-sidebars/v1/sidebars/logo'
+      );
+
+      const topLeftContent = await getApi(
+        '/wp-json/wp-rest-api-sidebars/v1/sidebars/top-left'
+      );
+
+      this.setState({
+        logoContent: logoContent,
+        isLoading: false,
+        topLeftContent
+      });
+    } catch (err) {
+      console.log(err);
+      this.setState({
+        isLoading: false
+      });
+    }
+
     try {
       this.setState({
         isLoading: true
@@ -111,13 +138,14 @@ class Header extends Component {
   render() {
     const { isAuthenticate, user } = this.props.auth;
     const { cartItems, totalPrice } = this.props;
-    const { catMenu, mainMenu, isLoading } = this.state;
+    const { catMenu, mainMenu, isLoading, topLeftContent } = this.state;
     const { isShowCartBar, categories, categorySelectValue } = this.state;
 
     return (
       <>
         <div className="top-head-1">
           <div className="langandcurrency">
+            {topLeftContent && ReactHtmlParser(topLeftContent.rendered)}
             {/* <p>
               ENGLISH <i className="fa fa-angle-down"></i>
             </p>
@@ -150,7 +178,7 @@ class Header extends Component {
               className="navbar-center-logoBox"
               onClick={() => this.props.history.push('/')}
             >
-              <img
+              {/* <img
                 style={{
                   width: '100%',
                   height: '100%',
@@ -158,7 +186,9 @@ class Header extends Component {
                 }}
                 src={require('../../assets/logo.png')}
                 alt="get a life"
-              />
+              /> */}
+
+              {ReactHtmlParser(this.state.logoContent.rendered)}
             </div>
             <div className="navbar-center-categoryAndSearch">
               <div className="categoryAndSearchFeilds">

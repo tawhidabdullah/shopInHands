@@ -8,27 +8,57 @@ import './Home.scss';
 import { withRouter } from 'react-router-dom';
 import Spinner from '../../components/commonFeilds/Spinner';
 import Footer from '../../components/Footer/Footer';
+import ReactHtmlParser from 'react-html-parser';
 
 class Home extends Component {
   state = {
     products: [],
     isProductLoading: false,
-    categories: []
+    categories: [],
+    sliderImageContents: {},
+    sliderRight: {},
+    isLoading: false
   };
 
   async componentDidMount() {
     try {
-      const categories = await getApi('/wp-json/wc/v3/products/categories');
       this.setState({
-        categories: categories
+        ...this.state,
+        isLoading: true
+      });
+      const categories = await getApi('/wp-json/wc/v3/products/categories');
+      const sliderImageContents = await getApi(
+        '/wp-json/wp-rest-api-sidebars/v1/sidebars/slider'
+      );
+
+      const sliderRight = await getApi(
+        '/wp-json/wp-rest-api-sidebars/v1/sidebars/slider-right'
+      );
+
+      console.log('sliderImagesContent', sliderImageContents);
+      this.setState({
+        ...this.state,
+        categories: categories,
+        sliderImageContents,
+        isLoading: false,
+        sliderRight
       });
     } catch (err) {
+      this.setState({
+        ...this.state,
+        isLoading: false
+      });
       console.log(err);
     }
   }
 
   render() {
-    const { categories } = this.state;
+    const {
+      categories,
+      isLoading,
+      sliderImageContents,
+      sliderRight
+    } = this.state;
     let fiveProducts;
     if (this.props.products.products) {
       fiveProducts = this.props.products.products.splice(0, 5);
@@ -71,28 +101,30 @@ class Home extends Component {
         <section className="image-slider-section">
           <div className="row">
             <div className="col-md-9 col-sm-12 image-slider-section-carousel">
-              <Carousel />
+              {!isLoading && (
+                <Carousel imagesContents={sliderImageContents.widgets} />
+              )}
             </div>
             <div className="col-md-3">
               <div className="row">
-                <div className="col-md-12 ">
-                  <img
-                    style={{
-                      width: '100%'
-                    }}
-                    src={require('./banner-3.jpg')}
-                    alt="Banner Img"
-                  />
-                </div>
-                <div className="col-md-12 " style={{ marginTop: '25px' }}>
-                  <img
-                    style={{
-                      width: '100%'
-                    }}
-                    src={require('./banner-4.jpg')}
-                    alt="Banner Img"
-                  />
-                </div>
+                {sliderRight &&
+                  sliderRight.widgets &&
+                  sliderRight.widgets.map((imgContent, index) => {
+                    return (
+                      <div
+                        className="col-md-12"
+                        style={{
+                          marginTop: `${
+                            index + 1 === sliderRight.widgets.length
+                              ? '23px'
+                              : ''
+                          }`
+                        }}
+                      >
+                        {ReactHtmlParser(imgContent.rendered)}
+                      </div>
+                    );
+                  })}
               </div>
             </div>
           </div>
