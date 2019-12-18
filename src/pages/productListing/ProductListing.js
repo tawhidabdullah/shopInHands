@@ -224,7 +224,7 @@ const ProductListing = props => {
                   </ul>
                 </div>
               </div>
-
+{/* 
               <div class="category-block">
                 <div class="product-detail">
                   <h2 class="category-title">Tags</h2>
@@ -243,7 +243,7 @@ const ProductListing = props => {
                      )
                    })} */}
 
-                    <li>
+                    {/* <li>
                       <input
                         class="custom-checkbox"
                         type="checkbox"
@@ -251,41 +251,11 @@ const ProductListing = props => {
                         onChange={handleSelectCategory}
                       />
                       <label>Products</label>
-                    </li>
-                  </ul>
+                    </li> */}
+                  {/* </ul>
                 </div>
-              </div>
+              </div> */} */}
 
-              <div class="category-block">
-                <div class="product-detail">
-                  <h2 class="category-title">Ratings</h2>
-                  <ul>
-                    {/* {categories && categories.map((cat,i) => {
-                     return (
-                      <li key={i}>
-                      <input 
-                      class="custom-checkbox"
-                        type="checkbox"
-                        checked={true}
-                        onChange={handleSelectCategory}
-                        name={cat.name} />
-                      <label >{cat.name}</label>
-                    </li>
-                     )
-                   })} */}
-
-                    <li>
-                      <input
-                        class="custom-checkbox"
-                        type="checkbox"
-                        checked={true}
-                        onChange={handleSelectCategory}
-                      />
-                      <label>All</label>
-                    </li>
-                  </ul>
-                </div>
-              </div>
             </div>
             <div class="col-sm-9">
               <div
