@@ -35,7 +35,7 @@ serviceWorker.unregister();
   But I am glad that now we are talking about reality.I know "arthi doesn't want to talk to him". I also know that tawhid did made some mistakes.But now what ? We just leave their story ruined and walk away ?
   i do not thing that would be the ideal thing to do. I feel like it still can be saved. Because now time and space has changed And so as THEY!
 
-Adri i know you usually do not talk about this kinda intense topic,Even i don't,Sorry about that! But it necessary.
+Adri i know you usually do not talk about this kinda intense topic, Even i don't, Sorry about that! But it necessary.
   
 
 
