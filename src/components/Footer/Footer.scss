@@ -127,3 +127,30 @@ footer .menu .menu-item a::before {
   position: absolute;
   left: 0;
 }
+
+.widget_nav_menu .widget-title {
+  display: block;
+  text-transform: uppercase !important;
+
+  color: #222 !important;
+
+  font-size: 16px !important;
+
+  font-weight: 600 !important;
+
+  margin-bottom: 30px !important;
+  line-height: 40px !important;
+  position: relative !important;
+}
+
+.widget_nav_menu .widget-title::before {
+  background: #ff5c00 !important;
+  content: '' !important;
+  display: block !important;
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: -2px !important;
+  height: 2px !important;
+  width: 40px !important;
+}

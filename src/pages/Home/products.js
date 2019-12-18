@@ -30,6 +30,8 @@ const Products = ({ categoryId, categoryName, history }) => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  console.log('products', products);
+
   React.useEffect(() => {
     const getProducts = async () => {
       setIsLoading(true);

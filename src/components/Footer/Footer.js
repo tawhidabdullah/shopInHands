@@ -59,9 +59,6 @@ const Footer = () => {
         {Object.keys(footerTwo).length > 0 && (
           <div className="col-md-3">
             <div className="our__categories">
-              <div className="footer_section-title">
-                <span>{ReactHtmlParser(footerTwo.name)}</span>
-              </div>
               {ReactHtmlParser(footerTwo.rendered)}
             </div>
           </div>
@@ -70,9 +67,6 @@ const Footer = () => {
         {Object.keys(footerThree).length > 0 && (
           <div className="col-md-3">
             <div className="our__categories">
-              <div className="footer_section-title">
-                <span>{ReactHtmlParser(footerThree.name)}</span>
-              </div>
               {ReactHtmlParser(footerThree.rendered)}
             </div>
           </div>
@@ -80,9 +74,6 @@ const Footer = () => {
         {Object.keys(footerFour).length > 0 && (
           <div className="col-md-3">
             <div className="our__categories">
-              <div className="footer_section-title">
-                <span>{footerFour && ReactHtmlParser(footerFour.name)}</span>
-              </div>
               {footerFour && ReactHtmlParser(footerFour.rendered)}
             </div>
           </div>

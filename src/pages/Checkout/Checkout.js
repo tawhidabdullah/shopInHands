@@ -364,7 +364,7 @@ const Checkout = props => {
                   <h2>Order Summary</h2>
                   <div className="order-summary-price">
                     <h3>{props.cartItems.length} items in Cart</h3>
-                    <span>${props.totalPrice}</span>
+                    <span>৳{props.totalPrice}</span>
                   </div>
                 </div>
                 <div className="order-summary">
