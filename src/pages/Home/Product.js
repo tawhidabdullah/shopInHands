@@ -61,13 +61,13 @@ const Product = ({
             </button>
           </Link>
 
-          <button
+          {/* <button
             type="button"
             class="btn btn-secondary"
             title="Add To Wishlist"
           >
             <i class="fa fa-heart-o"></i>
-          </button>
+          </button> */}
           <button
             type="button"
             class="btn btn-secondary"

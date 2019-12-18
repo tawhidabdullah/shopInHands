@@ -128,7 +128,7 @@ footer .menu .menu-item a::before {
   left: 0;
 }
 
-.widget_nav_menu .widget-title {
+.widget-title {
   display: block;
   text-transform: uppercase !important;
 
@@ -143,7 +143,7 @@ footer .menu .menu-item a::before {
   position: relative !important;
 }
 
-.widget_nav_menu .widget-title::before {
+.widget-title::before {
   background: #ff5c00 !important;
   content: '' !important;
   display: block !important;

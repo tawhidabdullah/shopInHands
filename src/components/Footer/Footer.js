@@ -48,7 +48,7 @@ const Footer = () => {
           <div className="shopping__info">
             <div
               style={{
-                padding: '20px  30px'
+                paddingLeft: '30px'
               }}
             >
               {footerOne && ReactHtmlParser(footerOne.rendered)}

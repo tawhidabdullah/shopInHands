@@ -131,7 +131,7 @@ class ProductDetail extends Component {
       ProductDetailContent = (
         <>
           <ProductDetailComponent {...this.props} product={product} />
-          <div class="row">
+          {/* <div class="row">
             <div class="productDetails__container">
               <ul class="productDetails__tablist">
                 <li
@@ -165,7 +165,7 @@ class ProductDetail extends Component {
                   : ''}
               </div>
             </div>
-          </div>
+          </div> */}
         </>
       );
     }
@@ -203,7 +203,7 @@ class ProductDetail extends Component {
                                   />
                                 </div>
                                 <div class="small-product-info">
-                                  <div class="small-product-reviews-summary">
+                                  {/* <div class="small-product-reviews-summary">
                                     <h3 class="small-rating-summary">
                                       <i
                                         class="fa fa-star"
@@ -226,7 +226,7 @@ class ProductDetail extends Component {
                                         aria-hidden="true"
                                       ></i>
                                     </h3>
-                                  </div>
+                                  </div> */}
 
                                   <h2 class="small-product-title">
                                     ৳{item.price}
