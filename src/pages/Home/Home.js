@@ -26,7 +26,9 @@ class Home extends Component {
         ...this.state,
         isLoading: true
       });
+
       const categories = await getApi('/wp-json/wc/v3/products/categories');
+
       const sliderImageContents = await getApi(
         '/wp-json/wp-rest-api-sidebars/v1/sidebars/slider'
       );
@@ -35,7 +37,6 @@ class Home extends Component {
         '/wp-json/wp-rest-api-sidebars/v1/sidebars/slider-right'
       );
 
-      console.log('sliderImagesContent', sliderImageContents);
       this.setState({
         ...this.state,
         categories: categories,

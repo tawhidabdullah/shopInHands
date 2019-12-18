@@ -26,7 +26,8 @@ class Header extends Component {
     mainMenu: [],
     catMenu: [],
     logoContent: {},
-    topLeftContent: {}
+    topLeftContent: {},
+    hotlineContent: {}
   };
 
   handleToggleCartBar = () => {
@@ -111,6 +112,26 @@ class Header extends Component {
         isLoading: false
       });
     }
+
+    try {
+      this.setState({
+        isLoading: true
+      });
+      const hotlineContent = await getApi(
+        '/wp-json/wp-rest-api-sidebars/v1/sidebars/hotline'
+      );
+
+      console.log('hotline', hotlineContent);
+      this.setState({
+        hotlineContent: hotlineContent,
+        isLoading: false
+      });
+    } catch (err) {
+      console.log(err);
+      this.setState({
+        isLoading: false
+      });
+    }
   }
 
   handleSearchBar = e => {
@@ -138,7 +159,13 @@ class Header extends Component {
   render() {
     const { isAuthenticate, user } = this.props.auth;
     const { cartItems, totalPrice } = this.props;
-    const { catMenu, mainMenu, isLoading, topLeftContent } = this.state;
+    const {
+      catMenu,
+      mainMenu,
+      isLoading,
+      topLeftContent,
+      hotlineContent
+    } = this.state;
     const { isShowCartBar, categories, categorySelectValue } = this.state;
 
     return (
@@ -380,7 +407,9 @@ class Header extends Component {
             <div className="navbar-center-phoneNumberbox">
               <i className="fa fa-phone"></i>
               <span className="text">Hotline</span>
-              <span className="phone">967021967021</span>
+              <span className="phone">
+                {hotlineContent && ReactHtmlParser(hotlineContent.rendered)}
+              </span>
             </div>
           </div>
         </div>

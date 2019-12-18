@@ -1,7 +1,7 @@
 const wooApiConfig = {
   url: 'https://shopinhands.com/wp',
-  consumerKey: 'ck_dd4a23a829d062104c4ef2f4dc857611d7fc38d7',
-  consumerSecret: 'cs_b1690533e7d8f367e9b5a6772872df398c1326ef',
+  consumerKey: 'ck_0614b63a5488147a26531351bed8b11947500184',
+  consumerSecret: 'cs_a2068e32537caa8c76e0d9cf50ac9ec040ecc6cf',
   version: 'wc/v3'
 };
 
