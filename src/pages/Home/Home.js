@@ -13,6 +13,7 @@ import ReactHtmlParser from 'react-html-parser';
 class Home extends Component {
   state = {
     products: [],
+    tags: [],
     isProductLoading: false,
     categories: [],
     sliderImageContents: {},
@@ -37,12 +38,16 @@ class Home extends Component {
         '/wp-json/wp-rest-api-sidebars/v1/sidebars/slider-right'
       );
 
+
+      const tags = await getApi('/wp-json/wc/v3/products/tags'); 
+
       this.setState({
         ...this.state,
         categories: categories,
         sliderImageContents,
         isLoading: false,
-        sliderRight
+        sliderRight,
+        tags
       });
     } catch (err) {
       this.setState({
@@ -58,7 +63,8 @@ class Home extends Component {
       categories,
       isLoading,
       sliderImageContents,
-      sliderRight
+      sliderRight,
+      tags
     } = this.state;
     let fiveProducts;
     if (this.props.products.products) {
@@ -84,15 +90,17 @@ class Home extends Component {
           </h5>
 
           <div className="tags">
-            {categories && categories.length > 0
-              ? categories.map(cat => {
+            {tags && tags.length > 0
+              ? tags.map(tag => {
                   return (
                     <h5
-                      onClick={() =>
-                        this.props.history.push(`/productsListing/${cat.id}`)
-                      }
+                    onClick={() =>
+                      this.props.history.push({
+                        pathname: `/productsListing/${tag.id}`,
+                        state: {tagId: true}
+                    })}
                     >
-                      {cat.name}
+                      {tag.name}
                     </h5>
                   );
                 })

@@ -405,8 +405,6 @@ class Header extends Component {
               <a href="https://shopinhands.com/wp/contact-us">Contact Us</a> */}
             </div>
             <div className="navbar-center-phoneNumberbox">
-              <i className="fa fa-phone"></i>
-              <span className="text">Hotline</span>
               <span className="phone">
                 {hotlineContent && ReactHtmlParser(hotlineContent.rendered)}
               </span>

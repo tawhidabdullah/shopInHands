@@ -26,7 +26,9 @@ const ProductListing = props => {
         try {
           const products = await getApi(`/wp-json/wc/v3/products`);
           console.log('products', products);
-          setProducts(products);
+          if (products.length > 0) {
+            setProducts(products);
+          }
           setIsLoading(false);
         } catch (err) {
           console.log(err);
@@ -41,6 +43,8 @@ const ProductListing = props => {
           const products = await getApi(
             `/wp-json/wc/v3/products?category=${id}`
           );
+          console.log('products', products);
+
           if (products.length > 0) {
             setProducts(products);
           }
