@@ -121,7 +121,7 @@ export default Footer;
         </div>
         <div className="col">
           <h1>Resources</h1>
-          <ul>
+          <ul> word from home, so do you know what the 
             <li>Webmail</li>
             <li>Redeem code</li>
             <li>WHOIS lookup</li>
