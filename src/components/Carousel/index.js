@@ -11,8 +11,6 @@ function ControlledCarousel({ imagesContents }) {
     setDirection(e.direction);
   };
 
-  console.log('imagesContents', imagesContents);
-
   return (
     <Carousel activeIndex={index} direction={direction} onSelect={handleSelect}>
       {imagesContents &&
