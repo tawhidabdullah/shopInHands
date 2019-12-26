@@ -8,13 +8,10 @@ import { logoutUser } from '../../actions/authAction';
 import './Header.scss';
 import '../styles_components/searchBar.scss';
 import ReactHtmlParser from 'react-html-parser';
+import { baseApiURL } from '../../constants/variable';
 
-import {
-  addProductToCart,
-  decrementCartQuantity,
-  incrementCartQuantity,
-  removeProductToCart
-} from '../../actions';
+import { removeProductToCart } from '../../actions';
+
 import CartOverLayCartItem from './CartOverLayCartItem';
 
 class Header extends Component {
@@ -46,16 +43,21 @@ class Header extends Component {
       this.setState({
         isLoading: true
       });
-      const logoContent = await getApi(
-        '/wp-json/wp-rest-api-sidebars/v1/sidebars/logo'
+      const logoContentRes = await axios.get(
+        `${baseApiURL}/api/component/detail/name/logo`
       );
+      const logoContent = logoContentRes.data;
+      console.log('logoContent', logoContent);
+      // const logoContent = await getApi(
+      //   '/wp-json/wp-rest-api-sidebars/v1/sidebars/logo'
+      // );
 
       const topLeftContent = await getApi(
         '/wp-json/wp-rest-api-sidebars/v1/sidebars/top-left'
       );
 
       this.setState({
-        logoContent: logoContent,
+        logoContent: logoContent.items[0].img,
         isLoading: false,
         topLeftContent
       });
@@ -71,9 +73,7 @@ class Header extends Component {
         isLoading: true
       });
       // const categories = await getApi('/wp-json/wc/v3/products/categories');
-      const categoryRes = await axios.get(
-        'http://192.168.0.102:5000/api/category/list'
-      );
+      const categoryRes = await axios.get(`${baseApiURL}/api/category/list`);
 
       const categories = categoryRes.data;
 
@@ -173,7 +173,12 @@ class Header extends Component {
       topLeftContent,
       hotlineContent
     } = this.state;
-    const { isShowCartBar, categories, categorySelectValue } = this.state;
+    const {
+      isShowCartBar,
+      categories,
+      categorySelectValue,
+      logoContent
+    } = this.state;
 
     return (
       <>
@@ -212,17 +217,17 @@ class Header extends Component {
               className="navbar-center-logoBox"
               onClick={() => this.props.history.push('/')}
             >
-              {/* <img
+              <img
                 style={{
                   width: '100%',
                   height: '100%',
                   objectFit: 'contain'
                 }}
-                src={require('../../assets/logo.png')}
-                alt="get a life"
-              /> */}
+                src={`${baseApiURL}${logoContent}`}
+                alt=""
+              />
 
-              {ReactHtmlParser(this.state.logoContent.rendered)}
+              {/* {ReactHtmlParser(this.state.logoContent.rendered)} */}
             </div>
             <div className="navbar-center-categoryAndSearch">
               <div className="categoryAndSearchFeilds">
@@ -344,7 +349,7 @@ class Header extends Component {
                         <li
                           onClick={() =>
                             this.props.history.push(
-                              `/productsListing/${item.id}`
+                              `/productsListing/${item._id}`
                             )
                           }
                         >

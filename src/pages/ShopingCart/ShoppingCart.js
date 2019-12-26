@@ -4,9 +4,35 @@ import { withRouter } from 'react-router-dom';
 import { formatMoney } from '../../pipes/priceFormatter';
 import CartItem from '../../components/CartItem/CartItem';
 import { clearCart } from '../../actions/index';
+import axios from 'axios';
 import './ShoppingCart.scss';
 
 const ShoppingCart = props => {
+  const [isLoading, setIsLoading] = React.useState(false);
+  const { cartItems } = props;
+
+  const handleOrder = async () => {
+    const products = cartItems.map(item => {
+      return {
+        _id: item.id,
+        quantity: item.quantity
+      };
+    });
+    console.log('cartItems', props.cartItems);
+    setIsLoading(true);
+    try {
+      const awaitedRes = axios.post(
+        'http://192.168.0.102:5000/customer/api/order/add',
+        {
+          products
+        }
+      );
+      setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
+      console.log(err);
+    }
+  };
   return (
     <>
       <div className="container">
@@ -24,7 +50,7 @@ const ShoppingCart = props => {
           <div className="card-body">
             {props.cartItemCount ? (
               props.cartItems.map(cart => (
-                <CartItem {...cart} image={cart.images[0].src} />
+                <CartItem {...cart} image={cart.image[0]} />
               ))
             ) : (
               <h1 className="display-4 mt-5 text-center text-danger">
@@ -75,7 +101,7 @@ const ShoppingCart = props => {
                 <a
                   onClick={e => {
                     e.preventDefault();
-                    props.history.push('/checkout');
+                    handleOrder();
                   }}
                   className="btn btn-primary"
                   style={{
@@ -85,7 +111,7 @@ const ShoppingCart = props => {
                     margin: '10px 10px'
                   }}
                 >
-                  Proceed To Checkout
+                  Order
                 </a>
               </>
             ) : (

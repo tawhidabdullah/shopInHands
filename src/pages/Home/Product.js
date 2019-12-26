@@ -8,6 +8,7 @@ import {
   getWishListsAction,
   deleteWishListAction
 } from '../../actions/userAction';
+import { baseApiURL } from '../../constants/variable';
 
 const Product = ({
   product,
@@ -52,7 +53,7 @@ const Product = ({
       // }}
     >
       <div class="product-top">
-        <img src={`http://192.168.0.102:5000${image[0]}`} />
+        <img src={`${baseApiURL}${image[0]}`} />
         <div
           className="product-top-overlay"
           onClick={() => history.push(`/products/${_id}`)}

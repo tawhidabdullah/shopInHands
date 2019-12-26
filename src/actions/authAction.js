@@ -3,6 +3,7 @@
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import { postApi } from '../utilities/wooApi';
+import { baseApiURL } from '../constants/variable';
 
 // import setAuthorizationToken
 import setAuthorizationToken from '../utilities/setAuthorizationToken';
@@ -14,7 +15,7 @@ import { GET_ERRORS, SET_CURRENT_USER } from './types';
 export const registeruser = (userData, history) => async dispatch => {
   try {
     const response = await axios.post(
-      'http://192.168.0.105:5000/customer/auth/register',
+      `${baseApiURL}/customer/auth/register`,
       userData
     );
     console.log('response', response.data);
@@ -46,24 +47,30 @@ export const registeruser = (userData, history) => async dispatch => {
 // when registeruser action get's called uporer function ta fired kore
 
 // Login - Get user token //////////////////////////////////////
-export const loginUser = userData => async dispatch => {
-  try {
-    const awaitedResponse = await fetch({
-      url: 'http://192.168.0.105:5000/customer/auth/login',
-      method: 'POST',
-      credentials: true,
-      body: userData
-    });
+export const loginUser = userData => dispatch => {
+  // axios({
+  //   url: 'http://192.168.0.102:5000/customer/auth/login',
+  //   data: JSON.stringify(userData),
+  //   method: 'post',
+  //   withCredentials: true,
+  //   headers: {
+  //     'content-type': 'application/json'
+  //   }
+  // }).then(res => console.log('res', res));
 
-    const response = await awaitedResponse.json();
-    console.log('response', response);
-  } catch (err) {
-    console.log('error happend', err);
-    dispatch({
-      type: GET_ERRORS,
-      payload: err.response.data
-    });
-  }
+  fetch(`${baseApiURL}/customer/auth/login`, {
+    body: JSON.stringify(userData),
+    method: 'post',
+    credentials: 'include',
+    headers: new Headers({
+      'content-type': 'application/json'
+    })
+  }).then(res => console.log('res', res));
+
+  // dispatch({
+  //   type: GET_ERRORS,
+  //   payload: err.response.data
+  // });
 
   // postApi('/wp-json/jwt-auth/v1/token', userData, 'auth')
   //   .then(res => {

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Product from './Product';
-import { getApi } from '../../utilities/wooApi';
 import { withRouter } from 'react-router-dom';
 import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
 import Spinner from '../../components/commonFeilds/Spinner';
+import { baseApiURL } from '../../constants/variable';
 
 const responsive = {
   superLargeDesktop: {

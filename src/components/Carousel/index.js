@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import ReactHtmlParser from 'react-html-parser';
+import { baseApiURL } from '../../constants/variable';
 
 function ControlledCarousel({ imagesContents }) {
   const [index, setIndex] = useState(0);
@@ -15,29 +16,27 @@ function ControlledCarousel({ imagesContents }) {
 
   return (
     <Carousel activeIndex={index} direction={direction} onSelect={handleSelect}>
-      {imagesContents &&
+      {/* {imagesContents &&
         imagesContents.map(imgContent => {
           return (
             <Carousel.Item>
               {ReactHtmlParser(imgContent.rendered)}
             </Carousel.Item>
           );
-        })}
+        })} */}
 
-      {/* <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src={require('./item-2.jpg')}
-          alt="Second slide"
-        />
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src={require('./item-3.jpg')}
-          alt="Third slide"
-        />
-      </Carousel.Item> */}
+      {imagesContents &&
+        imagesContents.map(items => {
+          return (
+            <Carousel.Item>
+              <img
+                className="d-block w-100"
+                src={`${baseApiURL}${items.img}`}
+                alt="Second slide"
+              />
+            </Carousel.Item>
+          );
+        })}
     </Carousel>
   );
 }

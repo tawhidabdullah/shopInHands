@@ -10,6 +10,7 @@ import Spinner from '../../components/commonFeilds/Spinner';
 import Footer from '../../components/Footer/Footer';
 import ReactHtmlParser from 'react-html-parser';
 import axios from 'axios';
+import { baseApiURL } from '../../constants/variable';
 
 class Home extends Component {
   state = {
@@ -30,21 +31,27 @@ class Home extends Component {
       });
 
       // const categories = await getApi('/wp-json/wc/v3/products/categories');
-      const categoryRes = await axios.get(
-        'http://192.168.0.102:5000/api/category/list'
-      );
+      const categoryRes = await axios.get(`${baseApiURL}/api/category/list`);
 
       const categories = categoryRes.data;
 
       console.log('categories result', categories);
 
-      const sliderImageContents = await getApi(
-        '/wp-json/wp-rest-api-sidebars/v1/sidebars/slider'
+      // const sliderImageContents = await getApi(
+      //   '/wp-json/wp-rest-api-sidebars/v1/sidebars/slider'
+      // );
+
+      const imageContentRes = await axios.get(
+        `${baseApiURL}/api/component/detail/name/Slider`
       );
 
-      const sliderRight = await getApi(
-        '/wp-json/wp-rest-api-sidebars/v1/sidebars/slider-right'
+      const sliderImageContents = imageContentRes.data;
+
+      const sliderRightRes = await axios.get(
+        `${baseApiURL}/api/component/detail/name/sliderRight`
       );
+
+      const sliderRight = sliderRightRes.data;
 
       const tags = await getApi('/wp-json/wc/v3/products/tags');
 
@@ -119,26 +126,32 @@ class Home extends Component {
           <div className="row">
             <div className="col-md-9 col-sm-12 image-slider-section-carousel">
               {!isLoading && (
-                <Carousel imagesContents={sliderImageContents.widgets} />
+                <Carousel imagesContents={sliderImageContents.items} />
               )}
             </div>
             <div className="col-md-3">
               <div className="row">
                 {sliderRight &&
-                  sliderRight.widgets &&
-                  sliderRight.widgets.map((imgContent, index) => {
+                  sliderRight.items &&
+                  sliderRight.items.map((item, index) => {
                     return (
                       <div
                         className="col-md-12"
                         style={{
                           marginTop: `${
-                            index + 1 === sliderRight.widgets.length
-                              ? '25px'
-                              : ''
+                            index + 1 === sliderRight.items.length ? '25px' : ''
                           }`
                         }}
                       >
-                        {ReactHtmlParser(imgContent.rendered)}
+                        <img
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'contain'
+                          }}
+                          src={`${baseApiURL}${item.img}`}
+                          alt="Second slide"
+                        />
                       </div>
                     );
                   })}

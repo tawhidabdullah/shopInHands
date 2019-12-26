@@ -6,7 +6,8 @@ import './productListing.scss';
 import Product from '../Home/Product';
 import { getApi } from '../../utilities/wooApi';
 import 'react-input-range/lib/css/index.css';
-
+import { baseApiURL } from '../../constants/variable';
+import axios from 'axios';
 import Spinner from '../../components/commonFeilds/Spinner';
 
 const ProductListing = props => {
@@ -16,6 +17,7 @@ const ProductListing = props => {
   const [categories, setCategories] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [searchValue, setSearchValue] = React.useState('');
+
   const [value, setValue] = React.useState({ min: 2, max: 5000 });
   // const [manupulatedCategories,setManupulatedCategories] = React.useState([]);
 
@@ -24,8 +26,10 @@ const ProductListing = props => {
       const getProducts = async () => {
         setIsLoading(true);
         try {
-          const products = await getApi(`/wp-json/wc/v3/products`);
-          console.log('products', products);
+          const awaitedProducts = await axios.get(
+            `${baseApiURL}/api/product/list`
+          );
+          const products = awaitedProducts.data;
           if (products.length > 0) {
             setProducts(products);
           }
@@ -40,14 +44,14 @@ const ProductListing = props => {
       const getProducts = async () => {
         setIsLoading(true);
         try {
-          const products = await getApi(
-            `/wp-json/wc/v3/products?category=${id}`
+          const awaitedProducts = await axios.get(
+            `${baseApiURL}/api/category/detail/${id}`
           );
+          const products = awaitedProducts.data.product;
           console.log('products', products);
+          console.log('get a life bro');
 
-          if (products.length > 0) {
-            setProducts(products);
-          }
+          setProducts(products);
           setIsLoading(false);
         } catch (err) {
           setIsLoading(false);
@@ -61,20 +65,21 @@ const ProductListing = props => {
   React.useEffect(() => {
     const getCategories = async () => {
       try {
-        const awaitedCategories = await getApi(
-          '/wp-json/wc/v3/products/categories'
+        const awaitedCategories = await axios.get(
+          `${baseApiURL}/api/category/list`
         );
+
         const categories = [
           {
             name: 'All Categories',
-            id: 967021,
+            _id: 967021,
             [`isAll Categories}`]: id ? false : true
           }
         ];
-        const tempCategories = awaitedCategories.map((cat, index) => {
+        const tempCategories = awaitedCategories.data.map((cat, index) => {
           return {
             name: cat.name,
-            id: cat.id,
+            id: cat._id,
             [`is${cat.name}`]: false
           };
         });
@@ -224,7 +229,7 @@ const ProductListing = props => {
                   </ul>
                 </div>
               </div>
-{/* 
+              {/* 
               <div class="category-block">
                 <div class="product-detail">
                   <h2 class="category-title">Tags</h2>
@@ -243,7 +248,7 @@ const ProductListing = props => {
                      )
                    })} */}
 
-                    {/* <li>
+              {/* <li>
                       <input
                         class="custom-checkbox"
                         type="checkbox"
@@ -252,10 +257,9 @@ const ProductListing = props => {
                       />
                       <label>Products</label>
                     </li> */}
-                  {/* </ul>
+              {/* </ul>
                 </div>
-              </div> */} 
-
+              </div> */}
             </div>
             <div class="col-sm-9">
               <div

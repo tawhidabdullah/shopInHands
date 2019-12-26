@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { shortenTitle } from '../../pipes/shortenTitle';
 import { formatMoney } from '../../pipes/priceFormatter';
 import './CartItem.scss';
+import { baseApiURL } from '../../constants/variable';
 import {
   addProductToCart,
   decrementCartQuantity,
@@ -55,7 +56,7 @@ const CartItem = ({
       <div className="col-12 col-sm-12 col-md-2 text-center">
         <img
           className="img-responsive"
-          src={image}
+          src={`${baseApiURL}${image}`}
           style={{ height: '60%', width: '60%' }}
           alt={description}
         />
