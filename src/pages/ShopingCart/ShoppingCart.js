@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { formatMoney } from '../../pipes/priceFormatter';
 import CartItem from '../../components/CartItem/CartItem';
 import { clearCart } from '../../actions/index';
+import { baseApiURL } from '../../constants/variable';
 import axios from 'axios';
 import './ShoppingCart.scss';
 
@@ -11,28 +12,6 @@ const ShoppingCart = props => {
   const [isLoading, setIsLoading] = React.useState(false);
   const { cartItems } = props;
 
-  const handleOrder = async () => {
-    const products = cartItems.map(item => {
-      return {
-        _id: item.id,
-        quantity: item.quantity
-      };
-    });
-    console.log('cartItems', props.cartItems);
-    setIsLoading(true);
-    try {
-      const awaitedRes = axios.post(
-        'http://192.168.0.102:5000/customer/api/order/add',
-        {
-          products
-        }
-      );
-      setIsLoading(false);
-    } catch (err) {
-      setIsLoading(false);
-      console.log(err);
-    }
-  };
   return (
     <>
       <div className="container">
@@ -101,7 +80,7 @@ const ShoppingCart = props => {
                 <a
                   onClick={e => {
                     e.preventDefault();
-                    handleOrder();
+                    props.history.push('/checkout');
                   }}
                   className="btn btn-primary"
                   style={{
@@ -111,7 +90,7 @@ const ShoppingCart = props => {
                     margin: '10px 10px'
                   }}
                 >
-                  Order
+                  checkout
                 </a>
               </>
             ) : (

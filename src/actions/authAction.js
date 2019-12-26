@@ -48,16 +48,6 @@ export const registeruser = (userData, history) => async dispatch => {
 
 // Login - Get user token //////////////////////////////////////
 export const loginUser = userData => dispatch => {
-  // axios({
-  //   url: 'http://192.168.0.102:5000/customer/auth/login',
-  //   data: JSON.stringify(userData),
-  //   method: 'post',
-  //   withCredentials: true,
-  //   headers: {
-  //     'content-type': 'application/json'
-  //   }
-  // }).then(res => console.log('res', res));
-
   fetch(`${baseApiURL}/customer/auth/login`, {
     body: JSON.stringify(userData),
     method: 'post',
@@ -65,7 +55,12 @@ export const loginUser = userData => dispatch => {
     headers: new Headers({
       'content-type': 'application/json'
     })
-  }).then(res => console.log('res', res));
+  })
+    .then(res => res.json())
+    .then(res => {
+      document.cookie = res.cookie;
+    })
+    .catch(err => console.log(err));
 
   // dispatch({
   //   type: GET_ERRORS,

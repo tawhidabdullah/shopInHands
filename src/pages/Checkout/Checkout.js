@@ -1,8 +1,10 @@
 import React from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { postApi, getApi } from '../../utilities/wooApi';
+import axios from 'axios';
+import { baseApiURL } from '../../constants/variable';
 import { useAlert } from 'react-alert';
 import './checkout.scss';
 
@@ -10,6 +12,11 @@ const Checkout = props => {
   const [selectedPaymentGateway, setSelectedPaymentGateway] = React.useState(
     'cod'
   );
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [isOrderError, setIsOrderError] = React.useState(false);
+  const [isOrderSuccess, setisOrderSuccess] = React.useState(false);
+  const [productErrorText, setProductErrorText] = React.useState('');
+
   const [senderBkashNumbr, setSenderBkashNumbr] = React.useState('');
   const [senderTransactionId, setSenderTransactionId] = React.useState('');
   const [ourWpNumber, setOurWpNumber] = React.useState('');
@@ -24,7 +31,8 @@ const Checkout = props => {
     postcode: '',
     country: '',
     email: '',
-    phone: ''
+    phone: '',
+    address: ''
   });
 
   const [isShowBkashFeilds, setIsShowBkashFeilds] = React.useState(false);
@@ -39,10 +47,12 @@ const Checkout = props => {
     postcode: '',
     country: '',
     email: '',
-    phone: ''
+    phone: '',
+    address: ''
   });
 
   const alert = useAlert();
+  const { cartItems } = props;
 
   const handleFieldsChange = e => {
     setfields({
@@ -95,12 +105,11 @@ const Checkout = props => {
     };
 
     try {
-      const successOrderResponse = await postApi(
-        `/wp-json/wc/v3/orders`,
-        orderData
-      );
-
-      console.log('successOrderrestponse', successOrderResponse);
+      // const successOrderResponse = await postApi(
+      //   `/wp-json/wc/v3/orders`,
+      //   orderData
+      // );
+      // console.log('successOrderrestponse', successOrderResponse);
       // alert.show('Your Order Has Been Created SuccessFully');
     } catch (err) {
       alert.show('Something Went Wrong Went Creating The Order');
@@ -140,11 +149,76 @@ const Checkout = props => {
     setIsShowBkashFeilds(isShow => !isShow);
   };
 
+  const handleOrder = async () => {
+    const products = cartItems.map(item => {
+      return {
+        id: item._id,
+        quantity: item.quantity
+      };
+    });
+
+    const orderSchema = {
+      products: products,
+      address: fields.address
+    };
+
+    console.log('orderschema', orderSchema);
+    setisOrderSuccess(false);
+    setIsOrderError(false);
+    setIsLoading(true);
+    seterrors({
+      ...errors,
+      address: ''
+    });
+    try {
+      const awaitedRes = await axios({
+        url: `${baseApiURL}/customer/api/order/add`,
+        method: 'post',
+        data: orderSchema,
+        headers: {
+          'content-type': 'application/json'
+        },
+        withCredentials: true
+      });
+
+      console.log('awaitedRes', await awaitedRes.data);
+      setIsLoading(false);
+      setisOrderSuccess(true);
+      setIsOrderError(false);
+    } catch (err) {
+      setIsLoading(false);
+      setIsOrderError(true);
+      setisOrderSuccess(false);
+
+      console.log(err.response.data);
+      if (err.response.data && err.response.data.address)
+        seterrors({
+          ...errors,
+          address: err.response.data.address
+        });
+
+      if (err.response.data && err.response.data.products) {
+        setProductErrorText(err.response.data.products);
+      }
+    }
+  };
+
   return (
     <div className="checkout">
       <div className="container">
         <div className="row">
           <div className="col-md-7">
+            {isOrderSuccess ? (
+              <Alert variant={'success'}>Order Created Successfully</Alert>
+            ) : (
+              ''
+            )}
+
+            {productErrorText && isOrderError ? (
+              <Alert variant={'danger'}>{productErrorText}</Alert>
+            ) : (
+              ''
+            )}
             <h2 className="shipping-heading">shipping Address</h2>
             <div className="shipping-fields">
               <Form onSubmit={onOrderSubmit}>
@@ -154,20 +228,20 @@ const Checkout = props => {
                       marginBottom: '10px'
                     }}
                   >
-                    Email address
+                    Shipping Address
                   </Form.Label>
                   <Form.Control
-                    name="email"
-                    type="email"
-                    placeholder="Enter email"
+                    name="address"
+                    type="text"
+                    placeholder="Shipping Address"
                     onChange={handleFieldsChange}
                   />
-                  <Form.Text className="text-muted text-danger">
-                    {errors.email && errors.email}
+                  <Form.Text className="text-danger">
+                    {errors.address && errors.address}
                   </Form.Text>
                 </Form.Group>
 
-                <Form.Group controlId="formBasicPhone">
+                {/* <Form.Group controlId="formBasicPhone">
                   <Form.Label
                     style={{
                       marginBottom: '10px'
@@ -342,7 +416,7 @@ const Checkout = props => {
                   <Form.Text className="text-muted text-danger">
                     {errors.country && errors.country}
                   </Form.Text>
-                </Form.Group>
+                </Form.Group> */}
 
                 <Button
                   variant="primary"
@@ -351,8 +425,9 @@ const Checkout = props => {
                     background: '#0000FE',
                     borderColor: '#fff'
                   }}
+                  onClick={() => handleOrder()}
                 >
-                  Save
+                  Order
                 </Button>
               </Form>
             </div>
@@ -367,7 +442,7 @@ const Checkout = props => {
                     <span>৳{props.totalPrice}</span>
                   </div>
                 </div>
-                <div className="order-summary">
+                {/* <div className="order-summary">
                   <h2>Place Order</h2>
                   <div className="mt-3 mb-3">
                     <form>
@@ -458,7 +533,7 @@ const Checkout = props => {
                   >
                     Place Order
                   </Button>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
