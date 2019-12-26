@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { formatMoney } from '../../pipes/priceFormatter';
 import CartItem from '../../components/CartItem/CartItem';
 import { clearCart } from '../../actions/index';
 import { baseApiURL } from '../../constants/variable';
+import { Modal, Button } from 'react-bootstrap';
+
 import axios from 'axios';
 import './ShoppingCart.scss';
 
@@ -12,8 +14,33 @@ const ShoppingCart = props => {
   const [isLoading, setIsLoading] = React.useState(false);
   const { cartItems } = props;
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => {
+    props.history.push('/login');
+    setShow(false);
+  };
+  const handleShow = () => setShow(true);
+  const { auth, isAuthenticate } = props.auth;
+
   return (
     <>
+      <Modal show={show} onHide={handleClose} animation={false}>
+        <Modal.Header closeButton>
+          <Modal.Title>You are not Authenticated </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          In Order to Order any Product You have to be Logged In
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Login
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Cancel
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <div className="container">
         <div className="card shopping-cart">
           <div
@@ -80,7 +107,10 @@ const ShoppingCart = props => {
                 <a
                   onClick={e => {
                     e.preventDefault();
-                    props.history.push('/checkout');
+
+                    if (isAuthenticate) {
+                      props.history.push('/checkout');
+                    } else handleShow();
                   }}
                   className="btn btn-primary"
                   style={{
@@ -133,6 +163,7 @@ const mapStateToProps = state => {
   console.log(state, 'state has changed');
 
   return {
+    auth: state.auth,
     cartItems: state.shop.cart,
     cartItemCount: state.shop.cart.reduce((count, curItem) => {
       return count + curItem.quantity;

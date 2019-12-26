@@ -59,8 +59,24 @@ export const loginUser = userData => dispatch => {
     .then(res => res.json())
     .then(res => {
       document.cookie = res.cookie;
+      axios({
+        url: `${baseApiURL}/customer/api/detail`,
+        method: 'get',
+        withCredentials: true
+      })
+        .then(res => {
+          dispatch(setCurrentUser(res.data));
+        })
+        .catch(err =>
+          console.log('something went wrong when fetching the user data', err)
+        );
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
 
   // dispatch({
   //   type: GET_ERRORS,
@@ -101,8 +117,22 @@ export const loginUser = userData => dispatch => {
 
 // Log out User
 
+export const getCurrentUser = () => dispatch => {
+  axios({
+    url: `${baseApiURL}/customer/api/detail`,
+    method: 'get',
+    withCredentials: true
+  })
+    .then(res => {
+      dispatch(setCurrentUser(res.data));
+    })
+    .catch(err =>
+      console.log('something went wrong when fetching the user data', err)
+    );
+};
+
 export const logoutUser = () => dispatch => {
-  localStorage.removeItem('jwttoken'); // remove the token from localStorage
+  document.cookie = ''; // remove the token from localStorage
   setAuthorizationToken(false); // remove Authorization header
   //set currentUser to empty object=>which will set isAuthenticate to false
   dispatch(setCurrentUser({}));

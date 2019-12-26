@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import ReactHtmlParser from 'react-html-parser';
 import { baseApiURL } from '../../constants/variable';
 
 function ControlledCarousel({ imagesContents }) {
@@ -16,21 +15,15 @@ function ControlledCarousel({ imagesContents }) {
 
   return (
     <Carousel activeIndex={index} direction={direction} onSelect={handleSelect}>
-      {/* {imagesContents &&
-        imagesContents.map(imgContent => {
-          return (
-            <Carousel.Item>
-              {ReactHtmlParser(imgContent.rendered)}
-            </Carousel.Item>
-          );
-        })} */}
-
       {imagesContents &&
         imagesContents.map(items => {
           return (
             <Carousel.Item>
               <img
                 className="d-block w-100"
+                style={{
+                  height: '70vh'
+                }}
                 src={`${baseApiURL}${items.img}`}
                 alt="Second slide"
               />

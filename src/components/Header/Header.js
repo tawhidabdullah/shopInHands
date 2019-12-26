@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { NavLink, Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { getApi } from '../../utilities/wooApi';
-import { logoutUser } from '../../actions/authAction';
+import { logoutUser, getCurrentUser } from '../../actions/authAction';
 import './Header.scss';
 import '../styles_components/searchBar.scss';
 import ReactHtmlParser from 'react-html-parser';
@@ -39,6 +39,7 @@ class Header extends Component {
   };
 
   async componentDidMount() {
+    this.props.getCurrentUser();
     try {
       this.setState({
         isLoading: true
@@ -47,7 +48,6 @@ class Header extends Component {
         `${baseApiURL}/api/component/detail/name/logo`
       );
       const logoContent = logoContentRes.data;
-      console.log('logoContent', logoContent);
       // const logoContent = await getApi(
       //   '/wp-json/wp-rest-api-sidebars/v1/sidebars/logo'
       // );
@@ -128,7 +128,6 @@ class Header extends Component {
         '/wp-json/wp-rest-api-sidebars/v1/sidebars/hotline'
       );
 
-      console.log('hotline', hotlineContent);
       this.setState({
         hotlineContent: hotlineContent,
         isLoading: false
@@ -193,16 +192,23 @@ class Header extends Component {
             </p> */}
           </div>
           <div className="trackorderandauthlinks">
-            <p>
-              <i className="fa fa-user"></i>
-              <span onClick={() => this.props.history.push('/login')}>
-                Login
-              </span>{' '}
-              or{' '}
-              <span onClick={() => this.props.history.push('/register')}>
-                Register
-              </span>
-            </p>
+            {(isAuthenticate && user && (
+              <p>
+                <i className="fa fa-user"></i>
+                <span onClick={() => this.props.logoutUser()}>Logout</span>{' '}
+              </p>
+            )) || (
+              <p>
+                <i className="fa fa-user"></i>
+                <span onClick={() => this.props.history.push('/login')}>
+                  Login
+                </span>{' '}
+                or{' '}
+                <span onClick={() => this.props.history.push('/register')}>
+                  Register
+                </span>
+              </p>
+            )}
           </div>
         </div>
 
@@ -494,9 +500,9 @@ class Header extends Component {
 
 const mapStateToProps = state => {
   return {
+    auth: state.auth,
     cartLength: state.shop.cart.length,
     cartItems: state.shop.cart,
-    auth: state.auth,
     category: state.category,
     totalPrice: state.shop.cart.reduce((count, curItem) => {
       return count + curItem.price * curItem.quantity;
@@ -504,6 +510,8 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { logoutUser, removeProductToCart })(
-  withRouter(Header)
-);
+export default connect(mapStateToProps, {
+  logoutUser,
+  removeProductToCart,
+  getCurrentUser
+})(withRouter(Header));

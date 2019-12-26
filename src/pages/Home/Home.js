@@ -8,7 +8,6 @@ import './Home.scss';
 import { withRouter } from 'react-router-dom';
 import Spinner from '../../components/commonFeilds/Spinner';
 import Footer from '../../components/Footer/Footer';
-import ReactHtmlParser from 'react-html-parser';
 import axios from 'axios';
 import { baseApiURL } from '../../constants/variable';
 
