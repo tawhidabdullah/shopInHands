@@ -28,7 +28,7 @@ const CartOverLayCartItem = ({
     }
   };
 
-  const { images, id, name, price, history, quantity } = cartItem;
+  const { image, id, name, price, history, quantity } = cartItem;
   return (
     <div className="cart-item">
       <img
@@ -36,7 +36,7 @@ const CartOverLayCartItem = ({
           handleToggleCartBar();
           history.push(`/products/${id}`);
         }}
-        src={images[0].src}
+        src={`http://192.168.0.102:5000${image[0]}`}
         alt="productImg"
       />
       <div className="">

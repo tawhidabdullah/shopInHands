@@ -50,45 +50,58 @@ class ProductDetail extends Component {
     });
   };
 
-  getProductsAndRelatedProducts = id => {
-    getApi(`/wp-json/wc/v3/products/${id}`)
-      .then(product => {
-        this.setState({
-          product
-        });
+  getProductsAndRelatedProducts = async id => {
+    const productRes = await axios.get(
+      `http://192.168.0.102:5000/api/product/detail/${id}`
+    );
 
-        const productRelatedIds = product && product.related_ids;
-        const auth = new Buffer(
-          apiConfig.consumerKey + ':' + apiConfig.consumerSecret
-        ).toString('base64');
+    const product = productRes.data;
 
-        axios
-          .all(
-            productRelatedIds.map(id =>
-              axios({
-                url: `https://shopinhands.com/wp/wp-json/wc/v3/products/${id}`,
-                method: 'GET',
-                headers: {
-                  Authorization: `Basic ${auth}`,
-                  'Content-Type': 'application/json'
-                }
-              })
-            )
-          )
-          .then(responseArr => {
-            //this will be executed only when all requests are complete
-            const relatedProducts = responseArr.map(responseItem => {
-              return responseItem.data;
-            });
-            console.log('responseArr', responseArr);
-            this.setState({
-              relatedProducts
-            });
-          });
-      })
-      .catch(err => {
-        console.log('something went wrong when retreving the product');
-      });
+    console.log('productDetail', product);
+
+    this.setState({
+      ...this.state,
+      product
+    });
+
+    // getApi(`/wp-json/wc/v3/products/${id}`)
+    //   .then(product => {
+    //     this.setState({
+    //       product
+    //     });
+
+    //     const productRelatedIds = product && product.related_ids;
+    //     const auth = new Buffer(
+    //       apiConfig.consumerKey + ':' + apiConfig.consumerSecret
+    //     ).toString('base64');
+
+    //     axios
+    //       .all(
+    //         productRelatedIds.map(id =>
+    //           axios({
+    //             url: `https://shopinhands.com/wp/wp-json/wc/v3/products/${id}`,
+    //             method: 'GET',
+    //             headers: {
+    //               Authorization: `Basic ${auth}`,
+    //               'Content-Type': 'application/json'
+    //             }
+    //           })
+    //         )
+    //       )
+    //       .then(responseArr => {
+    //         //this will be executed only when all requests are complete
+    //         const relatedProducts = responseArr.map(responseItem => {
+    //           return responseItem.data;
+    //         });
+    //         console.log('responseArr', responseArr);
+    //         this.setState({
+    //           relatedProducts
+    //         });
+    //       });
+    //   })
+    //   .catch(err => {
+    //     console.log('something went wrong when retreving the product');
+    //   });
   };
 
   componentDidMount() {
@@ -127,7 +140,6 @@ class ProductDetail extends Component {
 
     let ProductDetailContent = <Spinner />;
     if (product && Object.keys(product).length > 0) {
-      const { images, id } = product;
       ProductDetailContent = (
         <>
           <ProductDetailComponent {...this.props} product={product} />
@@ -183,7 +195,7 @@ class ProductDetail extends Component {
                       <div class="block-title">
                         <span>Best Sellers</span>
                       </div>
-                      <div class="small-products-items">
+                      {/* <div class="small-products-items">
                         {(this.state.relatedProducts &&
                           this.state.relatedProducts.map(item => {
                             return (
@@ -203,31 +215,6 @@ class ProductDetail extends Component {
                                   />
                                 </div>
                                 <div class="small-product-info">
-                                  {/* <div class="small-product-reviews-summary">
-                                    <h3 class="small-rating-summary">
-                                      <i
-                                        class="fa fa-star"
-                                        aria-hidden="true"
-                                      ></i>
-                                      <i
-                                        class="fa fa-star"
-                                        aria-hidden="true"
-                                      ></i>
-                                      <i
-                                        class="fa fa-star"
-                                        aria-hidden="true"
-                                      ></i>
-                                      <i
-                                        class="fa fa-star-half-o"
-                                        aria-hidden="true"
-                                      ></i>
-                                      <i
-                                        class="fa fa-star-o"
-                                        aria-hidden="true"
-                                      ></i>
-                                    </h3>
-                                  </div> */}
-
                                   <h2 class="small-product-title">
                                     ৳{item.price}
                                   </h2>
@@ -238,106 +225,9 @@ class ProductDetail extends Component {
                               </div>
                             );
                           })) || <Spinner />}
-                      </div>
+                      </div> */}
                     </div>
-                    {/* <ul>
-                      <li>
-                        <div class="service-content">
-                          <div class="service-icon">
-                            <i class="fa fa-truck"></i>
-                          </div>
-                          <div class="service-info">
-                            <h4>Free Delivery</h4>
-                            <p>From $59.89</p>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="service-content">
-                          <div class="service-icon">
-                            <i class="fa fa-truck"></i>
-                          </div>
-                          <div class="service-info">
-                            <h4>Free Delivery</h4>
-                            <p>From ৳59.89</p>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="service-content">
-                          <div class="service-icon">
-                            <i class="fa fa-truck"></i>
-                          </div>
-                          <div class="service-info">
-                            <h4>Free Delivery</h4>
-                            <p>From ৳59.89</p>
-                          </div>
-                        </div>
-                      </li>
-                    </ul> */}
                   </div>
-
-                  {/* <div class="small__filterProducts">
-                    <div class="block-title">
-                      <span>Best Sellers</span>
-                    </div>
-                    <div class="small-products-items">
-                      {(this.state.relatedProducts &&
-                        this.state.relatedProducts.map(item => {
-                          return (
-                            <div class="small-product-item">
-                              <div
-                                class="small-product-item-box-img"
-                                onClick={() => {
-                                  this.props.history.push(
-                                    `/products/${item.id}`
-                                  );
-                                }}
-                              >
-                                <img
-                                  src={item.images[0].src}
-                                  class="product photo product-item-photo"
-                                  alt=""
-                                />
-                              </div>
-                              <div class="small-product-info">
-                                <div class="small-product-reviews-summary">
-                                  <h3 class="small-rating-summary">
-                                    <i
-                                      class="fa fa-star"
-                                      aria-hidden="true"
-                                    ></i>
-                                    <i
-                                      class="fa fa-star"
-                                      aria-hidden="true"
-                                    ></i>
-                                    <i
-                                      class="fa fa-star"
-                                      aria-hidden="true"
-                                    ></i>
-                                    <i
-                                      class="fa fa-star-half-o"
-                                      aria-hidden="true"
-                                    ></i>
-                                    <i
-                                      class="fa fa-star-o"
-                                      aria-hidden="true"
-                                    ></i>
-                                  </h3>
-                                </div>
-
-                                <h2 class="small-product-title">
-                                  ৳{item.price}
-                                </h2>
-                                <h2 class="small-product-price">
-                                  ৳{item.regular_price}
-                                </h2>
-                              </div>
-                            </div>
-                          );
-                        })) || <Spinner />}
-                    </div>
-                  </div> */}
                 </div>
               </div>
             </div>

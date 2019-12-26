@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Spinner from '../commonFeilds/Spinner';
 import { connect } from 'react-redux';
 import { NavLink, Link, withRouter } from 'react-router-dom';
+import axios from 'axios';
 import { getApi } from '../../utilities/wooApi';
 import { logoutUser } from '../../actions/authAction';
 import './Header.scss';
@@ -69,7 +70,13 @@ class Header extends Component {
       this.setState({
         isLoading: true
       });
-      const categories = await getApi('/wp-json/wc/v3/products/categories');
+      // const categories = await getApi('/wp-json/wc/v3/products/categories');
+      const categoryRes = await axios.get(
+        'http://192.168.0.102:5000/api/category/list'
+      );
+
+      const categories = categoryRes.data;
+
       this.setState({
         categories: categories,
         isLoading: false

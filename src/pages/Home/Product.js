@@ -17,7 +17,7 @@ const Product = ({
   cartItems,
   removeProductToCart
 }) => {
-  const { name, price, image, id } = product;
+  const { name, price, image, _id } = product;
   console.log('images', image);
 
   console.log('iam here');
@@ -25,7 +25,7 @@ const Product = ({
 
   const AddCartContent = () => {
     if (cartItems && cartItems.length > 0) {
-      const isItemExistInCart = cartItems.find(item => item.id === id);
+      const isItemExistInCart = cartItems.find(item => item._id === _id);
       if (isItemExistInCart) {
         return 'Added';
       } else return 'Add To Cart';
@@ -36,9 +36,9 @@ const Product = ({
 
   const handleCartAction = () => {
     if (cartItems && cartItems.length > 0) {
-      const isItemExistInCart = cartItems.find(item => item.id === id);
+      const isItemExistInCart = cartItems.find(item => item._id === _id);
       if (isItemExistInCart) {
-        removeProductToCart(id);
+        removeProductToCart(_id);
       } else addProductToCart({ ...product });
     } else {
       return addProductToCart({ ...product });
@@ -55,11 +55,11 @@ const Product = ({
         <img src={`http://192.168.0.102:5000${image[0]}`} />
         <div
           className="product-top-overlay"
-          onClick={() => history.push(`/products/${id}`)}
+          onClick={() => history.push(`/products/${_id}`)}
         ></div>
 
         <div class="overlay-right">
-          <Link to={`/products/${id}`} className="product__link">
+          <Link to={`/products/${_id}`} className="product__link">
             <button type="button" class="btn btn-secondary" title="Quick Shop">
               <i class="fa fa-eye"></i>
             </button>

@@ -5,24 +5,11 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
 
 const ProductDetail = props => {
-  const {
-    name,
-    price,
-    description,
-    sale_price,
-    images,
-    regular_price
-  } = props.product;
+  const { name, price, description, image, offerPrice } = props.product;
 
   const onCart = e => {
     e.preventDefault();
     props.dispatch(addProductToCart(props.product));
-  };
-
-  const strip_html_tags = str => {
-    if (str === null || str === '') return false;
-    else str = str.toString();
-    return str.replace(/<[^>]*>/g, '');
   };
 
   return (
@@ -30,7 +17,7 @@ const ProductDetail = props => {
       <div class="col-md-6">
         <Carousel>
           <div>
-            <img src={images[0].src} />
+            <img src={`http://192.168.0.102:5000${image[0]}`} />
           </div>
         </Carousel>
       </div>
@@ -54,8 +41,8 @@ const ProductDetail = props => {
             </div>
 
             <div class="product-price-box">
-              <h2 class="special-price">৳{price}</h2>
-              <h2 class="old-price">৳{regular_price}</h2>
+              <h2 class="special-price">৳{offerPrice}</h2>
+              <h2 class="old-price">৳{price}</h2>
             </div>
           </div>
           <div class="product-options-bottom">
@@ -69,9 +56,9 @@ const ProductDetail = props => {
             </div>
           </div>
 
-          <div class="product-description">
+          {/* <div class="product-description">
             <p>{strip_html_tags(description)}</p>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
