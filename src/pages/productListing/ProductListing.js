@@ -12,6 +12,7 @@ import Spinner from '../../components/commonFeilds/Spinner';
 
 const ProductListing = props => {
   const id = props.match.params.id;
+  console.log('propspropspropsprops', props.location.state);
 
   const [products, setProducts] = React.useState([]);
   const [categories, setCategories] = React.useState([]);
@@ -44,15 +45,29 @@ const ProductListing = props => {
       const getProducts = async () => {
         setIsLoading(true);
         try {
-          const awaitedProducts = await axios.get(
-            `${baseApiURL}/api/category/detail/${id}`
-          );
-          const products = awaitedProducts.data.product;
-          console.log('products', products);
-          console.log('get a life bro');
+          if (props.location.state && props.location.state.tagId) {
+            const awaitedProducts = await axios.get(
+              `${baseApiURL}/api/tag/detail/${id}`
+            );
+            const products = awaitedProducts.data.product;
 
-          setProducts(products);
-          setIsLoading(false);
+            console.log('products', products);
+            console.log('get a life bro');
+
+            setProducts(products);
+            setIsLoading(false);
+          } else {
+            const awaitedProducts = await axios.get(
+              `${baseApiURL}/api/category/detail/${id}`
+            );
+            const products = awaitedProducts.data.product;
+
+            console.log('products', products);
+            console.log('get a life bro');
+
+            setProducts(products);
+            setIsLoading(false);
+          }
         } catch (err) {
           setIsLoading(false);
           console.log(err);

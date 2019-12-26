@@ -133,9 +133,18 @@ export const getCurrentUser = () => dispatch => {
 
 export const logoutUser = () => dispatch => {
   document.cookie = ''; // remove the token from localStorage
-  setAuthorizationToken(false); // remove Authorization header
   //set currentUser to empty object=>which will set isAuthenticate to false
-  dispatch(setCurrentUser({}));
+  axios({
+    url: `${baseApiURL}/customer/auth/logout`,
+    method: 'get',
+    withCredentials: true
+  })
+    .then(res => {
+      dispatch(setCurrentUser({}));
+    })
+    .catch(err =>
+      console.log('something went wrong when fetching the user data', err)
+    );
 };
 
 export const setCurrentUser = decoded => {

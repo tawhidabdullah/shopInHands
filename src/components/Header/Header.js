@@ -211,7 +211,6 @@ class Header extends Component {
             )}
           </div>
         </div>
-
         <div
           className="navbar"
           style={{

@@ -15,7 +15,7 @@ class Login extends Component {
 
   componentDidMount() {
     if (this.props.auth.isAuthenticate) {
-      this.props.history.push('/dashboard');
+      // this.props.history.push('/dashboard');
       // do this when the this file means login components just mounted ,
       // then check with the help of redux that is authenticated is true
       // of not if true then =>> give redirect to dashboard

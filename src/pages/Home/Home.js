@@ -52,7 +52,9 @@ class Home extends Component {
 
       const sliderRight = sliderRightRes.data;
 
-      const tags = await getApi('/wp-json/wc/v3/products/tags');
+      const tagRes = await axios.get(`${baseApiURL}/api/tag/list`);
+
+      const tags = tagRes.data;
 
       this.setState({
         ...this.state,
@@ -109,7 +111,7 @@ class Home extends Component {
                     <h5
                       onClick={() =>
                         this.props.history.push({
-                          pathname: `/productsListing/${tag.id}`,
+                          pathname: `/productsListing/${tag._id}`,
                           state: { tagId: true }
                         })
                       }
