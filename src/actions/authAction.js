@@ -58,7 +58,6 @@ export const loginUser = userData => dispatch => {
   })
     .then(res => res.json())
     .then(res => {
-      document.cookie = res.cookie;
       axios({
         url: `${baseApiURL}/customer/api/detail`,
         method: 'get',
