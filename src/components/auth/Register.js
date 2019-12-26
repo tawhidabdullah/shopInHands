@@ -11,9 +11,12 @@ import { registeruser } from '../../actions/authAction';
 
 class Register extends Component {
   state = {
-    username: '',
+    name: '',
     email: '',
     password: '',
+    password2: '',
+    phone: '',
+    address: '',
     errors: {}
   };
 
@@ -46,12 +49,15 @@ class Register extends Component {
   onSubmit = e => {
     e.preventDefault();
     const newUser = {
-      username: this.state.username,
+      name: this.state.name,
       email: this.state.email,
       password: this.state.password,
-      errors: {}
+      password2: this.state.password2,
+      phone: this.state.phone,
+      address: this.state.address
     };
 
+    console.log('new user data', newUser);
     // this is when action get's fired
     this.props.registeruser(newUser, this.props.history); // passing user object to action
 
@@ -71,12 +77,12 @@ class Register extends Component {
               <p className="lead text-center">Create your account</p>
               <form noValidate onSubmit={this.onSubmit}>
                 <TextFeildGroup
-                  name="username"
-                  placeholder="username"
+                  name="name"
+                  placeholder="name"
                   type="text"
-                  value={this.state.username}
+                  value={this.state.name}
                   onChange={this.onChange}
-                  errors={errors.username}
+                  errors={errors.name}
                 />
 
                 <TextFeildGroup
@@ -95,6 +101,33 @@ class Register extends Component {
                   value={this.state.password}
                   onChange={this.onChange}
                   errors={errors.password}
+                />
+
+                <TextFeildGroup
+                  name="password2"
+                  placeholder="Confirm Password"
+                  type="password"
+                  value={this.state.password2}
+                  onChange={this.onChange}
+                  errors={errors.password2}
+                />
+
+                <TextFeildGroup
+                  name="phone"
+                  placeholder="Phone No"
+                  type="text"
+                  value={this.state.phone}
+                  onChange={this.onChange}
+                  errors={errors.phone}
+                />
+
+                <TextFeildGroup
+                  name="address"
+                  placeholder="Address"
+                  type="text"
+                  value={this.state.address}
+                  onChange={this.onChange}
+                  errors={errors.address}
                 />
 
                 <div className="form">

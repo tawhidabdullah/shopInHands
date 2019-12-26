@@ -45,9 +45,7 @@ class Login extends Component {
     e.preventDefault();
     const userData = {
       username: this.state.username,
-      email: this.state.email,
-      password: this.state.password,
-      errors: {}
+      password: this.state.password
     };
 
     console.log(userData); // print on console the userData
@@ -72,20 +70,11 @@ class Login extends Component {
               <form onSubmit={this.onSubmit}>
                 <TextFeildGroup
                   name="username"
-                  placeholder="Username"
+                  placeholder="phone or email"
                   type="username"
                   value={this.state.username}
                   onChange={this.onChange}
                   errors={errors.username}
-                />
-
-                <TextFeildGroup
-                  name="email"
-                  placeholder="Email"
-                  type="email"
-                  value={this.state.email}
-                  onChange={this.onChange}
-                  errors={errors.email}
                 />
 
                 <TextFeildGroup

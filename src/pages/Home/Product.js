@@ -17,12 +17,11 @@ const Product = ({
   cartItems,
   removeProductToCart
 }) => {
-  const { name, price, images, id } = product;
-  console.log('images',images); 
+  const { name, price, image, id } = product;
+  console.log('images', image);
 
-
-  console.log('iam here'); 
-  console.log('productName',name); 
+  console.log('iam here');
+  console.log('productName', name);
 
   const AddCartContent = () => {
     if (cartItems && cartItems.length > 0) {
@@ -53,7 +52,7 @@ const Product = ({
       // }}
     >
       <div class="product-top">
-        <img src={images.length > 0 && images[0].src} />
+        <img src={`http://192.168.0.102:5000${image[0]}`} />
         <div
           className="product-top-overlay"
           onClick={() => history.push(`/products/${id}`)}

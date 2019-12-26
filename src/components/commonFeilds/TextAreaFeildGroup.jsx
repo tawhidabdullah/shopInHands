@@ -1,7 +1,6 @@
-import React from "react";
-import classnames from "classnames";
-import "../../components/styles_components/TextAreaFeildGroup.scss";
-
+import React from 'react';
+import classnames from 'classnames';
+import '../../components/styles_components/TextAreaFeildGroup.scss';
 
 const TextAreaFeildGroup = ({
   // props descructuring
@@ -15,8 +14,8 @@ const TextAreaFeildGroup = ({
   return (
     <div className="form">
       <textarea
-        className={classnames("form-control form-control-lg", {
-          "is-invalid": errors
+        className={classnames('form-control form-control-lg', {
+          'is-invalid': errors
         })}
         placeholder={placeholder}
         name={name}

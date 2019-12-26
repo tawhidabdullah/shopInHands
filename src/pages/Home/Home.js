@@ -9,6 +9,7 @@ import { withRouter } from 'react-router-dom';
 import Spinner from '../../components/commonFeilds/Spinner';
 import Footer from '../../components/Footer/Footer';
 import ReactHtmlParser from 'react-html-parser';
+import axios from 'axios';
 
 class Home extends Component {
   state = {
@@ -28,7 +29,14 @@ class Home extends Component {
         isLoading: true
       });
 
-      const categories = await getApi('/wp-json/wc/v3/products/categories');
+      // const categories = await getApi('/wp-json/wc/v3/products/categories');
+      const categoryRes = await axios.get(
+        'http://192.168.0.102:5000/api/category/list'
+      );
+
+      const categories = categoryRes.data;
+
+      console.log('categories result', categories);
 
       const sliderImageContents = await getApi(
         '/wp-json/wp-rest-api-sidebars/v1/sidebars/slider'
@@ -38,8 +46,7 @@ class Home extends Component {
         '/wp-json/wp-rest-api-sidebars/v1/sidebars/slider-right'
       );
 
-
-      const tags = await getApi('/wp-json/wc/v3/products/tags'); 
+      const tags = await getApi('/wp-json/wc/v3/products/tags');
 
       this.setState({
         ...this.state,
@@ -94,11 +101,12 @@ class Home extends Component {
               ? tags.map(tag => {
                   return (
                     <h5
-                    onClick={() =>
-                      this.props.history.push({
-                        pathname: `/productsListing/${tag.id}`,
-                        state: {tagId: true}
-                    })}
+                      onClick={() =>
+                        this.props.history.push({
+                          pathname: `/productsListing/${tag.id}`,
+                          state: { tagId: true }
+                        })
+                      }
                     >
                       {tag.name}
                     </h5>
@@ -144,12 +152,18 @@ class Home extends Component {
             <ProductList />
           </div> */}
 
-        {categories.length > 0 ? (
+        {categories && categories.length > 0 ? (
           <>
             {categories.map(cat => {
               if (cat.name === 'Uncategorized') {
               } else {
-                return <Products categoryId={cat.id} categoryName={cat.name} />;
+                return (
+                  <Products
+                    categoryId={cat.id}
+                    categoryName={cat.name}
+                    products={cat.product}
+                  />
+                );
               }
             })}
             <Footer />
