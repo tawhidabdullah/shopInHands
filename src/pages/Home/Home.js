@@ -52,6 +52,8 @@ class Home extends Component {
 
       const sliderRight = sliderRightRes.data;
 
+      console.log('sliderright', sliderRight);
+
       const tagRes = await axios.get(`${baseApiURL}/api/tag/list`);
 
       const tags = tagRes.data;
@@ -144,15 +146,17 @@ class Home extends Component {
                           }`
                         }}
                       >
-                        <img
-                          style={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'contain'
-                          }}
-                          src={`${baseApiURL}${item.img}`}
-                          alt="Second slide"
-                        />
+                        <a href={`${item.a}`}>
+                          <img
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                              objectFit: 'contain'
+                            }}
+                            src={`${baseApiURL}${item.img}`}
+                            alt="Second slide"
+                          />
+                        </a>
                       </div>
                     );
                   })}

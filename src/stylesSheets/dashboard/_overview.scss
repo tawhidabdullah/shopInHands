@@ -1,0 +1,205 @@
+.overview {
+  padding: 3.5rem;
+
+  &__apiKeyisnotRegiester {
+    background: #fff;
+    border-radius: .625rem;
+    box-shadow: 0 2px 0 rgba(90, 97, 105, .11), 0 4px 8px rgba(90, 97, 105, .12), 0 10px 10px rgba(90, 97, 105, .06), 0 7px 70px rgba(90, 97, 105, .1);
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 80%;
+    padding: 2rem;
+    flex-direction: column;
+
+    p {
+      font-size: 1.9rem;
+      color: #5e72e4 !important;
+      font-weight: 500;
+
+      span {
+        font-size: 2rem;
+        color: #3d53cc !important;
+
+      }
+    }
+  }
+
+  &__requestedMade {
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 90%;
+
+    @media only screen and (max-width : 764px) {
+      justify-content: center;
+
+    }
+
+    .requests__made-chart {
+      position: relative;
+      width: 80rem;
+      background: #fff;
+      border-radius: .625rem;
+      box-shadow: 0 2px 0 rgba(90, 97, 105, .11), 0 4px 8px rgba(90, 97, 105, .12), 0 10px 10px rgba(90, 97, 105, .06), 0 7px 70px rgba(90, 97, 105, .1);
+      height: 40.5rem;
+      color: #fff;
+
+
+
+      @media only screen and (max-width : 811px) {
+        width: 70rem;
+        height: 35.5rem;
+
+
+      }
+
+      @media only screen and (max-width : 654px) {
+        width: 60rem;
+        height: 30.5rem;
+
+
+      }
+
+      @media only screen and (max-width : 576px) {
+        width: 50rem;
+        height: 25.5rem;
+
+      }
+
+      @media only screen and (max-width : 462px) {
+        width: 45rem;
+      }
+
+      @media only screen and (max-width : 422px) {
+        width: 39rem;
+      }
+
+      @media only screen and (max-width : 347px) {
+        width: 35rem;
+
+      }
+
+      @media only screen and (max-width : 301px) {
+        width: 30rem;
+      }
+    }
+  }
+
+  &__cards {
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 90%;
+
+    @media only screen and (max-width : 469px) {
+      width: 100%;
+
+    }
+  }
+
+  &__card {
+    background: #fff;
+    display: flex;
+    margin-bottom: 30px;
+    box-shadow: 0 0 2rem 0 rgba(136, 152, 170, .15);
+    border: 0;
+    border-radius: .575rem;
+    padding: 2rem 2rem;
+    min-width: 250px;
+    border-radius: .625rem;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 1.5rem;
+
+    @media only screen and (max-width : 724px) {
+      min-width: 100%;
+
+    }
+
+
+    &-titleAndCalls {
+      padding-right: 2rem;
+
+      h2 {
+        text-transform: uppercase;
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: #404f68;
+        font-family: 'Open Sans', sans-serif !important;
+
+      }
+
+
+      &-totalCalls {
+        color: #f5365c !important;
+      }
+
+      &-pricePlan {
+        color: #2dce89 !important;
+      }
+
+      &-requestedPlan {
+        color: #825ee4 !important;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        font-weight: 500;
+      }
+    }
+
+    &-iconBox {
+      width: 5.5rem;
+      height: 5.5rem;
+      padding: 1.5rem;
+      text-align: center;
+      border-radius: 50%;
+      position: relative;
+
+
+      &-totalCalls {
+        background: linear-gradient(87deg, #f5365c, #f56036) !important;
+      }
+
+      &-pricePlan {
+        background: linear-gradient(87deg, #2dce89, #2dcecc) !important;
+      }
+
+      &-requestedPlan {
+        background: linear-gradient(87deg, #5e72e4, #825ee4) !important;
+
+      }
+
+      .fa {
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: #fff;
+        position: absolute;
+        left: 27%;
+        top: 24%;
+      }
+      .fa-check-circle {
+        padding-top: .3rem;
+        padding-left: .2rem;
+
+
+      }
+      .fa-lock {
+        padding-top: .3rem;
+        padding-left: .5rem;
+      }
+    }
+  }
+}
+
+
+
+.form__input {
+  width: 100%;
+}

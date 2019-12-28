@@ -1,0 +1,152 @@
+.logout-div {
+    margin-top: -50px;
+    width: 90%;
+    display: flex;
+    justify-content: flex-end;
+
+    @media only screen and (max-width : 887px) {
+        width: 87%;
+    }
+
+    @media only screen and (max-width : 763px) {
+        width: 95%;
+    }
+
+    @media only screen and (max-width : 605px) {
+        width: 99%;
+    }
+
+}
+
+.userProfileContainer {
+    font-size: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1.5rem;
+    background: var(--color-grey-light1);
+
+    @media only screen and (max-width : $bp-medium) {
+        padding: 3rem;
+    }
+
+    @media only screen and (max-width : $bp-small) {
+        flex-direction: column;
+    }
+
+    &__detail {
+        width: 80%;
+        background: #fff;
+        border-radius: .625rem;
+        box-shadow: 0 2px 0 rgba(90, 97, 105, .11), 0 4px 8px rgba(90, 97, 105, .12), 0 10px 10px rgba(90, 97, 105, .06), 0 7px 70px rgba(90, 97, 105, .1);
+
+        @media only screen and (max-width : 760px) {
+            width: 100%;
+        }
+
+        &-heading {
+            padding: 2.3rem;
+            border-bottom: 1px solid #eee;
+            color: #3d5170;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            & h2 {
+                font-weight: 500;
+                display: inline-block;
+            }
+        }
+
+        &-footer {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            color: #3d5170;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        &-form {
+
+            background: rgb(247, 249, 251);
+            padding: 4rem 0rem .1rem 0rem;
+        }
+
+    }
+
+    &__updateProfileModal {
+        margin: 0;
+        min-width: 40rem;
+        width: 100%;
+
+
+        @media only screen and (max-width : 497px) {
+            min-width: 35rem;
+
+        }
+
+        @media only screen and (max-width : 466px) {
+            min-width: 30rem;
+
+        }
+
+        @media only screen and (max-width : 426px) {
+            min-width: 0;
+        }
+    }
+
+
+
+    @media only screen and (max-width : $bp-medium) {
+        padding: 2rem;
+        margin-right: 3rem;
+    }
+
+    @media only screen and (max-width : $bp-small) {
+        margin-right: 0;
+        margin-bottom: 3rem;
+    }
+
+
+    &__deleteAccount {
+        margin-top: 1.5rem;
+        width: 80%;
+        background: #fff;
+        border-radius: .625rem;
+        box-shadow: 0 2px 0 rgba(90, 97, 105, .11), 0 4px 8px rgba(90, 97, 105, .12), 0 10px 10px rgba(90, 97, 105, .06), 0 7px 70px rgba(90, 97, 105, .1);
+
+        @media only screen and (max-width : 760px) {
+            width: 100%;
+        }
+
+        &-heading {
+            padding: 2.3rem;
+            border-bottom: 1px solid #eee;
+            color: #3d5170;
+
+            & h2 {
+                font-weight: 500;
+                display: inline-block;
+            }
+        }
+
+        &-body {
+
+            padding: 2.3rem;
+
+            &-text {
+                color: rgba(30, 39, 42, 0.54);
+                font-weight: 200;
+                font-size: 1.7rem;
+                padding-bottom: 2rem;
+            }
+
+        }
+    }
+
+
+
+}

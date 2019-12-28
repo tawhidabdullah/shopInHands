@@ -25,7 +25,8 @@ class Header extends Component {
     catMenu: [],
     logoContent: {},
     topLeftContent: {},
-    hotlineContent: {}
+    hotlineContent: {},
+    navItemsContent: []
   };
 
   handleToggleCartBar = () => {
@@ -48,18 +49,23 @@ class Header extends Component {
         `${baseApiURL}/api/component/detail/name/logo`
       );
       const logoContent = logoContentRes.data;
-      // const logoContent = await getApi(
-      //   '/wp-json/wp-rest-api-sidebars/v1/sidebars/logo'
-      // );
 
-      const topLeftContent = await getApi(
-        '/wp-json/wp-rest-api-sidebars/v1/sidebars/top-left'
+      const navItemsContentRes = await axios.get(
+        `${baseApiURL}/api/component/detail/name/navlinks`
       );
+      const navItemsContent = navItemsContentRes.data.items;
+
+      const topLeftContentRes = await axios.get(
+        `${baseApiURL}/api/component/detail/name/topLeftContent `
+      );
+      const topLeftContent = topLeftContentRes.data.items;
 
       this.setState({
+        ...this.state,
         logoContent: logoContent.items[0].img,
         isLoading: false,
-        topLeftContent
+        topLeftContent,
+        navItemsContent
       });
     } catch (err) {
       console.log(err);
@@ -124,9 +130,12 @@ class Header extends Component {
       this.setState({
         isLoading: true
       });
-      const hotlineContent = await getApi(
-        '/wp-json/wp-rest-api-sidebars/v1/sidebars/hotline'
+
+      const hotlineContentRes = await axios.get(
+        `${baseApiURL}/api/component/detail/name/hotline`
       );
+
+      const hotlineContent = hotlineContentRes.data.items;
 
       this.setState({
         hotlineContent: hotlineContent,
@@ -170,7 +179,8 @@ class Header extends Component {
       mainMenu,
       isLoading,
       topLeftContent,
-      hotlineContent
+      hotlineContent,
+      navItemsContent
     } = this.state;
     const {
       isShowCartBar,
@@ -183,7 +193,16 @@ class Header extends Component {
       <>
         <div className="top-head-1">
           <div className="langandcurrency">
-            {topLeftContent && ReactHtmlParser(topLeftContent.rendered)}
+            <span
+              style={{
+                fontSize: '14px'
+              }}
+            >
+              {topLeftContent &&
+                topLeftContent.length > 0 &&
+                topLeftContent[0].text}
+            </span>
+            {/* {topLeftContent && ReactHtmlParser(topLeftContent.rendered)} */}
             {/* <p>
               ENGLISH <i className="fa fa-angle-down"></i>
             </p>
@@ -391,7 +410,7 @@ class Header extends Component {
             </div> */}
 
             <div className="navbar-center-navItems">
-              {!isLoading && mainMenu && mainMenu.length > 0 && (
+              {/* {!isLoading && mainMenu && mainMenu.length > 0 && (
                 <>
                   <span onClick={() => this.props.history.push('/')}>Home</span>
                   <span
@@ -402,28 +421,25 @@ class Header extends Component {
                     Products
                   </span>
                 </>
-              )}
-              {mainMenu &&
-                mainMenu.length > 0 &&
-                mainMenu.map(item => {
-                  return <span>{item.title}</span>;
+              )} */}
+              {!isLoading &&
+                navItemsContent &&
+                navItemsContent.length > 0 &&
+                navItemsContent.map(item => {
+                  return <a href={item.a}>{item.name}</a>;
                 })}
-
-              {/* <span onClick={() => this.props.history.push('/')}>Home</span>
-              <span
-                onClick={() => this.props.history.push('/productsListing/22')}
-              >
-                Products
-              </span>
-
-              <a href="https://shopinhands.com/wp/on-sale/">OnSale</a>
-              <a href="https://shopinhands.com/wp/deals">Deals</a>
-              <a href="https://shopinhands.com/wp/about-us">About Us</a>
-              <a href="https://shopinhands.com/wp/contact-us">Contact Us</a> */}
             </div>
             <div className="navbar-center-phoneNumberbox">
               <span className="phone">
-                {hotlineContent && ReactHtmlParser(hotlineContent.rendered)}
+                {hotlineContent && hotlineContent.length > 0 && (
+                  <>
+                    <i className="fa fa-phone" />
+                    <span className="phoneText">hotline</span>
+                    <span className="phoneNumber">
+                      {hotlineContent[0].text}
+                    </span>
+                  </>
+                )}
               </span>
             </div>
           </div>

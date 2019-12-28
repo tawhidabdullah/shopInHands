@@ -3,8 +3,8 @@ import {
   GET_ERRORS,
   PRODUCT_SUCCESSFULL,
   GET_WISHLISTS
-} from "./types";
-import axios from "axios";
+} from './types';
+import axios from 'axios';
 
 // Add Post
 export const addWishListAction = id => dispatch => {
@@ -50,7 +50,7 @@ export const deleteWishListAction = id => dispatch => {
 // Get wishLists actions
 export const getWishListsAction = () => dispatch => {
   axios
-    .get("/api/users/wishLists")
+    .get('/api/users/wishLists')
     .then(res => {
       dispatch({
         type: GET_WISHLISTS,

@@ -9,7 +9,14 @@ import { baseApiURL } from '../constants/variable';
 import setAuthorizationToken from '../utilities/setAuthorizationToken';
 
 // import TYPES
-import { GET_ERRORS, SET_CURRENT_USER } from './types';
+import {
+  GET_ERRORS,
+  SET_CURRENT_USER,
+  GET_ORDERS,
+  GET_ORDERS_STARTED,
+  GET_ORDERS_FAIL,
+  GET_ORDERS_SUCCESS
+} from './types';
 
 // Register user
 export const registeruser = (userData, history) => async dispatch => {
@@ -113,13 +120,35 @@ export const logoutUser = () => dispatch => {
     );
 };
 
+export const getCustomerOrders = () => async dispatch => {
+  try {
+    dispatch({
+      type: GET_ORDERS_STARTED
+    });
+    const orderRes = await axios({
+      url: `${baseApiURL}/customer/api/order/list`,
+      method: 'get',
+      withCredentials: true
+    });
+
+    const orders = await orderRes.data;
+    console.log('ordersordersorders', orders);
+
+    dispatch({
+      type: GET_ORDERS_SUCCESS,
+      payload: orders
+    });
+  } catch (err) {
+    dispatch({
+      type: GET_ORDERS_FAIL
+    });
+    console.log('something went wrong when fetching the orders');
+  }
+};
+
 export const setCurrentUser = decoded => {
   return {
     type: SET_CURRENT_USER,
     payload: decoded
   };
 };
-
-/// types and action are friends
-// actions will go to the reducers
-////////////////////////////////////////////////////////////

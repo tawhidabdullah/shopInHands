@@ -19,14 +19,16 @@ function ControlledCarousel({ imagesContents }) {
         imagesContents.map(items => {
           return (
             <Carousel.Item>
-              <img
-                className="d-block w-100"
-                style={{
-                  height: '70vh'
-                }}
-                src={`${baseApiURL}${items.img}`}
-                alt="Second slide"
-              />
+              <a href={`${items.a}`}>
+                <img
+                  className="d-block w-100"
+                  style={{
+                    height: '70vh'
+                  }}
+                  src={`${baseApiURL}${items.img}`}
+                  alt="Second slide"
+                />
+              </a>
             </Carousel.Item>
           );
         })}

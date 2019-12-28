@@ -12,8 +12,7 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
 import ShoppingCart from './pages/ShopingCart/ShoppingCart';
-import Dashboard from './components/Dashboard/Dashboard';
-import AddProducts from './components/Dashboard/AddProducts';
+import Dashboard from './components/Dashboard/container/Dashboard';
 import ProductSearch from './pages/productSearch';
 
 // AUTH COMPONENTS
@@ -61,16 +60,11 @@ class App extends Component {
               <PrivateRoute exact path={'/checkout'} component={Checkout} />
 
               <Route exact path={'/cart'} component={ShoppingCart} />
+              <Route exact path="/dashboard" component={Dashboard} />
             </Switch>
+
             <Switch>
-              <PrivateRoute
-                exact
-                path={'/addProducts'}
-                component={AddProducts}
-              />
-            </Switch>
-            <Switch>
-              <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              {/* <Route exact path="/dashboard" component={Dashboard} /> */}
             </Switch>
 
             {/* <Footer /> */}

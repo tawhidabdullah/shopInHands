@@ -1,0 +1,23 @@
+:root {
+    --color-primary: #eb2f64;
+    --color-primary-light: #ff3366;
+    --color-primary-dark: #BA265D;
+
+    --color-grey-light1: #faf9f9;
+    --color-grey-light2: #f4f2f2;
+    --color-grey-light3: #f0eeee;
+    --color-grey-light4: #ccc;
+
+    --color-grey-dark1: #333;
+    --color-grey-dark2: #777;
+    --color-grey-dark3: #999;
+
+    --color-black: black;
+}
+
+
+$bp-largest : 75em; /// 1200px 
+$bp-large : 68.75em; // 1100px;
+$bp-medium : 56.25em; // 900px;
+$bp-small : 37.5em; // 600px;
+$bp-smallest : 31.25em; // 500px;
