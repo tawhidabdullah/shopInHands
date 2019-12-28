@@ -25,13 +25,14 @@ import './ProductDetail.scss';
 class ProductDetail extends Component {
   state = {
     clickedAddReview: false,
+    product: {},
     productDetailTabs: {
       isReviews: false,
       isDetails: true,
       isMoreInformation: false,
-      product: {},
       relatedProducts: []
-    }
+    },
+    isLoading: false
   };
 
   toggleTabs = tabName => {
@@ -52,62 +53,33 @@ class ProductDetail extends Component {
   };
 
   getProductsAndRelatedProducts = async id => {
-    const productRes = await axios.get(
-      `${baseApiURL}/api/product/detail/${id}`
-    );
-
-    const product = productRes.data;
-
-    console.log('productDetail', product);
-
     this.setState({
       ...this.state,
-      product
+      isLoading: true
     });
 
-    // getApi(`/wp-json/wc/v3/products/${id}`)
-    //   .then(product => {
-    //     this.setState({
-    //       product
-    //     });
+    try {
+      const productRes = await axios.get(
+        `${baseApiURL}/api/product/detail/${id}`
+      );
 
-    //     const productRelatedIds = product && product.related_ids;
-    //     const auth = new Buffer(
-    //       apiConfig.consumerKey + ':' + apiConfig.consumerSecret
-    //     ).toString('base64');
+      const product = productRes.data;
 
-    //     axios
-    //       .all(
-    //         productRelatedIds.map(id =>
-    //           axios({
-    //             url: `https://shopinhands.com/wp/wp-json/wc/v3/products/${id}`,
-    //             method: 'GET',
-    //             headers: {
-    //               Authorization: `Basic ${auth}`,
-    //               'Content-Type': 'application/json'
-    //             }
-    //           })
-    //         )
-    //       )
-    //       .then(responseArr => {
-    //         //this will be executed only when all requests are complete
-    //         const relatedProducts = responseArr.map(responseItem => {
-    //           return responseItem.data;
-    //         });
-    //         console.log('responseArr', responseArr);
-    //         this.setState({
-    //           relatedProducts
-    //         });
-    //       });
-    //   })
-    //   .catch(err => {
-    //     console.log('something went wrong when retreving the product');
-    //   });
+      this.setState({
+        ...this.state,
+        product,
+        isLoading: false
+      });
+    } catch (err) {
+      this.setState({
+        ...this.state,
+        isLoading: false
+      });
+    }
   };
 
   componentDidMount() {
     const productId = this.props.match.params.id;
-    // this.props.getAProductAction(productId);
     this.getProductsAndRelatedProducts(productId);
     console.log('get a life');
   }
@@ -137,50 +109,17 @@ class ProductDetail extends Component {
   }
 
   render() {
-    const { product } = this.state;
+    const { product, isLoading } = this.state;
 
     let ProductDetailContent = <Spinner />;
-    if (product && Object.keys(product).length > 0) {
+    if (product && Object.keys(product).length > 0 && !isLoading) {
       ProductDetailContent = (
         <>
           <ProductDetailComponent {...this.props} product={product} />
-          {/* <div class="row">
-            <div class="productDetails__container">
-              <ul class="productDetails__tablist">
-                <li
-                  class="productDetails__tablist-item"
-                  onClick={() => this.toggleTabs('isDetails')}
-                >
-                  <a class="productDetails__tablist-link">Details</a>
-                </li>
-                <li
-                  onClick={() => this.toggleTabs('isMoreInformation')}
-                  class="productDetails__tablist-item"
-                >
-                  <a class="productDetails__tablist-link">More Information</a>
-                </li>
-                <li
-                  onClick={() => this.toggleTabs('Reviews')}
-                  class="productDetails__tablist-item"
-                >
-                  <a class="productDetails__tablist-link">Reviews</a>
-                </li>
-              </ul>
-              <div class="productDetails__content">
-                {this.state.productDetailTabs.isDetails ? 'Details' : ''}
-                {this.state.productDetailTabs.isReviews ? (
-                  <ReviewContent productId={id} />
-                ) : (
-                  ''
-                )}
-                {this.state.productDetailTabs.isMoreInformation
-                  ? 'MoreInformation'
-                  : ''}
-              </div>
-            </div>
-          </div> */}
         </>
       );
+    } else if (product && !Object.keys(product).length > 0 && !isLoading) {
+      ProductDetailContent = <h1>Product Not Found</h1>;
     }
 
     return (

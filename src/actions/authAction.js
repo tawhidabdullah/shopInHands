@@ -47,71 +47,38 @@ export const registeruser = (userData, history) => async dispatch => {
 // when registeruser action get's called uporer function ta fired kore
 
 // Login - Get user token //////////////////////////////////////
-export const loginUser = userData => dispatch => {
-  fetch(`${baseApiURL}/customer/auth/login`, {
-    body: JSON.stringify(userData),
-    method: 'post',
-    credentials: 'include',
-    headers: new Headers({
-      'content-type': 'application/json'
-    })
-  })
-    .then(res => res.json())
-    .then(res => {
-      axios({
+export const loginUser = userData => async dispatch => {
+  try {
+    const awaitedRes = await fetch(`${baseApiURL}/customer/auth/login`, {
+      body: JSON.stringify(userData),
+      method: 'post',
+      credentials: 'include',
+      headers: new Headers({
+        'content-type': 'application/json'
+      })
+    });
+
+    if (awaitedRes.ok) {
+      const res = await axios({
         url: `${baseApiURL}/customer/api/detail`,
         method: 'get',
         withCredentials: true
-      })
-        .then(res => {
-          dispatch(setCurrentUser(res.data));
-        })
-        .catch(err =>
-          console.log('something went wrong when fetching the user data', err)
-        );
-    })
-    .catch(err => {
+      });
+
+      try {
+        dispatch(setCurrentUser(res.data));
+      } catch (err) {
+        console.log('something went wrong when fetching the user data', err);
+      }
+    } else {
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: await awaitedRes.json()
       });
-    });
-
-  // dispatch({
-  //   type: GET_ERRORS,
-  //   payload: err.response.data
-  // });
-
-  // postApi('/wp-json/jwt-auth/v1/token', userData, 'auth')
-  //   .then(res => {
-  //     if (res.data.status === 403 || 403) {
-  //       function strip_html_tags(str) {
-  //         if (str === null || str === '') return false;
-  //         else str = str.toString();
-  //         return str.replace(/<[^>]*>/g, '');
-  //       }
-  //       throw new Error(strip_html_tags(res.message));
-  //     } else {
-  //       const { token, user_display_name, user_email, user_nicename } = res; // get token from res.data
-
-  //       localStorage.setItem('jwtToken', token); //save to localStorage
-  //       setAuthorizationToken(token); // set Authorization token  to header
-  //       // const decoded = jwt_decode(token); // decode token to get user data
-  //       dispatch(
-  //         setCurrentUser({
-  //           user_display_name,
-  //           user_email,
-  //           user_nicename
-  //         })
-  //       ); // set current user
-  //     }
-  //   })
-  //   .catch(err => {
-  //     dispatch({
-  //       type: GET_ERRORS,
-  //       payload: err.message
-  //     });
-  //   });
+    }
+  } catch (err) {
+    console.log('something went wrong when login', err);
+  }
 };
 
 // Log out User

@@ -10,7 +10,8 @@ const CartOverLayCartItem = ({
   handleToggleCartBar,
   handleRemoveCartItem,
   cartItem,
-  dispatch
+  dispatch,
+  history
 }) => {
   const [itemQuantity, setItemQuantity] = useState(cartItem.quantity);
 
@@ -20,22 +21,22 @@ const CartOverLayCartItem = ({
 
     if (type === 'inc' && value < 10) {
       setItemQuantity(itemQuantity + 1);
-      dispatch(incrementCartQuantity(id));
+      dispatch(incrementCartQuantity(_id));
     }
 
     if (type === 'desc' && value > 1) {
       setItemQuantity(itemQuantity - 1);
-      dispatch(decrementCartQuantity(id));
+      dispatch(decrementCartQuantity(_id));
     }
   };
 
-  const { image, id, name, price, history, quantity } = cartItem;
+  const { image, _id, name, price, quantity } = cartItem;
   return (
     <div className="cart-item">
       <img
         onClick={() => {
           handleToggleCartBar();
-          history.push(`/products/${id}`);
+          history.push(`/products/${_id}`);
         }}
         src={`${baseApiURL}${image[0]}`}
         alt="productImg"
@@ -44,13 +45,13 @@ const CartOverLayCartItem = ({
         <h4
           onClick={() => {
             handleToggleCartBar();
-            history.push(`/products/${id}`);
+            history.push(`/products/${_id}`);
           }}
         >
           {name}
         </h4>
         <h5>৳{price}</h5>
-        <span className="remove-item" onClick={() => handleRemoveCartItem(id)}>
+        <span className="remove-item" onClick={() => handleRemoveCartItem(_id)}>
           <i
             className="fa fa-trash"
             style={{
