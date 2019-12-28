@@ -195,7 +195,7 @@ const ProductListing = props => {
                 </div>
               </div>
 
-              <div className="category-block">
+              {/* <div className="category-block">
                 <div className="product-title">Price</div>
                 <div
                   style={{
@@ -209,7 +209,7 @@ const ProductListing = props => {
                     onChange={value => handleInputRangePriceChange(value)}
                   />
                 </div>
-              </div>
+              </div> */}
               <div class="category-block">
                 <div class="product-detail">
                   <h2 class="category-title">Categories</h2>

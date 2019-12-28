@@ -1,1 +1,1 @@
-export const baseApiURL = 'https://shopinhands.com/admin';
+export const baseApiURL = 'https://shopinhands.com';

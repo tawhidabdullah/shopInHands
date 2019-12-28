@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { addProductToCart } from '../../actions';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
+import { baseApiURL } from '../../constants/variable';
 
 const ProductDetail = props => {
   const { name, price, description, image, offerPrice } = props.product;
@@ -17,7 +18,7 @@ const ProductDetail = props => {
       <div class="col-md-6">
         <Carousel>
           <div>
-            <img src={`http://192.168.0.102:5000${image[0]}`} />
+            <img src={`${baseApiURL}${image[0]}`} />
           </div>
         </Carousel>
       </div>

@@ -9,6 +9,7 @@ import { getApi } from '../../utilities/wooApi';
 import apiConfig from '../../config/apiConfig';
 import Footer from '../../components/Footer/Footer';
 import axios from 'axios';
+import { baseApiURL } from '../../constants/variable';
 
 import {
   getAProductAction,
@@ -52,7 +53,7 @@ class ProductDetail extends Component {
 
   getProductsAndRelatedProducts = async id => {
     const productRes = await axios.get(
-      `http://192.168.0.102:5000/api/product/detail/${id}`
+      `${baseApiURL}/api/product/detail/${id}`
     );
 
     const product = productRes.data;
