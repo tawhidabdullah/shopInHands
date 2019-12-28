@@ -9,7 +9,8 @@
 // SIDE NAVIGATION
 .side-nav {
   list-style: none;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
+  border-right: 1px solid #eee;
 
   @media only screen and (max-width: $bp-medium) {
     display: flex;
@@ -25,7 +26,7 @@
     }
 
     &:not(:last-child) {
-      margin-bottom: 0.5rem;
+      margin-bottom: -1rem;
 
       @media only screen and (max-width: $bp-medium) {
         margin-bottom: 0;
@@ -40,7 +41,7 @@
 
     .fa {
       color: inherit;
-      font-size: 20px;
+      font-size: 18px;
       margin-left: -10px;
       margin-right: 10px;
     }
@@ -73,7 +74,7 @@
     font-weight: 400;
     display: inline-block;
     color: inherit;
-    padding: 1.5rem 3rem;
+    padding: 1.2rem 2.5rem;
     display: flex;
     align-items: center;
     z-index: 10;
@@ -81,11 +82,12 @@
 
     @media only screen and (max-width: $bp-small) {
       flex-direction: column;
-      padding: 1.5rem 1.4rem;
+      padding: 1rem 1.2rem;
     }
   }
 
   &__text {
+    font-size: 14px;
     @media only screen and (max-width: 605px) {
       display: none;
     }

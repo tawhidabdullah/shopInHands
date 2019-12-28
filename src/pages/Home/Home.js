@@ -52,8 +52,6 @@ class Home extends Component {
 
       const sliderRight = sliderRightRes.data;
 
-      console.log('sliderright', sliderRight);
-
       const tagRes = await axios.get(`${baseApiURL}/api/tag/list`);
 
       const tags = tagRes.data;

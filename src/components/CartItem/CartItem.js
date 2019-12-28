@@ -4,6 +4,7 @@ import { shortenTitle } from '../../pipes/shortenTitle';
 import { formatMoney } from '../../pipes/priceFormatter';
 import './CartItem.scss';
 import { baseApiURL } from '../../constants/variable';
+import { withRouter } from 'react-router';
 import {
   addProductToCart,
   decrementCartQuantity,
@@ -16,14 +17,15 @@ const CartItem = ({
   price,
   description,
   quantity,
-  id,
+  _id,
   image,
-  dispatch
+  dispatch,
+  history
 }) => {
-  console.log(id);
+  console.log(_id);
   const [itemQuantity, setItemQuantity] = useState(quantity);
   const removeItem = () => {
-    dispatch(removeProductToCart(id));
+    dispatch(removeProductToCart(_id));
   };
 
   const handleQuantityChange = e => {
@@ -32,7 +34,7 @@ const CartItem = ({
 
         if(value > 0 && value <= 10) {
             setItemQuantity(value);
-            dispatch(addProductToCart(id));
+            dispatch(addProductToCart(_id));
         } */
   };
 
@@ -42,12 +44,12 @@ const CartItem = ({
 
     if (type === 'inc' && value < 10) {
       setItemQuantity(itemQuantity + 1);
-      dispatch(incrementCartQuantity(id));
+      dispatch(incrementCartQuantity(_id));
     }
 
     if (type === 'desc' && value > 1) {
       setItemQuantity(itemQuantity - 1);
-      dispatch(decrementCartQuantity(id));
+      dispatch(decrementCartQuantity(_id));
     }
   };
 
@@ -55,6 +57,12 @@ const CartItem = ({
     <div className="row align-items-center mb-3">
       <div className="col-12 col-sm-12 col-md-2 text-center">
         <img
+          onClick={() => {
+            history.push(`/products/${_id}`);
+          }}
+          style={{
+            cursor: 'pointer'
+          }}
           className="img-responsive"
           src={`${baseApiURL}${image}`}
           style={{ height: '60%', width: '60%' }}
@@ -128,4 +136,4 @@ const CartItem = ({
   );
 };
 
-export default connect()(CartItem);
+export default connect()(withRouter(CartItem));

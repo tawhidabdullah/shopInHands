@@ -65,9 +65,19 @@ class ProductDetail extends Component {
 
       const product = productRes.data;
 
+      const relatedProductsRes = await axios.get(
+        `${baseApiURL}/api/category/detail/${product.category &&
+          product.category[0]._id}`
+      );
+
+      const relatedProducts = relatedProductsRes.data.product.slice(0, 5);
+
+      console.log('relativer', relatedProducts);
+
       this.setState({
         ...this.state,
         product,
+        relatedProducts,
         isLoading: false
       });
     } catch (err) {
@@ -109,7 +119,7 @@ class ProductDetail extends Component {
   }
 
   render() {
-    const { product, isLoading } = this.state;
+    const { product, isLoading, relatedProducts } = this.state;
 
     console.log('thegratestProdcut', product);
     let ProductDetailContent = <Spinner />;
@@ -134,11 +144,12 @@ class ProductDetail extends Component {
                   <div class="services-sidebar">
                     <div class="small__filterProducts">
                       <div class="block-title">
-                        <span>Best Sellers</span>
+                        <span>Related Products</span>
                       </div>
-                      {/* <div class="small-products-items">
-                        {(this.state.relatedProducts &&
-                          this.state.relatedProducts.map(item => {
+                      <div class="small-products-items">
+                        {(!isLoading &&
+                          relatedProducts.length > 0 &&
+                          relatedProducts.map(item => {
                             return (
                               <div class="small-product-item">
                                 <div
@@ -150,23 +161,30 @@ class ProductDetail extends Component {
                                   }}
                                 >
                                   <img
-                                    src={item.images[0].src}
+                                    src={`${baseApiURL}${item.image[0]}`}
                                     class="product photo product-item-photo"
                                     alt=""
                                   />
                                 </div>
                                 <div class="small-product-info">
                                   <h2 class="small-product-title">
-                                    ৳{item.price}
+                                    {item.name}
                                   </h2>
                                   <h2 class="small-product-price">
-                                    ৳{item.regular_price}
+                                    ৳{item.offerPrice}
+                                  </h2>
+                                  <h2 class="small-product-offerPrice">
+                                    ৳{item.price}
                                   </h2>
                                 </div>
                               </div>
                             );
                           })) || <Spinner />}
-                      </div> */}
+
+                        {!isLoading && !relatedProducts.length > 0 && (
+                          <h2>No Related Product Has Been Found</h2>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>

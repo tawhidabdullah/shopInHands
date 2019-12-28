@@ -212,10 +212,20 @@ class Header extends Component {
           </div>
           <div className="trackorderandauthlinks">
             {(isAuthenticate && user && (
-              <p>
-                <i className="fa fa-user"></i>
-                <span onClick={() => this.props.logoutUser()}>Logout</span>{' '}
-              </p>
+              <>
+                <p>
+                  <i className="fa fa-dashboard"></i>
+                  <span onClick={() => this.props.history.push('/dashboard')}>
+                    Dashboard
+                  </span>{' '}
+                </p>
+                <p>
+                  <i className="fa fa-user"></i>
+                  <span onClick={() => this.props.logoutUser()}>
+                    Logout
+                  </span>{' '}
+                </p>
+              </>
             )) || (
               <p>
                 <i className="fa fa-user"></i>

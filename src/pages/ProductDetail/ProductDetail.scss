@@ -242,16 +242,27 @@
 
 .small-product-item .small-product-info .small-product-title {
   font-weight: 500;
-  font-size: 18px;
+  font-size: 17px;
   color: #444;
 }
 
 .small-product-item .small-product-info .small-product-price {
   font-weight: 700;
-  font-size: 18px;
+  font-size: 16px;
   color: #e74c3c;
   text-align: left;
-  margin-top: -10px;
+  // margin-top: -10px;
+  margin-top: 5px;
+}
+
+.small-product-item .small-product-info .small-product-offerPrice {
+  font-weight: 700;
+  font-size: 16px;
+  text-align: left;
+  // margin-top: -10px;
+  margin-top: 5px;
+  text-decoration: line-through;
+  color: #888;
 }
 
 .small-product-item-box-img {

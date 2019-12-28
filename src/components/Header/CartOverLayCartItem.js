@@ -40,6 +40,9 @@ const CartOverLayCartItem = ({
         }}
         src={`${baseApiURL}${image[0]}`}
         alt="productImg"
+        style={{
+          cursor: 'pointer'
+        }}
       />
       <div className="">
         <h4

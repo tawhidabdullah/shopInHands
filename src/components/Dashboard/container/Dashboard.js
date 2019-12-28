@@ -74,7 +74,7 @@ const Dashboard = props => {
                     <span className="side-nav__text">Orders</span>
                   </a>
                 </li>
-                <li
+                {/* <li
                   className={
                     tabs.isCart
                       ? 'side-nav__item side-nav__item--active'
@@ -86,8 +86,8 @@ const Dashboard = props => {
                     <i className="fa fa-shopping-cart"></i>
                     <span className="side-nav__text">Cart</span>
                   </a>
-                </li>
-                <li
+                </li> */}
+                {/* <li
                   className={
                     tabs.isWishlist
                       ? 'side-nav__item side-nav__item--active'
@@ -99,9 +99,9 @@ const Dashboard = props => {
                     <i className="fa fa-heart"></i>
                     <span className="side-nav__text">Wishlist</span>
                   </a>
-                </li>
+                </li> */}
 
-                <li
+                {/* <li
                   className={
                     tabs.isSettings
                       ? 'side-nav__item side-nav__item--active'
@@ -113,7 +113,7 @@ const Dashboard = props => {
                     <i className="fa fa-cog"></i>
                     <span className="side-nav__text">Settings</span>
                   </a>
-                </li>
+                </li> */}
               </ul>
             </nav>
             <main className="dashboard__main-content">
