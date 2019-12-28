@@ -153,7 +153,7 @@ class Header extends Component {
 
     this.props.history.push({
       pathname: '/productSearch',
-      search: `?category=${this.state.categorySelectValue}&search=${this.state.searchBarValue}`
+      search: `?cat=${this.state.categorySelectValue}&key=${this.state.searchBarValue}`
     });
   };
 
@@ -252,7 +252,7 @@ class Header extends Component {
                               categories.length > 0 &&
                               categories.map(item => {
                                 return (
-                                  <option value={item.id}>
+                                  <option value={item._id}>
                                     {item.name.charAt(0).toUpperCase() +
                                       item.name.slice(1)}
                                   </option>

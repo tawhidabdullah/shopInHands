@@ -111,10 +111,10 @@ const ProductListing = props => {
     const getProducts = async () => {
       setIsLoading(true);
       try {
-        const products = await getApi(
-          `/wp-json/wc/v3/products?search=${searchValue}`
+        const awaitedProducts = await axios.get(
+          `http://192.168.0.103:5000/api/search?key=${searchValue}`
         );
-        console.log('products', products);
+        const products = awaitedProducts.data;
         setProducts(products);
         setIsLoading(false);
       } catch (err) {

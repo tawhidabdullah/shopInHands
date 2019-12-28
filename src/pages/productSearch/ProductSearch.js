@@ -4,12 +4,12 @@ import queryString from 'query-string';
 import { getApi } from '../../utilities/wooApi';
 import Product from '../Home/Product';
 import Spinner from '../../components/commonFeilds/Spinner';
-import Footer from "../../components/Footer/Footer";
+import Footer from '../../components/Footer/Footer';
+import axios from 'axios';
 
 const ProductSearch = props => {
-  const queryValueOfSearch = queryString.parse(props.location.search).search;
-  const categoryValueOfSearch = queryString.parse(props.location.search)
-    .category;
+  const queryValueOfSearch = queryString.parse(props.location.search).key;
+  const categoryValueOfSearch = queryString.parse(props.location.search).cat;
   console.log('searchBValue', queryValueOfSearch);
   const [products, setProducts] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -18,9 +18,12 @@ const ProductSearch = props => {
     const getProducts = async () => {
       try {
         setIsLoading(true);
-        const products = await getApi(
-          `/wp-json/wc/v3/products?category=${categoryValueOfSearch}&search=${queryValueOfSearch}`
+
+        const productsRes = await axios.get(
+          `http://192.168.0.103:5000/api/search?key=${queryValueOfSearch}&cat=${categoryValueOfSearch}`
         );
+
+        const products = productsRes.data;
 
         setProducts(products);
         setIsLoading(false);
@@ -34,60 +37,60 @@ const ProductSearch = props => {
 
   return (
     <>
-    <div className="container">
-      <div
-        className="row"
-        style={{
-          paddingTop: '20px',
-          width: '100%',
-          // background: 'red',
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'space-around',
-          alignItems: 'center'
-        }}
-      >
-        {(!isLoading &&
-          products &&
-          products.length > 0 &&
-          products.map(product => {
-            return (
-              // <div class="col-md-2 col-sm-4 ml-3 mr-3">
-              //   <Product product={product} />
-              // </div>
-              <Product product={product} productListing={true} />
-            );
-          })) ||
-          (isLoading && <Spinner />)}
+      <div className="container">
+        <div
+          className="row"
+          style={{
+            paddingTop: '20px',
+            width: '100%',
+            // background: 'red',
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-around',
+            alignItems: 'center'
+          }}
+        >
+          {(!isLoading &&
+            products &&
+            products.length > 0 &&
+            products.map(product => {
+              return (
+                // <div class="col-md-2 col-sm-4 ml-3 mr-3">
+                //   <Product product={product} />
+                // </div>
+                <Product product={product} productListing={true} />
+              );
+            })) ||
+            (isLoading && <Spinner />)}
 
-        {!isLoading && products && !products.length > 0 ? (
-          <div
-            style={{
-              width: '100%',
-              height: '100%',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              flexDirection: 'column'
-            }}
-          >
-            <h2>No Product Has Been Found</h2>
-            <a
-              className="btn btn-outline-secondary"
-              onClick={e => {
-                e.preventDefault();
-                props.history.push('/');
+          {!isLoading && products && !products.length > 0 ? (
+            <div
+              style={{
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexDirection: 'column'
               }}
             >
-              Go Back To Home Page
-            </a>
-          </div>
-        ) : (
-          ''
-        )}
+              <h2>No Product Has Been Found</h2>
+              <a
+                className="btn btn-outline-secondary"
+                onClick={e => {
+                  e.preventDefault();
+                  props.history.push('/');
+                }}
+              >
+                Go Back To Home Page
+              </a>
+            </div>
+          ) : (
+            ''
+          )}
+        </div>
       </div>
-    </div>
-    <Footer />
+      <Footer />
     </>
   );
 };
