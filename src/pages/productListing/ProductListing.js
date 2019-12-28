@@ -112,7 +112,7 @@ const ProductListing = props => {
       setIsLoading(true);
       try {
         const awaitedProducts = await axios.get(
-          `http://192.168.0.103:5000/api/search?key=${searchValue}`
+          `${baseApiURL}/api/search?key=${searchValue}`
         );
         const products = awaitedProducts.data;
         setProducts(products);

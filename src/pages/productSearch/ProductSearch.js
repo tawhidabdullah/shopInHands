@@ -6,6 +6,7 @@ import Product from '../Home/Product';
 import Spinner from '../../components/commonFeilds/Spinner';
 import Footer from '../../components/Footer/Footer';
 import axios from 'axios';
+import { baseApiURL } from '../../constants/variable';
 
 const ProductSearch = props => {
   const queryValueOfSearch = queryString.parse(props.location.search).key;
@@ -20,7 +21,7 @@ const ProductSearch = props => {
         setIsLoading(true);
 
         const productsRes = await axios.get(
-          `http://192.168.0.103:5000/api/search?key=${queryValueOfSearch}&cat=${categoryValueOfSearch}`
+          `${baseApiURL}/api/search?key=${queryValueOfSearch}&cat=${categoryValueOfSearch}`
         );
 
         const products = productsRes.data;
