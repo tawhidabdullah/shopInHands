@@ -48,6 +48,16 @@
   }
 }
 
+@media screen and (max-width: 600px) {
+  .our__categories {
+    margin-top: 30px;
+    padding-left: 30px !important;
+  }
+  .shopping__info {
+    margin-left: 0 !important;
+  }
+}
+
 .footer_section-title {
   text-transform: uppercase;
 

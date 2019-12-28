@@ -159,6 +159,7 @@ body {
   position: relative;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .block-title span::before {
@@ -198,4 +199,10 @@ body {
   color: #666;
   top: 5px;
   margin-left: 3px;
+}
+
+@media screen and (max-width: 600px) {
+  .block-title {
+    line-height: 40px;
+  }
 }

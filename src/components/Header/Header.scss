@@ -1195,3 +1195,9 @@ fieldset {
     background: #fff;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    position: static;
+  }
+}

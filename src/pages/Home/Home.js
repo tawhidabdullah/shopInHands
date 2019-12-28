@@ -173,7 +173,7 @@ class Home extends Component {
               } else {
                 return (
                   <Products
-                    categoryId={cat.id}
+                    categoryId={cat._id}
                     categoryName={cat.name}
                     products={cat.product}
                   />
