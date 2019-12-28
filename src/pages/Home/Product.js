@@ -22,10 +22,6 @@ const Product = ({
   alert
 }) => {
   const { name, price, image, _id } = product;
-  console.log('images', image);
-
-  console.log('iam here');
-  console.log('productName', name);
 
   const AddCartContent = () => {
     if (cartItems && cartItems.length > 0) {
@@ -43,14 +39,14 @@ const Product = ({
       const isItemExistInCart = cartItems.find(item => item._id === _id);
       if (isItemExistInCart) {
         removeProductToCart(_id);
-        alert.success('Product Has Been Removed');
+        alert.success('Product Has Been Removed From the Cart');
       } else {
         addProductToCart({ ...product });
-        alert.success('Product Added');
+        alert.success('Product Added To The Cart');
       }
     } else {
       addProductToCart({ ...product });
-      alert.success('Product Added');
+      alert.success('Product Added To The Cart');
     }
   };
 

@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addProductToCart } from '../../actions';
+import { addProductToCart, removeProductToCart } from '../../actions';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
 import { baseApiURL } from '../../constants/variable';
 import Moment from 'react-moment';
+import { withAlert } from 'react-alert';
 
 const ProductDetail = props => {
   const {
@@ -22,9 +23,24 @@ const ProductDetail = props => {
     _id
   } = props.product;
 
+  const { cartItems, alert } = props;
+
   const onCart = e => {
     e.preventDefault();
-    props.dispatch(addProductToCart(props.product));
+
+    if (cartItems && cartItems.length > 0) {
+      const isItemExistInCart = cartItems.find(item => item._id === _id);
+      if (isItemExistInCart) {
+        props.removeProductToCart(_id);
+        alert.success('Product Has Been Removed From the Cart');
+      } else {
+        props.addProductToCart(props.product);
+        alert.success('Product Added To The Cart');
+      }
+    } else {
+      props.addProductToCart({ ...props.product });
+      alert.success('Product Added To The Cart');
+    }
   };
 
   const AddCartContent = () => {
@@ -160,4 +176,7 @@ const mapStateToProp = state => {
   };
 };
 
-export default connect(mapStateToProp, {})(ProductDetail);
+export default connect(mapStateToProp, {
+  addProductToCart,
+  removeProductToCart
+})(withAlert()(ProductDetail));

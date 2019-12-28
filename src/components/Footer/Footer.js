@@ -1,36 +1,49 @@
 import React, { useState } from 'react';
 import ReactHtmlParser from 'react-html-parser';
+import { baseApiURL } from '../../constants/variable';
+import axios from 'axios';
 
 import { getApi } from '../../utilities/wooApi';
 import './Footer.scss';
 
 const Footer = () => {
   const [footerOne, setFooterOne] = useState({});
-  const [footerTwo, setFooterTwo] = useState({});
-  const [footerThree, setFooterThree] = useState({});
-  const [footerFour, setFooterFour] = useState({});
+  const [aboutUsContent, setAboutUsContent] = useState({});
+  const [policyContent, setPolicyContent] = useState({});
+  const [accountContent, setAccountContent] = useState({});
   const [isLoading, setIsLoading] = useState({});
   React.useEffect(() => {
     const getFooterContent = async () => {
       try {
         setIsLoading(true);
-        const footerContentOne = await getApi(
-          `/wp-json/wp-rest-api-sidebars/v1/sidebars/footer-1`
-        );
-        const footerContentTwo = await getApi(
-          `/wp-json/wp-rest-api-sidebars/v1/sidebars/footer-2`
-        );
-        const footerContentThree = await getApi(
-          `/wp-json/wp-rest-api-sidebars/v1/sidebars/footer-3`
-        );
-        const footerContentFour = await getApi(
-          `/wp-json/wp-rest-api-sidebars/v1/sidebars/footer-4`
+        const footerContentOneRes = await axios.get(
+          `${baseApiURL}/api/component/detail/name/footer1`
         );
 
+        const footerContentOne = footerContentOneRes.data;
+
+        const aboutUsContentRes = await axios.get(
+          `${baseApiURL}/api/component/detail/name/About Us`
+        );
+
+        const aboutUsContent = aboutUsContentRes.data;
+
+        const policyContentRes = await axios.get(
+          `${baseApiURL}/api/component/detail/name/Policy`
+        );
+
+        const policyContent = policyContentRes.data;
+
+        const accountContentRes = await axios.get(
+          `${baseApiURL}/api/component/detail/name/Policy`
+        );
+
+        const accountContent = accountContentRes.data;
+
         setFooterOne(footerContentOne);
-        setFooterTwo(footerContentTwo);
-        setFooterThree(footerContentThree);
-        setFooterFour(footerContentFour);
+        setAboutUsContent(aboutUsContent);
+        setPolicyContent(policyContent);
+        setAccountContent(accountContent);
 
         setIsLoading(false);
       } catch (err) {
@@ -44,37 +57,74 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="row">
-        <div className="col-md-3">
-          <div className="shopping__info">
-            <div
-              style={{
-                paddingLeft: '30px'
-              }}
-            >
-              {footerOne && ReactHtmlParser(footerOne.rendered)}
-            </div>
-          </div>
-        </div>
-
-        {Object.keys(footerTwo).length > 0 && (
+        {footerOne.items && footerOne.items.length > 0 && (
           <div className="col-md-3">
             <div className="our__categories">
-              {ReactHtmlParser(footerTwo.rendered)}
+              {/* {ReactHtmlParser(footerOne.rendered)} */}
+              <span className="widget-title">{footerOne.items[0].name}</span>
+              <ul className="menu">
+                {footerOne.items.map(item => {
+                  return (
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-244">
+                      <a href={`${item.a}`}>{item.text}</a>
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
           </div>
         )}
 
-        {Object.keys(footerThree).length > 0 && (
+        {aboutUsContent.items && aboutUsContent.items.length > 0 && (
           <div className="col-md-3">
             <div className="our__categories">
-              {ReactHtmlParser(footerThree.rendered)}
+              {/* {ReactHtmlParser(aboutUsContent.rendered)} */}
+              <span className="widget-title">{aboutUsContent.name}</span>
+              <ul className="menu">
+                {aboutUsContent.items.map(item => {
+                  return (
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-244">
+                      <a href={`${item.a}`}>{item.name}</a>
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
           </div>
         )}
-        {Object.keys(footerFour).length > 0 && (
+
+        {policyContent.items && policyContent.items.length > 0 && (
           <div className="col-md-3">
             <div className="our__categories">
-              {footerFour && ReactHtmlParser(footerFour.rendered)}
+              {/* {ReactHtmlParser(policyContent.rendered)} */}
+              <span className="widget-title">{policyContent.name}</span>
+              <ul className="menu">
+                {policyContent.items.map(item => {
+                  return (
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-244">
+                      <a href={`${item.a}`}>{item.name}</a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>
+        )}
+
+        {accountContent.items && accountContent.items.length > 0 && (
+          <div className="col-md-3">
+            <div className="our__categories">
+              {/* {ReactHtmlParser(accountContent.rendered)} */}
+              <span className="widget-title">{accountContent.name}</span>
+              <ul className="menu">
+                {accountContent.items.map(item => {
+                  return (
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-244">
+                      <a href={`${item.a}`}>{item.name}</a>
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
           </div>
         )}
