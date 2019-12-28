@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { addProductToCart, removeProductToCart } from '../../actions';
+import { withAlert } from 'react-alert';
+
 import {
   addWishListAction,
   getWishListsAction,
@@ -16,7 +18,8 @@ const Product = ({
   history,
   productListing = false,
   cartItems,
-  removeProductToCart
+  removeProductToCart,
+  alert
 }) => {
   const { name, price, image, _id } = product;
   console.log('images', image);
@@ -40,11 +43,17 @@ const Product = ({
       const isItemExistInCart = cartItems.find(item => item._id === _id);
       if (isItemExistInCart) {
         removeProductToCart(_id);
-      } else addProductToCart({ ...product });
+        alert.success('Product Has Been Removed');
+      } else {
+        addProductToCart({ ...product });
+        alert.success('Product Added');
+      }
     } else {
-      return addProductToCart({ ...product });
+      addProductToCart({ ...product });
+      alert.success('Product Added');
     }
   };
+
   return (
     <div
       className="product-card"
@@ -118,4 +127,4 @@ export default connect(mapStateToProp, {
   deleteWishListAction,
   addProductToCart,
   removeProductToCart
-})(withRouter(Product));
+})(withRouter(withAlert()(Product)));

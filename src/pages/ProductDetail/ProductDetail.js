@@ -111,6 +111,7 @@ class ProductDetail extends Component {
   render() {
     const { product, isLoading } = this.state;
 
+    console.log('thegratestProdcut', product);
     let ProductDetailContent = <Spinner />;
     if (product && Object.keys(product).length > 0 && !isLoading) {
       ProductDetailContent = (
