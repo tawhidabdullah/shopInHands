@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 // import { shortenTitle } from '../../pipes/shortenTitle';
 // import { formatMoney } from '../../pipes/priceFormatter';
 import { decrementCartQuantity, incrementCartQuantity } from '../../actions';
+import { baseApiURL } from '../../constants/variable';
 
 const CartOverLayCartItem = ({
   handleToggleCartBar,
@@ -36,7 +37,7 @@ const CartOverLayCartItem = ({
           handleToggleCartBar();
           history.push(`/products/${id}`);
         }}
-        src={`http://192.168.0.102:5000${image[0]}`}
+        src={`${baseApiURL}${image[0]}`}
         alt="productImg"
       />
       <div className="">
