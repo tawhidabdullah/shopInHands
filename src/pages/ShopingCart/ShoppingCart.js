@@ -54,7 +54,15 @@ const ShoppingCart = props => {
                 <CartItem {...cart} image={cart.image[0]} />
               ))
             ) : (
-              <h1 className="display-4 mt-5 text-center text-danger">
+              <h1
+                className=" mt-5 text-center "
+                style={{
+                  fontSize: '6vh',
+                  color: '#777',
+                  fontWeight: '500',
+                  marginBottom: '50px'
+                }}
+              >
                 There is no product in your cart
               </h1>
             )}

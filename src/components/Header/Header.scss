@@ -87,6 +87,15 @@
   background: transparent;
   color: var(--primaryColor);
 }
+
+@media screen and (max-width: 768px) {
+  .banner-btn {
+    padding: 0.8rem 0.7rem;
+    font-size: 0.9rem;
+    margin-left: 5px;
+  }
+}
+
 /* --------------- End of Hero ---------------- */
 /* --------------- Products ---------------- */
 

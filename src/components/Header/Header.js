@@ -508,9 +508,6 @@ class Header extends Component {
                     this.handleToggleCartBar();
                     this.props.history.push('/checkout');
                   }}
-                  style={{
-                    marginLeft: '20px'
-                  }}
                 >
                   Checkout
                 </button>
