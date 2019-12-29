@@ -31,7 +31,7 @@ class Login extends Component {
   componentWillReceiveProps(nextProps) {
     // it's runs when our components recive new props
     if (nextProps.auth.isAuthenticate) {
-      this.props.history.push('/');
+      this.props.history.push('/dashboard');
     }
     if (nextProps.errors) {
       this.setState({
@@ -47,8 +47,6 @@ class Login extends Component {
       username: this.state.username,
       password: this.state.password
     };
-
-    console.log(userData); // print on console the userData
 
     this.props.loginUser(userData); // fired the loginUser action with passing current user
   };

@@ -72,8 +72,6 @@ class ProductDetail extends Component {
 
       const relatedProducts = relatedProductsRes.data.product.slice(0, 5);
 
-      console.log('relativer', relatedProducts);
-
       this.setState({
         ...this.state,
         product,
@@ -91,7 +89,6 @@ class ProductDetail extends Component {
   componentDidMount() {
     const productId = this.props.match.params.id;
     this.getProductsAndRelatedProducts(productId);
-    console.log('get a life');
   }
 
   onAddRateButtonClick = () => {
@@ -121,7 +118,6 @@ class ProductDetail extends Component {
   render() {
     const { product, isLoading, relatedProducts } = this.state;
 
-    console.log('thegratestProdcut', product);
     let ProductDetailContent = <Spinner />;
     if (product && Object.keys(product).length > 0 && !isLoading) {
       ProductDetailContent = (

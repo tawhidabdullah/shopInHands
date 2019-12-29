@@ -35,8 +35,6 @@ class Product extends Component {
         if (counter > 0) {
           this.props.deleteWishListAction(id);
         }
-
-        console.log('counter:', counter);
       }
     }
   };

@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { postApi, getApi } from '../../utilities/wooApi';
+import { getApi } from '../../utilities/wooApi';
 import axios from 'axios';
 import { baseApiURL } from '../../constants/variable';
 import { useAlert } from 'react-alert';
@@ -105,12 +105,6 @@ const Checkout = props => {
     };
 
     try {
-      // const successOrderResponse = await postApi(
-      //   `/wp-json/wc/v3/orders`,
-      //   orderData
-      // );
-      // console.log('successOrderrestponse', successOrderResponse);
-      // alert.show('Your Order Has Been Created SuccessFully');
     } catch (err) {
       alert.show('Something Went Wrong Went Creating The Order');
     }
@@ -162,7 +156,6 @@ const Checkout = props => {
       address: fields.address
     };
 
-    console.log('orderschema', orderSchema);
     setisOrderSuccess(false);
     setIsOrderError(false);
     setIsLoading(true);
@@ -181,7 +174,6 @@ const Checkout = props => {
         withCredentials: true
       });
 
-      console.log('awaitedRes', await awaitedRes.data);
       setIsLoading(false);
       setisOrderSuccess(true);
       setIsOrderError(false);
@@ -240,183 +232,6 @@ const Checkout = props => {
                     {errors.address && errors.address}
                   </Form.Text>
                 </Form.Group>
-
-                {/* <Form.Group controlId="formBasicPhone">
-                  <Form.Label
-                    style={{
-                      marginBottom: '10px'
-                    }}
-                  >
-                    Phone Number
-                  </Form.Label>
-                  <Form.Control
-                    name="number"
-                    type="text"
-                    onChange={handleFieldsChange}
-                    placeholder="Enter Phone Number"
-                  />
-
-                  <Form.Text className="text-muted text-danger">
-                    {errors.number && errors.number}
-                  </Form.Text>
-                </Form.Group>
-
-                <Form.Group controlId="formBasicFirstName">
-                  <Form.Label
-                    style={{
-                      marginBottom: '10px'
-                    }}
-                  >
-                    First Name
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="first_name"
-                    onChange={handleFieldsChange}
-                    placeholder="Enter First Name"
-                  />
-
-                  <Form.Text className="text-muted text-danger">
-                    {errors.first_name && errors.first_name}
-                  </Form.Text>
-                </Form.Group>
-
-                <Form.Group controlId="formBasicLastName">
-                  <Form.Label
-                    style={{
-                      marginBottom: '10px'
-                    }}
-                  >
-                    Last Name
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    onChange={handleFieldsChange}
-                    placeholder="Enter Last Name"
-                    name="last_name"
-                  />
-                  <Form.Text className="text-muted text-danger">
-                    {errors.last_name && errors.last_name}
-                  </Form.Text>
-                </Form.Group>
-
-                <Form.Group controlId="formBasicAddress1">
-                  <Form.Label
-                    style={{
-                      marginBottom: '10px'
-                    }}
-                  >
-                    Address 1
-                  </Form.Label>
-                  <Form.Control
-                    onChange={handleFieldsChange}
-                    type="text"
-                    placeholder="Enter Address1"
-                    name="address_1"
-                  />
-
-                  <Form.Text className="text-muted text-danger">
-                    {errors.address_1 && errors.address_1}
-                  </Form.Text>
-                </Form.Group>
-
-                <Form.Group controlId="formBasicAddress2">
-                  <Form.Label
-                    style={{
-                      marginBottom: '10px'
-                    }}
-                  >
-                    Address 2
-                  </Form.Label>
-                  <Form.Control
-                    onChange={handleFieldsChange}
-                    type="text"
-                    placeholder="Enter Address2"
-                    name="address_2"
-                  />
-
-                  <Form.Text className="text-muted text-danger">
-                    {errors.address_2 && errors.address_2}
-                  </Form.Text>
-                </Form.Group>
-
-                <Form.Group controlId="formBasicCity">
-                  <Form.Label
-                    style={{
-                      marginBottom: '10px'
-                    }}
-                  >
-                    City
-                  </Form.Label>
-                  <Form.Control
-                    name="city"
-                    type="text"
-                    onChange={handleFieldsChange}
-                    placeholder="Enter City"
-                  />
-
-                  <Form.Text className="text-muted text-danger">
-                    {errors.city && errors.city}
-                  </Form.Text>
-                </Form.Group>
-
-                <Form.Group controlId="formBasicState">
-                  <Form.Label
-                    style={{
-                      marginBottom: '10px'
-                    }}
-                  >
-                    State
-                  </Form.Label>
-                  <Form.Control
-                    name="state"
-                    type="text"
-                    onChange={handleFieldsChange}
-                    placeholder="Enter State"
-                  />
-
-                  <Form.Text className="text-muted text-danger">
-                    {errors.state && errors.state}
-                  </Form.Text>
-                </Form.Group>
-
-                <Form.Group controlId="formBasicPostcode">
-                  <Form.Label
-                    style={{
-                      marginBottom: '10px'
-                    }}
-                  >
-                    Postcode
-                  </Form.Label>
-                  <Form.Control
-                    name="postcode"
-                    type="text"
-                    onChange={handleFieldsChange}
-                    placeholder="Enter Postcode"
-                  />
-                  <Form.Text className="text-muted text-danger">
-                    {errors.postcode && errors.postcode}
-                  </Form.Text>
-                </Form.Group>
-
-                <Form.Group controlId="formBasicCountry">
-                  <Form.Label
-                    style={{
-                      marginBottom: '10px'
-                    }}
-                  >
-                    Country
-                  </Form.Label>
-                  <Form.Control
-                    name="country"
-                    type="text"
-                    onChange={handleFieldsChange}
-                    placeholder="Enter Country"
-                  />
-                  <Form.Text className="text-muted text-danger">
-                    {errors.country && errors.country}
-                  </Form.Text>
-                </Form.Group> */}
 
                 <Button
                   variant="primary"
@@ -544,8 +359,6 @@ const Checkout = props => {
 };
 
 const mapStateToProps = state => {
-  console.log(state, 'state has changed');
-
   return {
     cartItems: state.shop.cart,
     cartItemCount: state.shop.cart.reduce((count, curItem) => {

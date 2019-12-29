@@ -57,7 +57,6 @@ class Register extends Component {
       address: this.state.address
     };
 
-    console.log('new user data', newUser);
     // this is when action get's fired
     this.props.registeruser(newUser, this.props.history); // passing user object to action
 

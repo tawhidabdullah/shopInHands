@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { getProductAction } from '../../actions/productAction';
 import Carousel from '../../components/Carousel';
 import { connect } from 'react-redux';
-import { getApi } from '../../utilities/wooApi';
 import Products from './products';
 import './Home.scss';
 import { withRouter } from 'react-router-dom';
@@ -29,41 +28,36 @@ class Home extends Component {
         isLoading: true
       });
 
-      // const categories = await getApi('/wp-json/wc/v3/products/categories');
-      const categoryRes = await axios.get(`${baseApiURL}/api/category/list`);
+      if (!this.state.categories.length > 0) {
+        const categoryRes = await axios.get(`${baseApiURL}/api/category/list`);
 
-      const categories = categoryRes.data;
+        const categories = categoryRes.data;
 
-      console.log('categories result', categories);
+        const imageContentRes = await axios.get(
+          `${baseApiURL}/api/component/detail/name/Slider`
+        );
 
-      // const sliderImageContents = await getApi(
-      //   '/wp-json/wp-rest-api-sidebars/v1/sidebars/slider'
-      // );
+        const sliderImageContents = imageContentRes.data;
 
-      const imageContentRes = await axios.get(
-        `${baseApiURL}/api/component/detail/name/Slider`
-      );
+        const sliderRightRes = await axios.get(
+          `${baseApiURL}/api/component/detail/name/sliderRight`
+        );
 
-      const sliderImageContents = imageContentRes.data;
+        const sliderRight = sliderRightRes.data;
 
-      const sliderRightRes = await axios.get(
-        `${baseApiURL}/api/component/detail/name/sliderRight`
-      );
+        const tagRes = await axios.get(`${baseApiURL}/api/tag/list`);
 
-      const sliderRight = sliderRightRes.data;
+        const tags = tagRes.data;
 
-      const tagRes = await axios.get(`${baseApiURL}/api/tag/list`);
-
-      const tags = tagRes.data;
-
-      this.setState({
-        ...this.state,
-        categories: categories,
-        sliderImageContents,
-        isLoading: false,
-        sliderRight,
-        tags
-      });
+        this.setState({
+          ...this.state,
+          categories: categories,
+          sliderImageContents,
+          isLoading: false,
+          sliderRight,
+          tags
+        });
+      }
     } catch (err) {
       this.setState({
         ...this.state,
@@ -81,18 +75,6 @@ class Home extends Component {
       sliderRight,
       tags
     } = this.state;
-    let fiveProducts;
-    if (this.props.products.products) {
-      fiveProducts = this.props.products.products.splice(0, 5);
-    }
-
-    const fiveImages = fiveProducts.map(product => {
-      return product.productImage;
-    });
-    const imgOne = fiveImages[0];
-    const imgTwo = fiveImages[1];
-    const imgThree = fiveImages[2];
-    console.log('imgg22', imgTwo);
 
     return (
       <React.Fragment>
@@ -162,11 +144,6 @@ class Home extends Component {
             </div>
           </div>
         </section>
-
-        {/* <div className="row product-section">
-            <FilterBar />
-            <ProductList />
-          </div> */}
 
         {categories && categories.length > 0 ? (
           <>

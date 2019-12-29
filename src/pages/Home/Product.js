@@ -51,12 +51,7 @@ const Product = ({
   };
 
   return (
-    <div
-      className="product-card"
-      // style={{
-      //   minWidth: `${productListing ? '200px' : '250px'}`
-      // }}
-    >
+    <div className="product-card">
       <div class="product-top">
         <img src={`${baseApiURL}${image[0]}`} />
         <div

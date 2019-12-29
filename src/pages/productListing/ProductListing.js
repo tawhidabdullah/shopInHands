@@ -12,7 +12,6 @@ import Spinner from '../../components/commonFeilds/Spinner';
 
 const ProductListing = props => {
   const id = props.match.params.id;
-  console.log('propspropspropsprops', props.location.state);
 
   const [products, setProducts] = React.useState([]);
   const [categories, setCategories] = React.useState([]);
@@ -20,7 +19,6 @@ const ProductListing = props => {
   const [searchValue, setSearchValue] = React.useState('');
 
   const [value, setValue] = React.useState({ min: 2, max: 5000 });
-  // const [manupulatedCategories,setManupulatedCategories] = React.useState([]);
 
   React.useEffect(() => {
     if (id === 'all') {
@@ -51,9 +49,6 @@ const ProductListing = props => {
             );
             const products = awaitedProducts.data.product;
 
-            console.log('products', products);
-            console.log('get a life bro');
-
             setProducts(products);
             setIsLoading(false);
           } else {
@@ -61,9 +56,6 @@ const ProductListing = props => {
               `${baseApiURL}/api/category/detail/${id}`
             );
             const products = awaitedProducts.data.product;
-
-            console.log('products', products);
-            console.log('get a life bro');
 
             setProducts(products);
             setIsLoading(false);
@@ -145,7 +137,6 @@ const ProductListing = props => {
           cat[`is${cat.name}`] = true;
         } else cat[`is${cat.name}`] = false;
       });
-    console.log('temCategories', temCategories);
 
     setCategories(temCategories);
   };
@@ -159,7 +150,6 @@ const ProductListing = props => {
         const products = await getApi(
           `/wp-json/wc/v3/products?min_price=${newValue.min}&max_price=${newValue.max}`
         );
-        console.log('products', products);
         setProducts(products);
         setIsLoading(false);
       } catch (err) {
@@ -212,7 +202,14 @@ const ProductListing = props => {
               </div> */}
               <div class="category-block">
                 <div class="product-detail">
-                  <h2 class="category-title">Categories</h2>
+                  <h2
+                    class="category-title"
+                    style={{
+                      marginBottom: '10px'
+                    }}
+                  >
+                    Categories
+                  </h2>
                   <ul>
                     {categories &&
                       categories.map((cat, i) => {

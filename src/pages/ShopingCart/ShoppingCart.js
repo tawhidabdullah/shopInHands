@@ -4,16 +4,11 @@ import { withRouter } from 'react-router-dom';
 import { formatMoney } from '../../pipes/priceFormatter';
 import CartItem from '../../components/CartItem/CartItem';
 import { clearCart } from '../../actions/index';
-import { baseApiURL } from '../../constants/variable';
 import { Modal, Button } from 'react-bootstrap';
 
-import axios from 'axios';
 import './ShoppingCart.scss';
 
 const ShoppingCart = props => {
-  const [isLoading, setIsLoading] = React.useState(false);
-  const { cartItems } = props;
-
   const [show, setShow] = useState(false);
 
   const handleClose = () => {
@@ -160,8 +155,6 @@ const ShoppingCart = props => {
 };
 
 const mapStateToProps = state => {
-  console.log(state, 'state has changed');
-
   return {
     auth: state.auth,
     cartItems: state.shop.cart,

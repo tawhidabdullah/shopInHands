@@ -1,7 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import queryString from 'query-string';
-import { getApi } from '../../utilities/wooApi';
 import Product from '../Home/Product';
 import Spinner from '../../components/commonFeilds/Spinner';
 import Footer from '../../components/Footer/Footer';
@@ -11,7 +10,6 @@ import { baseApiURL } from '../../constants/variable';
 const ProductSearch = props => {
   const queryValueOfSearch = queryString.parse(props.location.search).key;
   const categoryValueOfSearch = queryString.parse(props.location.search).cat;
-  console.log('searchBValue', queryValueOfSearch);
   const [products, setProducts] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
 
@@ -44,7 +42,6 @@ const ProductSearch = props => {
           style={{
             paddingTop: '20px',
             width: '100%',
-            // background: 'red',
             display: 'flex',
             flexWrap: 'wrap',
             justifyContent: 'space-around',
@@ -55,12 +52,7 @@ const ProductSearch = props => {
             products &&
             products.length > 0 &&
             products.map(product => {
-              return (
-                // <div class="col-md-2 col-sm-4 ml-3 mr-3">
-                //   <Product product={product} />
-                // </div>
-                <Product product={product} productListing={true} />
-              );
+              return <Product product={product} productListing={true} />;
             })) ||
             (isLoading && <Spinner />)}
 

@@ -17,8 +17,6 @@ const CartOverLayCartItem = ({
 
   const incrementOrDecrement = (e, type) => {
     const value = itemQuantity;
-    console.log(type, value);
-
     if (type === 'inc' && value < 10) {
       setItemQuantity(itemQuantity + 1);
       dispatch(incrementCartQuantity(_id));
