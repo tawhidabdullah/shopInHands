@@ -23,7 +23,8 @@ function ControlledCarousel({ imagesContents }) {
                 <img
                   className="d-block w-100"
                   style={{
-                    height: '70vh'
+                    height: '70vh',
+                    objectFit: 'cover'
                   }}
                   src={`${baseApiURL}${items.img}`}
                   alt="Second slide"

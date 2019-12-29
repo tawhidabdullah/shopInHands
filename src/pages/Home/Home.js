@@ -112,8 +112,13 @@ class Home extends Component {
                 <Carousel imagesContents={sliderImageContents.items} />
               )}
             </div>
-            <div className="col-md-3">
-              <div className="row">
+            <div className="col-md-3 col-sm-12">
+              <div
+                className="row"
+                style={{
+                  height: '100%'
+                }}
+              >
                 {sliderRight &&
                   sliderRight.items &&
                   sliderRight.items.map((item, index) => {
@@ -131,7 +136,7 @@ class Home extends Component {
                             style={{
                               width: '100%',
                               height: '100%',
-                              objectFit: 'contain'
+                              objectFit: 'cover'
                             }}
                             src={`${baseApiURL}${item.img}`}
                             alt="Second slide"

@@ -58,20 +58,26 @@ const ProductDetail = props => {
     <div class="row">
       <div class="col-md-6">
         <Carousel>
-          <div
-            style={{
-              maxHeight: '500px'
-            }}
-          >
-            <img
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'contain'
-              }}
-              src={`${baseApiURL}${image[0]}`}
-            />
-          </div>
+          {image &&
+            image.length > 0 &&
+            image.map(src => {
+              return (
+                <div
+                  style={{
+                    maxHeight: '500px'
+                  }}
+                >
+                  <img
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'contain'
+                    }}
+                    src={`${baseApiURL}${src}`}
+                  />
+                </div>
+              );
+            })}
         </Carousel>
       </div>
       <div class="col-md-6">
