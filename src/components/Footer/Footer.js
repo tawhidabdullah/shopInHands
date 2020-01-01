@@ -66,7 +66,9 @@ const Footer = () => {
                 {footerOne.items.map(item => {
                   return (
                     <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-244">
-                      <a href={`${item.a}`}>{item.text}</a>
+                      {(item.a && <a href={`${item.a}`}>{item.text}</a>) || (
+                        <span>{item.text}</span>
+                      )}
                     </li>
                   );
                 })}

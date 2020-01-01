@@ -28,36 +28,34 @@ class Home extends Component {
         isLoading: true
       });
 
-      if (!this.state.categories.length > 0) {
-        const categoryRes = await axios.get(`${baseApiURL}/api/category/list`);
+      const categoryRes = await axios.get(`${baseApiURL}/api/category/list`);
 
-        const categories = categoryRes.data;
+      const categories = categoryRes.data;
 
-        const imageContentRes = await axios.get(
-          `${baseApiURL}/api/component/detail/name/Slider`
-        );
+      const imageContentRes = await axios.get(
+        `${baseApiURL}/api/component/detail/name/Slider`
+      );
 
-        const sliderImageContents = imageContentRes.data;
+      const sliderImageContents = imageContentRes.data;
 
-        const sliderRightRes = await axios.get(
-          `${baseApiURL}/api/component/detail/name/sliderRight`
-        );
+      const sliderRightRes = await axios.get(
+        `${baseApiURL}/api/component/detail/name/sliderRight`
+      );
 
-        const sliderRight = sliderRightRes.data;
+      const sliderRight = sliderRightRes.data;
 
-        const tagRes = await axios.get(`${baseApiURL}/api/tag/list`);
+      const tagRes = await axios.get(`${baseApiURL}/api/tag/list`);
 
-        const tags = tagRes.data;
+      const tags = tagRes.data;
 
-        this.setState({
-          ...this.state,
-          categories: categories,
-          sliderImageContents,
-          isLoading: false,
-          sliderRight,
-          tags
-        });
-      }
+      this.setState({
+        ...this.state,
+        categories: categories,
+        sliderImageContents,
+        isLoading: false,
+        sliderRight,
+        tags
+      });
     } catch (err) {
       this.setState({
         ...this.state,
@@ -109,7 +107,11 @@ class Home extends Component {
           <div className="row">
             <div className="col-md-9 col-sm-12 image-slider-section-carousel">
               {!isLoading && (
-                <Carousel imagesContents={sliderImageContents.items} />
+                <Carousel
+                  imagesContents={
+                    (sliderImageContents && sliderImageContents.items) || []
+                  }
+                />
               )}
             </div>
             <div className="col-md-3 col-sm-12">

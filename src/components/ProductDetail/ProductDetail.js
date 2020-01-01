@@ -6,7 +6,9 @@ import { Carousel } from 'react-responsive-carousel';
 import { baseApiURL } from '../../constants/variable';
 import Moment from 'react-moment';
 import { withAlert } from 'react-alert';
+import { withRouter } from 'react-router';
 
+import './ProductDetail.scss';
 const ProductDetail = props => {
   const {
     name,
@@ -23,7 +25,19 @@ const ProductDetail = props => {
     _id
   } = props.product;
 
-  const { cartItems, alert } = props;
+  const { cartItems, alert, history } = props;
+  console.log('product', props.product);
+  console.log('product', props.product);
+  console.log('product', props.product);
+  console.log('product', props.product);
+  console.log('product', props.product);
+  console.log('product', props.product);
+  console.log('product', props.product);
+  console.log('product', props.product);
+  console.log('product', props.product);
+  console.log('product', props.product);
+  console.log('product', props.product);
+  console.log('product', props.product);
 
   const onCart = e => {
     e.preventDefault();
@@ -83,16 +97,7 @@ const ProductDetail = props => {
       <div class="col-md-6">
         <div class="productInfo__container">
           <h2 class="productInfo__title">{name}</h2>
-          <span
-            style={{
-              fontSize: '14px',
-              color: '#777',
-              position: 'absolute',
-              right: 30
-            }}
-          >
-            In Stock: {minimumStock}
-          </span>
+
           <div class="productInfo__price">
             <div class="product-reviews-summary">
               {/* <h3 class="rating-summary">
@@ -114,47 +119,31 @@ const ProductDetail = props => {
               <h2 class="old-price">৳{price}</h2>
             </div>
 
-            <div
-              style={{
-                padding: '10px 0'
-              }}
-            >
+            <div className="tagAttributes">
               {brand && brand.length > 0 && 'Brand :'}
               {brand &&
                 brand.length > 0 &&
                 brand.map(item => (
-                  <span
-                    style={{
-                      fontSize: '15px',
-                      color: '#666',
-                      marginLeft: '5px'
-                    }}
-                  >
-                    {item.name},
-                  </span>
+                  <span className="tagAttribute">{item.name},</span>
                 ))}
             </div>
 
-            <div
-              style={{
-                padding: '10px 0'
-              }}
-            >
+            <div className="tagAttributes">
               {category && category.length > 0 && 'Category :'}
               {category &&
                 category.length > 0 &&
                 category.map(item => (
                   <span
-                    style={{
-                      fontSize: '15px',
-                      color: '#666',
-                      marginLeft: '5px'
-                    }}
+                    className="tagAttribute"
+                    onClick={() => history.push(`/productsListing/${item._id}`)}
                   >
                     {item.name},
                   </span>
                 ))}
             </div>
+          </div>
+          <div class="product-description">
+            <p>{description}</p>
           </div>
           <div class="product-options-bottom">
             <div class="box-tocart">
@@ -165,10 +154,6 @@ const ProductDetail = props => {
                 {/* <a  class="btn-add withborder"><i class="fa fa-heart"></i></a>  */}
               </div>
             </div>
-          </div>
-
-          <div class="product-description">
-            <p>{description}</p>
           </div>
         </div>
       </div>
@@ -185,4 +170,4 @@ const mapStateToProp = state => {
 export default connect(mapStateToProp, {
   addProductToCart,
   removeProductToCart
-})(withAlert()(ProductDetail));
+})(withRouter(withAlert()(ProductDetail)));

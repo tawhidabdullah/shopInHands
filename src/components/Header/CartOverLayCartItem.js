@@ -36,7 +36,7 @@ const CartOverLayCartItem = ({
           handleToggleCartBar();
           history.push(`/products/${_id}`);
         }}
-        src={`${baseApiURL}${image[0]}`}
+        src={`${baseApiURL}${image && image[0]}`}
         alt="productImg"
         style={{
           cursor: 'pointer'

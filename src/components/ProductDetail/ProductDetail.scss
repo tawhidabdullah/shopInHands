@@ -1,37 +1,14 @@
-.product-rating {
-    padding-bottom: 5px;
+.tagAttributes {
+  padding: 10px 0;
+}
+.tagAttributes .tagAttribute {
+  font-size: 15px;
+  color: #666;
+  margin-left: 5px;
+  transition: all 0.45ms;
+  cursor: pointer;
 }
 
-.product-rating .product-reviews {
-  font-family: "Lato";
-  // margin-left: 15px;
-  font-size: 12px;
- 
-}
-.product-rating .product-reviews a {
-  color: #999;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: color 0.05s ease;
-}
-.product-rating .product-reviews a:hover {
-  text-decoration: underline;
-  color: #d75229;
-}
-.product-rating ul {
-  display: inline-block;
-}
-.product-rating ul,
-.product-single .product-details .product-rating li {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-.product-rating li {
-  color: #fcd000;
-}
-
-
-.title {
-  font-size: 27px;
+.tagAttributes .tagAttribute:hover {
+  color: #ff5c00;
 }
