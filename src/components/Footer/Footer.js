@@ -57,11 +57,13 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="row">
-        {footerOne.items && footerOne.items.length > 0 && (
+        {footerOne && footerOne.items && footerOne.items.length > 0 && (
           <div className="col-md-3">
             <div className="our__categories">
               {/* {ReactHtmlParser(footerOne.rendered)} */}
-              <span className="widget-title">{footerOne.items[0].name}</span>
+              <span className="widget-title">
+                {footerOne.items && footerOne.items[0].name}
+              </span>
               <ul className="menu">
                 {footerOne.items.map(item => {
                   return (
@@ -77,59 +79,65 @@ const Footer = () => {
           </div>
         )}
 
-        {aboutUsContent.items && aboutUsContent.items.length > 0 && (
-          <div className="col-md-3">
-            <div className="our__categories">
-              {/* {ReactHtmlParser(aboutUsContent.rendered)} */}
-              <span className="widget-title">{aboutUsContent.name}</span>
-              <ul className="menu">
-                {aboutUsContent.items.map(item => {
-                  return (
-                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-244">
-                      <a href={`${item.a}`}>{item.name}</a>
-                    </li>
-                  );
-                })}
-              </ul>
+        {aboutUsContent &&
+          aboutUsContent.items &&
+          aboutUsContent.items.length > 0 && (
+            <div className="col-md-3">
+              <div className="our__categories">
+                {/* {ReactHtmlParser(aboutUsContent.rendered)} */}
+                <span className="widget-title">{aboutUsContent.name}</span>
+                <ul className="menu">
+                  {aboutUsContent.items.map(item => {
+                    return (
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-244">
+                        <a href={`${item.a}`}>{item.name}</a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {policyContent.items && policyContent.items.length > 0 && (
-          <div className="col-md-3">
-            <div className="our__categories">
-              {/* {ReactHtmlParser(policyContent.rendered)} */}
-              <span className="widget-title">{policyContent.name}</span>
-              <ul className="menu">
-                {policyContent.items.map(item => {
-                  return (
-                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-244">
-                      <a href={`${item.a}`}>{item.name}</a>
-                    </li>
-                  );
-                })}
-              </ul>
+        {policyContent &&
+          policyContent.items &&
+          policyContent.items.length > 0 && (
+            <div className="col-md-3">
+              <div className="our__categories">
+                {/* {ReactHtmlParser(policyContent.rendered)} */}
+                <span className="widget-title">{policyContent.name}</span>
+                <ul className="menu">
+                  {policyContent.items.map(item => {
+                    return (
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-244">
+                        <a href={`${item.a}`}>{item.name}</a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {accountContent.items && accountContent.items.length > 0 && (
-          <div className="col-md-3">
-            <div className="our__categories">
-              {/* {ReactHtmlParser(accountContent.rendered)} */}
-              <span className="widget-title">{accountContent.name}</span>
-              <ul className="menu">
-                {accountContent.items.map(item => {
-                  return (
-                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-244">
-                      <a href={`${item.a}`}>{item.name}</a>
-                    </li>
-                  );
-                })}
-              </ul>
+        {accountContent &&
+          accountContent.items &&
+          accountContent.items.length > 0 && (
+            <div className="col-md-3">
+              <div className="our__categories">
+                {/* {ReactHtmlParser(accountContent.rendered)} */}
+                <span className="widget-title">{accountContent.name}</span>
+                <ul className="menu">
+                  {accountContent.items.map(item => {
+                    return (
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-244">
+                        <a href={`${item.a}`}>{item.name}</a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
             </div>
-          </div>
-        )}
+          )}
       </div>
     </footer>
   );
