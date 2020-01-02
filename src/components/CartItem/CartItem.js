@@ -63,7 +63,7 @@ const CartItem = ({
             cursor: 'pointer'
           }}
           className="img-responsive"
-          src={`${baseApiURL}${image}`}
+          src={`${baseApiURL}${image && image}`}
           style={{ height: '60%', width: '60%' }}
           alt={description}
         />
