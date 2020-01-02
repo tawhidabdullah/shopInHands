@@ -11,7 +11,8 @@ const CartOverLayCartItem = ({
   handleRemoveCartItem,
   cartItem,
   dispatch,
-  history
+  history,
+  key
 }) => {
   const [itemQuantity, setItemQuantity] = useState(cartItem.quantity);
 
@@ -29,8 +30,9 @@ const CartOverLayCartItem = ({
   };
 
   const { image, _id, name, price, quantity } = cartItem;
+
   return (
-    <div className="cart-item">
+    <div className="cart-item" key={key}>
       <img
         onClick={() => {
           handleToggleCartBar();

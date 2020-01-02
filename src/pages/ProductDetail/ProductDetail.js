@@ -130,66 +130,83 @@ class ProductDetail extends Component {
     }
 
     return (
-      (product && Object.keys(product).length > 0 && (
+      (!isLoading && (
         <>
-          <div class="singleProduct">
-            <div class="container-fluid singleProduct__container">
-              <div class="row">
-                <div class="col-md-9">{ProductDetailContent}</div>
-                <div class="col-md-3">
-                  <div class="services-sidebar">
-                    <div class="small__filterProducts">
-                      <div class="block-title">
-                        <span>Related Products</span>
-                      </div>
-                      <div class="small-products-items">
-                        {(!isLoading &&
-                          relatedProducts.length > 0 &&
-                          relatedProducts.map(item => {
-                            return (
-                              <div class="small-product-item">
+          <div className="singleProduct">
+            <div className="container-fluid singleProduct__container">
+              <div className="row">
+                <div className="col-md-9">{ProductDetailContent}</div>
+                <div className="col-md-3">
+                  {(!isLoading &&
+                    relatedProducts &&
+                    relatedProducts.length > 0 && (
+                      <div className="services-sidebar">
+                        <div className="small__filterProducts">
+                          <div className="small-products-items">
+                            {(!isLoading &&
+                              relatedProducts &&
+                              relatedProducts.length > 0 &&
+                              relatedProducts.map(item => {
+                                return (
+                                  <div
+                                    key={item._id}
+                                    className="small-product-item"
+                                  >
+                                    <div
+                                      className="small-product-item-box-img"
+                                      onClick={() => {
+                                        this.props.history.push(
+                                          `/products/${item._id}`
+                                        );
+                                      }}
+                                    >
+                                      <img
+                                        src={`${baseApiURL}${item.image &&
+                                          item.image[0]}`}
+                                        className="product photo product-item-photo"
+                                        alt=""
+                                      />
+                                    </div>
+                                    <div className="small-product-info">
+                                      <h2 className="small-product-title">
+                                        {item.name}
+                                      </h2>
+                                      <h2 className="small-product-price">
+                                        ৳{item.offerPrice}
+                                      </h2>
+                                      <h2 className="small-product-offerPrice">
+                                        ৳{item.price}
+                                      </h2>
+                                    </div>
+                                  </div>
+                                );
+                              })) ||
+                              (isLoading && <Spinner />)}
+
+                            {!isLoading &&
+                              relatedProducts &&
+                              !relatedProducts.length > 0 && (
                                 <div
-                                  class="small-product-item-box-img"
-                                  onClick={() => {
-                                    this.props.history.push(
-                                      `/products/${item.id}`
-                                    );
+                                  style={{
+                                    marginTop: '200px'
                                   }}
                                 >
-                                  <img
-                                    src={`${baseApiURL}${item.image[0]}`}
-                                    class="product photo product-item-photo"
-                                    alt=""
-                                  />
+                                  <h2>No Related Product Has Been Found</h2>
                                 </div>
-                                <div class="small-product-info">
-                                  <h2 class="small-product-title">
-                                    {item.name}
-                                  </h2>
-                                  <h2 class="small-product-price">
-                                    ৳{item.offerPrice}
-                                  </h2>
-                                  <h2 class="small-product-offerPrice">
-                                    ৳{item.price}
-                                  </h2>
-                                </div>
-                              </div>
-                            );
-                          })) || <Spinner />}
-
-                        {!isLoading && !relatedProducts.length > 0 && (
-                          <h2>No Related Product Has Been Found</h2>
-                        )}
+                              )}
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
+                    )) ||
+                    ''}
                 </div>
               </div>
             </div>
           </div>
           <Footer />
         </>
-      )) || <Spinner />
+      )) ||
+      (isLoading && <Spinner />)
     );
   }
 }

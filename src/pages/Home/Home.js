@@ -61,7 +61,7 @@ class Home extends Component {
         ...this.state,
         isLoading: false
       });
-      console.log(err);
+      // console.log(err);
     }
   }
 
@@ -89,6 +89,7 @@ class Home extends Component {
               ? tags.map(tag => {
                   return (
                     <h5
+                      key={tag._id}
                       onClick={() =>
                         this.props.history.push({
                           pathname: `/productsListing/${tag._id}`,
@@ -158,11 +159,13 @@ class Home extends Component {
               if (cat.name === 'Uncategorized') {
               } else {
                 return (
-                  <Products
-                    categoryId={cat._id}
-                    categoryName={cat.name}
-                    products={cat.product}
-                  />
+                  <React.Fragment key={cat._id}>
+                    <Products
+                      categoryId={cat._id}
+                      categoryName={cat.name}
+                      products={cat.product}
+                    />
+                  </React.Fragment>
                 );
               }
             })}

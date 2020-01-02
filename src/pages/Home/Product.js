@@ -52,31 +52,35 @@ const Product = ({
 
   return (
     <div className="product-card">
-      <div class="product-top">
+      <div className="product-top">
         <img src={`${baseApiURL}${image[0]}`} />
         <div
           className="product-top-overlay"
           onClick={() => history.push(`/products/${_id}`)}
         ></div>
 
-        <div class="overlay-right">
+        <div className="overlay-right">
           <Link to={`/products/${_id}`} className="product__link">
-            <button type="button" class="btn btn-secondary" title="Quick Shop">
-              <i class="fa fa-eye"></i>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              title="Quick Shop"
+            >
+              <i className="fa fa-eye"></i>
             </button>
           </Link>
           <button
             type="button"
-            class="btn btn-secondary"
+            className="btn btn-secondary"
             title="Add To Cart"
             onClick={() => addProductToCart({ ...product })}
           >
-            <i class="fa fa-shopping-cart"></i>
+            <i className="fa fa-shopping-cart"></i>
           </button>
         </div>
       </div>
 
-      <div class="product-bottom text-center">
+      <div className="product-bottom text-center">
         <div className="cart-btn" onClick={handleCartAction}>
           <button className="primary-btn">{AddCartContent()}</button>
         </div>

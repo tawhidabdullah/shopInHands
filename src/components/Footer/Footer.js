@@ -65,7 +65,7 @@ const Footer = () => {
               <ul className="menu">
                 {footerOne.items.map(item => {
                   return (
-                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-244">
+                    <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-244">
                       {(item.a && <a href={`${item.a}`}>{item.text}</a>) || (
                         <span>{item.text}</span>
                       )}
@@ -87,7 +87,10 @@ const Footer = () => {
                 <ul className="menu">
                   {aboutUsContent.items.map(item => {
                     return (
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-244">
+                      <li
+                        key={item.name}
+                        className="menu-item menu-item-type-custom menu-item-object-custom menu-item-244"
+                      >
                         <a href={`${item.a}`}>{item.name}</a>
                       </li>
                     );
@@ -107,7 +110,10 @@ const Footer = () => {
                 <ul className="menu">
                   {policyContent.items.map(item => {
                     return (
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-244">
+                      <li
+                        key={item.name}
+                        className="menu-item menu-item-type-custom menu-item-object-custom menu-item-244"
+                      >
                         <a href={`${item.a}`}>{item.name}</a>
                       </li>
                     );
@@ -127,7 +133,10 @@ const Footer = () => {
                 <ul className="menu">
                   {accountContent.items.map(item => {
                     return (
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-244">
+                      <li
+                        key={item.name}
+                        className="menu-item menu-item-type-custom menu-item-object-custom menu-item-244"
+                      >
                         <a href={`${item.a}`}>{item.name}</a>
                       </li>
                     );

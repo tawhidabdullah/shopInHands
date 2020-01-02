@@ -265,11 +265,11 @@ class Header extends Component {
             </div>
             <div className="navbar-center-categoryAndSearch">
               <div className="categoryAndSearchFeilds">
-                <div class="s003">
+                <div className="s003">
                   <form onSubmit={this.handleSearch}>
-                    <div class="inner-form">
-                      <div class="input-field first-wrap">
-                        <div class="input-select">
+                    <div className="inner-form">
+                      <div className="input-field first-wrap">
+                        <div className="input-select">
                           <select
                             data-trigger="choices"
                             name="choices-single-default"
@@ -281,7 +281,7 @@ class Header extends Component {
                               categories.length > 0 &&
                               categories.map(item => {
                                 return (
-                                  <option value={item._id}>
+                                  <option value={item._id} key={item._id}>
                                     {item.name.charAt(0).toUpperCase() +
                                       item.name.slice(1)}
                                   </option>
@@ -290,7 +290,7 @@ class Header extends Component {
                           </select>
                         </div>
                       </div>
-                      <div class="input-field second-wrap">
+                      <div className="input-field second-wrap">
                         <input
                           id="search"
                           type="text"
@@ -300,10 +300,10 @@ class Header extends Component {
                           onChange={this.handleSearchBar}
                         />
                       </div>
-                      <div class="input-field third-wrap">
-                        <button class="btn-search">
+                      <div className="input-field third-wrap">
+                        <button className="btn-search">
                           <svg
-                            class="svg-inline--fa fa-search fa-w-16"
+                            className="svg-inline--fa fa-search fa-w-16"
                             aria-hidden="true"
                             data-prefix="fas"
                             data-icon="search"
@@ -381,6 +381,7 @@ class Header extends Component {
                     categories.map(item => {
                       return (
                         <li
+                          key={item._id}
                           onClick={() =>
                             this.props.history.push(
                               `/productsListing/${item._id}`
@@ -436,7 +437,11 @@ class Header extends Component {
                 navItemsContent &&
                 navItemsContent.length > 0 &&
                 navItemsContent.map(item => {
-                  return <a href={item.a}>{item.name}</a>;
+                  return (
+                    <a key={item.name} href={item.a}>
+                      {item.name}
+                    </a>
+                  );
                 })}
             </div>
             <div className="navbar-center-phoneNumberbox">
@@ -470,11 +475,14 @@ class Header extends Component {
               {(this.props.cartItems.length &&
                 this.props.cartItems.map(cartItem => {
                   return (
-                    <CartOverLayCartItem
-                      cartItem={cartItem}
-                      handleRemoveCartItem={this.handleRemoveCartItem}
-                      handleToggleCartBar={this.handleToggleCartBar}
-                    />
+                    <React.Fragment key={cartItem._id}>
+                      <CartOverLayCartItem
+                        cartItem={cartItem}
+                        handleRemoveCartItem={this.handleRemoveCartItem}
+                        handleToggleCartBar={this.handleToggleCartBar}
+                        key={cartItem._id}
+                      />
+                    </React.Fragment>
                   );
                 })) || (
                 <div className="cart-footer">

@@ -12,8 +12,11 @@ const ShoppingCart = props => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => {
-    props.history.push('/login');
     setShow(false);
+  };
+
+  const handleLogin = () => {
+    props.history.push('/login');
   };
   const handleShow = () => setShow(true);
   const { auth, isAuthenticate } = props.auth;
@@ -28,7 +31,7 @@ const ShoppingCart = props => {
           In Order to Order any Product You have to be Logged In
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handleLogin}>
             Login
           </Button>
           <Button variant="primary" onClick={handleClose}>
@@ -51,7 +54,9 @@ const ShoppingCart = props => {
           <div className="card-body">
             {props.cartItemCount ? (
               props.cartItems.map(cart => (
-                <CartItem {...cart} image={cart.image[0]} />
+                <React.Fragment key={cart._id}>
+                  <CartItem {...cart} image={cart.image[0]} />
+                </React.Fragment>
               ))
             ) : (
               <h1
@@ -82,7 +87,7 @@ const ShoppingCart = props => {
                 <a
                   onClick={e => {
                     e.preventDefault();
-                    props.history.push('/products');
+                    props.history.push('/');
                   }}
                   className="btn btn-primary"
                   style={{
@@ -130,7 +135,7 @@ const ShoppingCart = props => {
               <a
                 onClick={e => {
                   e.preventDefault();
-                  props.history.push('/products');
+                  props.history.push('/');
                 }}
                 className="btn btn-primary"
                 style={{

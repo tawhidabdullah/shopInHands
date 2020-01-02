@@ -162,14 +162,14 @@ const ProductListing = props => {
 
   return (
     <>
-      <div class="Bcak-bg">
-        <div class="container">
+      <div className="Bcak-bg">
+        <div className="container">
           {/* <h2>Category</h2> */}
-          <div class="row">
-            <div class="col-sm-3 filterbar">
-              <div class="category-block">
-                <span class="category-title">Search here</span>
-                <div class="form-group search-product">
+          <div className="row">
+            <div className="col-sm-3 filterbar">
+              <div className="category-block">
+                <span className="category-title">Search here</span>
+                <div className="form-group search-product">
                   <input
                     type="text"
                     name="Search"
@@ -179,7 +179,7 @@ const ProductListing = props => {
                   />
                   <i
                     onClick={handleSearch}
-                    class="fa fa-search"
+                    className="fa fa-search"
                     aria-hidden="true"
                   ></i>
                 </div>
@@ -200,10 +200,10 @@ const ProductListing = props => {
                   />
                 </div>
               </div> */}
-              <div class="category-block">
-                <div class="product-detail">
+              <div className="category-block">
+                <div className="product-detail">
                   <h2
-                    class="category-title"
+                    className="category-title"
                     style={{
                       marginBottom: '10px'
                     }}
@@ -242,7 +242,7 @@ const ProductListing = props => {
                 </div>
               </div>
               {/* 
-              <div class="category-block">
+              <div className="category-block">
                 <div class="product-detail">
                   <h2 class="category-title">Tags</h2>
                   <ul>
@@ -273,9 +273,9 @@ const ProductListing = props => {
                 </div>
               </div> */}
             </div>
-            <div class="col-sm-9">
+            <div className="col-sm-9">
               <div
-                class="row"
+                className="row"
                 style={{
                   paddingTop: '20px',
                   width: '100%',
@@ -289,28 +289,32 @@ const ProductListing = props => {
                   products.length > 0 &&
                   !isLoading &&
                   products.map(product => {
-                    return <Product product={product} productListing={true} />;
+                    return (
+                      <React.Fragment key={product._id}>
+                        <Product product={product} productListing={true} />
+                      </React.Fragment>
+                    );
                   })) ||
                   (isLoading && <Spinner />)}
               </div>
 
               {!isLoading && products && products.length > 0 ? (
                 <div
-                  class="pagination"
+                  className="pagination"
                   style={{
                     marginTop: '50px'
                   }}
                 >
                   {/* <a href="#">
-                  <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                  <i className="fa fa-chevron-left" aria-hidden="true"></i>
                 </a>
                 <a href="#">1</a>
-                <a href="#" class="active">
+                <a href="#" className="active">
                   2
                 </a>
                 <a href="#">3</a>
                 <a href="#">
-                  <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                  <i className="fa fa-chevron-right" aria-hidden="true"></i>
                 </a> */}
                 </div>
               ) : (

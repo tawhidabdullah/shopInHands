@@ -61,88 +61,6 @@ const Checkout = props => {
     });
   };
 
-  const onOrderSubmit = async e => {
-    e.preventDefault();
-
-    if (!fields.email.length > 0) {
-      seterrors({
-        ...errors,
-        email: 'Email Field is Required!'
-      });
-    }
-
-    const line_items = props.cartItems.map(cartItem => {
-      return {
-        product_id: cartItem.id,
-        quantity: cartItem.quantity
-      };
-    });
-
-    const orderData = {
-      billing: {
-        first_name: fields.first_name,
-        last_name: fields.last_name,
-        address_1: fields.address_1,
-        address_2: fields.address_2,
-        city: fields.city,
-        state: fields.state,
-        postcode: fields.postcode,
-        country: fields.country,
-        email: fields.email,
-        phone: fields.phone
-      },
-      shipping: {
-        first_name: fields.first_name,
-        last_name: fields.last_name,
-        address_1: fields.address_1,
-        address_2: fields.address_2,
-        city: fields.city,
-        state: fields.state,
-        postcode: fields.postcode,
-        country: fields.country
-      },
-      line_items
-    };
-
-    try {
-    } catch (err) {
-      alert.show('Something Went Wrong Went Creating The Order');
-    }
-  };
-
-  React.useEffect(() => {
-    const getPaymentGatewaysProps = async () => {
-      try {
-        const gatewaysProps = await getApi('/wp-json/wc/v3/payment_gateways');
-        setOurWpNumber(gatewaysProps[4].settings.bkash_number.value);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    getPaymentGatewaysProps();
-  }, []);
-
-  const handlePaymentGatewayChange = e => {
-    setSelectedPaymentGateway(e.target.value);
-  };
-
-  const handleSenderNumberChange = e => {
-    setSenderBkashNumbr(e.target.value);
-  };
-
-  const handleSenderTranncIdChange = e => {
-    setSenderTransactionId(e.target.value);
-  };
-
-  const onPaymentGateWaySubmit = e => {
-    e.preventDefault();
-  };
-
-  const toggleIsShowBkashFeilds = () => {
-    setIsShowBkashFeilds(isShow => !isShow);
-  };
-
   const handleOrder = async () => {
     const products = cartItems.map(item => {
       return {
@@ -182,7 +100,6 @@ const Checkout = props => {
       setIsOrderError(true);
       setisOrderSuccess(false);
 
-      console.log(err.response.data);
       if (err.response.data && err.response.data.address)
         seterrors({
           ...errors,
@@ -213,7 +130,7 @@ const Checkout = props => {
             )}
             <h2 className="shipping-heading">shipping Address</h2>
             <div className="shipping-fields">
-              <Form onSubmit={onOrderSubmit}>
+              <Form>
                 <Form.Group controlId="formBasicEmail">
                   <Form.Label
                     style={{

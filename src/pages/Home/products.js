@@ -7,7 +7,6 @@ import Spinner from '../../components/commonFeilds/Spinner';
 
 const responsive = {
   superLargeDesktop: {
-    // the naming can be any, depends on you.
     breakpoint: { max: 4000, min: 3000 },
     items: 6
   },
@@ -37,7 +36,7 @@ const Products = ({ categoryId, categoryName, history, products }) => {
     >
       <div className="row">
         <div className="col-md-12">
-          <div class="block-title">
+          <div className="block-title">
             <span>{categoryName}</span>
             <div
               className="seeMore-title-box"
@@ -82,9 +81,9 @@ const Products = ({ categoryId, categoryName, history, products }) => {
             products.length > 0 &&
             products.map(product => {
               return (
-                <>
+                <React.Fragment key={product._id}>
                   <Product product={product} productListing={true} />
-                </>
+                </React.Fragment>
               );
             })}
         </Carousel>

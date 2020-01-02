@@ -75,7 +75,7 @@ export const loginUser = userData => async dispatch => {
       try {
         dispatch(setCurrentUser(res.data));
       } catch (err) {
-        console.log('something went wrong when fetching the user data', err);
+        // console.log('something went wrong when fetching the user data', err);
       }
     } else {
       dispatch({
@@ -84,7 +84,7 @@ export const loginUser = userData => async dispatch => {
       });
     }
   } catch (err) {
-    console.log('something went wrong when login', err);
+    // console.log('something went wrong when login', err);
   }
 };
 
@@ -99,9 +99,9 @@ export const getCurrentUser = () => dispatch => {
     .then(res => {
       dispatch(setCurrentUser(res.data));
     })
-    .catch(err =>
-      console.log('something went wrong when fetching the user data', err)
-    );
+    .catch(err => {
+      // console.log('something went wrong when fetching the user data', err);
+    });
 };
 
 export const logoutUser = () => dispatch => {
@@ -115,9 +115,9 @@ export const logoutUser = () => dispatch => {
     .then(res => {
       dispatch(setCurrentUser({}));
     })
-    .catch(err =>
-      console.log('something went wrong when fetching the user data', err)
-    );
+    .catch(err => {
+      // console.log('something went wrong when fetching the user dataxxx', err);
+    });
 };
 
 export const getCustomerOrders = () => async dispatch => {
@@ -132,7 +132,7 @@ export const getCustomerOrders = () => async dispatch => {
     });
 
     const orders = await orderRes.data;
-    console.log('ordersordersorders', orders);
+    // console.log('ordersordersorders', orders);
 
     dispatch({
       type: GET_ORDERS_SUCCESS,
@@ -142,7 +142,7 @@ export const getCustomerOrders = () => async dispatch => {
     dispatch({
       type: GET_ORDERS_FAIL
     });
-    console.log('something went wrong when fetching the orders');
+    // console.log('something went wrong when fetching the orders');
   }
 };
 

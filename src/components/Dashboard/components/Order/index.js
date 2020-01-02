@@ -16,7 +16,7 @@ const index = ({ history, auth, getCustomerOrders }) => {
   return (
     <div className="order">
       <div
-        class="block-title"
+        className="block-title"
         style={{
           marginBottom: '20px'
         }}
@@ -42,7 +42,7 @@ const index = ({ history, auth, getCustomerOrders }) => {
                 index
               ) => {
                 return (
-                  <tr>
+                  <tr key={index + 1}>
                     <td>{index + 1}</td>
                     <td>{billingAddress}</td>
                     <td>{shippingAddress}</td>

@@ -11,18 +11,13 @@ function ControlledCarousel({ imagesContents }) {
     setDirection(e.direction);
   };
 
-  console.log(
-    'carousel: optionalParamsoptionalParamsoptionalParams',
-    imagesContents
-  );
-
   return (
     <Carousel activeIndex={index} direction={direction} onSelect={handleSelect}>
       {imagesContents &&
         imagesContents.length > 0 &&
         imagesContents.map(items => {
           return (
-            <Carousel.Item>
+            <Carousel.Item key={items.img}>
               {(items.a && (
                 <a href={`${items.a}`}>
                   <img

@@ -57,8 +57,8 @@ const ProductDetail = props => {
   };
 
   return (
-    <div class="row">
-      <div class="col-md-6">
+    <div className="row">
+      <div className="col-md-6">
         <Carousel>
           {image &&
             image.length > 0 &&
@@ -68,6 +68,7 @@ const ProductDetail = props => {
                   style={{
                     maxHeight: '500px'
                   }}
+                  key={src}
                 >
                   <img
                     style={{
@@ -82,29 +83,29 @@ const ProductDetail = props => {
             })}
         </Carousel>
       </div>
-      <div class="col-md-6">
-        <div class="productInfo__container">
-          <h2 class="productInfo__title">{name}</h2>
+      <div className="col-md-6">
+        <div className="productInfo__container">
+          <h2 className="productInfo__title">{name}</h2>
 
-          <div class="productInfo__price">
-            <div class="product-reviews-summary">
-              {/* <h3 class="rating-summary">
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                <i class="fa fa-star-o" aria-hidden="true"></i>
+          <div className="productInfo__price">
+            <div className="product-reviews-summary">
+              {/* <h3 className="rating-summary">
+                <i className="fa fa-star" aria-hidden="true"></i>
+                <i className="fa fa-star" aria-hidden="true"></i>
+                <i className="fa fa-star" aria-hidden="true"></i>
+                <i className="fa fa-star-half-o" aria-hidden="true"></i>
+                <i className="fa fa-star-o" aria-hidden="true"></i>
               </h3>
-              <h3 class="reviews-actions">
-                <span class="review-count">1</span>
+              <h3 className="reviews-actions">
+                <span className="review-count">1</span>
                 <span> Review</span>
               </h3>
-              <h3 class="reviews-actions">Add New Reviews</h3> */}
+              <h3 className="reviews-actions">Add New Reviews</h3> */}
             </div>
 
-            <div class="product-price-box">
-              <h2 class="special-price">৳{offerPrice}</h2>
-              <h2 class="old-price">৳{price}</h2>
+            <div className="product-price-box">
+              <h2 className="special-price">৳{offerPrice}</h2>
+              <h2 className="old-price">৳{price}</h2>
             </div>
 
             <div className="tagAttributes">
@@ -112,7 +113,9 @@ const ProductDetail = props => {
               {brand &&
                 brand.length > 0 &&
                 brand.map(item => (
-                  <span className="tagAttribute">{item.name},</span>
+                  <span key={item.name} className="tagAttribute">
+                    {item.name},
+                  </span>
                 ))}
             </div>
 
@@ -122,6 +125,7 @@ const ProductDetail = props => {
                 category.length > 0 &&
                 category.map(item => (
                   <span
+                    key={item.name}
                     className="tagAttribute"
                     onClick={() => history.push(`/productsListing/${item._id}`)}
                   >
@@ -130,16 +134,16 @@ const ProductDetail = props => {
                 ))}
             </div>
           </div>
-          <div class="product-description">
+          <div className="product-description">
             <p>{description}</p>
           </div>
-          <div class="product-options-bottom">
-            <div class="box-tocart">
-              <div class="actions">
-                <a class="btn-add withbackground" onClick={onCart}>
+          <div className="product-options-bottom">
+            <div className="box-tocart">
+              <div className="actions">
+                <a className="btn-add withbackground" onClick={onCart}>
                   {AddCartContent()}
                 </a>
-                {/* <a  class="btn-add withborder"><i class="fa fa-heart"></i></a>  */}
+                {/* <a  className="btn-add withborder"><i className="fa fa-heart"></i></a>  */}
               </div>
             </div>
           </div>
