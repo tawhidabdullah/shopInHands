@@ -26,18 +26,6 @@ const ProductDetail = props => {
   } = props.product;
 
   const { cartItems, alert, history } = props;
-  console.log('product', props.product);
-  console.log('product', props.product);
-  console.log('product', props.product);
-  console.log('product', props.product);
-  console.log('product', props.product);
-  console.log('product', props.product);
-  console.log('product', props.product);
-  console.log('product', props.product);
-  console.log('product', props.product);
-  console.log('product', props.product);
-  console.log('product', props.product);
-  console.log('product', props.product);
 
   const onCart = e => {
     e.preventDefault();

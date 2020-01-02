@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import ReactHtmlParser from 'react-html-parser';
 import { baseApiURL } from '../../constants/variable';
 import axios from 'axios';
 
-import { getApi } from '../../utilities/wooApi';
 import './Footer.scss';
 
 const Footer = () => {

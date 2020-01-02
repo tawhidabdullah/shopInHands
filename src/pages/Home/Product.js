@@ -65,14 +65,6 @@ const Product = ({
               <i class="fa fa-eye"></i>
             </button>
           </Link>
-
-          {/* <button
-            type="button"
-            class="btn btn-secondary"
-            title="Add To Wishlist"
-          >
-            <i class="fa fa-heart-o"></i>
-          </button> */}
           <button
             type="button"
             class="btn btn-secondary"
@@ -90,12 +82,6 @@ const Product = ({
         </div>
 
         <div className="ratingsandtitle">
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star-half-o"></i>
-
           <h3 className="product-bottom-title">{name}</h3>
         </div>
         <h5 className="product-bottom-price">৳{price}</h5>

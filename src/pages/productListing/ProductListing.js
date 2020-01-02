@@ -279,7 +279,6 @@ const ProductListing = props => {
                 style={{
                   paddingTop: '20px',
                   width: '100%',
-                  // background: 'red',
                   display: 'flex',
                   flexWrap: 'wrap',
                   justifyContent: 'space-around',
