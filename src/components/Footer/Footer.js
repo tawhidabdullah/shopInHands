@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { baseApiURL } from '../../constants/variable';
+import { getElement, isElementExists } from '../../utilities/elementHelpers';
 import axios from 'axios';
 
 import './Footer.scss';
 
 const Footer = () => {
-  const [footerOne, setFooterOne] = useState({});
+  const [addressContent, setAddressContent] = useState({});
   const [aboutUsContent, setAboutUsContent] = useState({});
   const [policyContent, setPolicyContent] = useState({});
   const [accountContent, setAccountContent] = useState({});
@@ -14,11 +15,11 @@ const Footer = () => {
     const getFooterContent = async () => {
       try {
         setIsLoading(true);
-        const footerContentOneRes = await axios.get(
-          `${baseApiURL}/api/component/detail/name/footer1`
+        const addressRes = await axios.get(
+          `${baseApiURL}/api/component/detail/name/address`
         );
 
-        const footerContentOne = footerContentOneRes.data;
+        const addressCont = addressRes.data.items;
 
         const aboutUsContentRes = await axios.get(
           `${baseApiURL}/api/component/detail/name/About Us`
@@ -38,7 +39,7 @@ const Footer = () => {
 
         const accountContent = accountContentRes.data;
 
-        setFooterOne(footerContentOne);
+        setAddressContent(addressCont);
         setAboutUsContent(aboutUsContent);
         setPolicyContent(policyContent);
         setAccountContent(accountContent);
@@ -55,23 +56,48 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="row">
-        {footerOne && footerOne.items && footerOne.items.length > 0 && (
+        {addressContent && addressContent && addressContent.length > 0 && (
           <div className="col-md-3">
             <div className="our__categories">
-              {/* {ReactHtmlParser(footerOne.rendered)} */}
+              {/* {ReactHtmlParser(addressContent.rendered)} */}
               <span className="widget-title">
-                {footerOne.items && footerOne.items[0].name}
+                {addressContent &&
+                  addressContent[0].name &&
+                  addressContent[0].name}
               </span>
               <ul className="menu">
-                {footerOne.items.map(item => {
-                  return (
-                    <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-244">
-                      {(item.a && <a href={`${item.a}`}>{item.text}</a>) || (
-                        <span>{item.text}</span>
-                      )}
-                    </li>
-                  );
-                })}
+                {addressContent &&
+                  addressContent.length > 0 &&
+                  addressContent.map(item => {
+                    return (
+                      <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-244">
+                        {(item.elements &&
+                          isElementExists(item.elements, 'url') && (
+                            <a
+                              href={`${getElement(item.elements, 'url').value}`}
+                            >
+                              {`${item.elements &&
+                                isElementExists(item.elements, 'text') &&
+                                getElement(item.elements, 'text').value}`}
+                            </a>
+                          )) || (
+                          <span
+                            style={{
+                              fontSize: '15px',
+                              fontWeight: '500',
+                              color: '#777',
+                              lineHeight: '1.6'
+                            }}
+                          >
+                            {' '}
+                            {`${item.elements &&
+                              isElementExists(item.elements, 'text') &&
+                              getElement(item.elements, 'text').value}`}
+                          </span>
+                        )}
+                      </li>
+                    );
+                  })}
               </ul>
             </div>
           </div>
