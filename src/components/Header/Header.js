@@ -9,6 +9,7 @@ import './Header.scss';
 import '../styles_components/searchBar.scss';
 import ReactHtmlParser from 'react-html-parser';
 import { baseApiURL } from '../../constants/variable';
+import { getElement, isElementExists } from '../../utilities/elementHelpers';
 
 import { removeProductToCart } from '../../actions';
 
@@ -43,18 +44,33 @@ class Header extends Component {
     this.props.getCurrentUser();
     try {
       this.setState({
+        ...this.state,
         isLoading: true
       });
-      const logoContentRes = await axios.get(
-        `${baseApiURL}/api/component/detail/name/logo`
-      );
-      const logoContent = logoContentRes.data;
 
       const navItemsContentRes = await axios.get(
         `${baseApiURL}/api/component/detail/name/navlinks`
       );
       const navItemsContent = navItemsContentRes.data.items;
 
+      this.setState({
+        ...this.state,
+        isLoading: false,
+        navItemsContent
+      });
+    } catch (err) {
+      console.log(err);
+      this.setState({
+        ...this.state,
+        isLoading: false
+      });
+    }
+
+    try {
+      this.setState({
+        ...this.state,
+        isLoading: true
+      });
       const topLeftContentRes = await axios.get(
         `${baseApiURL}/api/component/detail/name/topLeftContent `
       );
@@ -62,20 +78,63 @@ class Header extends Component {
 
       this.setState({
         ...this.state,
-        logoContent: logoContent.items[0].img,
-        isLoading: false,
-        topLeftContent,
-        navItemsContent
+        topLeftContent: topLeftContent,
+        isLoading: false
       });
     } catch (err) {
-      console.log(err);
       this.setState({
+        ...this.state,
         isLoading: false
       });
     }
 
     try {
       this.setState({
+        ...this.state,
+        isLoading: true
+      });
+      const logoContentRes = await axios.get(
+        `${baseApiURL}/api/component/detail/name/logo`
+      );
+      const logoContent = logoContentRes.data.items;
+
+      this.setState({
+        ...this.state,
+        logoContent: logoContent,
+        isLoading: false
+      });
+    } catch (err) {
+      this.setState({
+        ...this.state,
+        isLoading: false
+      });
+    }
+
+    try {
+      this.setState({
+        isLoading: true
+      });
+      const navItemsContentRes = await axios.get(
+        `${baseApiURL}/api/component/detail/name/navlinks`
+      );
+      const navItemsContent = navItemsContentRes.data.items;
+
+      this.setState({
+        ...this.state,
+        navItemsContent: navItemsContent,
+        isLoading: false
+      });
+    } catch (err) {
+      console.log(err);
+      this.setState({
+        ...this.state,
+        isLoading: false
+      });
+    }
+
+    try {
+      this.setState({
+        ...this.state,
         isLoading: true
       });
       // const categories = await getApi('/wp-json/wc/v3/products/categories');
@@ -84,50 +143,60 @@ class Header extends Component {
       const categories = categoryRes.data;
 
       this.setState({
+        ...this.state,
+
         categories: categories,
         isLoading: false
       });
     } catch (err) {
       console.log(err);
       this.setState({
+        ...this.state,
         isLoading: false
       });
     }
 
     try {
       this.setState({
+        ...this.state,
         isLoading: true
       });
       const catMenu = await getApi('/wp-json/wp/v2/menu_cat');
       this.setState({
+        ...this.state,
         catMenu: catMenu,
         isLoading: false
       });
     } catch (err) {
       console.log(err);
       this.setState({
+        ...this.state,
         isLoading: false
       });
     }
 
     try {
       this.setState({
+        ...this.state,
         isLoading: true
       });
       const mainMenu = await getApi('/wp-json/wp/v2/menu_main');
       this.setState({
+        ...this.state,
         mainMenu: mainMenu,
         isLoading: false
       });
     } catch (err) {
       console.log(err);
       this.setState({
+        ...this.state,
         isLoading: false
       });
     }
 
     try {
       this.setState({
+        ...this.state,
         isLoading: true
       });
 
@@ -138,12 +207,14 @@ class Header extends Component {
       const hotlineContent = hotlineContentRes.data.items;
 
       this.setState({
+        ...this.state,
         hotlineContent: hotlineContent,
         isLoading: false
       });
     } catch (err) {
       console.log(err);
       this.setState({
+        ...this.state,
         isLoading: false
       });
     }
@@ -249,9 +320,9 @@ class Header extends Component {
           <div className="navbar-center">
             <div
               className="navbar-center-logoBox"
-              onClick={() => this.props.history.push('/')}
+              // onClick={() => this.props.history.push('/')}
             >
-              <img
+              {/* <img
                 style={{
                   width: '100%',
                   height: '100%',
@@ -259,9 +330,51 @@ class Header extends Component {
                 }}
                 src={`${baseApiURL}${logoContent}`}
                 alt=""
-              />
+              /> */}
 
-              {/* {ReactHtmlParser(this.state.logoContent.rendered)} */}
+              {logoContent &&
+                logoContent.length > 0 &&
+                logoContent.map(item => {
+                  console.log('get alife');
+                  console.log('get alife');
+                  console.log('get alife');
+                  console.log('get alife');
+                  console.log('get alife');
+                  console.log('get alife');
+                  console.log('get alife');
+                  return (
+                    <React.Fragment key={item._id}>
+                      {(item.elements &&
+                        isElementExists(item.elements, 'url') && (
+                          <a href={`${getElement(item.elements, 'url').value}`}>
+                            <img
+                              style={{
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'contain'
+                              }}
+                              src={`${baseApiURL}${item.elements &&
+                                isElementExists(item.elements, 'img') &&
+                                getElement(item.elements, 'img').value}`}
+                              alt="ShoppingHands"
+                            />
+                          </a>
+                        )) || (
+                        <img
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'contain'
+                          }}
+                          src={`${baseApiURL}${item.elements &&
+                            isElementExists(item.elements, 'img') &&
+                            getElement(item.elements, 'img').value}`}
+                          alt="ShoppingHands"
+                        />
+                      )}
+                    </React.Fragment>
+                  );
+                })}
             </div>
             <div className="navbar-center-categoryAndSearch">
               <div className="categoryAndSearchFeilds">

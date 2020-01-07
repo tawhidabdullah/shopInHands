@@ -9,6 +9,7 @@ import Spinner from '../../components/commonFeilds/Spinner';
 import Footer from '../../components/Footer/Footer';
 import axios from 'axios';
 import { baseApiURL } from '../../constants/variable';
+import { getElement, isElementExists } from '../../utilities/elementHelpers';
 
 class Home extends Component {
   state = {
@@ -33,7 +34,7 @@ class Home extends Component {
       const categories = categoryRes.data;
 
       const imageContentRes = await axios.get(
-        `${baseApiURL}/api/component/detail/name/Slider`
+        `${baseApiURL}/api/component/detail/name/slider`
       );
 
       const sliderImageContents = imageContentRes.data;
@@ -110,7 +111,10 @@ class Home extends Component {
               {!isLoading && (
                 <Carousel
                   imagesContents={
-                    (sliderImageContents && sliderImageContents.items) || []
+                    (sliderImageContents &&
+                      sliderImageContents.items &&
+                      sliderImageContents.items) ||
+                    []
                   }
                 />
               )}
@@ -134,17 +138,36 @@ class Home extends Component {
                           }`
                         }}
                       >
-                        <a href={`${item.a}`}>
+                        {(item.elements &&
+                          isElementExists(item.elements, 'url') && (
+                            <a
+                              href={`${getElement(item.elements, 'url').value}`}
+                            >
+                              <img
+                                style={{
+                                  width: '100%',
+                                  height: '100%',
+                                  objectFit: 'cover'
+                                }}
+                                src={`${baseApiURL}${item.elements &&
+                                  isElementExists(item.elements, 'img') &&
+                                  getElement(item.elements, 'img').value}`}
+                                alt="Right Slider"
+                              />
+                            </a>
+                          )) || (
                           <img
                             style={{
                               width: '100%',
                               height: '100%',
                               objectFit: 'cover'
                             }}
-                            src={`${baseApiURL}${item.img}`}
-                            alt="Second slide"
+                            src={`${baseApiURL}${item.elements &&
+                              isElementExists(item.elements, 'img') &&
+                              getElement(item.elements, 'img').value}`}
+                            alt="Right Slider"
                           />
-                        </a>
+                        )}
                       </div>
                     );
                   })}
