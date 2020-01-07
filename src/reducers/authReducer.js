@@ -1,8 +1,6 @@
 import isEmpty from '../validation/isEmpty';
 import {
   SET_CURRENT_USER,
-  GET_ORDERS,
-  GET_ORDERS_FAIL,
   GET_ORDERS_SUCCESS,
   GET_ORDERS_STARTED
 } from '../actions/types';

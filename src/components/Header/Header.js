@@ -72,7 +72,7 @@ class Header extends Component {
         isLoading: true
       });
       const topLeftContentRes = await axios.get(
-        `${baseApiURL}/api/component/detail/name/topLeftContent `
+        `${baseApiURL}/api/component/detail/name/welcome`
       );
       const topLeftContent = topLeftContentRes.data.items;
 
@@ -271,7 +271,18 @@ class Header extends Component {
             >
               {topLeftContent &&
                 topLeftContent.length > 0 &&
-                topLeftContent[0].text}
+                topLeftContent.map(item => {
+                  return (
+                    <>
+                      {`${item.elements &&
+                        isElementExists(item.elements, 'text') &&
+                        getElement(item.elements, 'text').value}`}
+                    </>
+                  );
+                })}
+              {/* {topLeftContent &&
+                topLeftContent.length > 0 &&
+                topLeftContent[0].text} */}
             </span>
             {/* {topLeftContent && ReactHtmlParser(topLeftContent.rendered)} */}
             {/* <p>
@@ -335,13 +346,6 @@ class Header extends Component {
               {logoContent &&
                 logoContent.length > 0 &&
                 logoContent.map(item => {
-                  console.log('get alife');
-                  console.log('get alife');
-                  console.log('get alife');
-                  console.log('get alife');
-                  console.log('get alife');
-                  console.log('get alife');
-                  console.log('get alife');
                   return (
                     <React.Fragment key={item._id}>
                       {(item.elements &&
@@ -551,7 +555,12 @@ class Header extends Component {
                 navItemsContent.length > 0 &&
                 navItemsContent.map(item => {
                   return (
-                    <a key={item.name} href={item.a}>
+                    <a
+                      key={item.name}
+                      href={`${item.elements &&
+                        isElementExists(item.elements, 'url') &&
+                        getElement(item.elements, 'url').value}`}
+                    >
                       {item.name}
                     </a>
                   );
@@ -559,15 +568,21 @@ class Header extends Component {
             </div>
             <div className="navbar-center-phoneNumberbox">
               <span className="phone">
-                {hotlineContent && hotlineContent.length > 0 && (
-                  <>
-                    <i className="fa fa-phone" />
-                    <span className="phoneText">hotline</span>
-                    <span className="phoneNumber">
-                      {hotlineContent[0].text}
-                    </span>
-                  </>
-                )}
+                {hotlineContent &&
+                  hotlineContent.length > 0 &&
+                  hotlineContent.map(item => {
+                    return (
+                      <>
+                        <i className="fa fa-phone" />
+                        <span className="phoneText">hotline</span>
+                        <span className="phoneNumber">
+                          {`${item.elements &&
+                            isElementExists(item.elements, 'text') &&
+                            getElement(item.elements, 'text').value}`}
+                        </span>
+                      </>
+                    );
+                  })}
               </span>
             </div>
           </div>
