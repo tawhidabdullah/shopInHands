@@ -14,6 +14,7 @@ import ProductDetail from './pages/ProductDetail/ProductDetail';
 import ShoppingCart from './pages/ShopingCart/ShoppingCart';
 import Dashboard from './components/Dashboard/container/Dashboard';
 import ProductSearch from './pages/productSearch';
+import NotFoundPage from './pages/NotFoundPage';
 
 // AUTH COMPONENTS
 import Register from './components/auth/Register';
@@ -61,13 +62,8 @@ class App extends Component {
 
               <Route exact path={'/cart'} component={ShoppingCart} />
               <Route exact path="/dashboard" component={Dashboard} />
+              <Route path="*" component={NotFoundPage} />
             </Switch>
-
-            <Switch>
-              {/* <Route exact path="/dashboard" component={Dashboard} /> */}
-            </Switch>
-
-            {/* <Footer /> */}
           </React.Fragment>
         </BrowserRouter>
       </Provider>
