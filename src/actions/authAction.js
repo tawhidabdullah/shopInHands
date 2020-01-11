@@ -18,6 +18,10 @@ import {
   GET_ORDERS_SUCCESS
 } from './types';
 
+const GET_USER_START = 'GET_USER_START';
+const GET_USER_COMPLETE = 'GET_USER_COMPLETE';
+const GET_USER_FAIL = 'GET_USER_FAIL';
+
 // Register user
 export const registeruser = (userData, history) => async dispatch => {
   try {
@@ -90,23 +94,35 @@ export const loginUser = (userData, history) => async dispatch => {
 
 // Log out User
 
-export const getCurrentUser = () => dispatch => {
-  axios({
-    url: `${baseApiURL}/customer/api/detail`,
-    method: 'get',
-    withCredentials: true
-  })
-    .then(res => {
-      dispatch(setCurrentUser(res.data));
-    })
-    .catch(err => {
-      // console.log('something went wrong when fetching the user data', err);
+export const getCurrentUser = () => async dispatch => {
+  dispatch({
+    type: GET_USER_START
+  });
+  try {
+    const awaitedRes = await axios({
+      url: `${baseApiURL}/customer/api/detail`,
+      method: 'get',
+      withCredentials: true
     });
+
+    const res = awaitedRes.data;
+
+    dispatch({
+      type: GET_USER_COMPLETE,
+      payload: res
+    });
+
+    // dispatch(setCurrentUser(res));
+  } catch (err) {
+    dispatch({
+      type: GET_USER_FAIL
+    });
+  }
 };
 
 export const logoutUser = () => dispatch => {
   document.cookie = ''; // remove the token from localStorage
-  //set currentUser to empty object=>which will set isAuthenticate to false
+  //set currentUser to empty object=> which will set isAuthenticate to false
   axios({
     url: `${baseApiURL}/customer/auth/logout`,
     method: 'get',
@@ -123,7 +139,7 @@ export const logoutUser = () => dispatch => {
 export const getCustomerOrders = () => async dispatch => {
   try {
     dispatch({
-      type: GET_ORDERS_STARTED
+      type: GET_USER_START
     });
     const orderRes = await axios({
       url: `${baseApiURL}/customer/api/order/list`,
@@ -135,12 +151,12 @@ export const getCustomerOrders = () => async dispatch => {
     // console.log('ordersordersorders', orders);
 
     dispatch({
-      type: GET_ORDERS_SUCCESS,
+      type: GET_USER_COMPLETE,
       payload: orders
     });
   } catch (err) {
     dispatch({
-      type: GET_ORDERS_FAIL
+      type: GET_USER_FAIL
     });
     // console.log('something went wrong when fetching the orders');
   }

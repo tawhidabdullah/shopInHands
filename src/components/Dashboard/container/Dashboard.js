@@ -54,27 +54,24 @@ const Dashboard = props => {
 
   return (
     <>
-      {false ? (
-        <GifSpinner isAPageSpinner />
-      ) : (
-        <div className="container__of-dashboard">
-          <div className="content">
-            <nav className="sidebar">
-              <ul className="side-nav">
-                <li
-                  className={
-                    tabs.isOrders
-                      ? 'side-nav__item side-nav__item--active'
-                      : ' side-nav__item'
-                  }
-                  onClick={() => toggleTabs('isOrders')}
-                >
-                  <a href="#" className="side-nav__link">
-                    <i className="fa fa-first-order"></i>
-                    <span className="side-nav__text">Orders</span>
-                  </a>
-                </li>
-                {/* <li
+      <div className="container__of-dashboard">
+        <div className="content">
+          <nav className="sidebar">
+            <ul className="side-nav">
+              <li
+                className={
+                  tabs.isOrders
+                    ? 'side-nav__item side-nav__item--active'
+                    : ' side-nav__item'
+                }
+                onClick={() => toggleTabs('isOrders')}
+              >
+                <a href="#" className="side-nav__link">
+                  <i className="fa fa-first-order"></i>
+                  <span className="side-nav__text">Orders</span>
+                </a>
+              </li>
+              {/* <li
                   className={
                     tabs.isCart
                       ? 'side-nav__item side-nav__item--active'
@@ -87,7 +84,7 @@ const Dashboard = props => {
                     <span className="side-nav__text">Cart</span>
                   </a>
                 </li> */}
-                {/* <li
+              {/* <li
                   className={
                     tabs.isWishlist
                       ? 'side-nav__item side-nav__item--active'
@@ -101,7 +98,7 @@ const Dashboard = props => {
                   </a>
                 </li> */}
 
-                {/* <li
+              {/* <li
                   className={
                     tabs.isSettings
                       ? 'side-nav__item side-nav__item--active'
@@ -114,14 +111,13 @@ const Dashboard = props => {
                     <span className="side-nav__text">Settings</span>
                   </a>
                 </li> */}
-              </ul>
-            </nav>
-            <main className="dashboard__main-content">
-              {tabs.isOrders ? <Order /> : ''}
-            </main>
-          </div>
+            </ul>
+          </nav>
+          <main className="dashboard__main-content">
+            {tabs.isOrders ? <Order /> : ''}
+          </main>
         </div>
-      )}
+      </div>
     </>
   );
 };

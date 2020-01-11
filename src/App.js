@@ -27,19 +27,36 @@ import PrivateRoute from './components/commonFeilds/privateRoute';
 import { store } from './store';
 import { setCurrentUser } from './actions/authAction';
 
-// CHECK FOR TOKEN
-if (localStorage.jwttoken) {
-  // set auth token to header Authorization
-  setAuthorizationToken(localStorage.jwttoken);
-  // decode token and get user info and expression
-  const decoded = jwt_decode(localStorage.jwttoken);
-  // set user and isAuthenticated
-  store.dispatch(setCurrentUser(decoded)); // fired the action and set the user into state
+// // CHECK FOR TOKEN
+// if (localStorage.jwttoken) {
+//   // set auth token to header Authorization
+//   setAuthorizationToken(localStorage.jwttoken);
+//   // decode token and get user info and expression
+//   const decoded = jwt_decode(localStorage.jwttoken);
+//   // set user and isAuthenticated
+//   store.dispatch(setCurrentUser(decoded)); // fired the action and set the user into state
 
-  /////////// MAKE LOGOUT THE USER BASED on expired  tIme
-}
+//   /////////// MAKE LOGOUT THE USER BASED on expired  tIme
+// }
 
 class App extends Component {
+  authenticate() {
+    return new Promise(resolve => setTimeout(resolve, 2000)); // 2 seconds
+  }
+
+  componentDidMount() {
+    this.authenticate().then(() => {
+      const ele = document.getElementById('ipl-progress-indicator');
+      if (ele) {
+        // fade out
+        ele.classList.add('available');
+        setTimeout(() => {
+          // remove from DOM
+          ele.outerHTML = '';
+        }, 2000);
+      }
+    });
+  }
   render() {
     return (
       <Provider store={store}>
