@@ -18,6 +18,7 @@ const ShoppingCart = props => {
   const handleLogin = () => {
     props.history.push('/login');
   };
+
   const handleShow = () => setShow(true);
   const { auth, isAuthenticate } = props.auth;
 
@@ -55,7 +56,7 @@ const ShoppingCart = props => {
             {props.cartItemCount ? (
               props.cartItems.map(cart => (
                 <React.Fragment key={cart._id}>
-                  <CartItem {...cart} image={cart.image[0]} />
+                  <CartItem {...cart} image={cart.image && cart.image[0]} />
                 </React.Fragment>
               ))
             ) : (

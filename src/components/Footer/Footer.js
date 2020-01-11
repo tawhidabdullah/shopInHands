@@ -7,9 +7,9 @@ import './Footer.scss';
 
 const Footer = () => {
   const [addressContent, setAddressContent] = useState({});
-  const [aboutUsContent, setAboutUsContent] = useState({});
-  const [policyContent, setPolicyContent] = useState({});
   const [accountContent, setAccountContent] = useState({});
+  const [servicesContent, setServicesContent] = useState({});
+  const [aboutUsContent, setAboutUsContent] = useState({});
   const [isLoading, setIsLoading] = useState({});
   React.useEffect(() => {
     const getFooterContent = async () => {
@@ -21,32 +21,49 @@ const Footer = () => {
 
         const addressCont = addressRes.data.items;
 
+        setAddressContent(addressCont);
+
+        setIsLoading(false);
+      } catch (err) {
+        setIsLoading(false);
+      }
+
+      try {
+        setIsLoading(true);
+        const accountContentRes = await axios.get(
+          `${baseApiURL}/api/component/detail/name/Account`
+        );
+
+        const accountContent = accountContentRes.data;
+        setAccountContent(accountContent);
+        setIsLoading(false);
+      } catch (err) {
+        setIsLoading(false);
+      }
+
+      try {
+        setIsLoading(true);
         const aboutUsContentRes = await axios.get(
           `${baseApiURL}/api/component/detail/name/About Us`
         );
 
         const aboutUsContent = aboutUsContentRes.data;
-
-        const policyContentRes = await axios.get(
-          `${baseApiURL}/api/component/detail/name/Policy`
-        );
-
-        const policyContent = policyContentRes.data;
-
-        const accountContentRes = await axios.get(
-          `${baseApiURL}/api/component/detail/name/Policy`
-        );
-
-        const accountContent = accountContentRes.data;
-
-        setAddressContent(addressCont);
         setAboutUsContent(aboutUsContent);
-        setPolicyContent(policyContent);
-        setAccountContent(accountContent);
-
         setIsLoading(false);
       } catch (err) {
-        console.log(err);
+        setIsLoading(false);
+      }
+
+      try {
+        setIsLoading(true);
+        const servicesContentRes = await axios.get(
+          `${baseApiURL}/api/component/detail/name/Services`
+        );
+
+        const servicesContent = servicesContentRes.data;
+        setServicesContent(servicesContent);
+        setIsLoading(false);
+      } catch (err) {
         setIsLoading(false);
       }
     };
@@ -103,52 +120,6 @@ const Footer = () => {
           </div>
         )}
 
-        {aboutUsContent &&
-          aboutUsContent.items &&
-          aboutUsContent.items.length > 0 && (
-            <div className="col-md-3">
-              <div className="our__categories">
-                {/* {ReactHtmlParser(aboutUsContent.rendered)} */}
-                <span className="widget-title">{aboutUsContent.name}</span>
-                <ul className="menu">
-                  {aboutUsContent.items.map(item => {
-                    return (
-                      <li
-                        key={item.name}
-                        className="menu-item menu-item-type-custom menu-item-object-custom menu-item-244"
-                      >
-                        <a href={`${item.a}`}>{item.name}</a>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            </div>
-          )}
-
-        {policyContent &&
-          policyContent.items &&
-          policyContent.items.length > 0 && (
-            <div className="col-md-3">
-              <div className="our__categories">
-                {/* {ReactHtmlParser(policyContent.rendered)} */}
-                <span className="widget-title">{policyContent.name}</span>
-                <ul className="menu">
-                  {policyContent.items.map(item => {
-                    return (
-                      <li
-                        key={item.name}
-                        className="menu-item menu-item-type-custom menu-item-object-custom menu-item-244"
-                      >
-                        <a href={`${item.a}`}>{item.name}</a>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            </div>
-          )}
-
         {accountContent &&
           accountContent.items &&
           accountContent.items.length > 0 && (
@@ -163,7 +134,98 @@ const Footer = () => {
                         key={item.name}
                         className="menu-item menu-item-type-custom menu-item-object-custom menu-item-244"
                       >
-                        <a href={`${item.a}`}>{item.name}</a>
+                        {(item.elements &&
+                          isElementExists(item.elements, 'url') && (
+                            <a
+                              href={`${getElement(item.elements, 'url').value}`}
+                            >
+                              {`${item.elements &&
+                                isElementExists(item.elements, 'text') &&
+                                getElement(item.elements, 'text').value}`}
+                            </a>
+                          )) || (
+                          <span>
+                            {`{item.elements &&
+                              isElementExists(item.elements, 'text') &&
+                              getElement(item.elements, 'text').value}`}
+                          </span>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            </div>
+          )}
+
+        {aboutUsContent &&
+          aboutUsContent.items &&
+          aboutUsContent.items.length > 0 && (
+            <div className="col-md-3">
+              <div className="our__categories">
+                {/* {ReactHtmlParser(aboutUsContent.rendered)} */}
+                <span className="widget-title">{aboutUsContent.name}</span>
+                <ul className="menu">
+                  {aboutUsContent.items.map(item => {
+                    return (
+                      <li
+                        key={item.name}
+                        className="menu-item menu-item-type-custom menu-item-object-custom menu-item-244"
+                      >
+                        {(item.elements &&
+                          isElementExists(item.elements, 'url') && (
+                            <a
+                              href={`${getElement(item.elements, 'url').value}`}
+                            >
+                              {`${item.elements &&
+                                isElementExists(item.elements, 'text') &&
+                                getElement(item.elements, 'text').value}`}
+                            </a>
+                          )) || (
+                          <a>
+                            {`${item.elements &&
+                              isElementExists(item.elements, 'text') &&
+                              getElement(item.elements, 'text').value}`}
+                          </a>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            </div>
+          )}
+
+        {servicesContent &&
+          servicesContent.items &&
+          servicesContent.items.length > 0 && (
+            <div className="col-md-3">
+              <div className="our__categories">
+                {/* {ReactHtmlParser(servicesContent.rendered)} */}
+                <span className="widget-title">{servicesContent.name}</span>
+                <ul className="menu">
+                  {servicesContent.items.map(item => {
+                    return (
+                      <li
+                        key={item.name}
+                        className="menu-item menu-item-type-custom menu-item-object-custom menu-item-244"
+                      >
+                        {(item.elements &&
+                          isElementExists(item.elements, 'url') && (
+                            <a
+                              href={`${getElement(item.elements, 'url').value}`}
+                            >
+                              {`${item.elements &&
+                                isElementExists(item.elements, 'text') &&
+                                getElement(item.elements, 'text').value}`}
+                            </a>
+                          )) || (
+                          <a>
+                            {`${item.elements &&
+                              isElementExists(item.elements, 'text') &&
+                              getElement(item.elements, 'text').value}`}
+                          </a>
+                        )}
                       </li>
                     );
                   })}
@@ -177,82 +239,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
-/* 
-
- <footer className="fter ">
-      <div className="contain">
-        <div className="col">
-          <h1>Company</h1>
-          <ul>
-            <li>About</li>
-            <li>Mission</li>
-            <li>Services</li>
-            <li>Social</li>
-            <li>Get in touch</li>
-          </ul>
-        </div>
-        <div className="col">
-          <h1>Products</h1>
-          <ul>
-            <li>About</li>
-            <li>Mission</li>
-            <li>Services</li>
-            <li>Social</li>
-            <li>Get in touch</li>
-          </ul>
-        </div>
-        <div className="col">
-          <h1>Accounts</h1>
-          <ul>
-            <li>About</li>
-            <li>Mission</li>
-            <li>Services</li>
-            <li>Social</li>
-            <li>Get in touch</li>
-          </ul>
-        </div>
-        <div className="col">
-          <h1>Resources</h1>
-          <ul> word from home, so do you know what the 
-            <li>Webmail</li>
-            <li>Redeem code</li>
-            <li>WHOIS lookup</li>
-            <li>Site map</li>
-            <li>Web templates</li>
-            <li>Email templates</li>
-          </ul>
-        </div>
-        <div className="col">
-          <h1>Support</h1>
-          <ul>
-            <li>Contact us</li>
-            <li>Web chat</li>
-            <li>Open ticket</li>
-          </ul>
-        </div>
-        <div className="col social">
-          <h1>Social</h1>
-          <ul>
-            <li>
-              <i className="fa fa-facebook" />
-            </li>
-            <li>
-              <i className="fa fa-instagram" />
-            </li>
-
-            <li>
-              <i className="fa fa-twiiter" />
-            </li>
-            <li>
-              <i className="fa fa-youtube" />
-            </li>
-          </ul>
-        </div>
-        <div className="clearfix" />
-      </div>
-    </footer>
-
-
-
-*/
