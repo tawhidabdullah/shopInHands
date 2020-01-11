@@ -8,7 +8,10 @@ import { Table } from 'react-bootstrap';
 import './order.scss';
 
 const index = ({ history, auth, getCustomerOrders }) => {
-  const { orders, isLoading } = auth;
+  const {
+    order: { orders },
+    isLoading
+  } = auth;
   useEffect(() => {
     getCustomerOrders();
   }, []);

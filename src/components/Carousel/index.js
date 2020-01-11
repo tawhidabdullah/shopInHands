@@ -24,7 +24,7 @@ function ControlledCarousel({ imagesContents }) {
                   <img
                     className="d-block w-100"
                     style={{
-                      height: '70vh',
+                      height: '80vh',
                       objectFit: 'cover'
                     }}
                     src={`${baseApiURL}${item.elements &&
@@ -37,7 +37,7 @@ function ControlledCarousel({ imagesContents }) {
                 <img
                   className="d-block w-100"
                   style={{
-                    height: '70vh',
+                    height: '80vh',
                     objectFit: 'cover'
                   }}
                   src={`${baseApiURL}${item.elements &&

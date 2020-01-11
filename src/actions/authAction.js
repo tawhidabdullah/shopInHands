@@ -139,7 +139,7 @@ export const logoutUser = () => dispatch => {
 export const getCustomerOrders = () => async dispatch => {
   try {
     dispatch({
-      type: GET_USER_START
+      type: GET_ORDERS_STARTED
     });
     const orderRes = await axios({
       url: `${baseApiURL}/customer/api/order/list`,
@@ -148,15 +148,14 @@ export const getCustomerOrders = () => async dispatch => {
     });
 
     const orders = await orderRes.data;
-    // console.log('ordersordersorders', orders);
 
     dispatch({
-      type: GET_USER_COMPLETE,
+      type: GET_ORDERS_SUCCESS,
       payload: orders
     });
   } catch (err) {
     dispatch({
-      type: GET_USER_FAIL
+      type: GET_ORDERS_FAIL
     });
     // console.log('something went wrong when fetching the orders');
   }
