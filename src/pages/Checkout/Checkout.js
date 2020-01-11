@@ -62,12 +62,16 @@ const Checkout = props => {
   };
 
   const handleOrder = async () => {
+    console.log('cartItems', cartItems);
+
     const products = cartItems.map(item => {
       return {
-        id: item._id,
+        id: item._id || item.id,
         quantity: item.quantity
       };
     });
+
+    console.log('products', products);
 
     const orderSchema = {
       products: products,
@@ -129,7 +133,12 @@ const Checkout = props => {
               ''
             )}
             <h2 className="shipping-heading">shipping Address</h2>
-            <div className="shipping-fields">
+            <div
+              className="shipping-fields"
+              style={{
+                marginTop: '15px'
+              }}
+            >
               <Form>
                 <Form.Group controlId="formBasicEmail">
                   <Form.Label
@@ -157,7 +166,10 @@ const Checkout = props => {
                     background: '#0000FE',
                     borderColor: '#fff'
                   }}
-                  onClick={() => handleOrder()}
+                  onClick={e => {
+                    e.preventDefault();
+                    handleOrder();
+                  }}
                 >
                   Order
                 </Button>
@@ -168,7 +180,13 @@ const Checkout = props => {
             <div className="row">
               <div className="col-md-12">
                 <div className="order-summary">
-                  <h2>Order Summary</h2>
+                  <h2
+                    style={{
+                      marginBottom: '10px'
+                    }}
+                  >
+                    Order Summary
+                  </h2>
                   <div className="order-summary-price">
                     <h3>{props.cartItems.length} items in Cart</h3>
                     <span>৳{props.totalPrice}</span>

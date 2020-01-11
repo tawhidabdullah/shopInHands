@@ -651,6 +651,11 @@ class Header extends Component {
             )}
           </div>
         </div>
+        <div
+          style={{
+            borderBottom: '1px solid #eee'
+          }}
+        ></div>
       </>
     );
   }

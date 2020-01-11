@@ -9,8 +9,7 @@ const NotFoundPage = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        flexDirection: 'column',
-        borderTop: '1px solid #eee'
+        flexDirection: 'column'
       }}
     >
       <h2
