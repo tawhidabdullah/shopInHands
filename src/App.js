@@ -61,7 +61,7 @@ class App extends Component {
               <PrivateRoute exact path={'/checkout'} component={Checkout} />
 
               <Route exact path={'/cart'} component={ShoppingCart} />
-              <Route exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <Route path="*" component={NotFoundPage} />
             </Switch>
           </React.Fragment>

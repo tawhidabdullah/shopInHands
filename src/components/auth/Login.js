@@ -4,6 +4,7 @@ import '../styles_components/submit.scss';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/authAction';
 import { withAlert } from 'react-alert';
+import { withRouter } from 'react-router';
 
 class Login extends Component {
   state = {
@@ -30,9 +31,9 @@ class Login extends Component {
 
   componentWillReceiveProps(nextProps) {
     // it's runs when our components recive new props
-    if (nextProps.auth.isAuthenticate) {
-      this.props.history.push('/dashboard');
-    }
+    // if (nextProps.auth.isAuthenticate) {
+    //   this.props.history.push('/dashboard');
+    // }
     if (nextProps.errors) {
       this.setState({
         // set nextProps.errors to local state
@@ -48,7 +49,7 @@ class Login extends Component {
       password: this.state.password
     };
 
-    this.props.loginUser(userData); // fired the loginUser action with passing current user
+    this.props.loginUser(userData, this.props.history); // fired the loginUser action with passing current user
   };
 
   render() {
@@ -103,4 +104,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { loginUser })(withAlert()(Login));
+export default connect(mapStateToProps, { loginUser })(
+  withRouter(withAlert()(Login))
+);

@@ -7,6 +7,7 @@ import axios from 'axios';
 import { baseApiURL } from '../../constants/variable';
 import { useAlert } from 'react-alert';
 import './checkout.scss';
+import GifSpinner from '../../components/Spinner/GifSpinner/GifSpinner';
 
 const Checkout = props => {
   const [selectedPaymentGateway, setSelectedPaymentGateway] = React.useState(
@@ -16,10 +17,6 @@ const Checkout = props => {
   const [isOrderError, setIsOrderError] = React.useState(false);
   const [isOrderSuccess, setisOrderSuccess] = React.useState(false);
   const [productErrorText, setProductErrorText] = React.useState('');
-
-  const [senderBkashNumbr, setSenderBkashNumbr] = React.useState('');
-  const [senderTransactionId, setSenderTransactionId] = React.useState('');
-  const [ourWpNumber, setOurWpNumber] = React.useState('');
 
   const [fields, setfields] = React.useState({
     first_name: '',
@@ -34,8 +31,6 @@ const Checkout = props => {
     phone: '',
     address: ''
   });
-
-  const [isShowBkashFeilds, setIsShowBkashFeilds] = React.useState(false);
 
   const [errors, seterrors] = React.useState({
     first_name: '',
@@ -52,7 +47,8 @@ const Checkout = props => {
   });
 
   const alert = useAlert();
-  const { cartItems } = props;
+  const { cartItems, auth } = props;
+  const { isLoading: isAuthLoading } = auth;
 
   const handleFieldsChange = e => {
     setfields({
@@ -62,16 +58,12 @@ const Checkout = props => {
   };
 
   const handleOrder = async () => {
-    console.log('cartItems', cartItems);
-
     const products = cartItems.map(item => {
       return {
         id: item._id || item.id,
         quantity: item.quantity
       };
     });
-
-    console.log('products', products);
 
     const orderSchema = {
       products: products,
@@ -117,82 +109,83 @@ const Checkout = props => {
   };
 
   return (
-    <div className="checkout">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-7">
-            {isOrderSuccess ? (
-              <Alert variant={'success'}>Order Created Successfully</Alert>
-            ) : (
-              ''
-            )}
+    (isAuthLoading && <GifSpinner />) || (
+      <div className="checkout">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-7">
+              {isOrderSuccess ? (
+                <Alert variant={'success'}>Order Created Successfully</Alert>
+              ) : (
+                ''
+              )}
 
-            {productErrorText && isOrderError ? (
-              <Alert variant={'danger'}>{productErrorText}</Alert>
-            ) : (
-              ''
-            )}
-            <h2 className="shipping-heading">shipping Address</h2>
-            <div
-              className="shipping-fields"
-              style={{
-                marginTop: '15px'
-              }}
-            >
-              <Form>
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label
+              {productErrorText && isOrderError ? (
+                <Alert variant={'danger'}>{productErrorText}</Alert>
+              ) : (
+                ''
+              )}
+              <h2 className="shipping-heading">shipping Address</h2>
+              <div
+                className="shipping-fields"
+                style={{
+                  marginTop: '15px'
+                }}
+              >
+                <Form>
+                  <Form.Group controlId="formBasicEmail">
+                    <Form.Label
+                      style={{
+                        marginBottom: '10px'
+                      }}
+                    >
+                      Shipping Address
+                    </Form.Label>
+                    <Form.Control
+                      name="address"
+                      type="text"
+                      placeholder="Shipping Address"
+                      onChange={handleFieldsChange}
+                    />
+                    <Form.Text className="text-danger">
+                      {errors.address && errors.address}
+                    </Form.Text>
+                  </Form.Group>
+
+                  <Button
+                    variant="primary"
+                    type="submit"
                     style={{
-                      marginBottom: '10px'
+                      background: '#0000FE',
+                      borderColor: '#fff'
+                    }}
+                    onClick={e => {
+                      e.preventDefault();
+                      handleOrder();
                     }}
                   >
-                    Shipping Address
-                  </Form.Label>
-                  <Form.Control
-                    name="address"
-                    type="text"
-                    placeholder="Shipping Address"
-                    onChange={handleFieldsChange}
-                  />
-                  <Form.Text className="text-danger">
-                    {errors.address && errors.address}
-                  </Form.Text>
-                </Form.Group>
-
-                <Button
-                  variant="primary"
-                  type="submit"
-                  style={{
-                    background: '#0000FE',
-                    borderColor: '#fff'
-                  }}
-                  onClick={e => {
-                    e.preventDefault();
-                    handleOrder();
-                  }}
-                >
-                  Order
-                </Button>
-              </Form>
+                    Order
+                  </Button>
+                </Form>
+              </div>
             </div>
-          </div>
-          <div className="col-md-5">
-            <div className="row">
-              <div className="col-md-12">
-                <div className="order-summary">
-                  <h2
-                    style={{
-                      marginBottom: '10px'
-                    }}
-                  >
-                    Order Summary
-                  </h2>
-                  <div className="order-summary-price">
-                    <h3>{props.cartItems.length} items in Cart</h3>
-                    <span>৳{props.totalPrice}</span>
+            <div className="col-md-5">
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="order-summary">
+                    <h2
+                      style={{
+                        marginBottom: '10px'
+                      }}
+                    >
+                      Order Summary
+                    </h2>
+                    <div className="order-summary-price">
+                      <h3>{props.cartItems.length} items in Cart</h3>
+                      <span>৳{props.totalPrice}</span>
+                    </div>
                   </div>
-                </div>
-                {/* <div className="order-summary">
+                  {/* <div className="order-summary">
                   <h2>Place Order</h2>
                   <div className="mt-3 mb-3">
                     <form>
@@ -284,17 +277,19 @@ const Checkout = props => {
                     Place Order
                   </Button>
                 </div> */}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    )
   );
 };
 
 const mapStateToProps = state => {
   return {
+    auth: state.auth,
     cartItems: state.shop.cart,
     cartItemCount: state.shop.cart.reduce((count, curItem) => {
       return count + curItem.quantity;

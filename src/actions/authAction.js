@@ -54,7 +54,7 @@ export const registeruser = (userData, history) => async dispatch => {
 // when registeruser action get's called uporer function ta fired kore
 
 // Login - Get user token //////////////////////////////////////
-export const loginUser = userData => async dispatch => {
+export const loginUser = (userData, history) => async dispatch => {
   try {
     const awaitedRes = await fetch(`${baseApiURL}/customer/auth/login`, {
       body: JSON.stringify(userData),
@@ -66,14 +66,14 @@ export const loginUser = userData => async dispatch => {
     });
 
     if (awaitedRes.ok) {
-      const res = await axios({
-        url: `${baseApiURL}/customer/api/detail`,
-        method: 'get',
-        withCredentials: true
-      });
-
       try {
+        const res = await axios({
+          url: `${baseApiURL}/customer/api/detail`,
+          method: 'get',
+          withCredentials: true
+        });
         dispatch(setCurrentUser(res.data));
+        history.push('/dashboard');
       } catch (err) {
         // console.log('something went wrong when fetching the user data', err);
       }
