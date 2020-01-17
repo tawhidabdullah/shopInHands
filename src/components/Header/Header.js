@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import Spinner from '../commonFeilds/Spinner';
 import { connect } from 'react-redux';
-import { NavLink, Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { getApi } from '../../utilities/wooApi';
 import { logoutUser, getCurrentUser } from '../../actions/authAction';
 import './Header.scss';
 import '../styles_components/searchBar.scss';
-import ReactHtmlParser from 'react-html-parser';
 import { baseApiURL } from '../../constants/variable';
 import { getElement, isElementExists } from '../../utilities/elementHelpers';
 
@@ -246,8 +245,6 @@ class Header extends Component {
     const { isAuthenticate, user } = this.props.auth;
     const { cartItems, totalPrice } = this.props;
     const {
-      catMenu,
-      mainMenu,
       isLoading,
       topLeftContent,
       hotlineContent,
