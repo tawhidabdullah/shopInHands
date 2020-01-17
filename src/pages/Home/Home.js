@@ -119,7 +119,12 @@ class Home extends Component {
 								/>
 							)}
 						</div>
-						<div className='col-md-3 col-sm-12'>
+						<div
+							className='col-md-3 col-sm-12'
+							style={{
+								height: "80vh"
+							}}
+						>
 							<div
 								className='row'
 								style={{
@@ -133,8 +138,9 @@ class Home extends Component {
 											<div
 												className='col-md-12'
 												style={{
-													marginTop: `${
-														index + 1 === sliderRight.items.length ? "25px" : ""
+													height: "48%",
+													alignSelf: `${
+														index === 1 ? "flex-end" : "flex-start"
 													}`
 												}}
 											>
