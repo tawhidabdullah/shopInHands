@@ -39,7 +39,7 @@ import { store } from "./store";
 
 class App extends Component {
 	authenticate() {
-		return new Promise(resolve => setTimeout(resolve, 2000)); // 2 seconds
+		return new Promise(resolve => setTimeout(resolve, 1000)); // 2 seconds
 	}
 
 	componentDidMount() {
@@ -51,7 +51,7 @@ class App extends Component {
 				setTimeout(() => {
 					// remove from DOM
 					ele.outerHTML = "";
-				}, 2000);
+				}, 1000);
 			}
 		});
 	}

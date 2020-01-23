@@ -1,17 +1,27 @@
 {
-  "main.css": "/static/css/main.4a25d82b.chunk.css",
-  "main.js": "/static/js/main.6f7557d7.chunk.js",
-  "main.js.map": "/static/js/main.6f7557d7.chunk.js.map",
-  "runtime~main.js": "/static/js/runtime~main.fdfcfda2.js",
-  "runtime~main.js.map": "/static/js/runtime~main.fdfcfda2.js.map",
-  "static/css/2.48a91b6e.chunk.css": "/static/css/2.48a91b6e.chunk.css",
-  "static/js/2.c473a5e2.chunk.js": "/static/js/2.c473a5e2.chunk.js",
-  "static/js/2.c473a5e2.chunk.js.map": "/static/js/2.c473a5e2.chunk.js.map",
-  "index.html": "/index.html",
-  "precache-manifest.442795f76765b1ad8ff94b3b14ca2211.js": "/precache-manifest.442795f76765b1ad8ff94b3b14ca2211.js",
-  "service-worker.js": "/service-worker.js",
-  "static/css/2.48a91b6e.chunk.css.map": "/static/css/2.48a91b6e.chunk.css.map",
-  "static/css/main.4a25d82b.chunk.css.map": "/static/css/main.4a25d82b.chunk.css.map",
-  "static/media/styles.css": "/static/media/revicons.2feb69cc.eot",
-  "static/media/spinner2.gif": "/static/media/spinner2.2e7f2975.gif"
+  "files": {
+    "main.css": "/static/css/main.a6a06760.chunk.css",
+    "main.js": "/static/js/main.0e4e3f2f.chunk.js",
+    "main.js.map": "/static/js/main.0e4e3f2f.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.2ad2c407.js",
+    "runtime-main.js.map": "/static/js/runtime-main.2ad2c407.js.map",
+    "static/css/2.c5c53b0b.chunk.css": "/static/css/2.c5c53b0b.chunk.css",
+    "static/js/2.7117b817.chunk.js": "/static/js/2.7117b817.chunk.js",
+    "static/js/2.7117b817.chunk.js.map": "/static/js/2.7117b817.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.4a1c887c30b9063d53b51f28f0d4bd14.js": "/precache-manifest.4a1c887c30b9063d53b51f28f0d4bd14.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.c5c53b0b.chunk.css.map": "/static/css/2.c5c53b0b.chunk.css.map",
+    "static/css/main.a6a06760.chunk.css.map": "/static/css/main.a6a06760.chunk.css.map",
+    "static/js/2.7117b817.chunk.js.LICENSE": "/static/js/2.7117b817.chunk.js.LICENSE",
+    "static/media/styles.css": "/static/media/revicons.2feb69cc.eot",
+    "static/media/spinner2.gif": "/static/media/spinner2.2e7f2975.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2ad2c407.js",
+    "static/css/2.c5c53b0b.chunk.css",
+    "static/js/2.7117b817.chunk.js",
+    "static/css/main.a6a06760.chunk.css",
+    "static/js/main.0e4e3f2f.chunk.js"
+  ]
 }
